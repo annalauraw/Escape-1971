@@ -1,0 +1,30 @@
+/* img {
+  width: 100%;
+} */
+
+.imagecontainer {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 1280px;
+}
+
+#hintergrund {
+  /* width: 1280px; */
+  z-index: -1;
+}
+
+#ruth {
+  display: inline-block;
+  width: 222px;
+  /* height: 180px; */
+  /* position: absolute;
+  bottom: 0;
+  left: 0; */
+  z-index: 2;
+  /* border: 1px solid red; */
+}
+
+/* #solution1 {
+  width: 20px;
+} */
