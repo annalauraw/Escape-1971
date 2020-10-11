@@ -6,23 +6,21 @@
   position: relative;
   top: 0;
   left: 0;
-  width: 1280px;
+  width: 1200px;
 }
 
 #hintergrund {
-  /* width: 1280px; */
+  width: inherit;
   z-index: -1;
 }
 
 #ruth {
   display: inline-block;
-  width: 222px;
-  /* height: 180px; */
-  /* position: absolute;
-  bottom: 0;
-  left: 0; */
+  width: 100px;
+  /* Position needs to be styled
+  inline so it can be manipulated
+  with JS */
   z-index: 2;
-  /* border: 1px solid red; */
 }
 
 /* #solution1 {

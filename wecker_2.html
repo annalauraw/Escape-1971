@@ -1,0 +1,30 @@
+<!-- Inhalt der HTML-Seite, der angezeigt wird, wenn Ruth Uelis Haus betritt (Uelis Schlafzimmer) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="CSS/wecker_2.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="imagecontainer">
+      <img id="hintergrund" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_schlafzimmer.png" usemap="#map1">
+      <!-- If you want to use map1, insert attribute usemap="#map1" into img tag -->
+      <map name="map1">
+        <!-- <area shape="rect" coords="170, 130, 210, 153" alt="Puzzle 1" href="puzzle1.html"> -->
+        <!-- <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm"> -->
+        <area shape="circle" coords="300,350,100" onclick="showPuzzle()">
+      </map>
+      <div id="puzzle1">
+        <!-- Problem with checkPuzzle1(): document event listener catches keypress
+        Possible solution: make wecker_2 (and any other stations) a separate html page
+        with their own JS -->
+        <form name="puzzle1" class="puzzle" onsubmit="checkPuzzle1()">
+         <label for="solution1">Lösungswort:</label>
+         <input type="text" id="solution1" name="solution1"><br><br>
+         <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+  <script  type="text/javascript" src="JS/wecker_2.js"></script>
+  </body>
+</html>
