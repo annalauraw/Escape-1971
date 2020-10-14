@@ -1,4 +1,5 @@
-
+/* Der imagecontainer muss position:relative haben, damit
+eventuelle Kind-Elemente absolut positioniert werden können */
 .imagecontainer {
   position: relative;
   top: 0;
@@ -11,10 +12,13 @@
   z-index: -1;
 }
 
+/* Das Placeholder-Rätsel wird zunächst nicht angezeigt */
 #puzzle1 {
   display: none;
 }
 
+/* Wenn auf den Wecker geklickt wird, wird die Klasse display
+zum Tag mit dem Rätsel hinzugefügt, sodass es angezeigt wird */
 #puzzle1.display {
   display: inline-block;
   width: auto;
