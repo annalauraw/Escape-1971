@@ -7,23 +7,53 @@
   </head>
   <body>
     <div class="imagecontainer">
+      <!-- Hauptbild -->
       <img id="hintergrund" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_schlafzimmer.png" usemap="#map1">
       <!-- clickable areas inside the image -->
       <map name="map1">
         <!-- <area shape="rect" coords="170, 130, 210, 153" alt="Puzzle 1" href="puzzle1.html"> -->
         <!-- <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm"> -->
         <!-- Wecker -->
-        <area shape="circle" coords="300,350,100" onclick="showPuzzle()">
+        <area id="wecker" shape="circle" coords="300,350,50">
       </map>
-      <!-- Placeholder-Rätsel: Lösungswort eingeben -->
-      <div id="puzzle1">
+
+      <!-- Wecker gross von vorne, wird sichtbar bei Klick auf Nachttisch-Wecker -->
+      <img id="wecker_vorne" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_wecker.png" usemap="#map1">
+
+      <!-- Wecker-Ziffernblatt (SVG) -->
+      <div id="clockbox">
+          <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+          <!-- <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"> -->
+              <g id="face">
+                  <circle class="circle" cx="300" cy="300" r="253.9"/>
+                  <path class="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6"/>
+                  <circle class="mid-circle" cx="300" cy="300" r="16.2"/>
+              </g>
+              <g id="hour">
+                  <path class="hour-arm" d="M300.5 298V142"/>
+                  <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+              </g>
+              <g id="minute">
+                  <path class="minute-arm" d="M300.5 298V67"/>
+                  <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+              </g>
+              <g id="second">
+                  <path class="second-arm" d="M300.5 350V55"/>
+                  <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+              </g>
+          </svg>
+      </div> <!-- clockbox -->
+
+      <!-- <div id="puzzle1">
         <form name="puzzle1" class="puzzle" onsubmit="checkPuzzle1()">
          <label for="solution1">Lösungswort:</label>
          <input type="text" id="solution1" name="solution1"><br><br>
          <input type="submit" value="Submit">
         </form>
-      </div>
-    </div>
+      </div> -->
+
+    </div> <!--imagecontainer-->
+
   <script  type="text/javascript" src="JS/wecker_2.js"></script>
   </body>
 </html>

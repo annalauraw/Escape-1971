@@ -1,5 +1,6 @@
 /* Der imagecontainer muss position:relative haben, damit
 eventuelle Kind-Elemente absolut positioniert werden können */
+
 .imagecontainer {
   position: relative;
   top: 0;
@@ -12,14 +13,97 @@ eventuelle Kind-Elemente absolut positioniert werden können */
   z-index: -1;
 }
 
-/* Das Placeholder-Rätsel wird zunächst nicht angezeigt */
-#puzzle1 {
+#wecker_vorne {
   display: none;
 }
 
+#wecker_vorne.display {
+  display:block;
+  position: absolute;
+  left: 500px;
+  top: 150px;
+  width: 400px;
+}
+
+#clockbox {
+display: none;
+}
+
+#clockbox.display {
+  display: flex;
+  /* justify-content: center;
+  align-items: middle; */
+  width: 40%;
+  position: absolute;
+  top: 130px;
+  left: 570px;
+}
+
+#clock {
+  width: 50%;
+}
+
+/* Clock styles - Wecker-Ziffernblatt */
+.circle {
+  fill: white;
+  stroke: #000;
+  stroke-width: 9;
+  stroke-miterlimit: 10;
+}
+
+.mid-circle {
+  fill: #000;
+}
+.hour-marks {
+  fill: none;
+  stroke: #000;
+  stroke-width: 9;
+  stroke-miterlimit: 10;
+}
+
+.hour-arm {
+  fill: none;
+  stroke: #000;
+  stroke-width: 17;
+  stroke-miterlimit: 10;
+}
+
+.minute-arm {
+  fill: none;
+  stroke: #000;
+  stroke-width: 11;
+  stroke-miterlimit: 10;
+}
+
+.second-arm {
+  fill: none;
+  stroke: #000;
+  stroke-width: 4;
+  stroke-miterlimit: 10;
+}
+
+/* Transparent box ensuring arms center properly. */
+.sizing-box {
+  fill: none;
+}
+
+/* Make all arms rotate around the same center point. */
+/* Optional: Use transition for animation. */
+#hour,
+#minute,
+#second {
+  transform-origin: 300px 300px;
+  transition: transform .5s ease-in-out;
+}
+
+/* Das Placeholder-Rätsel wird zunächst nicht angezeigt */
+/* #puzzle1 {
+  display: none; */
+/* } */
+
 /* Wenn auf den Wecker geklickt wird, wird die Klasse display
 zum Tag mit dem Rätsel hinzugefügt, sodass es angezeigt wird */
-#puzzle1.display {
+/* #puzzle1.display {
   display: inline-block;
   width: auto;
   height: auto;
@@ -30,4 +114,4 @@ zum Tag mit dem Rätsel hinzugefügt, sodass es angezeigt wird */
   left: 730px;
   z-index: 3;
   border: 3px solid red;
-}
+} */
