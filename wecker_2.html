@@ -8,9 +8,9 @@
   <body>
     <div class="imagecontainer">
       <!-- Hauptbild -->
-      <img id="hintergrund" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_schlafzimmer.png" usemap="#map1">
+      <img id="hintergrund" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_schlafzimmer.png" usemap="#wecker_nachttisch">
       <!-- clickable areas inside the image -->
-      <map name="map1">
+      <map name="wecker_nachttisch">
         <!-- <area shape="rect" coords="170, 130, 210, 153" alt="Puzzle 1" href="puzzle1.html"> -->
         <!-- <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm"> -->
         <!-- Wecker -->
@@ -18,7 +18,13 @@
       </map>
 
       <!-- Wecker gross von vorne, wird sichtbar bei Klick auf Nachttisch-Wecker -->
-      <img id="wecker_vorne" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_wecker.png" usemap="#map1">
+      <img id="wecker_vorne" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_wecker.png" usemap="#wecker_rand">
+      <map name="wecker_rand">
+        <!-- Koordinaten zum Testen links oben -->
+        <area id="wecker_rand" shape="rect" coords="0,0,50,50">
+        <!-- eine kleine kreisförmige Fäche am rechten Weckerrand - wenn sie angeklickt wird, dreht sich der Wecker -->
+        <!-- <area id="wecker_rand" shape="circle" coords="300,300,100"> -->
+      </map>
 
       <!-- Wecker-Ziffernblatt (SVG) -->
       <div id="clockbox">
@@ -43,6 +49,8 @@
               </g>
           </svg>
       </div> <!-- clockbox -->
+
+      <img id="wecker_hinten" src="Bilder/bilder_trash/escape_frauenstreik_wecker_vonhinten.png">
 
       <!-- <div id="puzzle1">
         <form name="puzzle1" class="puzzle" onsubmit="checkPuzzle1()">

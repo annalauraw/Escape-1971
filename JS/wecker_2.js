@@ -1,15 +1,33 @@
+// ToDo: Weckeransichten von vorne/von hinten sollen nicht
+// gleichzeitig sichtbar sein!
+
+// Wecker auf Nachttisch
+var wecker = document.getElementById("wecker");
+// Rand von Wecker gross von vorne
+var wecker_rand = document.getElementById("wecker_rand");
+// Ziffernblatt
+var clockbox = document.getElementById("clockbox");
+var wecker_vorne = document.getElementById("wecker_vorne");
+var wecker_hinten = document.getElementById("wecker_hinten");
+
 // Wenn der Wecker geklickt wird, wird diese Funktion aufgerufen
 // Sie bewirkt, dass der Wecker in gross angezeigt wird
+
 function showClock() {
-  var clockbox = document.getElementById("clockbox");
-  var wecker_vorne = document.getElementById("wecker_vorne");
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
 }
 
+function turnClock() {
+  // Wecker (Ansicht von vorne) verstecken
+  clockbox.classList.toggle("display");
+  wecker_vorne.classList.toggle("display");
+  wecker_hinten.classList.toggle("display");
+}
+
 function setup() {
-  var wecker = document.getElementById("wecker");
   wecker.addEventListener("click", showClock);
+  wecker_rand.addEventListener("click", turnClock);
 }
 
 window.addEventListener("load", setup);
