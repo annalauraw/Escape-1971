@@ -1,0 +1,49 @@
+/* Video mit Emilie lieberherr */
+#lieberherr {
+  display: none;
+}
+
+#lieberherr.display {
+  display: block;
+  position: absolute;
+  left: 130px;
+  top: 530px;
+  width: 250px;
+  height: 140.625px;
+}
+
+/* Button "Rätsel starten" */
+#startPuzzle {
+  position: absolute;
+  left: 1070px;
+}
+
+/* Rätsel zu Emilie lieberherr */
+#puzzle_lieberherrQuestions {
+  display: none;
+}
+
+#puzzle_lieberherrQuestions.display {
+  display: block;
+  position: absolute;
+  left: 800px;
+  top: 170px;
+  padding: 20px;
+  background-color: rgb(204, 153, 255);
+  border-color: rgb(204, 102, 255);
+  border-width: 5px;
+  border-style: solid;
+}
+
+#fahne {
+  display: none;
+}
+
+#fahne.display {
+  display: block;
+  width: 100px;
+  position: absolute;
+  /* border-style: solid;
+  border-width: 5px;
+  border-color: black; */
+}

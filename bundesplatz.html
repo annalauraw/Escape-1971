@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>bundesplatz</title>
+    <link rel="stylesheet" href="CSS/general.css" type="text/css"/>
+    <link rel="stylesheet" href="CSS/bundesplatz.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="imagecontainer">
+      <img id="hintergrund" src="Bilder/bilder_trash/bundeshaus.png" usemap="#button_tv">
+      <img id="fahne" src="Bilder/bilder_trash/fahne_frauenstimmrecht.png">
+      <map name="button_tv">
+        <!-- Button-Koordinaten müssen noch angepasst werden
+        Es passiert noch nichts -->
+        <area id="button_lieberherr" shape="circle" coords="680, 220, 20">
+      </map>
+      <iframe id="lieberherr" src="https://srf.ch/play/embed?urn=urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5&startTime=897" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
+      <!-- <video id="testvideo_1">
+        <source src="Videos/test_queryus_mother.webm" type="video/webm"/>
+        <source src="Videos/test_queryus_mother.mp4" type="video/mp4"/>
+      </video> -->
+      <button id="startPuzzle" type="button">Rätsel starten</button>
+      <button id="removeFlag" type="button">Stop Fahne</button>
+      <div id="puzzle_lieberherrQuestions">
+        <form name="puzzle_lieberherrQuestions">
+         <label for="solution1">Wie lautet Emilie Lieberherrs berühmter Satz?</label><br>
+         <input type="text" id="solution1" name="solution1"><br><br>
+         <!-- <label for="solution2">Welche beiden Kantone haben das Frauenstimmrecht als erstes eingeführt?</label><br>
+         <input type="text" id="solution2" name="solution2"><br><br>
+         <label for="solution3">Wo in der Schweiz durften die Frauen zum ersten Mal abstimmen?</label><br>
+         <input type="text" id="solution3" name="solution3"><br><br> -->
+         <input id="puzzleLieberherrButton" type="button" value="Fertig">
+         <!-- Evtl. Reset-Button? -->
+        </form>
+      </div>
+    <div>
+  <script  type="text/javascript" src="JS/bundesplatz.js"></script>
+  </body>
+</html>
