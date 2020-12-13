@@ -13,13 +13,14 @@ eventuelle Kind-Elemente absolut positioniert werden können */
   z-index: -1;
 }
 
-#testvideo_1,#testvideo_2 {
+#lotti,#testvideo_2 {
   display: none;
 }
 
-#testvideo_1.display,#testvideo_2.display {
+#lotti.display,#testvideo_2.display {
   display: block;
   width: 350px;
+  height: 196.875px;
   position: absolute;
   left: 270px;
   top: 240px;
