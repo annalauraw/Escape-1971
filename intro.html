@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Intro</title>
+    <link rel="stylesheet" href="CSS/general.css" type="text/css"/>
     <link rel="stylesheet" href="CSS/intro.css" type="text/css"/>
   </head>
   <body>
@@ -24,6 +25,18 @@
         <source src="Videos/test_frida.webm" type="video/webm"/>
         <source src="Videos/test_frida.mp4" type="video/mp4"/>
       </video>
+      <button id="startPuzzle" type="button">Ich bin informiert</button>
+      <div id="puzzle_videoQuestions">
+        <form name="puzzle_videoQuestions">
+         <label for="solution1">Wann wurde in der Schweiz das erste Mal über das nationale Frauenstimmrecht abgestimmt?</label><br>
+         <input type="text" id="solution1" name="solution1"><br><br>
+         <label for="solution2">Welche beiden Kantone haben das Frauenstimmrecht als erstes eingeführt?</label><br>
+         <input type="text" id="solution2" name="solution2"><br><br>
+         <label for="solution3">Wo in der Schweiz durften die Frauen zum ersten Mal abstimmen?</label><br>
+         <input type="text" id="solution3" name="solution3"><br><br>
+         <input type="submit" value="Fertig">
+        </form>
+      </div>
     <div>
   <script  type="text/javascript" src="JS/intro.js"></script>
   </body>

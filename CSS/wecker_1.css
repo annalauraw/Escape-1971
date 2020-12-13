@@ -1,18 +1,3 @@
-/* Der imagecontainer muss position:relative haben, damit
-das Kind-Element #ruth absolut positioniert werden kann */
-.imagecontainer {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 1200px;
-}
-
-/* Hintergrundbild */
-#hintergrund {
-  width: inherit;
-  z-index: -1;
-}
-
 /* Das sich bewegende Ruth-Bild */
 #ruth {
   display: inline-block;
