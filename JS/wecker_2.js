@@ -3,6 +3,7 @@
 
 // Wecker auf Nachttisch
 var wecker = document.getElementById("wecker");
+var abstimmungszettel = document.getElementById("abstimmungszettel");
 // Rand von Wecker gross von vorne
 var wecker_rand = document.getElementById("wecker_rand");
 // Ziffernblatt
@@ -25,9 +26,14 @@ function turnClock() {
   wecker_hinten.classList.toggle("display");
 }
 
+function openPuzzle() {
+		location.assign("Abstimmungszettel.html");
+}
+
 function setup() {
   wecker.addEventListener("click", showClock);
   wecker_rand.addEventListener("click", turnClock);
+  abstimmungszettel.addEventListener("click", openPuzzle);
 }
 
 window.addEventListener("load", setup);
