@@ -1,6 +1,6 @@
 
 
-var place00Y = 5;   // x-Koordinate des aktuell leeren Feldes
+var place00Y = 4;   // x-Koordinate des aktuell leeren Feldes
 var place00X = 3;   // y-Koordinate des aktuell leeren Feldes
 
 var mouseDownX = 1*0; // x-Koordinate des angeklickten Feldes
@@ -8,6 +8,7 @@ var mouseDownY = 1*0; // y-Koordinate des angeklickten Feldes
 
 var changeSrc = "";   // Dateiname des Bildes des angeklickten Feldes
 var active = false;   // active = true : Feld wurde angeklickt
+var cookieTest=document.cookie
 
 function done() {
    result = true;
@@ -32,11 +33,16 @@ function pieceUp(nr) {
    h/=10;
    mouseDownX = h;
 
-
+	
    var check = 1;
+   console.log(check);
+   console.log(place00Y);
+   console.log(mouseDownY);
+   console.log(place00X);
+   console.log(mouseDownX);
    if ((place00X==mouseDownX)&&(Math.abs(place00Y-mouseDownY)==1)) check--;
    if ((place00Y==mouseDownY)&&(Math.abs(place00X-mouseDownX)==1)) check--;
-   
+   console.log(check);
    if (check == 0) {
       elementsName = "b_" + mouseDownX + mouseDownY;
       changeSrc = document.getElementById(elementsName).src;
@@ -51,5 +57,38 @@ function pieceUp(nr) {
    if (done() == true) {
       alert ("Gratuliere!");
       document.f_puzzle.b_35.src ="Bilder/bilder/abstimmungszettel-3-5.png";
+	  document.cookie="schieberaetsel=done";
    }
 } 
+
+function getCookie(cname) {
+  var test = cname + "=";
+  console.log(test);
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(test) == 0) {
+      return c.substring(test.length, c.length);
+    }
+  }
+  return "";
+}
+
+function testCookie(){
+  var schieberaetsel  = getCookie("schieberaetsel");
+  console.log(schieberaetsel);
+	if (schieberaetsel != "") {
+	alert("Welcome again " + schieberaetsel);
+  } 
+}
+
+function setup() {
+	testCookie();
+}
+
+
+window.addEventListener("load", setup);
