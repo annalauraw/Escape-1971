@@ -43,9 +43,28 @@ function playLotti() {
     lotti_isDisplayed = true;
   }
   if (lotti_isPlaying == false) {
-    // console.log(player.isReady());
     player.play();
     lotti_isPlaying = true;
+    // Wenn das Video bei 9min54sec angekommen ist (594sec),
+    // Video stoppen und an den Anfang der Sequenz (535sec)
+    // zurückspringen
+    playbackInterval = setInterval(checkPlaybackTime, 1000);
+    // Funktion, um das Intervall wieder zu stoppen
+    function stopInterval() {
+      clearInterval(playbackInterval);
+    }
+    // Diese Funtion wird jede Sekunde aufgerufen
+    function checkPlaybackTime() {
+      player.getCurrentTime(function (currentTime) {
+        console.log(currentTime);
+        if (currentTime >= 594.5) {
+          player.pause();
+          stopInterval();
+          player.seek(535);
+          lotti_isPlaying = false;
+        }
+      });
+    }
   }
   else {
     player.pause();
