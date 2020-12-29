@@ -1,15 +1,17 @@
-#lotti,#testvideo_2 {
+#SRF_player,#testvideo_2 {
   display: none;
 }
 
-#lotti.display,#testvideo_2.display {
+#SRF_player.display,#testvideo_2.display {
   display: block;
-  width: 350px;
-  height: 196.875px;
+  width: 460px;
+  height: 258.7499999px;
   position: absolute;
-  left: 270px;
-  top: 240px;
-  /* z-index: 2; */
+  left: 215px;
+  top: 210px;
+  /* Im Hintergrund */
+  z-index: -2;
+  /* z-index: 1; */
 }
 
 /* Button "Ich bin informiert" */
