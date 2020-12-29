@@ -56,7 +56,7 @@ function playLotti() {
 function playTestvideo_2() {
   //testvideo_1 ggf. stoppen und verstecken
   if (lotti_isPlaying == true) {
-    SRF_player.pause();
+    player.pause();
     lotti_isPlaying = false;
   }
   if (lotti_isDisplayed == true) {
