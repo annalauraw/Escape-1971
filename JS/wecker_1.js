@@ -45,7 +45,7 @@ function moveRuth(event) {
   //Wenn Ruth genau vor Uelis Tür steht, geht sie in Uelis Zimmer hinein
   if (posLeft == 1020 && posBottom == 460) {
     // Call next HTML page
-    location.assign("http://escape.localhost:8080/wecker_2.html")
+    location.assign("http://escape.localhost/wecker_2.html")
   }
 }
 
