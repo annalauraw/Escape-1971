@@ -27,7 +27,7 @@ function turnClock() {
 }
 
 function openPuzzle() {
-		location.assign("Abstimmungszettel.html");
+		location.assign("https://annalauraw.github.io/Escape-1971/abstimmungszettel.html");
 }
 
 function setup() {
