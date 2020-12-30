@@ -1,7 +1,7 @@
 // Knopf an Fernseher, um Testvideo zu starten
 var button_lotti = document.getElementById("button_lotti");
-// iFrame (später hoffentlich Videodatei)
-var lotti = document.getElementById("lotti");
+// div, das den SRF Player enthält
+var SRF_player = document.getElementById("SRF_player");
 var testvideo_2 = document.getElementById("testvideo_2");
 var lotti_isDisplayed = false;
 var lotti_isPlaying = false;
@@ -13,6 +13,8 @@ var button_startPuzzle = document.getElementById("startPuzzle");
 var puzzle_videoQuestions = document.getElementById("puzzle_videoQuestions");
 // Rätsel zum Video, Formular mit Fragen und Eingabefeldern
 var form_videoQuestions = document.forms["puzzle_videoQuestions"];
+// SRF Player wird mit einem ersten Video geladen (Lotti Ruckstuhl)
+var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a&start=535');
 
 // Wenn der oberste Knopf am Fernseher geklickt wird, wird
 // das Testvideo gestartet
@@ -37,15 +39,35 @@ function playLotti() {
   }
   //lotti ggf. anzeigen und starten
   if (lotti_isDisplayed == false) {
-    lotti.classList.toggle("display");
+    SRF_player.classList.toggle("display");
     lotti_isDisplayed = true;
   }
   if (lotti_isPlaying == false) {
-    lotti.play();
+    player.play();
     lotti_isPlaying = true;
+    // Wenn das Video bei 9min54sec angekommen ist (594sec),
+    // Video stoppen und an den Anfang der Sequenz (535sec)
+    // zurückspringen
+    playbackInterval = setInterval(checkPlaybackTime, 1000);
+    // Funktion, um das Intervall wieder zu stoppen
+    function stopInterval() {
+      clearInterval(playbackInterval);
+    }
+    // Diese Funtion wird jede Sekunde aufgerufen
+    function checkPlaybackTime() {
+      player.getCurrentTime(function (currentTime) {
+        console.log(currentTime);
+        if (currentTime >= 594.5) {
+          player.pause();
+          stopInterval();
+          player.seek(535);
+          lotti_isPlaying = false;
+        }
+      });
+    }
   }
   else {
-    lotti.pause();
+    player.pause();
     lotti_isPlaying = false;
   }
 }
@@ -53,11 +75,11 @@ function playLotti() {
 function playTestvideo_2() {
   //testvideo_1 ggf. stoppen und verstecken
   if (lotti_isPlaying == true) {
-    lotti.pause();
+    player.pause();
     lotti_isPlaying = false;
   }
   if (lotti_isDisplayed == true) {
-    lotti.classList.toggle("display");
+    SRF_player.classList.toggle("display");
     lotti_isDisplayed = false;
   }
   //testvideo_2 ggf. anzeigen und starten

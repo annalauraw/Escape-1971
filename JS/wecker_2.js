@@ -35,7 +35,7 @@ function turnClock() {
 }
 
 function openPuzzle() {
-		location.assign("Abstimmungszettel.html");
+		location.assign("abstimmungszettel.html");
 }
 setInterval(updateSeconds, 1000);
 function updateClock(){
