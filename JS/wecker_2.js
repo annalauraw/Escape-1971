@@ -4,23 +4,90 @@
 // Wecker auf Nachttisch
 var wecker = document.getElementById("wecker");
 var abstimmungszettel = document.getElementById("abstimmungszettel");
+var aufziehschluessel = document.getElementById("aufziehschluessel");
 // Rand von Wecker gross von vorne
 var wecker_rand = document.getElementById("wecker_rand");
 // Ziffernblatt
 var clockbox = document.getElementById("clockbox");
 var wecker_vorne = document.getElementById("wecker_vorne");
 var wecker_hinten = document.getElementById("wecker_hinten");
+var aufziehschluessel = document.getElementById("aufziehschluessel");
+
+
+const secDiv = document.getElementById('sec');
+const minDiv = document.getElementById('min');
+const hourDiv = document.getElementById('hour');
+const timerDiv = document.getElementById('timer');
+
+var centerX=792;
+var centerY=350;
+var ansicht=1;
 
 // Wenn der Wecker geklickt wird, wird diese Funktion aufgerufen
 // Sie bewirkt, dass der Wecker in gross angezeigt wird
 
+function getCookie(cname) {
+  var test = cname + "=";
+  console.log(test);
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(test) == 0) {
+      return c.substring(test.length, c.length);
+    }
+  }
+  return "";
+}
+function moveAufziehschluessel(event) {
+  // var outerDiv = document.getElementsByClassName("imagecontainer").item(0);
+  var windowMarginLeft = (window.innerWidth - 1200) / 2;
+  // var windowMarginTop = window.innerWidth - outerDiv.height;
+  // Die Fahne ist immer dort, wo der Mauszeiger ist
+  aufziehschluessel.style.left = event.clientX - windowMarginLeft + 'px';
+  aufziehschluessel.style.top = event.clientY -50 + 'px';
+  // if (flag.style.left == "655.5px" && flag.style.top == "1px") {
+  //   document.removeEventListener("mousemove", moveFlag);
+  // }
+}
+
+function callAufziehschluessel() {
+	console.log("Hello");
+  document.addEventListener("mousemove", moveAufziehschluessel);
+  // Wenn mit der Fahne auf das Hintergrundbild geklickt wird:
+  // Koordinaten prüfen
+  //document.addEventListener("click", putFlag);
+  aufziehschluessel.classList.toggle("display");
+  // Übergangslösung
+  //button_removeFlag.addEventListener("click", stopFlag);
+}
 function showClock() {
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
+  
 }
 
 function turnClock() {
   // Wecker (Ansicht von vorne) verstecken
+  if (ansicht==0){
+	ansicht=1;
+	console.log(ansicht);
+	  
+  } 
+  else {
+	ansicht=0;
+	console.log(ansicht);
+	var aufziehschluessel  = getCookie("aufziehschluessel");
+    console.log(aufziehschluessel);
+	if (aufziehschluessel != "") {
+	callAufziehschluessel();
+    } 
+  }
+	
+  
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
   wecker_hinten.classList.toggle("display");
@@ -29,11 +96,120 @@ function turnClock() {
 function openPuzzle() {
 		location.assign("abstimmungszettel.html");
 }
+setInterval(updateSeconds, 1000);
+
+function updateClock(){
+	let date = new Date();
+	let sec = date.getSeconds() / 60;
+	let min = (date.getMinutes() + sec) / 60;
+	let hour = (date.getHours() + min) / 12;
+
+	secDiv.style.transform = "rotate(" + (sec * 360) + "deg)";
+	minDiv.style.transform = "rotate(185deg)";
+	hourDiv.style.transform = "rotate(75deg)"
+	timerDiv.style.transform = "rotate(210deg)";
+	
+}
+function updateSeconds(){
+	let date = new Date();
+	let sec = date.getSeconds() / 60;
+	let min = (date.getMinutes() + sec) / 60;
+	let hour = (date.getHours() + min) / 12;
+
+	secDiv.style.transform = "rotate(" + (sec * 360) + "deg)";
+	
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+	console.log(ev);
+	ev.dataTransfer.setDragImage(new Image(), 0, 0)
+	
+	
+}
+
+function drop(ev) {
+	
+	var punktX=ev.clientX;
+	var punktY=ev.clientY;
+	console.log(punktX);
+	console.log(punktY);
+	if (punktX>centerX){
+		gegenkathete=punktX-centerX;
+	} else {
+		gegenkathete=centerX-punktX;
+	}
+	
+	if (punktY>centerY){
+		ankathete=punktY-centerY;
+	} else {
+		ankathete=centerY-punktY;
+	}
+	
+	hypotenuse=Math.sqrt(Math.pow(ankathete, 2)+(Math.pow(gegenkathete, 2)));
+	console.log(hypotenuse);
+	radian=Math.asin(gegenkathete/hypotenuse);
+	winkel=radian*(180/Math.PI)
+	console.log(winkel);
+	
+	
+	var testX = Math.sign(centerX-punktX);
+	console.log(testX);
+	var testY = Math.sign(centerY-punktY);
+	console.log(testY);
+	
+		
+	if (testX==1) {
+		if (testY==-1){
+			winkel=180+winkel;
+			console.log(winkel);
+			hourDiv.style.transform = "rotate("+winkel+"deg)";
+			
+		} if (testY==1) {
+			
+			winkel=360-winkel;
+			console.log(winkel);
+			hourDiv.style.transform = "rotate("+winkel+"deg)";
+		}
+		
+	}
+	
+	if (testX==-1) {
+		if (testY==-1){
+			Hwinkel=90-winkel;
+			Kwinkel=90+Hwinkel;
+			console.log(Kwinkel);
+			hourDiv.style.transform = "rotate("+Kwinkel+"deg)";
+			
+		} if (testY==1){
+			
+			console.log(winkel);
+			hourDiv.style.transform = "rotate("+winkel+"deg)";
+		}
+		
+	}
+	
+	
+}
+function findKey() {
+	document.cookie="aufziehschluessel=done";
+	alert ("Aufziehschlüssel gefunden");
+	
+}
+
+
+
 
 function setup() {
   wecker.addEventListener("click", showClock);
   wecker_rand.addEventListener("click", turnClock);
   abstimmungszettel.addEventListener("click", openPuzzle);
+  aufziehschluessel.addEventListener("click", findKey);
+  updateClock();
+  updateSeconds();
 }
 
 window.addEventListener("load", setup);
