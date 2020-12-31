@@ -24,9 +24,9 @@ var form_videoQuestions = document.forms["puzzle_videoQuestions"];
 var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a&start=535');
 var player_isDisplayed = false;
 
-// Testfunktion, um die Image map zu sehen (wo ist der klickbare Kreis?)
+// Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 // function hoverOverButton() {
-//   button_.style.cursor = "pointer";
+//   button_appenzell.style.cursor = "pointer";
 // }
 
 // Objekt, das den Zustand der Videos kennt - sind sie im Player geladen?
@@ -122,13 +122,6 @@ SRF_Video.prototype = {
     }
   },
 
-  // startInterval() {
-  //   setInterval(this.checkPlaybackTime(), 1000);
-  // }
-  // stopInterval(interval) {
-  //   clearInterval(interval);
-  // }
-
   checkPlaybackTime: function() {
     player.getCurrentTime(function (currentTime) {
       // console.log(currentTime);
@@ -145,180 +138,8 @@ SRF_Video.prototype = {
 
 lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 594.5);
 unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.8, 1065);
+appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53);
 
-// function playLotti() {
-//   player.play();
-//   lotti_isPlaying = true;
-//   // Wenn der oberste Knopf am Fernseher geklickt wird, wird
-//   // das Video mit Lotti Ruckstuhl gestartet
-//   // Wenn das Video bei 9min54sec angekommen ist (594sec),
-//   // Video stoppen und an den Anfang der Sequenz (535sec)
-//   // zurückspringen
-//   playbackInterval = setInterval(checkPlaybackTime, 1000);
-//   // Funktion, um das Intervall wieder zu stoppen
-//   function stopInterval() {
-//     clearInterval(playbackInterval);
-//   }
-//   // Diese Funtion wird jede Sekunde aufgerufen
-//   function checkPlaybackTime() {
-//     player.getCurrentTime(function (currentTime) {
-//       // console.log(currentTime);
-//       if (currentTime >= 594.5) {
-//         player.pause();
-//         stopInterval();
-//         player.seek(535);
-//         lotti_isPlaying = false;
-//       }
-//     });
-//   }
-// }
-//
-// function playUnterbaech() {
-//   player.play();
-//   unterbaech_isPlaying = true;
-//   // Wenn der zweitoberste Knopf am Fernseher geklickt wird, wird
-//   // das Video von Unterbäch gestartet
-//   // Wenn das Video bei ...min...sec angekommen ist (1065sec),
-//   // Video stoppen und an den Anfang der Sequenz (1045.8sec)
-//   // zurückspringen
-//   playbackInterval = setInterval(checkPlaybackTime, 1000);
-//   // Funktion, um das Intervall wieder zu stoppen
-//   function stopInterval() {
-//     clearInterval(playbackInterval);
-//   }
-//   // Diese Funtion wird jede Sekunde aufgerufen
-//   function checkPlaybackTime() {
-//     player.getCurrentTime(function (currentTime) {
-//       // console.log(currentTime);
-//       // Stopp-Zeitpunkt noch ermitteln
-//       if (currentTime >= 1065) {
-//         player.pause();
-//         stopInterval();
-//         player.seek(1045.8);
-//         unterbaech_isPlaying = false;
-//       }
-//     });
-//   }
-// }
-//
-// function handleLotti() {
-//
-//   // Wenn das Lotti-Video schon geladen ist, Player starten
-//   if (lotti_isLoaded == true) {
-//     if (lotti_isPlaying == false) {
-//       playLotti();
-//     }
-//     else {
-//       player.pause();
-//       lotti_isPlaying = false;
-//     }
-//   }
-//   // Sonst Video laden
-//   else {
-//     // let loadPromise = new Promise(function(resolve, reject) {
-//     //   player.load('urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a');
-//     //   if (/*everything worked*/) {
-//     //     resolve(result);
-//     //   }
-//     //   else {
-//     //     reject(error);
-//     //   }
-//     // });
-//     stopInterval();
-//     player.destroy();
-//     player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a&start=535');
-//     lotti_isLoaded = true;
-//     unterbaech_isLoaded = false;
-//     unterbaech_isPlaying = false;
-//     // player.seek(535);
-//     // player.getUrn(function (urn) {
-//     //     console.log(urn);
-//     // });
-//     playLotti();
-//   }
-//   //Player ggf. anzeigen und starten, evtl noch
-//   // Timeout einbauen, damit die SRF Controls nicht sichtbar sind
-//   if (player_isDisplayed == false) {
-//     SRF_player.classList.toggle("display");
-//     player_isDisplayed = true;
-//   }
-// }
-//
-// function handleUnterbaech() {
-//
-//   // Wenn das Lotti-Video schon geladen ist, Player starten
-//   if (unterbaech_isLoaded == true) {
-//     if (unterbaech_isPlaying == false) {
-//       playUnterbaech();
-//     }
-//     else {
-//       player.pause();
-//       unterbaech_isPlaying = false;
-//     }
-//   }
-//   // Sonst Video laden
-//   else {
-//     // let loadPromise = new Promise(function(resolve, reject) {
-//     //   player.load('urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', false);
-//     //   if (player.isLoaded() == true) {
-//     //     resolve("Ok");
-//     //   }
-//     //   else {
-//     //     reject("Error");
-//     //   }
-//     // });
-//     // loadPromise.then(
-//     //   function(value) {console.log(value);},
-//     //   function(error) {console.log(error);}
-//     // );
-//     // player.load('urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', false);
-//     stopInterval();
-//     player.destroy();
-//     player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a&start=1045.8');
-//     unterbaech_isLoaded = true;
-//     lotti_isLoaded = false;
-//     lotti_isPlaying = false;
-//     // player.seek(1046);
-//     player.getMetadata(function (metadata) {
-//         console.log(metadata);
-//     });
-//     // player.getUrn(function (urn) {
-//     //     console.log(urn);
-//     // });
-//     playUnterbaech();
-//   }
-//   //Player ggf. anzeigen und starten, evtl noch
-//   // Timeout einbauen, damit die SRF Controls nicht sichtbar sind
-//   if (player_isDisplayed == false) {
-//     SRF_player.classList.toggle("display");
-//     player_isDisplayed = true;
-//   }
-// }
-
-// function playUnterbaech() {
-//   //testvideo_1 ggf. stoppen und verstecken
-//   if (lotti_isPlaying == true) {
-//     player.pause();
-//     lotti_isPlaying = false;
-//   }
-//   if (lotti_isDisplayed == true) {
-//     SRF_player.classList.toggle("display");
-//     lotti_isDisplayed = false;
-//   }
-//   //unterbaech ggf. anzeigen und starten
-//   if (unterbaech_isDisplayed == false) {
-//     unterbaech.classList.toggle("display");
-//     unterbaech_isDisplayed = true;
-//   }
-//   if (unterbaech_isPlaying == false) {
-//     unterbaech.play();
-//     unterbaech_isPlaying = true;
-//   }
-//   else {
-//     unterbaech.pause();
-//     unterbaech_isPlaying = false;
-//   }
-// }
 
 function startPuzzle() {
   puzzle_videoQuestions.classList.toggle("display");
@@ -338,10 +159,10 @@ function checkPuzzle() {
 function setup() {
   button_lotti.addEventListener("click", lotti.handle.bind(lotti));
   button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
-  // button_appenzell.addEventListener("click", playAppenzell);
+  button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
   button_startPuzzle.addEventListener("click", startPuzzle);
   form_videoQuestions.addEventListener("submit", checkPuzzle);
-  // button_unterbaech.addEventListener("mouseover", hoverOverButton);
+  // button_appenzell.addEventListener("mouseover", hoverOverButton);
 }
 
 window.addEventListener("load", setup);
