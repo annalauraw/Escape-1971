@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="imagecontainer">
-	  <img id="aufziehschluessel" src="Bilder/bilder_trash/escape_frauenstreik_wecker_schluessel.png">
+	  
       <!-- Hauptbild -->
       <img id="hintergrund" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_schlafzimmer.png" usemap="#wecker_nachttisch">
       <!-- clickable areas inside the image -->
@@ -16,9 +16,10 @@
         <!-- <area shape="rect" coords="170, 130, 210, 153" alt="Puzzle 1" href="puzzle1.html"> -->
         <!-- <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm"> -->
         <!-- Wecker -->
-	   <area id="aufziehschluessel" shape="rect" coords="200,550,400,750">
+	   
        <area id="wecker" shape="circle" coords="300,350,50">
 	   <area id="abstimmungszettel" shape="rect" coords="0,550,100,650">
+	   <area id="aufziehschluessel2" shape="rect" coords="200,550,400,750">
 	  </map> 
 	  
 
@@ -28,66 +29,40 @@
 	  <map name="wecker_rand">
         <!-- Koordinaten zum Testen links oben -->
         <area id="wecker_rand" shape="rect" coords="0,0,50,50">
+		<area id="aufziehen" shape="rect" coords="200,200,300,250">
         <!-- eine kleine kreisförmige Fäche am rechten Weckerrand - wenn sie angeklickt wird, dreht sich der Wecker -->
         <!-- <area id="wecker_rand" shape="circle" coords="300,300,100"> -->
 		
       </map>
 
       <!-- Wecker-Ziffernblatt (SVG) -->
-      <div id="clockbox" ondrop="drop(event)" ondragover="allowDrop(event)">
-         <div class="num num1">
-			<div>1</div>
-		</div>
-		<div class="num num2">
-			<div>2</div>
-		</div>
-		<div class="num num3">
-			<div>3</div>
-		</div>
-		<div class="num num4">
-			<div>4</div>
-		</div>
-		<div class="num num5">
-			<div>5</div>
-		</div>
-		<div class="num num6">
-			<div>6</div>
-		</div>
-		<div class="num num7">
-			<div>7</div>
-		</div>
-		<div class="num num8">
-			<div>8</div>
-		</div>
-		<div class="num num9">
-			<div>9</div>
-		</div>
-		<div class="num num10">
-			<div>10</div>
-		</div>
-		<div class="num num11">
-			<div>11</div>
-		</div>
-		<div class="num num12">
-			<div>12</div>
-		</div>
-		<div class="hand" id="sec">
-			<div class="sec"></div>
-		</div>
-		<div class="hand" id="min">
-			<div class="min"></div>
-		</div>		
-		<div class="hand" id="timer">
-			<div class="timer"></div>
-		</div>
-		<div class="hand" id="hour">
-			<div class="hour" draggable="true" ondragstart="drag(event)"></div>
-		</div>
-		</div>
+      <div id="clockbox">
+       <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 600 600">
+            <g id="face" class="static">
+                <circle class="circle" cx="300" cy="300" r="253.9"/>
+                <path class="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6"/>
+                <circle class="mid-circle" cx="300" cy="300" r="16.2"/>
+            </g>
+            <g id="hour" class="draggable">
+                <path class="hour-arm" d="M300.5 298V142"/>
+                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+            </g>
+            <g id="minute" class="static">
+                <path class="minute-arm" d="M300.5 298V67"/>
+                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+            </g>
+            <g id="second" class="static">
+                <path class="second-arm" d="M300.5 350V55"/>
+                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+            </g>
+			<g id="timer" class="draggable">
+                <path class="timer-arm" d="M300.5 298V180"/>
+                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+            </g>
       </div> <!-- clockbox -->
 
       <img id="wecker_hinten" src="Bilder/bilder_trash/escape_frauenstreik_wecker_vonhinten.png" usemap="#wecker_rand">
-	  
+	  <img id="aufziehschluessel" src="Bilder/bilder_trash/escape_frauenstreik_wecker_schluessel.png">
       <!-- <div id="puzzle1">
         <form name="puzzle1" class="puzzle" onsubmit="checkPuzzle1()">
          <label for="solution1">Lösungswort:</label>

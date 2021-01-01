@@ -19,7 +19,7 @@
   width: 500px;
   height: 500px;
   position: absolute;
-  top: 250px;
+  top: 150px;
   left: 400px;
   /*transform: translate(-50%, -50%);*/
   
@@ -41,164 +41,23 @@ display: none;
   display: flex;
   /* justify-content: center;
   align-items: middle; */
-  width: 250px;
-  height: 250px;
+  width: 350px;
+  height: 350px;
   position: absolute;
-  top: 450px;
+  top: 300px;
   left: 500px;
   overflow: hidden;
-  border-radius: 250px;
-  border: 10px solid #111;
+  /*border-radius: 250px;
+  border: 10px solid #111;*/
   /*transform: translate(-50%, -50%);*/
-  background: white;
+  /*background: white;*/
 }
 
 #clock {
-  width: 50%;
-}
-	
-
-.num{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	text-align: center;
-	font-size: 2rem;
-	font-weight: 700;
-	padding: 18px;
+  width: 300px;
+  height: 300px;
 }
 
-.num:after{
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 5px;
-	height: 15px;
-	background-color: black;
-}
-
-
-.num1{
-	transform: rotate(30deg);
-}
-.num1 div{
-	transform: rotate(-30deg);
-}
-
-.num2{
-	transform: rotate(60deg);
-}
-.num2 div{
-	transform: rotate(-60deg);
-}
-
-.num3{
-	transform: rotate(90deg);
-}
-.num3 div{
-	transform: rotate(-90deg);
-}
-
-.num4{
-	transform: rotate(120deg);
-}
-.num4 div{
-	transform: rotate(-120deg);
-}
-
-.num5{
-	transform: rotate(150deg);
-}
-.num5 div{
-	transform: rotate(-150deg);
-}
-
-.num6{
-	transform: rotate(180deg);
-}
-.num6 div{
-	transform: rotate(-180deg);
-}
-
-.num7{
-	transform: rotate(210deg);
-}
-.num7 div{
-	transform: rotate(-210deg);
-}
-
-.num8{
-	transform: rotate(240deg);
-}
-.num8 div{
-	transform: rotate(-240deg);
-}
-
-.num9{
-	transform: rotate(270deg);
-}
-.num9 div{
-	transform: rotate(-270deg);
-}
-
-.num10{
-	transform: rotate(300deg);
-}
-.num10 div{
-	transform: rotate(-300deg);
-}
-
-.num11{
-	transform: rotate(330deg);
-}
-.num11 div{
-	transform: rotate(-330deg);
-}
-
-.hand{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
-.hand div{
-	position: absolute;
-	bottom: 50%;
-	left: 50%;
-	transform: translateX(-50%);
-	background-color: #000;
-}
-
-.sec{
-	width: 1px;
-	height: 40%;
-}
-
-.min{
-	height: 38%;
-	width: 4px;
-	border-radius: 2px;
-}
-
-.hour{
-	height: 28%;
-	width: 10px;
-	border-radius: 4px;
-	cursor: move;
-}
-
-.timer{
-	height: 18%;
-	width: 6px;
-	border-radius: 2px;
-	
-}
 
 #aufziehschluessel {
   display: none;
@@ -210,67 +69,76 @@ display: none;
   position: absolute;
 }
 
-  /* border-style: solid;
-  border-width: 5px;
-  border-color: black; */
 
-/* Clock styles - Wecker-Ziffernblatt 
+/* Clock styles */
 .circle {
-  fill: white;
-  stroke: #000;
-  stroke-width: 9;
-  stroke-miterlimit: 10;
+    fill: white;
+    stroke: #000;
+    stroke-width: 9;
+    stroke-miterlimit: 10;
 }
 
 .mid-circle {
-  fill: #000;
+    fill: #000;
 }
 .hour-marks {
-  fill: none;
-  stroke: #000;
-  stroke-width: 9;
-  stroke-miterlimit: 10;
+    fill: none;
+    stroke: #000;
+    stroke-width: 9;
+    stroke-miterlimit: 10;
 }
 
 .hour-arm {
-  fill: none;
-  stroke: #000;
-  stroke-width: 17;
-  stroke-miterlimit: 10;
+    fill: none;
+    stroke: #000;
+    stroke-width: 17;
+    stroke-miterlimit: 10;
+	
 }
 
 .minute-arm {
-  fill: none;
-  stroke: #000;
-  stroke-width: 11;
-  stroke-miterlimit: 10;
+    fill: none;
+    stroke: #000;
+    stroke-width: 11;
+    stroke-miterlimit: 10;
 }
 
 .second-arm {
-  fill: none;
-  stroke: #000;
-  stroke-width: 4;
-  stroke-miterlimit: 10;
-}/*
+    fill: none;
+    stroke: #000;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+}
+.timer-arm {
+    fill: none;
+    stroke: #000;
+    stroke-width: 5;
+    stroke-miterlimit: 10;
+}
+
+.draggable {
+    cursor: move;
+}
+
+.static {
+    cursor: not-allowed;
+}
+
 
 /* Transparent box ensuring arms center properly. */
-/*.sizing-box {
-  fill: none;
-}/*
+.sizing-box {
+    fill: none;
+}
 
 /* Make all arms rotate around the same center point. */
 /* Optional: Use transition for animation. */
-/*#hour,
+#hour,
+#timer,
 #minute,
 #second {
-  transform-origin: 300px 300px;
-  transition: transform .5s ease-in-out;
+    transform-origin: 300px 300px;
 }
-*/
-/* Das Placeholder-Rätsel wird zunächst nicht angezeigt */
-/* #puzzle1 {
-  display: none; */
-/* } */
+
 
 /* Wenn auf den Wecker geklickt wird, wird die Klasse display
 zum Tag mit dem Rätsel hinzugefügt, sodass es angezeigt wird */
