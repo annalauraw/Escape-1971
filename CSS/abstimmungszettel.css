@@ -1,0 +1,20 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#puzzle {
+  
+}
+
+#puzzle.hide {
+  display: none;
+}
+
+#zettel {
+  display: none;
+}
+#zettel.display {
+  display: flex;
+}

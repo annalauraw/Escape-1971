@@ -1,14 +1,20 @@
 
 
 var place00Y = 4;   // x-Koordinate des aktuell leeren Feldes
-var place00X = 3;   // y-Koordinate des aktuell leeren Feldes
+var place00X = 1;   // y-Koordinate des aktuell leeren Feldes
 
 var mouseDownX = 1*0; // x-Koordinate des angeklickten Feldes
 var mouseDownY = 1*0; // y-Koordinate des angeklickten Feldes
 
 var changeSrc = "";   // Dateiname des Bildes des angeklickten Feldes
 var active = false;   // active = true : Feld wurde angeklickt
-var cookieTest=document.cookie
+var cookieTest=document.cookie;
+var puzzle =document.getElementById("puzzle");
+var zettel =document.getElementById("zettel")
+
+function goBack() {
+		location.assign("wecker_2.html");
+}
 
 function done() {
    result = true;
@@ -56,8 +62,10 @@ function pieceUp(nr) {
    }
    if (done() == true) {
       alert ("Gratuliere!");
-      document.f_puzzle.b_35.src ="Bilder/bilder/abstimmungszettel-3-5.png";
+      puzzle.classList.toggle("hide");
+	  zettel.classList.toggle("display");
 	  document.cookie="schieberaetsel=done";
+	  window.onclick = goBack();
    }
 } 
 
@@ -82,7 +90,10 @@ function testCookie(){
   var schieberaetsel  = getCookie("schieberaetsel");
   console.log(schieberaetsel);
 	if (schieberaetsel != "") {
-	alert("Welcome again " + schieberaetsel);
+	puzzle.classList.toggle("hide");
+	zettel.classList.toggle("display");
+	alert("Bereits gelöst, Bravo!");
+	window.onclick = goBack();
   } 
 }
 
