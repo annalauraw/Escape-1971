@@ -24,6 +24,10 @@ var form_videoQuestions = document.forms["puzzle_videoQuestions"];
 var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a&start=535');
 var player_isDisplayed = false;
 
+// Intervall, das die aktuelle Abspielsekunde kontrolliert
+// Wird von SRF_player-Methoden gestartet und gestoppt
+var playbackInterval = undefined;
+
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 // function hoverOverButton() {
 //   button_appenzell.style.cursor = "pointer";
@@ -43,16 +47,34 @@ var playState = {
   appenzell: false
 }
 
+// Funktion, die eine Closure enthält und die Callback-Funktion für das
+// Intervall zurückgibt,
+// die an das Video-Objekt gebunden ist (andernfalls wäre sie an
+// Window gebunden)
+function returnCheckPlaybackTime(obj) {
+  return function() {
+    player.getCurrentTime(function (currentTime) {
+      // console.log(currentTime);
+      // console.log("Current time is " + currentTime + " and stop time is " + obj.stopTime + " and this is " + obj.name);
+      if (currentTime >= obj.stopTime) {
+        obj.pause();
+        obj.stopInterval();
+        player.seek(obj.startTime);
+        playState[obj.name] = false;
+      }
+    });
+  }
+}
+
 // Prototyp SRF_Video
 function SRF_Video(name, urn, startTime, stopTime) {
   // startTime and stopTime in seconds (int or float)
+  // var self = this;
   this.name = name;
   this.urn = urn;
   this.startTime = startTime;
   this.stopTime = stopTime;
   this.fullUrn = urn + '&start=' + startTime;
-  // loadState[this.name] = false;
-  this.playbackInterval = setInterval(this.checkPlaybackTime, 1000);
 }
 
 SRF_Video.prototype = {
@@ -60,13 +82,10 @@ SRF_Video.prototype = {
   play: function() {
     player.play();
     playState[this.name] = true;
-    if (this.playbackInterval == undefined) {
-      this.playbackInterval = setInterval(this.checkPlaybackTime, 1000);
-    }
     if (player_isDisplayed == false) {
       this.displayPlayer();
     }
-    // return playbackInterval;
+    this.startInterval();
   },
 
   pause: function() {
@@ -74,9 +93,8 @@ SRF_Video.prototype = {
     playState[this.name] = false;
   },
 
-  recreatePlayer: function(playbackInterval) {
-    // Wie kann ich playbackInterval hier verfügbar machen?
-    clearInterval(this.playbackInterval);
+  recreatePlayer: function() {
+    this.stopInterval();
     player.destroy();
     this.resetLoadState();
     this.resetPlayState();
@@ -86,18 +104,31 @@ SRF_Video.prototype = {
 
   resetLoadState: function() {
     loadState.lotti = false;
-    // var lotti_isLoaded = true;
     loadState.unterbaech = false;
-    // var unterbaech_isLoaded = false;
     loadState.appenzell = false;
   },
 
   resetPlayState: function() {
     playState.lotti = false;
-    // var lotti_isLoaded = true;
     playState.unterbaech = false;
-    // var unterbaech_isLoaded = false;
     playState.appenzell = false;
+  },
+
+  startInterval: function() {
+    clearInterval(playbackInterval);
+    // Der Variable wird eine Funktion ausserhalb des Objekts zugewiesen,
+    // die eine Closure enthält und die Callback-Funktion zurückgibt,
+    // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
+    // Window gebunden)
+    let checkPlaybackTime = returnCheckPlaybackTime(this);
+    playbackInterval = setInterval(checkPlaybackTime, 1000);
+  },
+
+  stopInterval: function() {
+    if (playbackInterval != undefined) {
+      clearInterval(playbackInterval);
+      // playbackInterval = undefined;
+    }
   },
 
   displayPlayer: function() {
@@ -121,24 +152,13 @@ SRF_Video.prototype = {
       this.play();
     }
   },
-
-  checkPlaybackTime: function() {
-    player.getCurrentTime(function (currentTime) {
-      // console.log(currentTime);
-      if (currentTime >= this.stopTime) {
-        player.pause();
-        // Wie kann ich playbackInterval hier verfügbar machen?
-        clearInterval(this.playbackInterval);
-        player.seek(this.startTime);
-        playState[this.name] = false;
-      }
-    });
-  }
 }
 
+
 lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 594.5);
-unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.8, 1065);
+unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5);
 appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53);
+// appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0.1, 5);
 
 
 function startPuzzle() {
@@ -151,7 +171,7 @@ function checkPuzzle() {
   var solution2 = document.forms["puzzle_videoQuestions"]["solution2"].value;
   var solution3 = document.forms["puzzle_videoQuestions"]["solution3"].value;
   // Hier evtl mit RegEx arbeiten, damit Varianten als richtig erkannt werden
-  if (solution1 == "1959" && solution2 == "Waadt, Genf" && solution3 == "Unterbäch") {
+  if (solution1 == "1959" && solution2 == "Waadt, Genf, Neuenburg" && solution3 == "Unterbäch") {
     window.alert("Glückwunsch! Diese Antworten sind richtig!");
   }
 }
