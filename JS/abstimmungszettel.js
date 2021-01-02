@@ -61,11 +61,11 @@ function pieceUp(nr) {
       active = false;
    }
    if (done() == true) {
-      alert ("Gratuliere!");
+      //alert ("Gratuliere!");
       puzzle.classList.toggle("hide");
 	  zettel.classList.toggle("display");
 	  document.cookie="schieberaetsel=done";
-	  window.onclick = goBack();
+	  zettel.addEventListener("click",goBack);
    }
 } 
 
@@ -93,12 +93,13 @@ function testCookie(){
 	puzzle.classList.toggle("hide");
 	zettel.classList.toggle("display");
 	alert("Bereits gelöst, Bravo!");
-	window.onclick = goBack();
+	
   } 
 }
 
 function setup() {
 	testCookie();
+	zettel.addEventListener("click", goBack);
 }
 
 

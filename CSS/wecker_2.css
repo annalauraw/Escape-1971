@@ -6,6 +6,33 @@
 	font-size: 18px;
 }
 
+#spinner {
+  display: none;
+}
+#spinner.display {
+  display: flex;
+  position: absolute;
+  top: 455px;
+  left: 550px;
+  background: url(http://i.stack.imgur.com/0Fc85m.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 75px;
+  width: 200px;
+}
+.number {
+  background: url(http://i.stack.imgur.com/c0ufam.png);
+  background-repeat: no-repeat;
+  background-size: 75% 330px;
+  height: 75px;
+  width: 30px;
+  margin-left: 5px;
+  float: left;
+  
+}
+
+
+
 #wecker_vorne {
   display: none;
 }

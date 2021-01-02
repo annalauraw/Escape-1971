@@ -13,9 +13,11 @@ var clockbox = document.getElementById("clockbox");
 var clock = document.getElementById("clock");
 var wecker_vorne = document.getElementById("wecker_vorne");
 var wecker_hinten = document.getElementById("wecker_hinten");
+var spinner = document.getElementById("spinner");
 var aufziehschluessel2 = document.getElementById("aufziehschluessel2");
 var aufziehschluessel = document.getElementById("aufziehschluessel");
 
+//Variablen für Zeiger, Uhrfunktionen
 const secDiv = document.getElementById('second');
 const minDiv = document.getElementById('minute');
 const hourDiv = document.getElementById('hour');
@@ -26,6 +28,18 @@ var centerY=450;
 var ansicht=1;
 var selectedElement=false;
 
+//Variablen für Zahlenrad
+var NUM_HEIGHT = 30;
+var Y_OFFSET = 25;
+var SPINNER_HEIGHT = 75;
+
+var targetPosition = new Array (0,0,0,0,0,0,0,0,0);
+var currentPosition = new Array (0,0,0,0,0,0,0,0,0);
+var deltaY = new Array (0,0,0,0,0,0,0,0,0);
+var rad="number1";
+var speicher=new Array (0,0,0,0,0,0,0,0,0);
+var loesung=new Array (0,0,7,0,2,1,9,7,1);
+var zahl = 0
 
 // Wenn der Wecker geklickt wird, wird diese Funktion aufgerufen
 // Sie bewirkt, dass der Wecker in gross angezeigt wird
@@ -97,6 +111,7 @@ function turnClock() {
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
   wecker_hinten.classList.toggle("display");
+  spinner.classList.toggle("display");
 }
 
 function openPuzzle() {
@@ -237,6 +252,142 @@ function findKey() {
 	window.alert ("Aufziehschlüssel gefunden");
 	
 }
+function pruefen(){
+	
+	
+	for (i = 1; i < 9; i++){
+		if (speicher[i]==loesung[i]){
+		
+		} else{
+			break;
+		}
+		
+		
+	}
+	
+	console.log("geschafft")
+}
+function targetReached() {
+  
+  deltaY[zahl] = 0;
+  currentPosition[zahl] = targetPosition[zahl];
+  speicher[zahl]=currentPosition[zahl];
+  
+  //document.getElementById("value").innerHTML = "Value: " + currentPosition[zahl];
+  pruefen();
+}
+
+function move() {
+  
+  var yPosition = -currentPosition[zahl] * NUM_HEIGHT + deltaY[zahl] + Y_OFFSET;
+  
+  
+  document.getElementById(rad).style.backgroundPosition = "0px " + yPosition + "px";
+
+  if (targetPosition[zahl] > currentPosition[zahl]) {
+    if (deltaY[zahl]  > -NUM_HEIGHT) {
+      deltaY[zahl]  = deltaY[zahl]  - 5;
+      setTimeout(move, 10);
+	  
+	  
+    } else {
+      targetReached();
+    }
+  } else if (targetPosition[zahl] < currentPosition[zahl]) {
+    if (deltaY[zahl]  < NUM_HEIGHT) {
+      deltaY[zahl]  = deltaY[zahl]  + 5;
+      setTimeout(move, 10);
+    } else {
+		
+      targetReached();
+	  
+    }
+  }
+  
+}
+
+function getClickPosition(e) {
+  // Click position handling.
+  // xPosition and yPosition are relative to element bounds.
+  // Source: http://www.kirupa.com/html5/getting_mouse_click_position.htm
+  rad=e.currentTarget.id;
+  zahl =rad.replace("number","")
+  
+  
+  
+  var parentPosition = getPosition(e.currentTarget);
+  //console.log(e.clientY);
+  console.log(parentPosition.y);
+  var xPosition = e.clientX - parentPosition.x;
+  var yPosition = Math.abs(e.clientY - parentPosition.y);
+  console.log(yPosition);
+  //console.log(SPINNER_HEIGHT);
+  
+  if (zahl==1){
+  
+	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=3) {
+		
+		targetPosition[zahl]=currentPosition[zahl]+1
+	 		
+	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
+		targetPosition[zahl] = currentPosition[zahl] - 1;		
+	
+  } 
+  }
+  else if (zahl==3){
+  
+	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=1) {
+		console.log(zahl);
+		targetPosition[zahl]=currentPosition[zahl]+1
+	 		
+	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
+		targetPosition[zahl] = currentPosition[zahl] - 1;		
+	
+  } 
+  } 
+  else if (zahl==5){
+  
+	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=2) {
+		console.log(zahl);
+		targetPosition[zahl]=currentPosition[zahl]+1
+	 		
+	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
+		targetPosition[zahl] = currentPosition[zahl] - 1;		
+	
+  } 
+  } else {
+	  
+	  if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=9) {
+	
+		targetPosition[zahl]=currentPosition[zahl]+1
+	 		
+	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
+		targetPosition[zahl] = currentPosition[zahl] - 1;
+		console.log(targetPosition[zahl]);
+	}
+  //console.log(targetPosition[zahl]);
+  
+}
+move();
+}
+
+function getPosition(element) {
+  // Helper function
+  // Source: http://www.kirupa.com/html5/getting_mouse_click_position.htm
+  var xPosition = 0;
+  var yPosition = 0;
+  
+  while (element) {
+    xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+    yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+    element = element.offsetParent;
+  }
+  
+  return {
+    x: xPosition,
+    y: yPosition
+  };
+}
 
 function setup() {
   wecker.addEventListener("click", showClock);
@@ -246,6 +397,12 @@ function setup() {
   hourDiv.addEventListener("mousedown",startDrag);
   timerDiv.addEventListener("mousedown",startDrag);
   updateClock();
+  	for (i = 1; i < 9; i++) {
+		rad="number"+i 
+		document.getElementById(rad).addEventListener("mousedown", getClickPosition, false);
+		move();
+  
+} 
    }
 
 window.addEventListener("load", setup);
