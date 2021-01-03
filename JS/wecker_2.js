@@ -3,8 +3,16 @@
 
 // Wecker auf Nachttisch
 var wecker = document.getElementById("wecker");
+
+// Abstimmungszettel
 var abstimmungszettel = document.getElementById("abstimmungszettel");
 
+// Kalender
+var calenderclick=document.getElementById("calenderclick");
+var calender=document.getElementById("calender");
+// Licht an
+var nacht= document.getElementById("nacht");
+var schalter = document.getElementById("schalter");
 // Rand von Wecker gross von vorne
 var wecker_rand = document.getElementById("wecker_rand");
 var aufziehen = document.getElementById("aufziehen");
@@ -63,25 +71,26 @@ function getCookie(cname) {
 function moveAufziehschluessel(event) {
   
   var windowMarginLeft = (window.innerWidth - 1200)/2;
-  aufziehschluessel.style.left = event.clientX - windowMarginLeft + 'px';
+  aufziehschluessel.style.left = event.clientX - windowMarginLeft +10 + 'px';
   aufziehschluessel.style.top = event.clientY-50 + 'px';
   
 }
 
 function callAufziehschluessel() {
 	
-  wecker_hinten.addEventListener("mousemove", moveAufziehschluessel);
-  // Wenn mit der Fahne auf das Hintergrundbild geklickt wird:
-  // Koordinaten prüfen
-  //document.addEventListener("click", putFlag);
-  aufziehschluessel.classList.toggle("display");
-  
-  // Übergangslösung
-  //button_removeFlag.addEventListener("click", stopFlag);
+  document.addEventListener("mousemove", moveAufziehschluessel);
+   
 }
+
+//Uhr anzeigen
 function showClock() {
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
+  
+}
+//Kalender anzeigen
+function showCalender() {
+  calender.classList.toggle("display");
   
 }
 function weckerAufziehen() {
@@ -92,22 +101,15 @@ function weckerAufziehen() {
 }
 function turnClock() {
   // Wecker (Ansicht von vorne) verstecken
-  if (ansicht==0){
-	ansicht=1;
-		  
-  } 
-  else {
-	ansicht=0;
-	var aufziehschluessel  = getCookie("aufziehschluessel");
+  
+	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
     
-	if (aufziehschluessel != "") {
+	if (aufziehschluesselCookie != "") {
+	aufziehschluessel.classList.toggle("display");
 	callAufziehschluessel();
 	aufziehen.addEventListener("click", weckerAufziehen);
 	
     } 
-  }
-	
-  
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
   wecker_hinten.classList.toggle("display");
@@ -224,8 +226,9 @@ function dropEnd(evt){
 	drop(evt);
 	clock.removeEventListener('mousemove',drop)
 	var aufziehenCookie  = getCookie("aufziehen");
+	var zahlencodeCookie = getCookie("zahlencode");
     
-	if (aufziehenCookie != "") {
+	if (aufziehenCookie != "" && zahlencodeCookie!="") {
 		console.log(aufziehenCookie);
 		checkTimer();
 	}
@@ -252,21 +255,24 @@ function findKey() {
 	window.alert ("Aufziehschlüssel gefunden");
 	
 }
-function pruefen(){
-	
-	
-	for (i = 1; i < 9; i++){
-		if (speicher[i]==loesung[i]){
-		
-		} else{
-			break;
-		}
-		
-		
-	}
-	
-	console.log("geschafft")
+
+function lichtAn (){
+	nacht.classList.toggle("hide");
+	schalter.classList.toggle("hide");
 }
+
+//Funktionen für Zahlenrad
+function pruefen(){
+	 
+    
+    for (var i = 0, len = speicher.length; i < len; i++){ 
+     if (speicher[i] !== loesung[i]){ 
+      return false; 
+     } 
+    } 
+    return true; 
+}
+		
 function targetReached() {
   
   deltaY[zahl] = 0;
@@ -275,6 +281,12 @@ function targetReached() {
   
   //document.getElementById("value").innerHTML = "Value: " + currentPosition[zahl];
   pruefen();
+  if (pruefen()==true){
+	  window.alert("Code stimmt");
+	  document.cookie="zahlencode=done";
+	  
+	  
+  }
 }
 
 function move() {
@@ -393,6 +405,8 @@ function setup() {
   wecker.addEventListener("click", showClock);
   wecker_rand.addEventListener("click", turnClock);
   abstimmungszettel.addEventListener("click", openPuzzle);
+  calenderclick.addEventListener("click", showCalender);
+  schalter.addEventListener("click", lichtAn);
   aufziehschluessel2.addEventListener("click", findKey);
   hourDiv.addEventListener("mousedown",startDrag);
   timerDiv.addEventListener("mousedown",startDrag);
