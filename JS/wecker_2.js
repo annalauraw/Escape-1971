@@ -94,7 +94,8 @@ function showCalender() {
   
 }
 function weckerAufziehen() {
-	window.alert("Wecker aufgezogen");
+	document.getElementById('AV-weckeraufziehen').play();
+	aufziehschluessel.classList.toggle("display");
 	document.cookie="aufziehen=done";
 	updateSeconds();
 	setInterval(updateSeconds, 1000);
@@ -103,13 +104,16 @@ function turnClock() {
   // Wecker (Ansicht von vorne) verstecken
   
 	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
+	var aufziehenCookie = getCookie("aufziehen");
+	
     
-	if (aufziehschluesselCookie != "") {
+	if (aufziehschluesselCookie != ""&& aufziehenCookie=="") {
 	aufziehschluessel.classList.toggle("display");
 	callAufziehschluessel();
 	aufziehen.addEventListener("click", weckerAufziehen);
 	
     } 
+	
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
   wecker_hinten.classList.toggle("display");
@@ -154,7 +158,7 @@ function checkTimer(){
 	console.log(TestArm);
 	
 	if(TestArm < 5){
-		window.alert("Rrrrring");
+		document.getElementById('AV-klingeln').play();
 		
 	}
 	
@@ -259,6 +263,7 @@ function findKey() {
 function lichtAn (){
 	nacht.classList.toggle("hide");
 	schalter.classList.toggle("hide");
+	document.getElementById('AV-schalter').play();
 }
 
 //Funktionen für Zahlenrad
@@ -324,6 +329,7 @@ function getClickPosition(e) {
   // Source: http://www.kirupa.com/html5/getting_mouse_click_position.htm
   rad=e.currentTarget.id;
   zahl =rad.replace("number","")
+  document.getElementById('AV-zahlenrad').play();
   
   
   
