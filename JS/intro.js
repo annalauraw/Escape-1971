@@ -14,6 +14,11 @@ var appenzell_isPlaying = false;
 // Button "Ich bin informiert", startet das Rätsel zum Video
 var button_startPuzzle = document.getElementById("startPuzzle");
 
+// Buttons 'Senden', um die eingegebenen Lösungswörter zu überprüfen
+var button_solution_1 = document.getElementById("button_solution_1");
+var button_solution_2 = document.getElementById("button_solution_2");
+var button_solution_3 = document.getElementById("button_solution_3");
+
 // div mit Rätsel zum Video
 var puzzle_videoQuestions = document.getElementById("puzzle_videoQuestions");
 
@@ -54,8 +59,6 @@ var playState = {
 function returnCheckPlaybackTime(obj) {
   return function() {
     player.getCurrentTime(function (currentTime) {
-      // console.log(currentTime);
-      // console.log("Current time is " + currentTime + " and stop time is " + obj.stopTime + " and this is " + obj.name);
       if (currentTime >= obj.stopTime) {
         obj.pause();
         obj.stopInterval();
@@ -155,24 +158,108 @@ SRF_Video.prototype = {
 }
 
 
-lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 594.5);
+lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609);
 unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5);
 appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53);
 // appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0.1, 5);
 
-
+// Wrapper-Funktion, da von Event-Listener aufgerufen
 function startPuzzle() {
-  puzzle_videoQuestions.classList.toggle("display");
+  // var puzzlePartElement = document.getElementById(puzzlePart);
+  // puzzlePartElement.classList.toggle("display");
+  startPuzzlePart("puzzle_videoQuestions_1");
 }
 
-function checkPuzzle() {
+function startPuzzlePart(puzzlePart) {
+  // Div mit Rätselfrage anzeigen
+  var puzzleDiv = document.getElementById(puzzlePart);
+  puzzleDiv.classList.toggle("display");
+}
+
+function checkPuzzle(trigger) {
+
   // Was die Spielerin eingegeben hat
-  var solution1 = document.forms["puzzle_videoQuestions"]["solution1"].value;
-  var solution2 = document.forms["puzzle_videoQuestions"]["solution2"].value;
-  var solution3 = document.forms["puzzle_videoQuestions"]["solution3"].value;
-  // Hier evtl mit RegEx arbeiten, damit Varianten als richtig erkannt werden
-  if (solution1 == "1959" && solution2 == "Waadt, Genf, Neuenburg" && solution3 == "Unterbäch") {
-    window.alert("Glückwunsch! Diese Antworten sind richtig!");
+  var playerSolution;
+
+  // Welcher Button hat die Funktion getriggert (id des HTML-Elements)?
+  var triggeringButton = trigger.id;
+
+  // Die Lösungsbausteine als RegEx-Muster
+  // solution_2
+  ersteAbstimmung = /1959/;
+
+  // Die Lösungsbausteine als RegEx-Muster
+  // solution_2
+  baselStadt = /(basel[-\s]stadt|bs)/i;
+  waadt = /(waadt|vaud|vd)/i;
+  genf = /(genf|gen[eéè]ve|ge)/i;
+  neuenburg = /(neuenburg|neuch[aâ]tel|ne)/i;
+
+  // Die Lösungsbausteine als RegEx-Muster
+  // solution_3
+  unterbaech = /unterb[aä]e?ch/i;
+
+  // Um welche Rätselfrage (welches Formular-HTML-Element)
+  // geht es aktuell?
+  var puzzlePart;
+
+  if (triggeringButton == "button_solution_1") {
+    puzzlePart = "puzzle_videoQuestions_1";
+    // correctSolution = correctSolution_1;
+  }
+  else if (triggeringButton == "button_solution_2") {
+    puzzlePart = "puzzle_videoQuestions_2";
+    // correctSolution = correctSolution_2;
+  }
+  else if (triggeringButton == "button_solution_3") {
+    puzzlePart = "puzzle_videoQuestions_3";
+    // correctSolution = correctSolution_3;
+  }
+
+  // Was die Spielerin eingegeben hat bei der aktuellen Rätselfrage
+  playerSolution = document.forms[puzzlePart]["solution"].value;
+
+  // Was 'true' ergeben muss, damit die Lösung als richtig erkannt Wird
+  // playerSolution muss die RegEx-Pattern enthalten
+  var correctSolution_1 = ersteAbstimmung.test(playerSolution);
+  var correctSolution_2 = baselStadt.test(playerSolution) && waadt.test(playerSolution) && genf.test(playerSolution) && neuenburg.test(playerSolution);
+  var correctSolution_3 = unterbaech.test(playerSolution);
+
+  // Welche Rätselfrage kommt nach dieser?
+  var nextPuzzlePart;
+
+  // Um welche Lösung geht es aktuell?
+  if (puzzlePart == "puzzle_videoQuestions_1") {
+    // puzzlePart = "puzzle_videoQuestions_1";
+    correctSolution = correctSolution_1;
+    nextPuzzlePart = "puzzle_videoQuestions_2";
+  }
+  else if (puzzlePart == "puzzle_videoQuestions_2") {
+    // puzzlePart = "puzzle_videoQuestions_2";
+    correctSolution = correctSolution_2;
+    nextPuzzlePart = "puzzle_videoQuestions_3";
+  }
+  else if (puzzlePart == "puzzle_videoQuestions_3") {
+    // puzzlePart = "puzzle_videoQuestions_3";
+    correctSolution = correctSolution_3;
+    nextPuzzlePart = undefined;
+  }
+
+  if (correctSolution == true) {
+    // alert("Richtig!");
+    // Formular bzw. umgebendes div mit der korrekt beantworteten Frage verstecken
+    solvedForm = document.getElementById(puzzlePart);
+    solvedForm.classList.toggle("display");
+    // Zweite Rätselfrage aufrufen
+    if (nextPuzzlePart == undefined) {
+      alert("Vreni, Lisi und Ruth kommen ins Wohnzimmer für die nächste Station");
+    }
+    else {
+      startPuzzlePart(nextPuzzlePart);
+    }
+  }
+  else {
+    alert("Das ist die falsche Antwort für " + puzzlePart);
   }
 }
 
@@ -181,7 +268,9 @@ function setup() {
   button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
   button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
   button_startPuzzle.addEventListener("click", startPuzzle);
-  form_videoQuestions.addEventListener("submit", checkPuzzle);
+  button_solution_1.addEventListener("click", function() {checkPuzzle(this);});
+  button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
+  button_solution_3.addEventListener("click", function() {checkPuzzle(this);});
   // button_appenzell.addEventListener("mouseover", hoverOverButton);
 }
 
