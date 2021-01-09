@@ -3,49 +3,180 @@
 const RUTH = document.getElementById("ruth");
 // IMAGE: das Hintergrundbild
 const IMAGE = document.getElementsByClassName("imagecontainer")[0];
+// Soundtrack: erster Durchlauf mit Intro
+const BIT_TUNE = document.getElementById("8bit");
+// Soundtrack: Loop ohne Intro
+const BIT_TUNE_LOOP = document.getElementById("8bit_loop");
+// Button, der zuerst der Startbutton ist
+// Danach Button, um Soundtrack zu stoppen/starten
+const START = document.getElementById("start_stop");
+
+// Variablen für den Timer
+const TIMER = document.getElementById("timer");
+var seconds;
+var timerInterval;
+
+// Variablen für den addEventListener
+var posLeftString = RUTH.style.left;
+var posBottomString = RUTH.style.bottom;
+var posLeft = Number(posLeftString.slice(0, -2));
+var posBottom = Number(posBottomString.slice(0, -2));
+
+// Abspielen des Soundtracks beim Start
+function startSoundtrack() {
+  BIT_TUNE.play();
+}
+
+// Funktion, die Ruth an den Anfang des Wegs zurücksetzt
+function resetRuth() {
+  RUTH.style.left = "120px";
+  RUTH.style.bottom = "40px";
+  posLeft = 120;
+  posBottom = 40;
+}
+
+// Timer zählt Countdown ab 10
+function countTimer() {
+  if (seconds >= 1) {
+    seconds -= 1;
+    TIMER.innerHTML = seconds.toString();
+  }
+  else {
+    clearInterval(timerInterval);
+    resetRuth();
+    TIMER.classList.toggle("display");
+    startTimer();
+  }
+}
+
+// Funktion, die den Timer startet
+function startTimer() {
+  seconds = 7;
+  TIMER.innerHTML = seconds.toString();
+  TIMER.classList.toggle("display");
+  timerInterval = setInterval(countTimer, 1000);
+}
+
+function startGame() {
+  document.addEventListener("keypress", function(event){moveRuth(event)});
+  document.addEventListener("keypress", checkRuthPosition);
+  START.removeEventListener("click", startGame);
+  startSoundtrack();
+  startTimer();
+}
+
+// Soundtrack stoppen / starten, wenn Button gedrückt wird
+function toggleSoundtrack() {
+  if (BIT_TUNE_LOOP.paused) {
+    BIT_TUNE_LOOP.play();
+    START.innerHTML = "Sound stoppen";
+  }
+  else {
+    BIT_TUNE_LOOP.pause();
+    START.innerHTML = "Sound starten";
+  }
+}
+
+function startSoundtrackLoop() {
+  BIT_TUNE_LOOP.play();
+  if (START.innerHTML == "Start") {
+    START.innerHTML = "Sound stoppen";
+    START.addEventListener("click", toggleSoundtrack);
+  }
+}
 
 function moveRuth(event) {
   // console.log(event.key);
-  var posLeftString = RUTH.style.left;
-  var posBottomString = RUTH.style.bottom;
-  var posLeft = Number(posLeftString.slice(0, -2));
-  var posBottom = Number(posBottomString.slice(0, -2));
+
 
   // Wenn d-Taste gedrückt wird, läuft Ruth 20px nach rechts
   if (event.key == "d") {
-    posLeft += 20;
-    posLeftString = posLeft.toString() + "px";
-    //The above statement does not update the left value in the document yet
-    document.getElementById("ruth").style.left = posLeft.toString() + "px";
-    // console.log("left", posLeftString);
+    // bei 760px kann Ruth nicht weiter nach rechts
+    // wenn sie weiter unten als 340px ist (unterer Weg)
+    if (posBottom <= 340) {
+      if (posLeft <= 760) {
+        posLeft += 20;
+        // console.log(posLeft);
+        posLeftString = posLeft.toString() + "px";
+        //The above statement does not update the left value in the document yet
+        RUTH.style.left = posLeft.toString() + "px";
+        // console.log("left", posLeftString);
+      }
+    }
+    else if (posLeft <= 1000) {
+      posLeft += 20;
+      // console.log(posLeft);
+      posLeftString = posLeft.toString() + "px";
+      //The above statement does not update the left value in the document yet
+      RUTH.style.left = posLeft.toString() + "px";
+    }
   }
   // Wenn a-Taste gedrückt wird, läuft Ruth 20px nach links
   else if (event.key == "a") {
-    posLeft -= 20;
-    posLeftString = posLeft.toString() + "px";
-    //The above statement does not update the left value in the document yet
-    document.getElementById("ruth").style.left = posLeft.toString() + "px";
-    // console.log("left:", posLeftString);
+    // bei 120px kann Ruth nicht weiter nach links
+    // wenn sie weiter unten als 340px ist (unterer Weg)
+    if (posBottom == 40) {
+      if (posLeft >= 140) {
+        posLeft -= 20;
+        // console.log(posLeft);
+        posLeftString = posLeft.toString() + "px";
+        RUTH.style.left = posLeft.toString() + "px";
+      }
+    }
+    else if (posBottom >= 360 && posBottom <= 380) {
+      if (posLeft >= 220) {
+        posLeft -= 20;
+        // console.log(posLeft);
+        posLeftString = posLeft.toString() + "px";
+        RUTH.style.left = posLeft.toString() + "px";
+      }
+    }
   }
   // Wenn w-Taste gedrückt wird, läuft Ruth 20px nach oben
   else if (event.key == "w") {
-    posBottom += 20;
-    posBottomString = posBottom.toString() + "px";
-    //The above statement does not update the bottom value in the document yet
-    document.getElementById("ruth").style.bottom = posBottom.toString() + "px";
-    // console.log("bottom", posBottomString);
+    // wenn Ruth beim Weg nach oben ist
+    // && posBottom <= 360
+    if (posLeft >= 740 && posLeft <= 780 && posBottom <= 360) {
+      posBottom += 20;
+      // console.log(posBottom);
+      posBottomString = posBottom.toString() + "px";
+      RUTH.style.bottom = posBottom.toString() + "px";
+      // console.log("bottom", posBottomString);
+    }
+    // wenn Ruth vor einem der Häuser ist
+    else if (posBottom >= 360 && posBottom <= 460) {
+      if (posLeft == 1020 || posLeft == 580 || posLeft == 200) {
+        posBottom += 20;
+        // console.log(posBottom);
+        posBottomString = posBottom.toString() + "px";
+        RUTH.style.bottom = posBottom.toString() + "px";
+      }
+    }
   }
   // Wenn s-Taste gedrückt wird, läuft Ruth 20px nach unten
   else if (event.key == "s") {
-    posBottom -= 20;
-    posBottomString = posBottom.toString() + "px";
-    document.getElementById("ruth").style.bottom = posBottom.toString() + "px";
-    // console.log("bottom", posBottomString);
+    // wenn sie auf dem langen senkrechten Weg ist
+    if (posLeft >= 740 && posLeft <= 780 && posBottom >= 60) {
+      posBottom -= 20;
+      // console.log(posBottom);
+      posBottomString = posBottom.toString() + "px";
+      RUTH.style.bottom = posBottom.toString() + "px";
+    }
+    // wenn sie vor einem der Häuser steht
+    else if ((posLeft == 1020 || posLeft == 580 || posLeft == 200) && posBottom >= 400) {
+      posBottom -= 20;
+      // console.log(posBottom);
+      posBottomString = posBottom.toString() + "px";
+      RUTH.style.bottom = posBottom.toString() + "px";
+    }
   }
-  //Wenn Ruth genau vor Uelis Tür steht, geht sie in Uelis Zimmer hinein
+}
+
+// Wenn Ruth in Uelis Tür steht, betritt sie sein Schlafzimmer
+function checkRuthPosition() {
   if (posLeft == 1020 && posBottom == 460) {
     // Call next HTML page
-    location.assign("wecker_2.html")
+    location.assign("wecker_2.html");
   }
 }
 
@@ -54,18 +185,11 @@ function moveRuth(event) {
 //Als Parameter wird der keypress-Event mitgeliefert, der die Info enthält,
 //welche Taste gedrück wurde
 function setup() {
-  document.addEventListener("keypress", function(event){moveRuth(event)});
+  BIT_TUNE.addEventListener("ended", startSoundtrackLoop);
+  // BIT_TUNE.addEventListener("ended", showButton);
+  BIT_TUNE_LOOP.addEventListener("ended", startSoundtrackLoop);
+  START.addEventListener("click", startGame);
 }
 
 // Sobald die Seite geladen ist, wird die setup-Funktion aufgerufen
 window.addEventListener("load", setup);
-
-// AJAX-Beispiel - falls wir das mal brauchen
-// var xhttp = new XMLHttpRequest();
-// xhttp.onreadystatechange = function() {
-//   if (this.readyState == 4 && this.status == 200) {
-//     IMAGE.innerHTML = this.responseText;
-//   }
-// };
-// xhttp.open("GET", "wecker_2.html", true);
-// xhttp.send();
