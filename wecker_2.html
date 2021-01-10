@@ -10,33 +10,37 @@
     <div class="imagecontainer">
 	  
       <!-- Hauptbild -->
-      <img id="hintergrund" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_schlafzimmer.png" usemap="#wecker_nachttisch">
+      <img id="hintergrund" src="Bilder/bilder/uelis_schlafzimmer_def.png" ondragover="allowDrop(event)" ondrop="dropKalender(event)" usemap="#wecker_nachttisch">
+	  <img id="kalenderblatt" src="Bilder/bilder/uelis_schlafzimmer_def_kalenderblatt_6feb.png">
 	  <div id="nacht">
 	  <div id="schalter"></div>
 	  </div>
+	  <div id=weckerdrehen></div>
+	  <div id=aufziehen></div>
       <!-- clickable areas inside the image -->
       <map name="wecker_nachttisch"> 
         <!-- <area shape="rect" coords="170, 130, 210, 153" alt="Puzzle 1" href="puzzle1.html"> -->
         <!-- <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm"> -->
         <!-- Wecker -->
-	   <area id="calenderclick" shape="rect" coords="100,350,300,550">
-       <area id="wecker" shape="circle" coords="300,350,50">
-	   <area id="abstimmungszettel" shape="rect" coords="0,550,100,650">
-	   <area id="aufziehschluessel2" shape="rect" coords="200,550,400,750">
+	   
+       <area id="wecker" shape="rect" coords="340,410,410,460">
+	   <area id="abstimmungszettel" shape="rect" coords="270,485,340,585">
+	   <area id="aufziehschluessel2" shape="rect" coords="320,590,360,630">
 	  </map> 
 	  
 
       <!-- Wecker gross von vorne, wird sichtbar bei Klick auf Nachttisch-Wecker -->
-      <img id="wecker_vorne" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_wecker.png" usemap="#wecker_rand">
+      <img id="wecker_vorne" src="Bilder/bilder/wecker_vorderseite.png" usemap="#wecker_rand">
       
 	  <map name="wecker_rand">
         <!-- Koordinaten zum Testen links oben -->
-        <area id="wecker_rand" shape="rect" coords="0,0,50,50">
-		<area id="aufziehen" shape="rect" coords="200,200,300,250">
+        <area id="wecker_rand" shape="rect" coords="150,120,680,450">
+		<!--<area id="aufziehen" shape="rect" coords="380,220,410,250">-->
         <!-- eine kleine kreisförmige Fäche am rechten Weckerrand - wenn sie angeklickt wird, dreht sich der Wecker -->
         <!-- <area id="wecker_rand" shape="circle" coords="300,300,100"> -->
 		
       </map>
+	  
 
       <!-- Wecker-Ziffernblatt (SVG) -->
       <div id="clockbox">
@@ -63,33 +67,34 @@
                 <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
             </g>
       </div> <!-- clockbox -->
-	  <div id="calender"> 06.02.1971</div>
+	  
 
-      <img id="wecker_hinten" src="Bilder/bilder_trash/escape_frauenstreik_wecker_vonhinten.png" usemap="#wecker_rand">
+      <img id="wecker_hinten" src="Bilder/bilder/wecker_rueckseite.png" usemap="#wecker_rand">
 	  <audio id="AV-weckeraufziehen" src="Audio/AV-weckeraufziehen.mp3"></audio>
 	  <audio id="AV-klingeln" src="Audio/AV-klingeln.mp3"></audio>
 	  <audio id="AV-schalter" src="Audio/AV-schalter.mp3"></audio>
 	  <audio id="AV-zahlenrad" src="Audio/AV-zahlenrad.mp3"></audio>
+	  <audio id="AV-ticken" src="Audio/AV-ticken.mp3"></audio>
 	  <div id="spinner">
-		<div id="number1" class="number">
+		<div id="number1" class="number3">
 		</div>
-		<div id="number2" class="number">
+		<div id="number2" class="number9">
 		</div>
-		<div id="number3" class="number">
+		<div id="number3" class="number1">
 		</div>
-		<div id="number4" class="number">
+		<div id="number4" class="number9">
 		</div>
-		<div id="number5" class="number">
+		<div id="number5" class="number2">
 		</div>
-		<div id="number6" class="number">
+		<div id="number6" class="number9">
 		</div>
-		<div id="number7" class="number">
+		<div id="number7" class="number9">
 		</div>
-		<div id="number8" class="number">
+		<div id="number8" class="number9">
 	</div>
   
 </div>
-	  <img id="aufziehschluessel" src="Bilder/bilder_trash/escape_frauenstreik_wecker_schluessel.png">
+	  <img id="aufziehschluessel" src="Bilder/bilder/uelis_schlafzimmer_def_weckerschluessel.png">
       <!-- <div id="puzzle1">
         <form name="puzzle1" class="puzzle" onsubmit="checkPuzzle1()">
          <label for="solution1">Lösungswort:</label>

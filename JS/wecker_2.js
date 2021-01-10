@@ -1,15 +1,14 @@
 // ToDo: Weckeransichten von vorne/von hinten sollen nicht
 // gleichzeitig sichtbar sein!
-
+var hintergrund=document.getElementById("hintergrund");
 // Wecker auf Nachttisch
 var wecker = document.getElementById("wecker");
 
 // Abstimmungszettel
 var abstimmungszettel = document.getElementById("abstimmungszettel");
 
-// Kalender
-var calenderclick=document.getElementById("calenderclick");
-var calender=document.getElementById("calender");
+//Kalender
+var kalenderblatt = document.getElementById("kalenderblatt")
 // Licht an
 var nacht= document.getElementById("nacht");
 var schalter = document.getElementById("schalter");
@@ -24,6 +23,7 @@ var wecker_hinten = document.getElementById("wecker_hinten");
 var spinner = document.getElementById("spinner");
 var aufziehschluessel2 = document.getElementById("aufziehschluessel2");
 var aufziehschluessel = document.getElementById("aufziehschluessel");
+var weckerdrehen =document.getElementById("weckerdrehen");
 
 //Variablen für Zeiger, Uhrfunktionen
 const secDiv = document.getElementById('second');
@@ -31,9 +31,10 @@ const minDiv = document.getElementById('minute');
 const hourDiv = document.getElementById('hour');
 const timerDiv = document.getElementById('timer');
 
-var centerX=850;
-var centerY=450;
+var centerX=783;
+var centerY=446;
 var ansicht=1;
+var ansicht2=1;
 var selectedElement=false;
 
 //Variablen für Zahlenrad
@@ -79,41 +80,77 @@ function moveAufziehschluessel(event) {
 function callAufziehschluessel() {
 	
   document.addEventListener("mousemove", moveAufziehschluessel);
-   
+   //console.log("H");
 }
 
 //Uhr anzeigen
 function showClock() {
-  clockbox.classList.toggle("display");
-  wecker_vorne.classList.toggle("display");
+	if (ansicht==1){
+		ansicht=0
+		hintergrund.addEventListener("click",showClock);
+	}else{
+		hintergrund.removeEventListener("click",showClock);
+		ansicht=1
+	}
+
+   if (ansicht2==1){
+       clockbox.classList.toggle("display");
+       wecker_vorne.classList.toggle("display");
+       weckerdrehen.classList.toggle("display");
+ 
+	}else{
+		wecker_hinten.classList.toggle("display");
+		spinner.classList.toggle("display");
+		
+	}
   
 }
-//Kalender anzeigen
-function showCalender() {
-  calender.classList.toggle("display");
-  
-}
+
 function weckerAufziehen() {
 	document.getElementById('AV-weckeraufziehen').play();
 	aufziehschluessel.classList.toggle("display");
 	document.cookie="aufziehen=done";
 	updateSeconds();
 	setInterval(updateSeconds, 1000);
+	document.getElementById("AV-weckeraufziehen").addEventListener('ended', function(){
+    
+    document.getElementById("AV-ticken").play();
+	document.getElementById("AV-ticken").loop = true; 
+  });
+	
 }
 function turnClock() {
-  // Wecker (Ansicht von vorne) verstecken
-  
+	
+	if (ansicht2==1){
 	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
 	var aufziehenCookie = getCookie("aufziehen");
 	
-    
-	if (aufziehschluesselCookie != ""&& aufziehenCookie=="") {
+    //console.log(aufziehschluesselCookie);
+	//console.log(aufziehenCookie);
+	if (aufziehschluesselCookie != "" && aufziehenCookie=="") {
 	aufziehschluessel.classList.toggle("display");
 	callAufziehschluessel();
+	aufziehen.classList.toggle("display");
 	aufziehen.addEventListener("click", weckerAufziehen);
 	
-    } 
+    } ansicht2=0;
+	} else{
+	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
+	var aufziehenCookie = getCookie("aufziehen");
 	
+    //console.log(aufziehschluesselCookie);
+	//console.log(aufziehenCookie);
+	if (aufziehschluesselCookie != "" && aufziehenCookie=="") {
+	aufziehschluessel.classList.toggle("display");
+	callAufziehschluessel();
+	aufziehen.classList.toggle("display");
+	aufziehen.addEventListener("click", weckerAufziehen);
+	}
+	ansicht2=1;
+	}
+	
+  // Wecker (Ansicht von vorne) verstecken
+  //console.log(ansicht2);
   clockbox.classList.toggle("display");
   wecker_vorne.classList.toggle("display");
   wecker_hinten.classList.toggle("display");
@@ -155,9 +192,11 @@ function checkTimer(){
 	checkHourArm=checkHourArm.replace("rotate(","");
 	checkHourArm=checkHourArm.replace("deg)","");
 	var TestArm=Math.abs(checkHourArm-checkTimerArm)
-	console.log(TestArm);
+	
 	
 	if(TestArm < 5){
+		//console.log("Done");
+		document.getElementById('AV-ticken').pause();
 		document.getElementById('AV-klingeln').play();
 		
 	}
@@ -168,6 +207,9 @@ function drop(ev) {
 	
 	var punktX=ev.clientX;
 	var punktY=ev.clientY;
+	 
+	 //console.log(punktX);
+	 //console.log(punktY);
 	
 	if (punktX>centerX){
 		gegenkathete=punktX-centerX;
@@ -233,7 +275,7 @@ function dropEnd(evt){
 	var zahlencodeCookie = getCookie("zahlencode");
     
 	if (aufziehenCookie != "" && zahlencodeCookie!="") {
-		console.log(aufziehenCookie);
+		//console.log(aufziehenCookie);
 		checkTimer();
 	}
 }
@@ -241,8 +283,8 @@ function dropEnd(evt){
 function startDrag(evt) {
       
 	  selectedElement = evt.target;
-	  console.log(selectedElement);
-	  console.log(selectedElement.classList[0]);
+	  //console.log(selectedElement);
+	  //console.log(selectedElement.classList[0]);
 	  if (selectedElement.classList[0]=="timer-arm"){
 		  selectedElement=timerDiv;
 		  
@@ -335,10 +377,10 @@ function getClickPosition(e) {
   
   var parentPosition = getPosition(e.currentTarget);
   //console.log(e.clientY);
-  console.log(parentPosition.y);
+  //console.log(parentPosition.y);
   var xPosition = e.clientX - parentPosition.x;
   var yPosition = Math.abs(e.clientY - parentPosition.y);
-  console.log(yPosition);
+  //console.log(yPosition);
   //console.log(SPINNER_HEIGHT);
   
   if (zahl==1){
@@ -355,7 +397,7 @@ function getClickPosition(e) {
   else if (zahl==3){
   
 	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=1) {
-		console.log(zahl);
+		//console.log(zahl);
 		targetPosition[zahl]=currentPosition[zahl]+1
 	 		
 	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
@@ -366,7 +408,7 @@ function getClickPosition(e) {
   else if (zahl==5){
   
 	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=2) {
-		console.log(zahl);
+		//console.log(zahl);
 		targetPosition[zahl]=currentPosition[zahl]+1
 	 		
 	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
@@ -381,7 +423,7 @@ function getClickPosition(e) {
 	 		
 	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
 		targetPosition[zahl] = currentPosition[zahl] - 1;
-		console.log(targetPosition[zahl]);
+		//console.log(targetPosition[zahl]);
 	}
   //console.log(targetPosition[zahl]);
   
@@ -405,13 +447,25 @@ function getPosition(element) {
     x: xPosition,
     y: yPosition
   };
+  }                        
+function dragKalender(ev){
+	 //ev.dataTransfer.setData("text", ev.target.id);
+} 
+
+function allowDrop(ev){
+	ev.preventDefault();
+}
+
+function dropKalender(ev){
+	ev.preventDefault();
+	kalenderblatt.classList.toggle("hide");
 }
 
 function setup() {
   wecker.addEventListener("click", showClock);
-  wecker_rand.addEventListener("click", turnClock);
+  weckerdrehen.addEventListener("click", turnClock);
   abstimmungszettel.addEventListener("click", openPuzzle);
-  calenderclick.addEventListener("click", showCalender);
+  kalenderblatt.addEventListener("mousedown", dragKalender);
   schalter.addEventListener("click", lichtAn);
   aufziehschluessel2.addEventListener("click", findKey);
   hourDiv.addEventListener("mousedown",startDrag);

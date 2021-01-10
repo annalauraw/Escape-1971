@@ -6,13 +6,60 @@
 	font-size: 18px;
 }
 
+
+
+#weckerdrehen {
+	display: none;
+}
+
+#weckerdrehen.display {
+	display:flex;
+	position: absolute;
+	height: 300px;
+    width: 50px;
+    top: 300px;
+    left: 700px;
+	z-index:10;
+}
+
+
+#kalenderblatt {
+	display:flex;
+	position: absolute;
+	height: 100px;
+    /*width: 50px;*/
+    top: 115px;
+    left: 400px;
+	z-index:2;
+	cursor: move;
+}
+
+#kalenderblatt.hide {
+	display: none;
+}
+
+
+#aufziehen {
+	display: none;
+}
+
+#aufziehen.display {
+	display:flex;
+	position: absolute;
+	height: 25px;
+    width: 25px;
+    top: 375px;
+    left: 580px;
+	z-index:10;
+}
+
 #nacht {
   position: absolute;
-  height: 768px;
-  width: 1280px;
+  height: 750px;
+  width: 1200px;
   top: 0px;
   left: 0px;
-  z-index: 1;
+  z-index: 5;
   background-color: black;
   opacity: 0.8;
   
@@ -24,11 +71,11 @@
 
 #schalter {
   position: absolute;
-  height: 100px;
-  width: 100px;
-  top: 0px;
-  left: 0px;
-  z-index: 2;
+  height: 30px;
+  width: 40px;
+  top: 450px;
+  left: 295px;
+  z-index: 10;
     
 }
 #schalter.hide {
@@ -42,16 +89,47 @@
 #spinner.display {
   display: flex;
   position: absolute;
-  top: 455px;
-  left: 550px;
-  background: url(http://i.stack.imgur.com/0Fc85m.png);
+  top: 440px;
+  left: 490px;
+  background-image: url("bilder/zahlenrad-hintergrund.png"); /*http://i.stack.imgur.com/0Fc85m.png*/
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 75px;
   width: 200px;
+  z-index:6;
 }
-.number {
-  background: url(http://i.stack.imgur.com/c0ufam.png);
+.number9 {
+  background: url("bilder/zahlenrad-zahlen9.png");/*http://i.stack.imgur.com/c0ufam.png*/
+  background-repeat: no-repeat;
+  background-size: 75% 330px;
+  height: 75px;
+  width: 30px;
+  margin-left: 5px;
+  float: left;
+  
+}
+.number3 {
+  background: url("bilder/zahlenrad-zahlen3.png");/*http://i.stack.imgur.com/c0ufam.png*/
+  background-repeat: no-repeat;
+  background-size: 75% 330px;
+  height: 75px;
+  width: 30px;
+  margin-left: 5px;
+  float: left;
+  
+}
+.number2 {
+  background: url("bilder/zahlenrad-zahlen2.png");/*http://i.stack.imgur.com/c0ufam.png*/
+  background-repeat: no-repeat;
+  background-size: 75% 330px;
+  height: 75px;
+  width: 30px;
+  margin-left: 5px;
+  float: left;
+  
+}
+.number1 {
+  background: url("bilder/zahlenrad-zahlen1.png");/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;
@@ -75,30 +153,16 @@
   left: 500px;
   top: 150px;
   width: 400px;*/
-  width: 500px;
+  /*width: 800px;*/
   height: 500px;
   position: absolute;
   top: 150px;
-  left: 400px;
+  left: 200px;
+  z-index:5;
   /*transform: translate(-50%, -50%);*/
   
 }
 
-#calender {
-  display: none;
-}
-
-
-#calender.display {
-  display: flex;
-  background-color: white; 
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  top: 150px;
-  left: 400px;
-    
-}
 
 
 /* Ziffernblatt */
@@ -114,9 +178,10 @@ display: none;
   width: 350px;
   height: 350px;
   position: absolute;
-  top: 300px;
-  left: 500px;
+  top: 295px;
+  left: 440px;
   overflow: hidden;
+  z-index:6;
   /*border-radius: 250px;
   border: 10px solid #111;*/
   /*transform: translate(-50%, -50%);*/
@@ -137,6 +202,7 @@ display: none;
   display: block;
   width: 100px;
   position: absolute;
+  z-index:10;
 }
 
 
