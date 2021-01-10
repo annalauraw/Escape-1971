@@ -9,6 +9,7 @@ var abstimmungszettel = document.getElementById("abstimmungszettel");
 
 //Kalender
 var kalenderblatt = document.getElementById("kalenderblatt")
+var kalendertest= 0
 // Licht an
 var nacht= document.getElementById("nacht");
 var schalter = document.getElementById("schalter");
@@ -24,6 +25,7 @@ var spinner = document.getElementById("spinner");
 var aufziehschluessel2 = document.getElementById("aufziehschluessel2");
 var aufziehschluessel = document.getElementById("aufziehschluessel");
 var weckerdrehen =document.getElementById("weckerdrehen");
+
 
 //Variablen für Zeiger, Uhrfunktionen
 const secDiv = document.getElementById('second');
@@ -103,6 +105,22 @@ function showClock() {
 		spinner.classList.toggle("display");
 		
 	}
+	if (ansicht2==0){
+	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
+	var aufziehenCookie = getCookie("aufziehen");
+	
+    //console.log(aufziehschluesselCookie);
+	//console.log(aufziehenCookie);
+	if (aufziehschluesselCookie != "" && aufziehenCookie=="") {
+	aufziehschluessel.classList.toggle("display");
+	callAufziehschluessel();
+	aufziehen.classList.toggle("display");
+	aufziehen.addEventListener("click", weckerAufziehen);
+	
+    }
+	}
+	
+	
   
 }
 
@@ -450,6 +468,7 @@ function getPosition(element) {
   }                        
 function dragKalender(ev){
 	 //ev.dataTransfer.setData("text", ev.target.id);
+	 kalendertest=1
 } 
 
 function allowDrop(ev){
@@ -458,7 +477,14 @@ function allowDrop(ev){
 
 function dropKalender(ev){
 	ev.preventDefault();
+	if (kalendertest==1){
+	
+	
 	kalenderblatt.classList.toggle("hide");
+	hintergrund.removeAttribute("ondragover");
+	hintergrund.removeAttribute("ondrop");
+	}
+	
 }
 
 function setup() {
