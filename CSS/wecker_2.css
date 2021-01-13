@@ -62,11 +62,11 @@
   z-index: 5;
   background-color: black;
   opacity: 0.8;
-  
+
 }
 #nacht.hide {
   display:none;
-  
+
 }
 
 #schalter {
@@ -76,11 +76,11 @@
   top: 450px;
   left: 295px;
   z-index: 10;
-    
+
 }
 #schalter.hide {
   display:none;
-  
+
 }
 
 #spinner {
@@ -91,52 +91,49 @@
   position: absolute;
   top: 440px;
   left: 490px;
-  background-image: url(../Bilder/bilder/zahlenrad-hintergrund.png); /*http://i.stack.imgur.com/0Fc85m.png*/
+  background-image: url(bilder/Zahlenrad-hintergrund.png); /*http://i.stack.imgur.com/0Fc85m.png*/
+	/* background-image: url("bilder/Zahlenrad-hintergrund.png"); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 75px;
   width: 200px;
-  z-index:6;
+  z-index: 6;
 }
 .number9 {
-  background: url("bilder/zahlenrad-zahlen9.png");/*http://i.stack.imgur.com/c0ufam.png*/
+  background-image: url(bilder/Zahlenrad-zahlen9.png);/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;
   width: 30px;
   margin-left: 5px;
   float: left;
-  
 }
 .number3 {
-  background: url("bilder/zahlenrad-zahlen3.png");/*http://i.stack.imgur.com/c0ufam.png*/
+  background-image: url(bilder/Zahlenrad-zahlen3.png);/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;
   width: 30px;
   margin-left: 5px;
   float: left;
-  
 }
 .number2 {
-  background: url("bilder/zahlenrad-zahlen2.png");/*http://i.stack.imgur.com/c0ufam.png*/
+  background-image: url(bilder/Zahlenrad-zahlen2.png);/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;
   width: 30px;
   margin-left: 5px;
   float: left;
-  
 }
 .number1 {
-  background: url("bilder/zahlenrad-zahlen1.png");/*http://i.stack.imgur.com/c0ufam.png*/
+  background-image: url(bilder/Zahlenrad-zahlen1.png);/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;
   width: 30px;
   margin-left: 5px;
   float: left;
-  
 }
 
 #wecker_hinten {
@@ -160,7 +157,7 @@
   left: 200px;
   z-index:5;
   /*transform: translate(-50%, -50%);*/
-  
+
 }
 
 
@@ -229,7 +226,7 @@ display: none;
     stroke: #000;
     stroke-width: 17;
     stroke-miterlimit: 10;
-	
+
 }
 
 .minute-arm {
