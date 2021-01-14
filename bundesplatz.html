@@ -8,12 +8,13 @@
   </head>
   <body>
     <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder_trash/bundeshaus.png" usemap="#button_tv">
+      <img id="hintergrund" src="Bilder/bilder_trash/bundeshaus.png" usemap="#hintergrund">
       <img id="fahne" src="Bilder/bilder_trash/fahne_frauenstimmrecht.png">
-      <map name="button_tv">
-        <!-- Button-Koordinaten müssen noch angepasst werden
-        Es passiert noch nichts -->
-        <area id="button_lieberherr" shape="circle" coords="680, 220, 20">
+      <map name="hintergrund">
+        <!-- mittlerer Knopf am Fernseher -->
+        <area id="button_lieberherr" shape="circle" coords="410, 580, 20">
+        <!-- Hand der Helvetia -->
+        <area id="helvetia" shape="circle" coords="750, 140, 20">
       </map>
       <iframe id="lieberherr" src="https://srf.ch/play/embed?urn=urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5&startTime=897" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
       <!-- <video id="testvideo_1">
@@ -21,7 +22,7 @@
         <source src="Videos/test_queryus_mother.mp4" type="video/mp4"/>
       </video> -->
       <button id="startPuzzle" type="button">Rätsel starten</button>
-      <button id="removeFlag" type="button">Stop Fahne</button>
+      <!-- <button id="removeFlag" type="button">Stop Fahne</button> -->
       <div id="puzzle_lieberherrQuestions">
         <form name="puzzle_lieberherrQuestions">
          <label for="solution1">Wie lautet Emilie Lieberherrs berühmter Satz?</label><br>

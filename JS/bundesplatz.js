@@ -11,8 +11,11 @@ var form_lieberherrQuestions = document.forms["puzzle_LieberherrQuestions"];
 var hintergrund = document.getElementById("hintergrund");
 // Fahnen-Bild
 var flag = document.getElementById("fahne");
-// Button "Stop Fahne"
-var button_removeFlag = document.getElementById("removeFlag");
+// Button am Fernseher, der das Lieberherr-Video startet
+// Noch passiert nichts, wenn man klickt
+var button_lieberherr = document.getElementById("button_lieberherr");
+// Helvetias Hand
+var helvetia = document.getElementById("helvetia");
 
 // Funktion, die das Rätsel zu Lieberherr anzeigt
 function startPuzzle() {
@@ -25,39 +28,28 @@ function moveFlag(event) {
   var windowMarginLeft = (window.innerWidth - 1200) / 2;
   // var windowMarginTop = window.innerWidth - outerDiv.height;
   // Die Fahne ist immer dort, wo der Mauszeiger ist
-  flag.style.left = event.clientX - windowMarginLeft + 'px';
+  // bzw. 20px rechts davon, damit auf Helvetias Hand geklickt
+  // werden kann, ohne dass die Fahme im Weg ist
+  flag.style.left = event.clientX - windowMarginLeft + 20 + 'px';
   flag.style.top = event.clientY -50 + 'px';
-  // if (flag.style.left == "655.5px" && flag.style.top == "1px") {
-  //   document.removeEventListener("mousemove", moveFlag);
-  // }
+  helvetia.addEventListener("click", putFlag);
+
 }
 
 // Wenn Fahne an den richtigen Koordinaten ist: Helvetia in die Hand drücken
-// Ist noch viel zu schwierig zum Treffen - kann eine Range von Werten für
-// flag.style.left und flag.style.top hinterlegt werden
 function putFlag() {
-  if (flag.style.left == "662.5px" && flag.style.top == "-4px") {
-    document.removeEventListener("mousemove", moveFlag);
-  }
-}
-
-// Wenn der "Stop Fahne"-Button geklickt wird, verschwindet die Fahne
-// Übergangslösung
-function stopFlag() {
-  flag.classList.toggle("display");
-  hintergrund.removeEventListener("mousemove", moveFlag);
+  document.removeEventListener("mousemove", moveFlag);
+  flag.style.left = "662.5px";
+  flag.style.top = "-4px";
 }
 
 // Funktion, die die Fahne erscheinen lässt: Es wird ein addEventListener
 // für die Mausbewegungen im äussersten div registriert
 function callFlag() {
   document.addEventListener("mousemove", moveFlag);
-  // Wenn mit der Fahne auf das Hintergrundbild geklickt wird:
-  // Koordinaten prüfen
-  document.addEventListener("click", putFlag);
   flag.classList.toggle("display");
   // Übergangslösung
-  button_removeFlag.addEventListener("click", stopFlag);
+  // button_removeFlag.addEventListener("click", stopFlag);
 }
 
 function checkPuzzle() {
@@ -73,9 +65,16 @@ function checkPuzzle() {
   }
 }
 
+// Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
+// function showArea(area) {
+//   area.style.cursor = "pointer";
+// }
+
 function setup() {
   button_startPuzzle.addEventListener("click", startPuzzle);
   puzzleLieberherrButton.addEventListener("click", checkPuzzle);
+  // button_lieberherr.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // helvetia.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
 
 window.addEventListener("load", setup);
