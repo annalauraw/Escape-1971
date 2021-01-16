@@ -5,7 +5,7 @@ var abfall=document.getElementById("abfall");
 var hintergrund=document.getElementById("hintergrund");
 var istargumentoffen=null;
 
-for (i=1; i<12; i++){
+for (i=1; i<11; i++){
 	this ["arg"+i]=document.getElementById("arg"+i);
 	
 }
@@ -54,7 +54,15 @@ function openArgument(event){
 	} else {
 		argumentgross.classList.toggle("display");
 	}
+	
 	argument=event.target.id;
+	//var elem = document.createElement("img");
+    //elem.setAttribute("src", "Bilder/bilder/"+argument+".png");
+   //document.getElementById("argumentgross").appendChild(elem);
+    argumentgross.style.backgroundImage="url('./Bilder/bilder/"+argument+".png')";
+	
+	
+	
 	test=argument.replace("arg","");
 	
 	
@@ -71,7 +79,7 @@ function openArgument(event){
 
 function setup() {
     
-   for (i=1; i<12; i++){
+   for (i=1; i<11; i++){
 	rad="arg"+i 
 		document.getElementById(rad).addEventListener("click", openArgument);
 	

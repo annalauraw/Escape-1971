@@ -1,9 +1,8 @@
 .argument {
 	display:flex;
-	background:white;
+	/*background:white;*/
 	position: absolute;
-	height: 25px;
-    width: 25px;
+	width: 25px;
 	z-index:3;
 	
 }
@@ -88,13 +87,16 @@
 }
 
 #argumentgross.display {
-  display: flex;
-  background: white;
-  width: 200px;
-  height: 200px;
+  /*background-image: url("../Bilder/bilder/arg1.png");*/
+  background-repeat: no-repeat;
+  background-size: contain;
+  /*background-color:white;*/
+  display: flex;  
+  height: 300px;
+  width: 400px;
   position: absolute;
-  top: 150px;
-  left: 200px;
+  top: 100px;
+  left: 100px;
   z-index:5;
   cursor:move;
   /*transform: translate(-50%, -50%);*/
