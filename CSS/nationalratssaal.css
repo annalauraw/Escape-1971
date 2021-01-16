@@ -1,0 +1,102 @@
+.argument {
+	display:flex;
+	background:white;
+	position: absolute;
+	height: 25px;
+    width: 25px;
+	z-index:3;
+	
+}
+.argument.hide {
+	display:none;
+		
+}
+
+
+#arg1 {
+	top: 200px;
+    left: 250px;	
+}
+#arg1.hide {
+	display:none;
+}
+#arg11 {
+	top: 290px;
+    left: 200px;	
+}
+#arg3 {
+	top: 390px;
+    left: 250px;	
+}
+#arg4 {
+	top: 520px;
+    left: 20px;	
+}
+#arg5 {
+	top: 70px;
+    left: 660px;	
+}
+#arg6 {
+	top: 300px;
+    left: 700px;	
+}
+#arg7 {
+	top: 650px;
+    left: 900px;	
+}
+#arg8 {
+	top: 440px;
+    left: 550px;	
+}
+#arg9 {
+	top: 650px;
+    left: 600px;	
+}
+#arg10 {
+	top: 500px;
+    left: 270px;	
+}
+#arg2 {
+	top: 550px;
+    left: 700px;	
+}
+
+#abfall {
+	display:flex;
+	position: absolute;
+	height: 100px;
+    width: 50px;
+    top: 300px;
+    left: 520px;
+	z-index:2;
+	
+}
+
+#pult {
+	display:flex;
+	position: absolute;
+	height: 100px;
+    width: 100px;
+    top: 150px;
+    left: 670px;
+	z-index:2;
+	
+}
+
+#argumentgross{
+	display:none;
+}
+
+#argumentgross.display {
+  display: flex;
+  background: white;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 150px;
+  left: 200px;
+  z-index:5;
+  cursor:move;
+  /*transform: translate(-50%, -50%);*/
+  
+}
