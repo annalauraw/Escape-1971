@@ -176,7 +176,7 @@ function moveRuth(event) {
 function checkRuthPosition() {
   if (posLeft == 1020 && posBottom == 460) {
     // Call next HTML page
-    location.assign("wecker_2.html");
+    location.assign("vordertuere.html");
   }
 }
 
