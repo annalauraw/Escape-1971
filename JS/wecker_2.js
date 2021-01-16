@@ -22,7 +22,7 @@ var clock = document.getElementById("clock");
 var wecker_vorne = document.getElementById("wecker_vorne");
 var wecker_hinten = document.getElementById("wecker_hinten");
 var spinner = document.getElementById("spinner");
-var aufziehschluessel2 = document.getElementById("aufziehschluessel2");
+var aufziehschluessel3 = document.getElementById("aufziehschluessel3");
 var aufziehschluessel = document.getElementById("aufziehschluessel");
 var weckerdrehen =document.getElementById("weckerdrehen");
 
@@ -74,8 +74,8 @@ function getCookie(cname) {
 function moveAufziehschluessel(event) {
   
   var windowMarginLeft = (window.innerWidth - 1200)/2;
-  aufziehschluessel.style.left = event.clientX - windowMarginLeft +10 + 'px';
-  aufziehschluessel.style.top = event.clientY-50 + 'px';
+  aufziehschluessel.style.left = event.clientX - windowMarginLeft -40 + 'px';
+  aufziehschluessel.style.top = event.clientY-90 + 'px';
   
 }
 
@@ -216,6 +216,7 @@ function checkTimer(){
 		//console.log("Done");
 		document.getElementById('AV-ticken').pause();
 		document.getElementById('AV-klingeln').play();
+		document.cookie="aufziehen=";
 		
 	}
 	
@@ -316,7 +317,8 @@ function startDrag(evt) {
 
 function findKey() {
 	document.cookie="aufziehschluessel=done";
-	window.alert ("Aufziehschlüssel gefunden");
+	//window.alert ("Aufziehschlüssel gefunden");
+	aufziehschluessel3.classList.toggle("hide");
 	
 }
 
@@ -347,7 +349,7 @@ function targetReached() {
   //document.getElementById("value").innerHTML = "Value: " + currentPosition[zahl];
   pruefen();
   if (pruefen()==true){
-	  window.alert("Code stimmt");
+	  document.getElementById('AV-schalter').play();
 	  document.cookie="zahlencode=done";
 	  
 	  
@@ -493,7 +495,7 @@ function setup() {
   abstimmungszettel.addEventListener("click", openPuzzle);
   kalenderblatt.addEventListener("mousedown", dragKalender);
   schalter.addEventListener("click", lichtAn);
-  aufziehschluessel2.addEventListener("click", findKey);
+  aufziehschluessel3.addEventListener("click", findKey);
   hourDiv.addEventListener("mousedown",startDrag);
   timerDiv.addEventListener("mousedown",startDrag);
   updateClock();

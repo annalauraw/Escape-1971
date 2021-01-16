@@ -34,10 +34,25 @@
 	cursor: move;
 }
 
+
+
 #kalenderblatt.hide {
 	display: none;
 }
 
+#aufziehschluessel3 {
+	display:flex;
+	position: absolute;
+	height: 30px;
+    /*width: 50px;*/
+    top: 625px;
+    left: 320px;
+	z-index:2;
+}
+
+#aufziehschluessel3.hide {
+	display: none;
+}
 
 #aufziehen {
 	display: none;
@@ -50,7 +65,7 @@
     width: 25px;
     top: 375px;
     left: 580px;
-	z-index:10;
+	z-index:20;
 }
 
 #nacht {
@@ -197,7 +212,7 @@ display: none;
 
 #aufziehschluessel.display {
   display: block;
-  width: 100px;
+  width: 65px;
   position: absolute;
   z-index:10;
 }
