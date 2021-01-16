@@ -12,16 +12,19 @@ var genf=document.getElementById("genf");
 var freiburg=document.getElementById("freiburg");
 var luzern=document.getElementById("luzern");
 var winterthur=document.getElementById("winterthur");
+var sion=document.getElementById("sion");
 
 
 
 function falsch() {
-	console.log("hel");
+	
 	document.getElementById("3_nein").play();
 }
 
 function richtig (){
 	document.getElementById("4_ab_nach_Bern").play();
+	bern.setAttribute("r","10")
+	bern.setAttribute("fill","red")
 }
 
 
@@ -40,6 +43,7 @@ function setup() {
   lugano.addEventListener("click", falsch);
   winterthur.addEventListener("click", falsch);
   bern.addEventListener("click", richtig);
+  sion.addEventListener("click", falsch);
   //puzzleLieberherrButton.addEventListener("click", checkPuzzle);
 }
 
