@@ -4,14 +4,42 @@
 
 #SRF_player.display {
   display: block;
-  width: 460px;
-  height: 258.7499999px;
+  width: 480px;
+  height: 270px;
   position: absolute;
-  left: 215px;
-  top: 210px;
-  /* Im Hintergrund */
-  z-index: -2;
-  /* z-index: 1; */
+  left: 200px;
+  top: 215px;
+  /* Hinter dem Fernseher */
+  z-index: 2;
+}
+
+#fernseher {
+  display: none;
+}
+
+#fernseher.display {
+  display: block;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 1200px;
+  height: 750px;
+  z-index: 3;
+}
+
+#tv_black {
+  display: none;
+}
+
+#tv_black.display {
+  display: block;
+  width: 1200px;
+  height: 750px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: black;
+  z-index: 1;
 }
 
 /* Button "Ich bin informiert" */
