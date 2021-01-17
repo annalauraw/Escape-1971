@@ -12,4 +12,5 @@ eventuelle Kind-Elemente absolut positioniert werden können */
 #hintergrund {
   width: inherit;
   z-index: -1;
+  border: 2px solid black;
 }
