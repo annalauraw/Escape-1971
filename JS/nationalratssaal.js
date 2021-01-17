@@ -12,6 +12,14 @@ for (i=1; i<11; i++){
 
 function allowDrop(ev){
 	ev.preventDefault();
+	
+}
+
+function checkElements(){
+	var check=document.getElementsByClassName("argument");
+	if (check.length<1){
+		location.assign("vordertuere.html");
+	}
 }
 
 function dropAbfall(){
@@ -21,6 +29,7 @@ function dropAbfall(){
 		document.getElementById('AV-reissen').play();
 		document.getElementById(argument).remove();
 		closeArgument();
+		checkElements();
 	}
 }
 function dropPult(){
@@ -29,6 +38,7 @@ function dropPult(){
 		document.getElementById('AV-applaus').play();
 		document.getElementById(argument).remove();
 		closeArgument();
+		checkElements();
 	}
 	
 }
