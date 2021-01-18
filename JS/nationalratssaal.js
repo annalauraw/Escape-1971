@@ -15,11 +15,22 @@ function allowDrop(ev){
 	
 }
 
-function checkElements(){
+function checkElements(number){
 	var check=document.getElementsByClassName("argument");
+	
 	if (check.length<1){
-		location.assign("vordertuere.html");
+		if (number==2){
+			document.getElementById("AV-reissen").addEventListener("ended", function (){
+				location.assign("zwischenbild.html");
+			});
+		} else {
+			document.getElementById("AV-reissen").addEventListener("ended", function (){
+				location.assign("zwischenbild.html");
+			});
+		}
 	}
+	
+	
 }
 
 function dropAbfall(){
@@ -29,22 +40,24 @@ function dropAbfall(){
 		document.getElementById('AV-reissen').play();
 		document.getElementById(argument).remove();
 		closeArgument();
-		checkElements();
+		checkElements(2);
 	}
 }
 function dropPult(){
+	
 	if (test > 5){
 		//alert("Korrekt");
 		document.getElementById('AV-applaus').play();
 		document.getElementById(argument).remove();
 		closeArgument();
-		checkElements();
+		checkElements(3);
 	}
 	
 }
 
-function dragArgument(){
+function dragArgument(ev){
 	console.log("YES");
+	//ev.dataTransfer.setData("text", ev.target.id);
 
 }
 function closeArgument(){
@@ -76,7 +89,7 @@ function openArgument(event){
 	test=argument.replace("arg","");
 	
 	
-	argumentgross.addEventListener("onmousedown", dragArgument);
+	//argumentgross.addEventListener("onmousedown", dragArgument);
 	hintergrund.addEventListener("click", closeArgument);
 	document.getElementById(argument).classList.toggle("hide");
 	
