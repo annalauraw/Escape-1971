@@ -1,7 +1,19 @@
-// Knöpfe an Fernseher, um Videos zu starten
+// Knöpfe an Fernseher und Radio, um Videos/Song zu starten
 var button_lotti = document.getElementById("button_lotti");
 var button_unterbaech = document.getElementById("button_unterbaech");
 var button_appenzell = document.getElementById("button_appenzell");
+var button_radio = document.getElementById("button_radio");
+var radiosong = document.getElementById("radiosong");
+
+// grosser Fernseher
+var fernseher= document.getElementById("fernseher");
+// Fläche des kleinen Fernsehers: Bei Klick darauf erscheint der grosse
+var tv_gross = document.getElementById("tv_gross");
+// Fläche links im lila Hintergrund - Klick lässt grossen Fernseher verschwinden
+var area_hideTV = document.getElementById("area_hideTV");
+// Schwarzer Hintergrund wegen durchsichtigem Bildschirm
+var black = document.getElementById("tv_black");
+// var blackIsDisplayed = false;
 
 // Zustand der Videos - sind sie im Player geladen? Werden sie gerade abgespielt?
 var lotti_isPlaying = false;
@@ -10,6 +22,7 @@ var unterbaech_isPlaying = false;
 // var unterbaech_isLoaded = false;
 var appenzell_isPlaying = false;
 // var appenzell_isLoaded = false;
+var radiosong_isPlaying = false;
 
 // Button "Ich bin informiert", startet das Rätsel zum Video
 var button_startPuzzle = document.getElementById("startPuzzle");
@@ -34,9 +47,28 @@ var player_isDisplayed = false;
 var playbackInterval = undefined;
 
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
-// function hoverOverButton() {
-//   button_appenzell.style.cursor = "pointer";
-// }
+function showArea(area) {
+  area.style.cursor = "pointer";
+}
+
+// Grossen Fernseher verstecken
+function hideTV() {
+  fernseher.classList.toggle("display");
+  if (player_isDisplayed) {
+    SRF_player.classList.toggle("display");
+    player_isDisplayed = false;
+  }
+  if (black.classList.contains("display")) {
+    black.classList.toggle("display");
+  }
+}
+
+// Grossen Fernseher anzeigen
+function showTV() {
+  black.classList.toggle("display");
+  fernseher.classList.toggle("display");
+  area_hideTV.addEventListener("click", hideTV);
+}
 
 // Objekt, das den Zustand der Videos kennt - sind sie im Player geladen?
 var loadState = {
@@ -84,19 +116,27 @@ SRF_Video.prototype = {
 
   play: function() {
     player.play();
+    area_hideTV.removeEventListener("click", hideTV);
     playState[this.name] = true;
     if (player_isDisplayed == false) {
       this.displayPlayer();
     }
     this.startInterval();
+    // if (black.classList.contains("display")) {
+    //   black.classList.toggle("display");
+    // }
   },
 
   pause: function() {
     player.pause();
     playState[this.name] = false;
+    area_hideTV.addEventListener("click", hideTV);
   },
 
   recreatePlayer: function() {
+    // if (black.classList.contains("display") == false) {
+    //   black.classList.toggle("display");
+    // }
     this.stopInterval();
     player.destroy();
     this.resetLoadState();
@@ -162,6 +202,20 @@ lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e
 unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5);
 appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53);
 // appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0.1, 5);
+
+// Funktion, die den Radio-Song abspielt
+function playSong() {
+  if (radiosong_isPlaying == false) {
+    radiosong.play();
+    radiosong_isPlaying = true;
+    // alert("Radio is playing?");
+  }
+  else {
+    radiosong.pause();
+    radiosong_isPlaying = false;
+    // alert("Radio is paused?");
+  }
+}
 
 // Wrapper-Funktion, da von Event-Listener aufgerufen
 function startPuzzle() {
@@ -259,19 +313,27 @@ function checkPuzzle(trigger) {
     }
   }
   else {
-    alert("Das ist die falsche Antwort für " + puzzlePart);
+    alert("Das ist die falsche Antwort - versuch's nochmal!");
   }
 }
 
 function setup() {
+  // Fernseher und Radio
+  tv_gross.addEventListener("click", showTV);
   button_lotti.addEventListener("click", lotti.handle.bind(lotti));
   button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
   button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
   button_startPuzzle.addEventListener("click", startPuzzle);
+  button_radio.addEventListener("click", playSong);
+  // Quizfragen
   button_solution_1.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_3.addEventListener("click", function() {checkPuzzle(this);});
-  // button_appenzell.addEventListener("mouseover", hoverOverButton);
+  // tv_gross.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // button_lotti.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // button_unterbaech.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // button_appenzell.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // button_radio.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
 
 window.addEventListener("load", setup);

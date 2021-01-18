@@ -10,6 +10,8 @@ eventuelle Kind-Elemente absolut positioniert werden können */
 }
 
 #hintergrund {
+  /* position: inherit; */
   width: inherit;
   z-index: -1;
+  border: 2px solid black;
 }
