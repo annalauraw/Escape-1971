@@ -24,7 +24,7 @@ function checkElements(number){
 				location.assign("zwischenbild.html");
 			});
 		} else {
-			document.getElementById("AV-reissen").addEventListener("ended", function (){
+			document.getElementById("AV-applaus").addEventListener("ended", function (){
 				location.assign("zwischenbild.html");
 			});
 		}
