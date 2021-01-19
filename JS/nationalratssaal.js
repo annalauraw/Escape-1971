@@ -56,7 +56,7 @@ function dropPult(){
 }
 
 function dragArgument(ev){
-	console.log("YES");
+	//console.log("YES");
 	//ev.dataTransfer.setData("text", ev.target.id);
 
 }
