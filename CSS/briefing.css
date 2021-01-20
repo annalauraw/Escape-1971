@@ -1,0 +1,25 @@
+#ruth {
+  width: 50%;
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
+#repeat, #next {
+  display: none;
+}
+
+#repeat.display, #next.display {
+  display: block;
+  position: absolute;
+  top: 2%;
+}
+
+#repeat.display {
+  position: absolute;
+  right: 13%;
+}
+
+#next.display {
+  position: absolute;
+  right: 5%;
+}
