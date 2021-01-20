@@ -57,7 +57,7 @@ var zahl = 0
 
 function getCookie(cname) {
   var test = cname + "=";
- 
+
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(';');
   for(var i = 0; i <ca.length; i++) {
@@ -72,15 +72,15 @@ function getCookie(cname) {
   return "";
 }
 function moveAufziehschluessel(event) {
-  
+
   var windowMarginLeft = (window.innerWidth - 1200)/2;
   aufziehschluessel.style.left = event.clientX - windowMarginLeft -40 + 'px';
   aufziehschluessel.style.top = event.clientY-90 + 'px';
-  
+
 }
 
 function callAufziehschluessel() {
-	
+
   document.addEventListener("mousemove", moveAufziehschluessel);
    //console.log("H");
 }
@@ -99,16 +99,16 @@ function showClock() {
        clockbox.classList.toggle("display");
        wecker_vorne.classList.toggle("display");
        weckerdrehen.classList.toggle("display");
- 
+
 	}else{
 		wecker_hinten.classList.toggle("display");
 		spinner.classList.toggle("display");
-		
+
 	}
 	if (ansicht2==0){
 	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
 	var aufziehenCookie = getCookie("aufziehen");
-	
+
     //console.log(aufziehschluesselCookie);
 	//console.log(aufziehenCookie);
 	if (aufziehschluesselCookie != "" && aufziehenCookie=="") {
@@ -116,12 +116,12 @@ function showClock() {
 	callAufziehschluessel();
 	aufziehen.classList.toggle("display");
 	aufziehen.addEventListener("click", weckerAufziehen);
-	
+
     }
 	}
-	
-	
-  
+
+
+
 }
 
 function weckerAufziehen() {
@@ -131,18 +131,18 @@ function weckerAufziehen() {
 	updateSeconds();
 	setInterval(updateSeconds, 1000);
 	document.getElementById("AV-weckeraufziehen").addEventListener('ended', function(){
-    
+
     document.getElementById("AV-ticken").play();
-	document.getElementById("AV-ticken").loop = true; 
+	document.getElementById("AV-ticken").loop = true;
   });
-	
+
 }
 function turnClock() {
-	
+
 	if (ansicht2==1){
 	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
 	var aufziehenCookie = getCookie("aufziehen");
-	
+
     //console.log(aufziehschluesselCookie);
 	//console.log(aufziehenCookie);
 	if (aufziehschluesselCookie != "" && aufziehenCookie=="") {
@@ -150,12 +150,12 @@ function turnClock() {
 	callAufziehschluessel();
 	aufziehen.classList.toggle("display");
 	aufziehen.addEventListener("click", weckerAufziehen);
-	
+
     } ansicht2=0;
 	} else{
 	var aufziehschluesselCookie  = getCookie("aufziehschluessel");
 	var aufziehenCookie = getCookie("aufziehen");
-	
+
     //console.log(aufziehschluesselCookie);
 	//console.log(aufziehenCookie);
 	if (aufziehschluesselCookie != "" && aufziehenCookie=="") {
@@ -166,7 +166,7 @@ function turnClock() {
 	}
 	ansicht2=1;
 	}
-	
+
   // Wecker (Ansicht von vorne) verstecken
   //console.log(ansicht2);
   clockbox.classList.toggle("display");
@@ -190,7 +190,7 @@ function updateClock(){
 	minDiv.style.transform = "rotate(185deg)";
 	hourDiv.style.transform = "rotate(75deg)";
 	timerDiv.style.transform = "rotate(210deg)";
-	
+
 }
 function updateSeconds(){
 	let date = new Date();
@@ -199,7 +199,7 @@ function updateSeconds(){
 	let hour = (date.getHours() + min) / 12;
 
 	secDiv.style.transform = "rotate(" + (sec * 360) + "deg)";
-	
+
 }
 
 function checkTimer(){
@@ -210,89 +210,89 @@ function checkTimer(){
 	checkHourArm=checkHourArm.replace("rotate(","");
 	checkHourArm=checkHourArm.replace("deg)","");
 	var TestArm=Math.abs(checkHourArm-checkTimerArm)
-	
-	
+
+
 	if(TestArm < 5){
 		//console.log("Done");
 		document.getElementById('AV-ticken').pause();
 		document.getElementById('AV-klingeln').play();
 		document.cookie="aufziehen=";
-		
+
 	}
-	
+
 }
 
 function drop(ev) {
-	
+
 	var punktX=ev.clientX;
 	var punktY=ev.clientY;
-	 
+
 	 //console.log(punktX);
 	 //console.log(punktY);
-	
+
 	if (punktX>centerX){
 		gegenkathete=punktX-centerX;
 	} else {
 		gegenkathete=centerX-punktX;
 	}
-	
+
 	if (punktY>centerY){
 		ankathete=punktY-centerY;
 	} else {
 		ankathete=centerY-punktY;
 	}
-	
+
 	hypotenuse=Math.sqrt(Math.pow(ankathete, 2)+(Math.pow(gegenkathete, 2)));
-	
+
 	radian=Math.asin(gegenkathete/hypotenuse);
 	winkel=radian*(180/Math.PI)
-	
-	
-	
+
+
+
 	var testX = Math.sign(centerX-punktX);
-	
+
 	var testY = Math.sign(centerY-punktY);
-	
-	
-		
+
+
+
 	if (testX==1) {
 		if (testY==-1){
 			winkel=180+winkel;
-			
+
 			selectedElement.style.transform = "rotate("+winkel+"deg)";
-			
+
 		} if (testY==1) {
-			
+
 			winkel=360-winkel;
-			
+
 			selectedElement.style.transform = "rotate("+winkel+"deg)";
 		}
-		
+
 	}
-	
+
 	if (testX==-1) {
 		if (testY==-1){
 			Hwinkel=90-winkel;
 			Kwinkel=90+Hwinkel;
-			
+
 			selectedElement.style.transform = "rotate("+Kwinkel+"deg)";
-			
+
 		} if (testY==1){
-			
-			
+
+
 			selectedElement.style.transform = "rotate("+winkel+"deg)";
 		}
-		
+
 	}
-	
-	
+
+
 }
 function dropEnd(evt){
 	drop(evt);
 	clock.removeEventListener('mousemove',drop)
 	var aufziehenCookie  = getCookie("aufziehen");
 	var zahlencodeCookie = getCookie("zahlencode");
-    
+
 	if (aufziehenCookie != "" && zahlencodeCookie!="") {
 		//console.log(aufziehenCookie);
 		checkTimer();
@@ -300,17 +300,17 @@ function dropEnd(evt){
 }
 
 function startDrag(evt) {
-      
+
 	  selectedElement = evt.target;
 	  //console.log(selectedElement);
 	  //console.log(selectedElement.classList[0]);
 	  if (selectedElement.classList[0]=="timer-arm"){
 		  selectedElement=timerDiv;
-		  
+
 	  }else {
 		  selectedElement=hourDiv;
 	  }
-	  
+
 	  clock.addEventListener('mousemove', drop);
 	  clock.addEventListener('mouseup', dropEnd);
     }
@@ -319,56 +319,58 @@ function findKey() {
 	document.cookie="aufziehschluessel=done";
 	//window.alert ("Aufziehschlüssel gefunden");
 	aufziehschluessel3.classList.toggle("hide");
-	
+
 }
 
 function lichtAn (){
-	nacht.classList.toggle("hide");
-	schalter.classList.toggle("hide");
-	document.getElementById('AV-schalter').play();
+  document.getElementById('AV-schalter').play()
+	setTimeout(function() {
+    nacht.classList.toggle("hide");
+	  schalter.classList.toggle("hide");
+  }, 500);
 }
 
 //Funktionen für Zahlenrad
 function pruefen(){
-	 
-    
-    for (var i = 0, len = speicher.length; i < len; i++){ 
-     if (speicher[i] !== loesung[i]){ 
-      return false; 
-     } 
-    } 
-    return true; 
+
+
+    for (var i = 0, len = speicher.length; i < len; i++){
+     if (speicher[i] !== loesung[i]){
+      return false;
+     }
+    }
+    return true;
 }
-		
+
 function targetReached() {
-  
+
   deltaY[zahl] = 0;
   currentPosition[zahl] = targetPosition[zahl];
   speicher[zahl]=currentPosition[zahl];
-  
+
   //document.getElementById("value").innerHTML = "Value: " + currentPosition[zahl];
   pruefen();
   if (pruefen()==true){
 	  document.getElementById('AV-schalter').play();
 	  document.cookie="zahlencode=done";
-	  
-	  
+
+
   }
 }
 
 function move() {
-  
+
   var yPosition = -currentPosition[zahl] * NUM_HEIGHT + deltaY[zahl] + Y_OFFSET;
-  
-  
+
+
   document.getElementById(rad).style.backgroundPosition = "0px " + yPosition + "px";
 
   if (targetPosition[zahl] > currentPosition[zahl]) {
     if (deltaY[zahl]  > -NUM_HEIGHT) {
       deltaY[zahl]  = deltaY[zahl]  - 5;
       setTimeout(move, 10);
-	  
-	  
+
+
     } else {
       targetReached();
     }
@@ -377,12 +379,12 @@ function move() {
       deltaY[zahl]  = deltaY[zahl]  + 5;
       setTimeout(move, 10);
     } else {
-		
+
       targetReached();
-	  
+
     }
   }
-  
+
 }
 
 function getClickPosition(e) {
@@ -392,9 +394,9 @@ function getClickPosition(e) {
   rad=e.currentTarget.id;
   zahl =rad.replace("number","")
   document.getElementById('AV-zahlenrad').play();
-  
-  
-  
+
+
+
   var parentPosition = getPosition(e.currentTarget);
   //console.log(e.clientY);
   //console.log(parentPosition.y);
@@ -402,51 +404,51 @@ function getClickPosition(e) {
   var yPosition = Math.abs(e.clientY - parentPosition.y);
   //console.log(yPosition);
   //console.log(SPINNER_HEIGHT);
-  
+
   if (zahl==1){
-  
+
 	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=3) {
-		
+
 		targetPosition[zahl]=currentPosition[zahl]+1
-	 		
+
 	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
-		targetPosition[zahl] = currentPosition[zahl] - 1;		
-	
-  } 
+		targetPosition[zahl] = currentPosition[zahl] - 1;
+
+  }
   }
   else if (zahl==3){
-  
+
 	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=1) {
 		//console.log(zahl);
 		targetPosition[zahl]=currentPosition[zahl]+1
-	 		
+
 	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
-		targetPosition[zahl] = currentPosition[zahl] - 1;		
-	
-  } 
-  } 
+		targetPosition[zahl] = currentPosition[zahl] - 1;
+
+  }
+  }
   else if (zahl==5){
-  
+
 	if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=2) {
 		//console.log(zahl);
 		targetPosition[zahl]=currentPosition[zahl]+1
-	 		
+
 	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
-		targetPosition[zahl] = currentPosition[zahl] - 1;		
-	
-  } 
+		targetPosition[zahl] = currentPosition[zahl] - 1;
+
+  }
   } else {
-	  
+
 	  if (yPosition > SPINNER_HEIGHT / 2 && currentPosition[zahl] !=9) {
-	
+
 		targetPosition[zahl]=currentPosition[zahl]+1
-	 		
+
 	} else if (yPosition < SPINNER_HEIGHT / 2 && currentPosition[zahl] != 0) {
 		targetPosition[zahl] = currentPosition[zahl] - 1;
 		//console.log(targetPosition[zahl]);
 	}
   //console.log(targetPosition[zahl]);
-  
+
 }
 move();
 }
@@ -456,22 +458,22 @@ function getPosition(element) {
   // Source: http://www.kirupa.com/html5/getting_mouse_click_position.htm
   var xPosition = 0;
   var yPosition = 0;
-  
+
   while (element) {
     xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
     yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
     element = element.offsetParent;
   }
-  
+
   return {
     x: xPosition,
     y: yPosition
   };
-  }                        
+  }
 function dragKalender(ev){
 	 //ev.dataTransfer.setData("text", ev.target.id);
 	 kalendertest=1
-} 
+}
 
 function allowDrop(ev){
 	ev.preventDefault();
@@ -480,13 +482,13 @@ function allowDrop(ev){
 function dropKalender(ev){
 	ev.preventDefault();
 	if (kalendertest==1){
-	
-	
+
+
 	kalenderblatt.classList.toggle("hide");
 	hintergrund.removeAttribute("ondragover");
 	hintergrund.removeAttribute("ondrop");
 	}
-	
+
 }
 
 function setup() {
@@ -500,11 +502,11 @@ function setup() {
   timerDiv.addEventListener("mousedown",startDrag);
   updateClock();
   	for (i = 1; i < 9; i++) {
-		rad="number"+i 
+		rad="number"+i
 		document.getElementById(rad).addEventListener("mousedown", getClickPosition, false);
 		move();
-  
-} 
+
+}
    }
 
 window.addEventListener("load", setup);
