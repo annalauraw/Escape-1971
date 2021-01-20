@@ -1,0 +1,35 @@
+/* To Do: Links hübscher stylen */
+
+.frauenstreik {
+  width: 70%;
+  margin: 10%;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+#feedback, #song {
+  float: left;
+  margin: 5%;
+}
+
+@keyframes scroll {
+  from {top: 0;}
+  to {top: -12000px;}
+}
+
+.imagecontainer.animate {
+  animation-name: scroll;
+  animation-duration: 180s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Button, der die Animation startet */
+#animation {
+  position: absolute;
+  top: 50px;
+  left: -200px;
+}
