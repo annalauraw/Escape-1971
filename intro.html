@@ -8,12 +8,13 @@
   </head>
   <body>
     <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder/ruths_stube_def.png" usemap="#discover_media">
+      <img id="hintergrund" src="Bilder/bilder/ruths_stube.png" usemap="#discover_media">
       <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
       <map name="discover_media">
         <!-- Macht den grossen Fernseher sichtbar -->
         <area id="tv_gross" shape="rect" coords="460, 230, 780, 410">
-        <area id="button_radio" shape="circle" coords="1055, 280, 10">
+        <area id="button_radio_noise" shape="circle" coords="1055, 280, 10">
+        <area id="button_radio_song" shape="circle" coords="1055, 310, 10">
       </map>
       <div id="tv_black"></div>
       <img id="fernseher" src="Bilder/bilder/fernseher_stube.png" usemap="#knoepfe_tv">
@@ -25,12 +26,15 @@
         <area id="button_appenzell" shape="circle" coords="685, 425, 20">
       </map>
 
-      <!-- <div id="tv_container">
-      </div>       -->
-
       <div id="SRF_player"></div>
+
+      <!-- Audios, die im Radio abgespielt werden -->
       <audio id="radiosong">
-        <source src="Audio/escape_song_test.mp3" type="audio/mpeg">
+        <source src="Audio/radiosong.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+      <audio id="rauschen">
+        <source src="Audio/rauschen.mp3" type="audio/mpeg">
         Your browser does not support the audio tag.
       </audio>
 

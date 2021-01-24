@@ -2,8 +2,10 @@
 var button_lotti = document.getElementById("button_lotti");
 var button_unterbaech = document.getElementById("button_unterbaech");
 var button_appenzell = document.getElementById("button_appenzell");
-var button_radio = document.getElementById("button_radio");
+var button_radio_noise = document.getElementById("button_radio_noise");
+var button_radio_song = document.getElementById("button_radio_song");
 var radiosong = document.getElementById("radiosong");
+var rauschen = document.getElementById("rauschen");
 
 // grosser Fernseher
 var fernseher= document.getElementById("fernseher");
@@ -23,6 +25,7 @@ var unterbaech_isPlaying = false;
 var appenzell_isPlaying = false;
 // var appenzell_isLoaded = false;
 var radiosong_isPlaying = false;
+var rauschen_isPlaying = false;
 
 // Button "Ich bin informiert", startet das Rätsel zum Video
 var button_startPuzzle = document.getElementById("startPuzzle");
@@ -81,7 +84,7 @@ var loadState = {
 var playState = {
   lotti: false,
   unterbaech: false,
-  appenzell: false
+  appenzell: false,
 }
 
 // Funktion, die eine Closure enthält und die Callback-Funktion für das
@@ -203,17 +206,21 @@ unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-
 appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53);
 // appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0.1, 5);
 
+// Funktion, die alle evtl. laufende Radiosounds vorsorglich stoppt
+function stopRadio() {
+  // Object.keys(playState).forEach(key => playState[key] = false);
+  radiosong.pause();
+  rauschen.pause();
+}
+
 // Funktion, die den Radio-Song abspielt
-function playSong() {
-  if (radiosong_isPlaying == false) {
-    radiosong.play();
-    radiosong_isPlaying = true;
-    // alert("Radio is playing?");
+function playSound(sound) {
+  if (sound.paused == false) {
+    sound.pause();
   }
   else {
-    radiosong.pause();
-    radiosong_isPlaying = false;
-    // alert("Radio is paused?");
+    stopRadio();
+    sound.play();
   }
 }
 
@@ -324,16 +331,13 @@ function setup() {
   button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
   button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
   button_startPuzzle.addEventListener("click", startPuzzle);
-  button_radio.addEventListener("click", playSong);
+  button_radio_noise.addEventListener("click", function() {playSound(rauschen);});
+  button_radio_song.addEventListener("click", function() {playSound(radiosong);});
   // Quizfragen
   button_solution_1.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_3.addEventListener("click", function() {checkPuzzle(this);});
   // tv_gross.addEventListener("mouseover", function(event) {showArea(event.target)});
-  // button_lotti.addEventListener("mouseover", function(event) {showArea(event.target)});
-  // button_unterbaech.addEventListener("mouseover", function(event) {showArea(event.target)});
-  // button_appenzell.addEventListener("mouseover", function(event) {showArea(event.target)});
-  // button_radio.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
 
 window.addEventListener("load", setup);
