@@ -17,6 +17,11 @@ var area_hideTV = document.getElementById("area_hideTV");
 var black = document.getElementById("tv_black");
 // var blackIsDisplayed = false;
 
+// Untertitel
+var untertitel_lotti = document.getElementById("untertitel_lotti");
+var untertitel_unterbaech = document.getElementById("untertitel_unterbaech");
+var untertitel_appenzell = document.getElementById("untertitel_appenzell");
+
 // Zustand der Videos - sind sie im Player geladen? Werden sie gerade abgespielt?
 var lotti_isPlaying = false;
 // var lotti_isLoaded = true;
@@ -105,7 +110,7 @@ function returnCheckPlaybackTime(obj) {
 }
 
 // Prototyp SRF_Video
-function SRF_Video(name, urn, startTime, stopTime) {
+function SRF_Video(name, urn, startTime, stopTime, subtitles) {
   // startTime and stopTime in seconds (int or float)
   // var self = this;
   this.name = name;
@@ -113,9 +118,14 @@ function SRF_Video(name, urn, startTime, stopTime) {
   this.startTime = startTime;
   this.stopTime = stopTime;
   this.fullUrn = urn + '&start=' + startTime;
+  this.subtitles = subtitles;
 }
 
 SRF_Video.prototype = {
+
+  showSubtitles: function() {
+    this.subtitles.classList.toggle("display");
+  },
 
   play: function() {
     player.play();
@@ -124,7 +134,9 @@ SRF_Video.prototype = {
     if (player_isDisplayed == false) {
       this.displayPlayer();
     }
+    this.subtitles.classList.toggle("display");
     this.startInterval();
+    showSubtitles();
     // if (black.classList.contains("display")) {
     //   black.classList.toggle("display");
     // }
@@ -132,6 +144,7 @@ SRF_Video.prototype = {
 
   pause: function() {
     player.pause();
+    this.showSubtitles();
     playState[this.name] = false;
     area_hideTV.addEventListener("click", hideTV);
   },
@@ -201,9 +214,9 @@ SRF_Video.prototype = {
 }
 
 
-lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609);
-unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5);
-appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53);
+lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609, untertitel_lotti);
+unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5, untertitel_unterbaech);
+appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53, untertitel_appenzell);
 // appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0.1, 5);
 
 // Funktion, die alle evtl. laufende Radiosounds vorsorglich stoppt

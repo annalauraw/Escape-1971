@@ -42,6 +42,43 @@
   z-index: 1;
 }
 
+/* Untertitel */
+.untertitel {
+  display: none;
+}
+
+/* Untertitel werden sichtbar und wieder unsichtbar */
+@keyframes displayHide {
+    0% {
+        opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.untertitel.display {
+  display: flex;
+  position: absolute;
+  left: 300px;
+  top: 220px;
+  width: 310px;
+  color: white;
+  text-align: center;
+  z-index: 4;
+  opacity: 0;
+  animation-name: displayHide;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 3s;
+}
+
 /* Button "Ich bin informiert" */
 #startPuzzle {
   position: absolute;
