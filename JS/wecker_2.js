@@ -216,7 +216,11 @@ function checkTimer(){
 		//console.log("Done");
 		document.getElementById('AV-ticken').pause();
 		document.getElementById('AV-klingeln').play();
+		document.getElementById('AV-klingeln').addEventListener("ended", function () {
+			location.assign("wecker_3.html");
+		});
 		document.cookie="aufziehen=";
+		document.cookie="abstimmungszettelB=";
 
 	}
 
@@ -292,8 +296,10 @@ function dropEnd(evt){
 	clock.removeEventListener('mousemove',drop)
 	var aufziehenCookie  = getCookie("aufziehen");
 	var zahlencodeCookie = getCookie("zahlencode");
+	var schieberaetselCookie=getCookie("schieberaetsel");
+	var kalenderCookie= getCookie("kalender");
 
-	if (aufziehenCookie != "" && zahlencodeCookie!="") {
+	if (aufziehenCookie != "" && zahlencodeCookie!="" && kalenderCookie!="" && schieberaetselCookie!="") {
 		//console.log(aufziehenCookie);
 		checkTimer();
 	}
@@ -323,11 +329,15 @@ function findKey() {
 }
 
 function lichtAn (){
-  document.getElementById('AV-schalter').play()
+  document.getElementById('AV-schalter').play();
+  //document.getElementById('AV-schalter').addEventListener('ended', function(){
+	  //nacht.classList.toggle("hide");
+	  //schalter.classList.toggle("hide");
+  //});
 	setTimeout(function() {
     nacht.classList.toggle("hide");
-	  schalter.classList.toggle("hide");
-  }, 500);
+	 schalter.classList.toggle("hide");
+     }, 500);
 }
 
 //Funktionen für Zahlenrad
@@ -388,9 +398,11 @@ function move() {
 }
 
 function getClickPosition(e) {
+	var kalenderCookie= getCookie("kalender");
   // Click position handling.
   // xPosition and yPosition are relative to element bounds.
   // Source: http://www.kirupa.com/html5/getting_mouse_click_position.htm
+  if (kalenderCookie != ""){
   rad=e.currentTarget.id;
   zahl =rad.replace("number","")
   document.getElementById('AV-zahlenrad').play();
@@ -451,6 +463,7 @@ function getClickPosition(e) {
 
 }
 move();
+  }
 }
 
 function getPosition(element) {
@@ -487,8 +500,23 @@ function dropKalender(ev){
 	kalenderblatt.classList.toggle("hide");
 	hintergrund.removeAttribute("ondragover");
 	hintergrund.removeAttribute("ondrop");
+	document.cookie="kalender=done";
+	for (i = 1; i < 9; i++) {
+		rad="number"+i
+		document.getElementById(rad).addEventListener("mousedown", getClickPosition, false);
+		move();
 	}
 
+}
+}
+
+function checkLicht(){
+	var abstimmungszettelBCookie = getCookie("abstimmungszettelB");
+	if (abstimmungszettelBCookie=="done"){
+		nacht.classList.toggle("hide");
+		schalter.classList.toggle("hide");
+		
+	}
 }
 
 function setup() {
@@ -500,13 +528,9 @@ function setup() {
   aufziehschluessel3.addEventListener("click", findKey);
   hourDiv.addEventListener("mousedown",startDrag);
   timerDiv.addEventListener("mousedown",startDrag);
+  checkLicht();
   updateClock();
-  	for (i = 1; i < 9; i++) {
-		rad="number"+i
-		document.getElementById(rad).addEventListener("mousedown", getClickPosition, false);
-		move();
-
-}
+  	
    }
 
 window.addEventListener("load", setup);
