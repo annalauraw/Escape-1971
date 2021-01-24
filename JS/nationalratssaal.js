@@ -55,9 +55,14 @@ function dropPult(){
 	
 }
 
-function dragArgument(ev){
+function dragArgument(event){
 	//console.log("YES");
-	//ev.dataTransfer.setData("text", ev.target.id);
+	//argument=event.target.id;
+	
+	//ev.dataTransfer.setData("text", "junk");
+	var img = document.createElement("img");
+    img.src = "Bilder/bilder/"+argument+".png";
+    event.dataTransfer.setDragImage(img, 200, 200);
 
 }
 function closeArgument(){
@@ -101,7 +106,7 @@ function openArgument(event){
 
 
 function setup() {
-    
+	
    for (i=1; i<11; i++){
 	rad="arg"+i 
 		document.getElementById(rad).addEventListener("click", openArgument);
