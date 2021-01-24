@@ -12,6 +12,8 @@ var cookieTest=document.cookie;
 var puzzle =document.getElementById("puzzle");
 var zettel =document.getElementById("zettel")
 
+document.cookie="abstimmungszettelB=done";
+
 function goBack() {
 		location.assign("wecker_2.html");
 }
