@@ -103,8 +103,10 @@
   left: 800px;
   top: 170px;
   padding: 20px;
-  background-color: rgb(204, 153, 255);
-  border-color: rgb(204, 102, 255);
+  /* background-color: rgb(204, 153, 255); */
+  background-color: rgb(229, 204, 255); /* lila */
+  border-color: rgb(173, 102, 255); /* dunkellila */
+  border-radius: 10%;
   border-width: 5px;
   border-style: solid;
 }
