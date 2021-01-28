@@ -237,6 +237,15 @@ function playSound(sound) {
   }
 }
 
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+function preventEnter(event) {
+  if (event.key == "Enter"){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
+
 // Wrapper-Funktion, da von Event-Listener aufgerufen
 function startPuzzle() {
   // var puzzlePartElement = document.getElementById(puzzlePart);
@@ -248,6 +257,7 @@ function startPuzzlePart(puzzlePart) {
   // Div mit Rätselfrage anzeigen
   var puzzleDiv = document.getElementById(puzzlePart);
   puzzleDiv.classList.toggle("display");
+  document.addEventListener("keypress", function(event) {preventEnter(event);})
 }
 
 function checkPuzzle(trigger) {
@@ -259,7 +269,7 @@ function checkPuzzle(trigger) {
   var triggeringButton = trigger.id;
 
   // Die Lösungsbausteine als RegEx-Muster
-  // solution_2
+  // solution_1
   ersteAbstimmung = /1959/;
 
   // Die Lösungsbausteine als RegEx-Muster
