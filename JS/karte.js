@@ -24,7 +24,7 @@ function falsch() {
 function richtig (){
 	document.getElementById("4_ab_nach_Bern").play();
 	bern.setAttribute("r","10")
-	bern.setAttribute("fill","red")
+	bern.setAttribute("fill","#ad66ff")
 }
 
 

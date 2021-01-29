@@ -10,6 +10,12 @@ for (i=1; i<11; i++){
 	
 }
 
+function lightup(ev){
+	var feld=ev.target.id
+	document.getElementById(feld).classList.toggle("display");
+}
+
+
 function allowDrop(ev){
 	ev.preventDefault();
 	

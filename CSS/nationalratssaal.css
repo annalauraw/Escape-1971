@@ -11,6 +11,49 @@
 		
 }
 
+.buchstaben{
+	position: absolute;
+	
+	z-index:3;
+	
+}
+
+.buchstaben.display{
+	/*border: 2px solid #dadada;*/
+    border-radius: 2px;
+	box-shadow: 0 0 10px #ad66ff;
+}
+
+#buchstabeW {
+	top: 267px;
+    left: 1007px;
+	transform: rotate(26deg);
+	width: 45px;
+	height: 25px;
+}
+#buchstabeA {
+	top: 124px;
+    left: 382px;
+	transform: skewY(10deg);
+width: 45px;
+	height: 25px;	
+}
+#buchstabeS {
+	top: 80px;
+    left: 220px;	
+	transform: skewY(30deg);
+	width: 30px;
+	height: 25px;
+}
+#buchstabeD {
+	top: 160px;
+    left: 1007px;
+	transform: rotate(23deg);
+width: 40px;
+	height: 27px;	
+}
+
+
 
 #arg1 {
 	top: 215px;
