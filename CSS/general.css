@@ -50,11 +50,14 @@ input {
   font-size: 18px;
   padding: 5px;
   color: rgb(95, 0, 204);
+  border-color: rgb(201, 153, 255);
+  border-width: 1px;
+  border-radius: 10%;
 }
 
 /* mit lila Rand */
 input:focus {
   border-color: rgb(95, 0, 204);
-  border-width: 1px;
-  border-radius: 10%;
+  /* border-width: 1px;
+  border-radius: 10%; */
 }

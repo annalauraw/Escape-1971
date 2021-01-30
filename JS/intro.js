@@ -34,6 +34,14 @@ var appenzell_isPlaying = false;
 var radiosong_isPlaying = false;
 var rauschen_isPlaying = false;
 
+// Zeitungsartikel
+var zeitungsartikel = document.getElementById("zeitungsartikel");
+var arrowLeft = document.getElementById("arrowLeft");
+var arrowRight = document.getElementById("arrowRight");
+var zeitungWeg_1 = document.getElementById("zeitungWeg_1");
+var zeitungWeg_2 = document.getElementById("zeitungWeg_2");
+var currentArticle = document.getElementById("artikelbild");
+
 // Button "Ich bin informiert", startet das Rätsel zum Video
 var button_startPuzzle = document.getElementById("startPuzzle");
 
@@ -242,6 +250,62 @@ function playSound(sound) {
   }
 }
 
+// Zeitungsartikel verstecken
+function hidePaper() {
+  zeitungsartikel.classList.toggle("display");
+  arrowLeft.classList.toggle("display");
+  arrowRight.classList.toggle("display");
+  zeitungWeg_1.removeEventListener("click", hidePaper);
+  zeitungWeg_2.removeEventListener("click", hidePaper);
+}
+
+// Funktion, die prüft, mit welchem Index der Liste
+// der Dateiname übereinstimmt
+function compareFileName(file) {
+  return file == currentArticle.attributes[1].value;
+}
+
+// Zwischen den Zeitungsartikeln wechseln
+function switchArticle(direction) {
+  var fileNameList = [
+    "Bilder/Zeitungsartikel/Stimmrecht_Basel.jpg",
+    "Bilder/Zeitungsartikel/EMRK_unterzeichnen.png",
+    "Bilder/Zeitungsartikel/MarschNachBern_Wut.jpg",
+    "Bilder/Zeitungsartikel/Gruss_Zukunft.png"
+  ];
+  var articleIndex = fileNameList.findIndex(compareFileName);
+  if (direction == "right") {
+    // Bildpfad ersetzen
+    if (articleIndex <= 2) {
+      currentArticle.attributes[1].value = fileNameList[articleIndex + 1];
+    }
+    else {
+      currentArticle.attributes[1].value = fileNameList[0];
+    }
+  }
+  else if (direction == "left") {
+    // Bildpfad ersetzen
+    if (articleIndex >= 1) {
+      currentArticle.attributes[1].value = fileNameList[articleIndex - 1];
+    }
+    else {
+      currentArticle.attributes[1].value = fileNameList[3];
+    }
+  }
+  // alert("File name is: " + fileName);
+}
+
+// Zeitungsartikel anzeigen
+function showPaper() {
+  zeitungsartikel.classList.toggle("display");
+  arrowLeft.classList.toggle("display");
+  arrowRight.classList.toggle("display");
+  zeitungWeg_1.addEventListener("click", hidePaper);
+  zeitungWeg_2.addEventListener("click", hidePaper);
+  arrowLeft.addEventListener("click", function() {switchArticle("left");});
+  arrowRight.addEventListener("click", function() {switchArticle("right");});
+}
+
 // Funktion, die das Default Behaviour der Enter-Taste
 // (Formular abschicken mit POST) verhindert
 function preventEnter(event) {
@@ -374,7 +438,9 @@ function setup() {
   button_solution_1.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_3.addEventListener("click", function() {checkPuzzle(this);});
-  // tv_gross.addEventListener("mouseover", function(event) {showArea(event.target)});
+  zeitungsstapel.addEventListener("click", showPaper);
+  // zeitungWeg_1.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // zeitungWeg_2.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
 
 window.addEventListener("load", setup);
