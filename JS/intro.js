@@ -11,8 +11,10 @@ var rauschen = document.getElementById("rauschen");
 var fernseher= document.getElementById("fernseher");
 // Fläche des kleinen Fernsehers: Bei Klick darauf erscheint der grosse
 var tv_gross = document.getElementById("tv_gross");
-// Fläche links im lila Hintergrund - Klick lässt grossen Fernseher verschwinden
-var area_hideTV = document.getElementById("area_hideTV");
+// Fläche links und rechts neben Fernseher im Hintergrund -
+// Klick lässt grossen Fernseher verschwinden
+var area_hideTV_1 = document.getElementById("area_hideTV_1");
+var area_hideTV_2 = document.getElementById("area_hideTV_2");
 // Schwarzer Hintergrund wegen durchsichtigem Bildschirm
 var black = document.getElementById("tv_black");
 // var blackIsDisplayed = false;
@@ -42,6 +44,8 @@ var button_solution_3 = document.getElementById("button_solution_3");
 
 // div mit Rätsel zum Video
 var puzzle_videoQuestions = document.getElementById("puzzle_videoQuestions");
+// div mit Alert "Falsche Antwort"
+var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
 
 // Rätsel zum Video, Formular mit Fragen und Eingabefeldern
 var form_videoQuestions = document.forms["puzzle_videoQuestions"];
@@ -75,7 +79,8 @@ function hideTV() {
 function showTV() {
   black.classList.toggle("display");
   fernseher.classList.toggle("display");
-  area_hideTV.addEventListener("click", hideTV);
+  area_hideTV_1.addEventListener("click", hideTV);
+  area_hideTV_2.addEventListener("click", hideTV);
 }
 
 // Objekt, das den Zustand der Videos kennt - sind sie im Player geladen?
@@ -129,7 +134,8 @@ SRF_Video.prototype = {
 
   play: function() {
     player.play();
-    area_hideTV.removeEventListener("click", hideTV);
+    area_hideTV_1.removeEventListener("click", hideTV);
+    area_hideTV_2.removeEventListener("click", hideTV);
     playState[this.name] = true;
     if (player_isDisplayed == false) {
       this.displayPlayer();
@@ -146,7 +152,8 @@ SRF_Video.prototype = {
     player.pause();
     this.showSubtitles();
     playState[this.name] = false;
-    area_hideTV.addEventListener("click", hideTV);
+    area_hideTV_1.addEventListener("click", hideTV);
+    area_hideTV_2.addEventListener("click", hideTV);
   },
 
   recreatePlayer: function() {
@@ -260,6 +267,13 @@ function startPuzzlePart(puzzlePart) {
   document.addEventListener("keypress", function(event) {preventEnter(event);})
 }
 
+// Rätselfrage nach falscher Antwort erneut anzeigen
+function reDisplayPuzzlePart(puzzlePart) {
+  alert_wrongAnswer.classList.toggle("display");
+  document.getElementById(puzzlePart).classList.toggle("display");
+  alert_wrongAnswer.removeEventListener("click", function(event) {reDisplayPuzzlePart(puzzlePart);});
+}
+
 function checkPuzzle(trigger) {
 
   // Was die Spielerin eingegeben hat
@@ -343,7 +357,9 @@ function checkPuzzle(trigger) {
     }
   }
   else {
-    alert("Das ist die falsche Antwort - versuch's nochmal!");
+    alert_wrongAnswer.classList.toggle("display");
+    document.getElementById(puzzlePart).classList.toggle("display");
+    alert_wrongAnswer.addEventListener("click", function(event) {reDisplayPuzzlePart(puzzlePart);});
   }
 }
 

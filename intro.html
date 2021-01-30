@@ -20,7 +20,8 @@
       <img id="fernseher" src="Bilder/bilder/fernseher_stube.png" usemap="#knoepfe_tv">
       <map name="knoepfe_tv">
         <!-- Fernseher verschwinden lassen -->
-        <area id="area_hideTV" shape="rect" coords="2, 2, 200, 750">
+        <area id="area_hideTV_1" shape="rect" coords="2, 2, 200, 750">
+        <area id="area_hideTV_2" shape="rect" coords="850, 2, 1200, 750">
         <area id="button_lotti" shape="circle" coords="685, 245, 20">
         <area id="button_unterbaech" shape="circle" coords="685, 335, 20">
         <area id="button_appenzell" shape="circle" coords="685, 425, 20">
@@ -42,24 +43,24 @@
       <div id="untertitel_lotti" class="untertitel">
         <p>Dr. Lotti Ruckstuhl, Präsidentin<br/>
         des Schweizerischen Verbandes für<br/>
-        Frauenstimmrecht</p>
+        Frauenstimmrecht, 1967</p>
       </div>
-      <div id="untertitel_unterbaech" class="untertitel">
+      <div id="untertitel_unterbaech" class="untertitel druckschrift">
         <p><br/>&nbsp; &nbsp; &nbsp; Unterbäch VS, 3. März 1957</p>
       </div>
-      <div id="untertitel_appenzell" class="untertitel">
+      <div id="untertitel_appenzell" class="untertitel" class="druckschrift">
         <p>Strassenumfrage in Appenzell zur Konsultativabstimmung zum Frauenstimmrecht 1969</p>
       </div>
 
       <button id="startPuzzle" class="button" type="button">Ich bin informiert</button>
-      <div id="puzzle_videoQuestions_1">
+      <div id="puzzle_videoQuestions_1" class="handschrift">
         <form name="puzzle_videoQuestions_1">
          <label for="solution">In welchem Jahr wurde in der Schweiz das erste Mal über das nationale Frauenstimmrecht abgestimmt?</label><br><br>
          <input type="text" id="solution1" name="solution" maxlength="4"><br><br>
-         <input type="button" id="button_solution_1" class="button" value="Senden">
+         <input type="button" id="button_solution_1" class="button inputButton" value="Senden">
         </form>
       </div>
-      <div id="puzzle_videoQuestions_2">
+      <div id="puzzle_videoQuestions_2" class="handschrift">
         <form name="puzzle_videoQuestions_2">
          <label for="solution2">Richtig!<br><br>Welche vier Kantone haben das volle kantonale Frauenstimmrecht bereits eingeführt?</label><br><br>
          <input type="text" id="solution2" name="solution" maxlength="100"><br><br>
@@ -68,13 +69,19 @@
          <input type="button" id="button_solution_2" class="button" value="Senden">
         </form>
       </div>
-      <div id="puzzle_videoQuestions_3">
+      <div id="puzzle_videoQuestions_3" class="handschrift">
         <form name="puzzle_videoQuestions_3">
          <label for="solution3">Du bist ziemlich gut informiert!<br><br>In einer einzigen Schweizer Gemeinde durften die Frauen 1957 an der nationalen Abstimmung über die Einführung der Zivilschutzpflicht für Frauen abstimmen. Die Stimmzettel der Frauen wurden jedoch im Nachhinein für ungültig erklärt. Wie heisst die betreffende Gemeinde?</label><br><br>
          <input type="text" id="solution3" name="solution" maxlength="20"><br><br>
          <!-- Evtl. hier type=button versuchen - Werte werden nicht an URL gehängt (?) -->
          <!-- Evtl. Reset-Button? -->
          <input type="button" id="button_solution_3" class="button" value="Senden">
+        </form>
+      </div>
+      <div id="alert_wrongAnswer" class="handschrift">
+        <form name="puzzle_videoQuestions_3">
+         <label>Das ist die falsche Antwort - versuch's nochmal!</label><br/><br/>
+         <input type="button" id="button_alert" class="button inputButton" value="Okay">
         </form>
       </div>
     </div>
