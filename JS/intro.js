@@ -46,6 +46,7 @@ var button_solution_3 = document.getElementById("button_solution_3");
 var puzzle_videoQuestions = document.getElementById("puzzle_videoQuestions");
 // div mit Alert "Falsche Antwort"
 var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
+button_alert = document.getElementById("button_alert");
 
 // Rätsel zum Video, Formular mit Fragen und Eingabefeldern
 var form_videoQuestions = document.forms["puzzle_videoQuestions"];
@@ -193,7 +194,6 @@ SRF_Video.prototype = {
   stopInterval: function() {
     if (playbackInterval != undefined) {
       clearInterval(playbackInterval);
-      // playbackInterval = undefined;
     }
   },
 
@@ -224,11 +224,9 @@ SRF_Video.prototype = {
 lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609, untertitel_lotti);
 unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5, untertitel_unterbaech);
 appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53, untertitel_appenzell);
-// appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0.1, 5);
 
 // Funktion, die alle evtl. laufende Radiosounds vorsorglich stoppt
 function stopRadio() {
-  // Object.keys(playState).forEach(key => playState[key] = false);
   radiosong.pause();
   rauschen.pause();
 }
@@ -255,8 +253,6 @@ function preventEnter(event) {
 
 // Wrapper-Funktion, da von Event-Listener aufgerufen
 function startPuzzle() {
-  // var puzzlePartElement = document.getElementById(puzzlePart);
-  // puzzlePartElement.classList.toggle("display");
   startPuzzlePart("puzzle_videoQuestions_1");
 }
 
@@ -264,14 +260,15 @@ function startPuzzlePart(puzzlePart) {
   // Div mit Rätselfrage anzeigen
   var puzzleDiv = document.getElementById(puzzlePart);
   puzzleDiv.classList.toggle("display");
+  // puzzleDiv.querySelector("form").focus(); //not working yet
   document.addEventListener("keypress", function(event) {preventEnter(event);})
 }
 
 // Rätselfrage nach falscher Antwort erneut anzeigen
-function reDisplayPuzzlePart(puzzlePart) {
+function reDisplayPuzzlePart(puzzleDiv) {
   alert_wrongAnswer.classList.toggle("display");
-  document.getElementById(puzzlePart).classList.toggle("display");
-  alert_wrongAnswer.removeEventListener("click", function(event) {reDisplayPuzzlePart(puzzlePart);});
+  puzzleDiv.classList.toggle("display");
+  button_alert.addEventListener("click", function() {reDisplayPuzzlePart(puzzleDiv);});
 }
 
 function checkPuzzle(trigger) {
@@ -358,8 +355,9 @@ function checkPuzzle(trigger) {
   }
   else {
     alert_wrongAnswer.classList.toggle("display");
-    document.getElementById(puzzlePart).classList.toggle("display");
-    alert_wrongAnswer.addEventListener("click", function(event) {reDisplayPuzzlePart(puzzlePart);});
+    var puzzleDiv = document.getElementById(puzzlePart);
+    puzzleDiv.classList.toggle("display");
+    button_alert.addEventListener("click", function() {reDisplayPuzzlePart(puzzleDiv);});
   }
 }
 

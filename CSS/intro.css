@@ -131,20 +131,12 @@
   left: 450px;
 }
 
-/* Eingabefeld im Formular mit lila Rand */
-input:focus {
-  border-color: rgb(95, 0, 204);
-  border-radius: 5%;
+input[type="text"] {
+  width: 100px;
 }
 
 /* Button soll in der Mitte sein */
-/* #button_solution_1,
-#button_solution_2,
-#button_solution_3  */
 .inputButton {
-  /* position: absolute;
-  bottom: left: 80%;
-  top: 80%; */
   position: absolute;
   bottom: 5%;
   right: 39%;
