@@ -10,22 +10,25 @@
     <div class="imagecontainer">
       <img id="hintergrund" src="Bilder/bilder/bundeshausplatz_marschnachbern.png" usemap="#hintergrund">
       <img id="fahne" src="Bilder/bilder_trash/fahne_frauenstimmrecht.png">
-      
+
 	  <div id="helvetia"></div>
 	  <div id="showTV"></div>
-	  <img id="fernseher" src="Bilder/bilder/fernseher_stube_freigestellt.png">
+	  <img id="fernseher" src="Bilder/bilder/fernseher_stube_freigestellt.png" usemap="#playTV">
+    <map name="playTV">
+      <area id="button_lieberherr" shape="circle" coords="470, 165, 20">
+    </map>
       <div id="SRF_player"></div>
-	  
+
       <button id="startPuzzle" type="button">Rätsel starten</button>
       <!-- <button id="removeFlag" type="button">Stop Fahne</button> -->
-      
-	  
+
+
 	 <div id="puzzleVertrauen">
 	 <p class="handschrift">Wie lautet Emilie Lieberherrs berühmter Satz?</p><br>
 	<fieldset id="fieldset">
 	<ul><li>
 	<input type="radio" name="auswahl" id="ja" value="ja">
-    <label class="handschrift" for="ja">"Händ vertraue zu de Mensche"</label> 
+    <label class="handschrift" for="ja">"Händ vertraue zu de Mensche"</label>
 	</li><li>
     <input type="radio" name="auswahl" id="nein" value="nein" onclick="richtig()">
     <label class="handschrift" for="nein">"Händ vertraue zu de Fraue"</label>

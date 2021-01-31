@@ -14,9 +14,11 @@ var fernseher =document.getElementById("fernseher");
 var puzzleVertrauen = document.getElementById("puzzleVertrauen");
 
 var showTV= document.getElementById("showTV");
+var button_lieberherr = document.getElementById("button_lieberherr");
 var SRF_player=document.getElementById("SRF_player");
 
-var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5');
+// var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5');
+var player = SRG.PlayerManager.createPlayer('SRF_player','inline', 'urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83&start=81');
 var playbackInterval = undefined;
 var player_isDisplayed = false;
 
@@ -188,8 +190,8 @@ SRF_Video.prototype = {
 
   displayPlayer: function() {
     SRF_player.classList.toggle("display");
-	fernseher.classList.toggle("display");
-	hintergrund.style.opacity="0.2";
+	// fernseher.classList.toggle("display");
+	// hintergrund.style.opacity="0.2";
     player_isDisplayed = true;
   },
 
@@ -211,8 +213,19 @@ SRF_Video.prototype = {
   },
 }
 
+// lieberherrV = new SRF_Video('lieberherrV', 'urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5', 0, 5);
+lieberherrV = new SRF_Video('lieberherrV', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 81, 110);
 
-lieberherrV = new SRF_Video('lieberherrV', 'urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5', 0, 5);
+// Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
+function showArea(area) {
+  area.style.cursor = "pointer";
+}
+
+function displayTV() {
+	fernseher.classList.toggle("display");
+	hintergrund.style.opacity="0.2";
+	button_lieberherr.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
+}
 
 
 function setup() {
@@ -220,7 +233,8 @@ function setup() {
   //puzzleLieberherrButton.addEventListener("click", checkPuzzle);
   //button_lieberherr.addEventListener("mouseover", function(event) {showArea(event.target)});
   //helvetia.addEventListener("mouseover", function(event) {showArea(event.target)});
-  showTV.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
+  // showTV.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
+	showTV.addEventListener("click", displayTV);
 }
 
 window.addEventListener("load", setup);
