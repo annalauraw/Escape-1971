@@ -25,6 +25,10 @@ function richtig (){
 	document.getElementById("4_ab_nach_Bern").play();
 	bern.setAttribute("r","10")
 	bern.setAttribute("fill","#ad66ff")
+	document.getElementById('4_ab_nach_Bern').addEventListener("ended", function () {
+			location.assign("bundesplatz.html");
+		});
+	
 }
 
 
