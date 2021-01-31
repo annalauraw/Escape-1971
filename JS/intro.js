@@ -257,6 +257,8 @@ function hidePaper() {
   arrowRight.classList.toggle("display");
   zeitungWeg_1.removeEventListener("click", hidePaper);
   zeitungWeg_2.removeEventListener("click", hidePaper);
+  arrowLeft.removeEventListener("click", function() {switchArticle("left");});
+  arrowRight.removeEventListener("click", function() {switchArticle("right");});
 }
 
 // Funktion, die prüft, mit welchem Index der Liste
