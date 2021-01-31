@@ -1,15 +1,83 @@
-/* Video mit Emilie lieberherr */
-#lieberherr {
+.handschrift{
+	font-size: 20pt;
+}
+
+ul { 
+  list-style: none 
+}
+
+#fieldset{
+	border:none;
+}
+
+
+#puzzleVertrauen {
   display: none;
 }
 
-#lieberherr.display {
+
+#puzzleVertrauen.display {
   display: block;
   position: absolute;
-  left: 130px;
-  top: 530px;
-  width: 250px;
-  height: 140.625px;
+  left: 500px;
+  top: 170px;
+  padding: 20px;
+  /* background-color: rgb(204, 153, 255); */
+  background-color: rgb(229, 204, 255); /* lila */
+  border-color: rgb(173, 102, 255); /* dunkellila */
+  border-radius: 10%;
+  border-width: 5px;
+  border-style: solid;
+}
+
+
+/* Video mit Emilie lieberherr */
+#SRF_player {
+  display: none;
+}
+
+#SRF_player.display {
+  display: block;
+  width: 390px;
+  height: 290px;
+  position: absolute;
+  left: 560px;
+  top: 330px;
+  /* Hinter dem Fernseher */
+  z-index: 2;
+}
+
+
+#fernseher {
+  display: none;
+}
+
+#fernseher.display {
+  display: block;
+  width: 680px;
+  position: absolute;
+  left: 500px;
+  top: 215px;
+  /* Hinter dem Fernseher */
+  z-index: 3;
+}
+
+#showTV{
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+}
+
+#helvetia{
+  display: block;
+  position: absolute;
+  left: 570px;
+  top: 150px;
+  width: 50px;
+  height: 80px;
 }
 
 /* Button "Rätsel starten" */

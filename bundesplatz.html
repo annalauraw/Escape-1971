@@ -8,34 +8,39 @@
   </head>
   <body>
     <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder_trash/bundeshaus.png" usemap="#hintergrund">
+      <img id="hintergrund" src="Bilder/bilder/bundeshausplatz_marschnachbern.png" usemap="#hintergrund">
       <img id="fahne" src="Bilder/bilder_trash/fahne_frauenstimmrecht.png">
-      <map name="hintergrund">
-        <!-- mittlerer Knopf am Fernseher -->
-        <area id="button_lieberherr" shape="circle" coords="410, 580, 20">
-        <!-- Hand der Helvetia -->
-        <area id="helvetia" shape="circle" coords="750, 140, 20">
-      </map>
-      <iframe id="lieberherr" src="https://srf.ch/play/embed?urn=urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5&startTime=897" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
-      <!-- <video id="testvideo_1">
-        <source src="Videos/test_queryus_mother.webm" type="video/webm"/>
-        <source src="Videos/test_queryus_mother.mp4" type="video/mp4"/>
-      </video> -->
+      
+	  <div id="helvetia"></div>
+	  <div id="showTV"></div>
+	  <img id="fernseher" src="Bilder/bilder/fernseher_stube_freigestellt.png">
+      <div id="SRF_player"></div>
+	  
       <button id="startPuzzle" type="button">Rätsel starten</button>
       <!-- <button id="removeFlag" type="button">Stop Fahne</button> -->
-      <div id="puzzle_lieberherrQuestions">
-        <form name="puzzle_lieberherrQuestions">
-         <label for="solution1">Wie lautet Emilie Lieberherrs berühmter Satz?</label><br>
-         <input type="text" id="solution1" name="solution1"><br><br>
-         <!-- <label for="solution2">Welche beiden Kantone haben das Frauenstimmrecht als erstes eingeführt?</label><br>
-         <input type="text" id="solution2" name="solution2"><br><br>
-         <label for="solution3">Wo in der Schweiz durften die Frauen zum ersten Mal abstimmen?</label><br>
-         <input type="text" id="solution3" name="solution3"><br><br> -->
-         <input id="puzzleLieberherrButton" type="button" value="Fertig">
-         <!-- Evtl. Reset-Button? -->
-        </form>
-      </div>
-    <div>
+      
+	  
+	 <div id="puzzleVertrauen">
+	 <p class="handschrift">Wie lautet Emilie Lieberherrs berühmter Satz?</p><br>
+	<fieldset id="fieldset">
+	<ul><li>
+	<input type="radio" name="auswahl" id="ja" value="ja">
+    <label class="handschrift" for="ja">"Händ vertraue zu de Mensche"</label> 
+	</li><li>
+    <input type="radio" name="auswahl" id="nein" value="nein" onclick="richtig()">
+    <label class="handschrift" for="nein">"Händ vertraue zu de Fraue"</label>
+	</li><li>
+	<input type="radio" name="auswahl" id="nein" value="nein">
+    <label class="handschrift" for="nein">"Händ kei vertraue zu de Fraue"</label>
+	</li></ul>
+	</fieldset>
+	 </div>
+    </div>
+	Audio_Tor_schliessen_bundeshaus_diva.mp3
+	<audio id="Tor"><source src="Audio/Audio_Tor_schliessen_bundeshaus_diva.mp3" type="audio/mpeg"/>
+      Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
+      Oder möchtest du eine aktuellere Browser-Version installieren?</audio>
+	<script type="text/javascript" src="https://tp.srgssr.ch/assets/javascripts/player-api.min.js"></script>
   <script  type="text/javascript" src="JS/bundesplatz.js"></script>
   </body>
 </html>
