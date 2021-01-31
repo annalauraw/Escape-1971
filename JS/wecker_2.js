@@ -27,6 +27,8 @@ var aufziehschluessel = document.getElementById("aufziehschluessel");
 var weckerdrehen =document.getElementById("weckerdrehen");
 
 
+var weissesFeld=document.getElementById("weissesFeld");
+
 //Variablen für Zeiger, Uhrfunktionen
 const secDiv = document.getElementById('second');
 const minDiv = document.getElementById('minute');
@@ -330,7 +332,17 @@ function findKey() {
 	document.cookie="aufziehschluessel=done";
 	//window.alert ("Aufziehschlüssel gefunden");
 	aufziehschluessel3.classList.toggle("hide");
-	aufziehschluessel.classListe.toggle("display");
+	aufziehschluessel.classList.toggle("display");
+	hintergrund.style.opacity="0.2";
+	kalenderblatt.style.opacity="0.2";
+	aufziehschluessel.style.width="150px";
+	window.setTimeout(function (){
+		aufziehschluessel.classList.toggle("display");
+		hintergrund.style.opacity="1";
+		kalenderblatt.style.opacity="1";
+	}, 3000);
+	
+	//document.cookie="aufziehschluessel=";
 
 }
 

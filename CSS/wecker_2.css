@@ -36,6 +36,7 @@
 
 
 
+
 #kalenderblatt.hide {
 	display: none;
 }
@@ -211,8 +212,10 @@ display: none;
 }
 
 #aufziehschluessel.display {
-  display: block;
+  display:flex;
   width: 65px;
+  top: 300px;
+  left: 500px;
   position: absolute;
   z-index:10;
 }
