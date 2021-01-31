@@ -94,7 +94,6 @@ function testCookie(){
 	if (schieberaetsel != "") {
 	puzzle.classList.toggle("hide");
 	zettel.classList.toggle("display");
-	alert("Bereits gelöst, Bravo!");
 	
   } 
 }

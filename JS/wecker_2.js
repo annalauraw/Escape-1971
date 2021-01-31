@@ -221,6 +221,11 @@ function checkTimer(){
 		});
 		document.cookie="aufziehen=";
 		document.cookie="abstimmungszettelB=";
+		document.cookie="schieberaetsel=";
+		document.cookie="aufziehschluessel=";
+		document.cookie="zahlencode=";
+		document.cookie="kalender=";
+		document.cookie="aufziehenCookie=";
 
 	}
 
@@ -325,6 +330,7 @@ function findKey() {
 	document.cookie="aufziehschluessel=done";
 	//window.alert ("Aufziehschlüssel gefunden");
 	aufziehschluessel3.classList.toggle("hide");
+	aufziehschluessel.classListe.toggle("display");
 
 }
 
@@ -517,6 +523,22 @@ function checkLicht(){
 		schalter.classList.toggle("hide");
 		
 	}
+	
+	var aufziehschluesselCookie = getCookie("aufziehschluessel");
+	if (aufziehschluesselCookie=="done"){
+		aufziehschluessel3.classList.toggle("hide");
+		
+	}
+	var kalenderCookie = getCookie("kalender");
+	if (kalenderCookie=="done"){
+		kalenderblatt.classList.toggle("hide");
+		for (i = 1; i < 9; i++) {
+			rad="number"+i
+			document.getElementById(rad).addEventListener("mousedown", getClickPosition, false);
+			move();
+		
+	}
+}
 }
 
 function setup() {
