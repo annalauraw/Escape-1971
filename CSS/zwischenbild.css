@@ -1,6 +1,9 @@
 #ruth{
+ display:flex;
  position: absolute;
- left: 100px;
- top:250px;
+ left: 400px;
+ top: 50px;
+ height :600px;
+ width: 400px;
  z-index:2;
 }
