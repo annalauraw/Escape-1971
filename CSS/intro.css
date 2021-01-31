@@ -88,9 +88,9 @@
 #zeitungsartikel.display {
   display: block;
   position: absolute;
-  left: 20%;
+  left: 22.5%;
   top: 2%;
-  width: 60%;
+  width: 55%;
   max-height: 700px;
   overflow: hidden;
   border-color: rgb(95, 0, 204);
@@ -115,31 +115,42 @@
   height: 50px;
   border: solid rgb(95, 0, 204);
   border-width: 0 8px 8px 0;
-  /* padding: 8px; */
-}
-
-#arrowLeft {
-  left:15%;
-  top: 37%;
-}
-
-#arrowRight {
-  left: 80%;
-  top: 37%;
+  z-index: 4;
 }
 
 .arrow:hover {
   border-color: rgb(201, 153, 255);
+  opacity: 1;
 }
 
 .right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+  left: 78%;
+  top: 37%;
 }
 
 .left {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
+  left:17.5%;
+  top: 37%;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  left: 47.5%;
+  top: 85%;
+  opacity: 0;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  left: 47.5%;
+  top: 5%;
+  opacity: 0;
 }
 
 /* Button "Ich bin informiert" */

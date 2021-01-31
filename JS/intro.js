@@ -1,3 +1,6 @@
+// Hintergrundbild
+var hintergrund = document.getElementById("hintergrund");
+
 // Knöpfe an Fernseher und Radio, um Videos/Song zu starten
 var button_lotti = document.getElementById("button_lotti");
 var button_unterbaech = document.getElementById("button_unterbaech");
@@ -38,9 +41,19 @@ var rauschen_isPlaying = false;
 var zeitungsartikel = document.getElementById("zeitungsartikel");
 var arrowLeft = document.getElementById("arrowLeft");
 var arrowRight = document.getElementById("arrowRight");
+var arrowDown = document.getElementById("arrowDown");
+var arrowUp = document.getElementById("arrowUp");
 var zeitungWeg_1 = document.getElementById("zeitungWeg_1");
 var zeitungWeg_2 = document.getElementById("zeitungWeg_2");
 var currentArticle = document.getElementById("artikelbild");
+var fileNameList = [
+  "Bilder/Zeitungsartikel/Stimmrecht_Basel.jpg",
+  "Bilder/Zeitungsartikel/EMRK_unterzeichnen.png",
+  "Bilder/Zeitungsartikel/Wut_1.png",
+  "Bilder/Zeitungsartikel/Gruss_Zukunft.png"
+];
+// Muss global verfügbar sein
+var articleIndex = 0;
 
 // Button "Ich bin informiert", startet das Rätsel zum Video
 var button_startPuzzle = document.getElementById("startPuzzle");
@@ -255,6 +268,7 @@ function hidePaper() {
   zeitungsartikel.classList.toggle("display");
   arrowLeft.classList.toggle("display");
   arrowRight.classList.toggle("display");
+  hintergrund.style.opacity = "1";
   zeitungWeg_1.removeEventListener("click", hidePaper);
   zeitungWeg_2.removeEventListener("click", hidePaper);
   arrowLeft.removeEventListener("click", function() {switchArticle("left");});
@@ -263,49 +277,66 @@ function hidePaper() {
 
 // Funktion, die prüft, mit welchem Index der Liste
 // der Dateiname übereinstimmt
-function compareFileName(file) {
-  return file == currentArticle.attributes[1].value;
-}
+// function compareFileName(file) {
+//   return file == currentArticle.attributes[1].value;
+// }
 
 // Zwischen den Zeitungsartikeln wechseln
 function switchArticle(direction) {
-  var fileNameList = [
-    "Bilder/Zeitungsartikel/Stimmrecht_Basel.jpg",
-    "Bilder/Zeitungsartikel/EMRK_unterzeichnen.png",
-    "Bilder/Zeitungsartikel/MarschNachBern_Wut.jpg",
-    "Bilder/Zeitungsartikel/Gruss_Zukunft.png"
-  ];
-  var articleIndex = fileNameList.findIndex(compareFileName);
+
+  // articleIndex = fileNameList.findIndex(compareFileName);
   if (direction == "right") {
     // Bildpfad ersetzen
     if (articleIndex <= 2) {
       currentArticle.attributes[1].value = fileNameList[articleIndex + 1];
+      articleIndex += 1;
     }
     else {
       currentArticle.attributes[1].value = fileNameList[0];
+      articleIndex = 0;
     }
   }
   else if (direction == "left") {
     // Bildpfad ersetzen
     if (articleIndex >= 1) {
       currentArticle.attributes[1].value = fileNameList[articleIndex - 1];
+      articleIndex -= 1;
     }
     else {
       currentArticle.attributes[1].value = fileNameList[3];
+      articleIndex = 3;
     }
   }
   // alert("File name is: " + fileName);
 }
 
+// Zeitungsartikel "scrollen"
+function switchArticlePart(direction) {
+  // articleIndex = fileNameList.findIndex(compareFileName);
+  if (articleIndex == 2) {
+    if (direction == "down") {
+      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_2.png";
+    }
+    else if (direction == "up") {
+      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_1.png";
+    }
+  }
+}
+
 // Zeitungsartikel anzeigen
 function showPaper() {
+  hintergrund.style.opacity = "0.2";
   zeitungsartikel.classList.toggle("display");
   arrowLeft.classList.toggle("display");
   arrowRight.classList.toggle("display");
+  arrowDown.classList.toggle("display");
+  arrowUp.classList.toggle("display");
   zeitungWeg_1.addEventListener("click", hidePaper);
   zeitungWeg_2.addEventListener("click", hidePaper);
   arrowLeft.addEventListener("click", function() {switchArticle("left");});
   arrowRight.addEventListener("click", function() {switchArticle("right");});
+  arrowDown.addEventListener("click", function() {switchArticlePart("down");});
+  arrowUp.addEventListener("click", function() {switchArticlePart("up");});
 }
 
 // Funktion, die das Default Behaviour der Enter-Taste
