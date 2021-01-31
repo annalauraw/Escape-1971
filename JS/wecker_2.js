@@ -82,7 +82,7 @@ function moveAufziehschluessel(event) {
 }
 
 function callAufziehschluessel() {
-
+  aufziehschluessel.style.width="68px";
   document.addEventListener("mousemove", moveAufziehschluessel);
    //console.log("H");
 }
