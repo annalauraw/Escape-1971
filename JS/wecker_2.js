@@ -340,7 +340,7 @@ function findKey() {
 		aufziehschluessel.classList.toggle("display");
 		hintergrund.style.opacity="1";
 		kalenderblatt.style.opacity="1";
-	}, 3000);
+	}, 1000);
 	
 	//document.cookie="aufziehschluessel=";
 
@@ -503,6 +503,7 @@ function getPosition(element) {
   }
 function dragKalender(ev){
 	 //ev.dataTransfer.setData("text", ev.target.id);
+	 document.getElementById('AV-abreissen').play();
 	 kalendertest=1
 }
 
@@ -549,8 +550,15 @@ function checkLicht(){
 			document.getElementById(rad).addEventListener("mousedown", getClickPosition, false);
 			move();
 		
+	}	
 	}
-}
+	var aufziehenCookie=getCookie("aufziehen");
+	if (aufziehenCookie=="done"){
+		document.getElementById("AV-ticken").play();
+		document.getElementById("AV-ticken").loop = true;
+		updateSeconds();
+		setInterval(updateSeconds, 1000);
+	}
 }
 
 function setup() {
