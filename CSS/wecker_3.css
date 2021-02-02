@@ -31,7 +31,11 @@ ul {
     top: 200px;
     left: 350px;
 	z-index:10;
-	background-color:white;
+	background-color: rgb(229, 204, 255); /* lila */
+    border-color: rgb(173, 102, 255); /* dunkellila */
+    border-radius: 10%;
+    border-width: 5px;
+    border-style: solid;
 }
 
 #frage2{

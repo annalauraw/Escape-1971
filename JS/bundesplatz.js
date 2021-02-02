@@ -22,11 +22,23 @@ var player = SRG.PlayerManager.createPlayer('SRF_player','inline', 'urn:srf:vide
 var playbackInterval = undefined;
 var player_isDisplayed = false;
 
+var TV_black=document.getElementById("TV_black");
+
+function glow(){
+	helvetia.classList.toggle("display");
+	
+}
+
+
 function richtig(){
 	puzzleVertrauen.classList.toggle("display");
 	hintergrund.style.opacity="1";
 	callFlag();
+	helvetia.addEventListener("mouseover", glow);
+	helvetia.addEventListener("mouseleave", glow);
 }
+
+
 
 // Funktion, die das Rätsel zu Lieberherr anzeigt
 function startPuzzle() {
@@ -77,12 +89,16 @@ function callFlag() {
 
 // Objekt, das den Zustand der Videos kennt - sind sie im Player geladen?
 var loadState = {
-  lieberherrV: true
+  lieberherrV: true,
+  lieberherrV2: false,
+  lieberherrV3: false
 }
 
 // Objekt, das den Zustand der Videos kennt - werden sie gerade abgespielt?
 var playState = {
-  lieberherrV: false
+  lieberherrV: false,
+  lieberherrV2: false,
+  lieberherrV3: false
 }
 
 // Funktion, die eine Closure enthält und die Callback-Funktion für das
@@ -91,9 +107,18 @@ var playState = {
 // Window gebunden)
 
 function puzzleVertrauenFrauen(){
+	hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
 	fernseher.classList.toggle("display");
-	SRF_player.classList.toggle("display");
 	puzzleVertrauen.classList.toggle("display");
+	
+	
+	if (SRF_player.classList.contains("display")){
+		SRF_player.classList.toggle("display");
+	}
+	if (TV_black.classList.contains("display")){
+		TV_black.classList.toggle("display");
+	}
+	
 }
 
 
@@ -103,7 +128,6 @@ function returnCheckPlaybackTime(obj) {
       if (currentTime >= obj.stopTime) {
         obj.pause();
         obj.stopInterval();
-		puzzleVertrauenFrauen();
         player.seek(obj.startTime);
         playState[obj.name] = false;
       }
@@ -131,7 +155,7 @@ SRF_Video.prototype = {
 
   play: function() {
     player.play();
-    //area_hideTV.removeEventListener("click", hideTV);
+    hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
     playState[this.name] = true;
     if (player_isDisplayed == false) {
       this.displayPlayer();
@@ -139,22 +163,23 @@ SRF_Video.prototype = {
     //this.subtitles.classList.toggle("display");
     this.startInterval();
     //showSubtitles();
-    // if (black.classList.contains("display")) {
-    //   black.classList.toggle("display");
-    // }
+     if (TV_black.classList.contains("display")) {
+       TV_black.classList.toggle("display");
+     }
   },
 
   pause: function() {
     player.pause();
     //this.showSubtitles();
     playState[this.name] = false;
+	hintergrund.addEventListener("click", puzzleVertrauenFrauen);
     //area_hideTV.addEventListener("click", hideTV);
   },
 
   recreatePlayer: function() {
-    // if (black.classList.contains("display") == false) {
-    //   black.classList.toggle("display");
-    // }
+     if (TV_black.classList.contains("display") == false) {
+			TV_black.classList.toggle("display");
+    }
     this.stopInterval();
     player.destroy();
     this.resetLoadState();
@@ -165,10 +190,14 @@ SRF_Video.prototype = {
 
   resetLoadState: function() {
     loadState.lieberherrV = false;
+	loadState.lieberherrV2 = false;
+	loadState.lieberherrV3 = false;
   },
 
   resetPlayState: function() {
     playState.lieberherrV = false;
+	playState.lieberherrV2 = false;
+	playState.lieberherrV3 = false;
   },
 
   startInterval: function() {
@@ -215,6 +244,8 @@ SRF_Video.prototype = {
 
 // lieberherrV = new SRF_Video('lieberherrV', 'urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5', 0, 5);
 lieberherrV = new SRF_Video('lieberherrV', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 81, 110);
+lieberherrV2 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 9, 66);
+lieberherrV3 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 110, 124);
 
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 function showArea(area) {
@@ -222,16 +253,25 @@ function showArea(area) {
 }
 
 function displayTV() {
+	showTV.removeEventListener("click", displayTV);
 	fernseher.classList.toggle("display");
 	hintergrund.style.opacity="0.2";
+	TV_black.classList.toggle("display");
 	button_lieberherr.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
+	button_lieberherr2.addEventListener("click", lieberherrV2.handle.bind(lieberherrV2));
+	button_lieberherr3.addEventListener("click", lieberherrV3.handle.bind(lieberherrV3));
+	hintergrund.addEventListener("click", puzzleVertrauenFrauen);
+	if (puzzleVertrauen.classList.contains("display")){
+		puzzleVertrauen.classList.toggle("display");
+	}
 }
 
 
 function setup() {
   //button_startPuzzle.addEventListener("click", startPuzzle);
   //puzzleLieberherrButton.addEventListener("click", checkPuzzle);
-  //button_lieberherr.addEventListener("mouseover", function(event) {showArea(event.target)});
+  button_lieberherr3.addEventListener("mouseover", function(event) {showArea(event.target)});
+  backTV.addEventListener("click", displayTV);
   //helvetia.addEventListener("mouseover", function(event) {showArea(event.target)});
   // showTV.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
 	showTV.addEventListener("click", displayTV);

@@ -16,30 +16,35 @@
 	  <img id="fernseher" src="Bilder/bilder/fernseher_stube_freigestellt.png" usemap="#playTV">
     <map name="playTV">
       <area id="button_lieberherr" shape="circle" coords="470, 165, 20">
+	  <area id="button_lieberherr2" shape="circle" coords="470, 245, 20">
+	  <area id="button_lieberherr3" shape="circle" coords="475, 330, 20">
     </map>
       <div id="SRF_player"></div>
 
-      <button id="startPuzzle" type="button">Rätsel starten</button>
+     
       <!-- <button id="removeFlag" type="button">Stop Fahne</button> -->
 
-
+	<div id="TV_black"></div>
 	 <div id="puzzleVertrauen">
 	 <p class="handschrift">Wie lautet Emilie Lieberherrs berühmter Satz?</p><br>
 	<fieldset id="fieldset">
 	<ul><li>
 	<input type="radio" name="auswahl" id="ja" value="ja">
-    <label class="handschrift" for="ja">"Händ vertraue zu de Mensche"</label>
+    <label class="handschrift" for="ja">"Lönd d’Fraue nöd ergraue"</label>
 	</li><li>
     <input type="radio" name="auswahl" id="nein" value="nein" onclick="richtig()">
-    <label class="handschrift" for="nein">"Händ vertraue zu de Fraue"</label>
+    <label class="handschrift" for="nein">"Händ Vertraue mit de Fraue"</label>
+	</li><li>
+	<input type="radio" name="auswahl" id="nein" value="nein" onclick="richtig()">
+    <label class="handschrift" for="nein">"Lönd euch d’Zuekunft nöd verbaue"</label>
 	</li><li>
 	<input type="radio" name="auswahl" id="nein" value="nein">
-    <label class="handschrift" for="nein">"Händ kei vertraue zu de Fraue"</label>
+    <label class="handschrift" for="nein">"Lönd euch nöd verhaue vo de Fraue"</label>
 	</li></ul>
-	</fieldset>
+	 <button id="backTV" class="button" type="button">Filme nochmals sehen</button>
+		</fieldset>
 	 </div>
     </div>
-	Audio_Tor_schliessen_bundeshaus_diva.mp3
 	<audio id="Tor"><source src="Audio/Audio_Tor_schliessen_bundeshaus_diva.mp3" type="audio/mpeg"/>
       Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
       Oder möchtest du eine aktuellere Browser-Version installieren?</audio>
