@@ -8,6 +8,8 @@ eventuelle Kind-Elemente absolut positioniert werden können */
 /* Schriftarten */
 .handschrift {
   font-family: 'Architects Daughter', cursive;
+  color: rgb(95, 0, 204);
+  /* font-size: 18px; */
 }
 
 .druckschrift {
@@ -29,6 +31,30 @@ eventuelle Kind-Elemente absolut positioniert werden können */
   border: 2px solid rgb(95, 0, 204);
 }
 
+.quizbox {
+  display: none;
+}
+
+.quizbox.display {
+  display: block;
+  position: absolute;
+  left: 450px;
+  top: 200px;
+  width: 350px;
+  padding: 2%;
+  padding-bottom: 5%;
+  /* Schrift */
+  color: rgb(95, 0, 204);
+  font-size: 22px;
+  background-color: rgb(229, 204, 255); /* lila */
+  border-color: rgb(95, 0, 204); /* dunkellila */
+  border-radius: 7%;
+  border-width: 2px;
+  border-style: solid;
+  /* Wegen Button-Position */
+  text-align:center;
+}
+
 .button {
   border: 2px solid rgb(95, 0, 204); /* dunkellila */
   font-family: 'Architects Daughter', cursive;
@@ -40,8 +66,9 @@ eventuelle Kind-Elemente absolut positioniert werden können */
 }
 
 .button:hover {
-  background-color: rgb(201, 153, 255); /* lila*/
-  /* color: rgb(255, 255, 255); /* white */ */
+  /* background-color: rgb(201, 153, 255); /* lila*/
+  background-color: rgb(95, 0, 204);
+  color: rgb(255, 255, 255); /* white */
 }
 
 /* Eingabefelder */

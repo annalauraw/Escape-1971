@@ -50,7 +50,8 @@ var fileNameList = [
   "Bilder/Zeitungsartikel/Stimmrecht_Basel.jpg",
   "Bilder/Zeitungsartikel/EMRK_unterzeichnen.png",
   "Bilder/Zeitungsartikel/Wut_1.png",
-  "Bilder/Zeitungsartikel/Gruss_Zukunft.png"
+  "Bilder/Zeitungsartikel/Vorbehalte_Lotti_1.png",
+  "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png"
 ];
 // Muss global verfügbar sein
 var articleIndex = 0;
@@ -268,11 +269,19 @@ function hidePaper() {
   zeitungsartikel.classList.toggle("display");
   arrowLeft.classList.toggle("display");
   arrowRight.classList.toggle("display");
+  if (arrowDown.classList.contains("display")) {
+    arrowDown.classList.toggle("display");
+  }
+  else if (arrowUp.classList.contains("display")) {
+    arrowUp.classList.toggle("display");
+  }
   hintergrund.style.opacity = "1";
   zeitungWeg_1.removeEventListener("click", hidePaper);
   zeitungWeg_2.removeEventListener("click", hidePaper);
   arrowLeft.removeEventListener("click", function() {switchArticle("left");});
   arrowRight.removeEventListener("click", function() {switchArticle("right");});
+  button_startPuzzle.classList.toggle("display");
+  button_startPuzzle.addEventListener("click", startPuzzle);
 }
 
 // Funktion, die prüft, mit welchem Index der Liste
@@ -287,7 +296,7 @@ function switchArticle(direction) {
   // articleIndex = fileNameList.findIndex(compareFileName);
   if (direction == "right") {
     // Bildpfad ersetzen
-    if (articleIndex <= 2) {
+    if (articleIndex <= 3) {
       currentArticle.attributes[1].value = fileNameList[articleIndex + 1];
       articleIndex += 1;
     }
@@ -303,8 +312,22 @@ function switchArticle(direction) {
       articleIndex -= 1;
     }
     else {
-      currentArticle.attributes[1].value = fileNameList[3];
-      articleIndex = 3;
+      currentArticle.attributes[1].value = fileNameList[4];
+      articleIndex = 4;
+    }
+  }
+  if (articleIndex == 2 || articleIndex == 4) {
+    arrowDown.classList.toggle("display");
+    // arrowUp.classList.toggle("display");
+    arrowDown.addEventListener("click", function() {switchArticlePart("down");});
+    // arrowUp.addEventListener("click", function() {switchArticlePart("up");});
+  }
+  else {
+    if (arrowDown.classList.contains("display")) {
+      arrowDown.classList.toggle("display");
+    }
+    else if (arrowUp.classList.contains("display")) {
+      arrowUp.classList.toggle("display");
     }
   }
   // alert("File name is: " + fileName);
@@ -313,14 +336,46 @@ function switchArticle(direction) {
 // Zeitungsartikel "scrollen"
 function switchArticlePart(direction) {
   // articleIndex = fileNameList.findIndex(compareFileName);
-  if (articleIndex == 2) {
-    if (direction == "down") {
+  if (direction == "down") {
+    if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_1.png") {
       currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_2.png";
+      arrowDown.classList.toggle("display");
+      arrowUp.classList.toggle("display");
+      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
+      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
     }
-    else if (direction == "up") {
-      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_1.png";
+    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
+      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png";
+      arrowDown.classList.toggle("display");
+      arrowUp.classList.toggle("display");
+      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
+      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
     }
   }
+  else if (direction == "up") {
+    if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png") {
+      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_1.png";
+      arrowDown.classList.toggle("display");
+      arrowUp.classList.toggle("display");
+      arrowUp.removeEventListener("click", function() {switchArticlePart("up");});
+      arrowDown.addEventListener("click", function() {switchArticlePart("down");});
+    }
+    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
+      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png";
+      arrowDown.classList.toggle("display");
+      arrowUp.classList.toggle("display");
+      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
+      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
+    }
+  }
+  // if (articleIndex == 2) {
+  //   if (direction == "down") {
+  //     currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_2.png";
+  //   }
+  //   else if (direction == "up") {
+  //     currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_1.png";
+  //   }
+  // }
 }
 
 // Zeitungsartikel anzeigen
@@ -329,14 +384,25 @@ function showPaper() {
   zeitungsartikel.classList.toggle("display");
   arrowLeft.classList.toggle("display");
   arrowRight.classList.toggle("display");
-  arrowDown.classList.toggle("display");
-  arrowUp.classList.toggle("display");
+  if (articleIndex == 2 || articleIndex == 4) {
+    if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_1.png"
+    || currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
+      arrowDown.classList.toggle("display");
+      arrowDown.addEventListener("click", function() {switchArticlePart("down");});
+    }
+    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png"
+    || currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
+      arrowUp.classList.toggle("display");
+      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
+    }
+  }
   zeitungWeg_1.addEventListener("click", hidePaper);
   zeitungWeg_2.addEventListener("click", hidePaper);
   arrowLeft.addEventListener("click", function() {switchArticle("left");});
   arrowRight.addEventListener("click", function() {switchArticle("right");});
-  arrowDown.addEventListener("click", function() {switchArticlePart("down");});
-  arrowUp.addEventListener("click", function() {switchArticlePart("up");});
+  if (button_startPuzzle.classList.contains("display")) {
+    button_startPuzzle.classList.toggle("display");
+  }
 }
 
 // Funktion, die das Default Behaviour der Enter-Taste
@@ -464,7 +530,6 @@ function setup() {
   button_lotti.addEventListener("click", lotti.handle.bind(lotti));
   button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
   button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
-  button_startPuzzle.addEventListener("click", startPuzzle);
   button_radio_noise.addEventListener("click", function() {playSound(rauschen);});
   button_radio_song.addEventListener("click", function() {playSound(radiosong);});
   // Quizfragen
