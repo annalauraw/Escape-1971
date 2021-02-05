@@ -81,19 +81,23 @@ function moveCrt(event){
 
 
 function dragstartArgument(event){
-	//argumentgross.classList.toggle("display");
+	//ghost-image neu definieren und ausblenden
 	argumentgross.style.opacity="0";
 	var img = document.createElement("img");
     //img.src = "Bilder/bilder/"+argument+".png";
 	img.src="";
     event.dataTransfer.setDragImage(img, 200, 200);
-	//crt = event.target.cloneNode(true);
-	crt = document.createElement("img");
+	
+	//Bild das mitgeht einfügen
+	
+	crt = document.createElement("div");
+	crtimg = document.createElement("img");
 	crt.id="crt";
-	crt.src = "Bilder/bilder/"+argument+".png";
+	crtimg.src = "Bilder/bilder/"+argument+".png";
     //crt.style.position = "absolute"; 
 	
 	document.getElementById("imagecontainer").appendChild(crt);
+	document.getElementById("crt").appendChild(crtimg);
 	event.dataTransfer.setData('text/html', null);
 	
 	
