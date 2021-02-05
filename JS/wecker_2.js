@@ -246,6 +246,13 @@ function drop(ev) {
 	} else {
 		gegenkathete=centerX-punktX;
 	}
+	
+
+	
+	var rect = clockbox.getBoundingClientRect();
+    
+	centerY=rect.top+150;
+	centerX=rect.left+150;
 
 	if (punktY>centerY){
 		ankathete=punktY-centerY;
