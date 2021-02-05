@@ -3,7 +3,7 @@
 	/*background:white;*/
 	position: absolute;
 	width: 25px;
-	z-index:3;
+	z-index: 3;
 	
 }
 .argument.hide {
@@ -21,6 +21,17 @@
 	/*border: 2px solid #dadada;*/
     border-radius: 2px;
 	box-shadow: 0 0 10px #ad66ff;
+}
+
+#crt{
+	position: absolute;
+	display: flex;
+	z-index:10;
+	width: 400px;
+	
+	
+	
+	/*height: 300px;*/
 }
 
 #buchstabeW {

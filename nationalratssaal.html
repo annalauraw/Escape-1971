@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="CSS/nationalratssaal.css" type="text/css"/>
   </head>
   <body>
-    <div class="imagecontainer">
+    <div id="imagecontainer" class="imagecontainer">
 	  
       <!-- Hauptbild -->
-      <img id="hintergrund" src="Bilder/bilder/nationalratssaal_buchstaben.png" ondragover="allowDrop(event)" draggable="false">
+      <img id="hintergrund" src="Bilder/bilder/nationalratssaal_buchstaben.png" draggable="false">
 	  
 	  <img id="arg1" class="argument" src="Bilder/bilder/arg1.png" draggable="false">
 	  <img id="arg2" class="argument" src="Bilder/bilder/arg2.png" draggable="false">
@@ -29,7 +29,7 @@
 	  <div id="buchstabeD" class="buchstaben" onmouseover="lightup(event)" onmouseout="lightup(event)"></div>
 	  <div id="abfall" ondragover="allowDrop(event)"></div>
 	  <div id="pult" ondragover="allowDrop(event)"></div>
-	  <div id="argumentgross" draggable="true" ondragover="allowDrop(event)" ondragstart="dragArgument(event)"></div>
+	  <div id="argumentgross" draggable="true" ondrag="dragArgument(event)" ondragstart="dragstartArgument(event)" ondragend="bildweg(event)"></div>
 	  </div>
 	  <audio id="AV-reissen"><source src="Audio/AV-reissen.mp3" type="audio/mpeg"/>
       Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
