@@ -8,9 +8,12 @@ var mouseDownY = 1*0; // y-Koordinate des angeklickten Feldes
 
 var changeSrc = "";   // Dateiname des Bildes des angeklickten Feldes
 var active = false;   // active = true : Feld wurde angeklickt
+
 var cookieTest=document.cookie;
 var puzzle =document.getElementById("puzzle");
-var zettel =document.getElementById("zettel")
+var zettel =document.getElementById("zettel");
+var hintergrund=document.getElementById("hintergrund");
+document.getElementById("AV-ticken").autoplay=true;
 
 document.cookie="abstimmungszettelB=done";
 
@@ -67,7 +70,6 @@ function pieceUp(nr) {
       puzzle.classList.toggle("hide");
 	  zettel.classList.toggle("display");
 	  document.cookie="schieberaetsel=done";
-	  zettel.addEventListener("click",goBack);
    }
 } 
 
@@ -98,9 +100,40 @@ function testCookie(){
   } 
 }
 
+function getCookie(cname) {
+  var test = cname + "=";
+
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(test) == 0) {
+      return c.substring(test.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkTicken(){
+
+	var aufziehenCookie=getCookie("aufziehen");
+	console.log(aufziehenCookie);
+	if (aufziehenCookie=="done"){
+		
+		document.getElementById("AV-ticken").play();
+		document.getElementById("AV-ticken").loop = true;
+		document.removeEventListener("click",checkTicken);
+		
+	}
+}
+
 function setup() {
 	testCookie();
-	zettel.addEventListener("click", goBack);
+	hintergrund.addEventListener("click", goBack);
+	document.addEventListener("click",checkTicken);
 }
 
 

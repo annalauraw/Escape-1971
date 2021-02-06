@@ -561,10 +561,21 @@ function checkLicht(){
 	}
 	var aufziehenCookie=getCookie("aufziehen");
 	if (aufziehenCookie=="done"){
-		document.getElementById("AV-ticken").play();
-		document.getElementById("AV-ticken").loop = true;
 		updateSeconds();
 		setInterval(updateSeconds, 1000);
+	}
+}
+
+function checkTicken(){
+
+	var aufziehenCookie=getCookie("aufziehen");
+	console.log(aufziehenCookie);
+	if (aufziehenCookie=="done"){
+		
+		document.getElementById("AV-ticken").play();
+		document.getElementById("AV-ticken").loop = true;
+		document.removeEventListener("click",checkTicken);
+		
 	}
 }
 
@@ -579,6 +590,7 @@ function setup() {
   timerDiv.addEventListener("mousedown",startDrag);
   checkLicht();
   updateClock();
+  document.addEventListener("click", checkTicken);
   	
    }
 

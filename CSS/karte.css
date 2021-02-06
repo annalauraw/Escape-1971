@@ -1,7 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 
-
+#karte {
+	text-align:center;
+	
+}
 
 #text {
   display: flex;
@@ -9,3 +12,14 @@
   font-family: 'Architects Daughter', cursive;
   font-size: 28pt;
 }
+
+#kartencontainer {
+	/*display:flex;*/
+	height: 750px;
+	width: 1200px;
+	position: relative;
+	margin: auto;
+	/*z-index: -1;*/
+    border: 2px solid rgb(95, 0, 204);
+}
+
