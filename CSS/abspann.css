@@ -1,27 +1,98 @@
 /* To Do: Links hübscher stylen */
 
-.frauenstreik {
+body {
+  font-family: 'Architects Daughter', cursive;
+  color: rgb(95, 0, 204);
+}
+
+/* Bilder */
+.quer {
   width: 70%;
-  margin: 10%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid rgb(95, 0, 204);
+}
+
+.hoch {
+  width: 40%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid rgb(95, 0, 204);
 }
 
 h1, h2 {
   text-align: center;
 }
 
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+li {
+  font-size: 24px;
+  list-style-type: none;
+  text-align: center;
+}
+
+/* Bildli als list-style-image? */
+/* li.arrow {
+
+} */
+
+#buttons {
+  /* position: absolute;
+  left: 40%; */
+  text-align: center;
+}
+
 #feedback, #song {
-  float: left;
+  /* float: left; */
   margin: 5%;
 }
 
+/* Animation von oben nach unten (langsam) */
 @keyframes scroll {
   from {top: 0;}
-  to {top: -12000px;}
+  to {top: -12300px;}
+}
+
+@-webkit-keyframes scroll {
+  from {top: 0;}
+  to {top: -12300px;}
 }
 
 .imagecontainer.animate {
   animation-name: scroll;
-  animation-duration: 180s;
+  animation-duration: 200s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Animation von unten nach oben (schnell) */
+@keyframes up {
+  from {top: -12300px;}
+  to {top: 0;}
+}
+
+@-webkit-keyframes up {
+  from {top: -12300px;}
+  to {top: 0;}
+}
+
+.imagecontainer.animate.end {
+  animation-name: up;
+  animation-duration: 0.01s;
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-fill-mode: forwards;

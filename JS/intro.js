@@ -38,6 +38,7 @@ var radiosong_isPlaying = false;
 var rauschen_isPlaying = false;
 
 // Zeitungsartikel
+var zeitungsstapel = document.getElementById("zeitungsstapel");
 var zeitungsartikel = document.getElementById("zeitungsartikel");
 var arrowLeft = document.getElementById("arrowLeft");
 var arrowRight = document.getElementById("arrowRight");
@@ -368,14 +369,6 @@ function switchArticlePart(direction) {
       arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
     }
   }
-  // if (articleIndex == 2) {
-  //   if (direction == "down") {
-  //     currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_2.png";
-  //   }
-  //   else if (direction == "up") {
-  //     currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_1.png";
-  //   }
-  // }
 }
 
 // Zeitungsartikel anzeigen

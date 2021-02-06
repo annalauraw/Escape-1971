@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Marsch</title>
+    <link rel="stylesheet" href="CSS/general.css" type="text/css"/>
+    <link rel="stylesheet" href="CSS/marsch.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="imagecontainer">
+      <img id="hintergrund" src="Bilder/bilder/ruths_stube.png" usemap="#discover_media">
+      <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
+      <map name="discover_media">
+        <!-- Zeitungen -->
+        <area id="zeitungsstapel" shape="circle" coords="720, 190, 30">
+        <area id="zeitungWeg_1" shape="rect" coords="2, 2, 200, 750">
+        <area id="zeitungWeg_2" shape="rect" coords="1000, 2, 1200, 750">
+      </map>
+
+      <!-- Zeitungsartikel -->
+      <div id="zeitungsartikel">
+        <img id="artikelbild" src="Bilder/Zeitungsartikel/Werbung_Marsch.png">
+      </div>
+      <!-- Pfeile, zum zwischen den Zeitungsartikeln wechseln -->
+      <div id="arrowRight" class="arrow right"></div>
+      <div id="arrowLeft" class="arrow left"></div>
+
+      <button id="startPuzzle" class="button" type="button">Quizfrage</button>
+      <div id="puzzle" class="quizbox handschrift">
+        <form name="puzzle_marsch">
+          <p>Was meinst du dazu?</p>
+          <input type="radio" id="egal" name="attitude" value="egal">
+          <label for="egal">Ist mir egal</label><br>
+          <input type="radio" id="ok" name="attitude" value="ok">
+          <label for="ok">Die Menschenrechte sind in der Schweiz voll umgesetzt</label><br>
+          <input type="radio" id="aendern" name="attitude" value="aendern">
+          <label for="aendern">Jetzt muss sich etwas ändern!</label><br><br>
+         <input type="button" id="button_solution_1" class="button inputButton" value="Senden">
+        </form>
+      </div>
+
+      <div id="alert_wrongAnswer" class="quizbox handschrift">
+        <form name="puzzle_videoQuestions_3">
+         <label>Bist du sicher?</label><br/><br/>
+         <input type="button" id="button_alert" class="button inputButton" value="Okay">
+        </form>
+      </div>
+    </div>
+    <script  type="text/javascript" src="JS/marsch.js"></script>
+  </body>
+</html>
