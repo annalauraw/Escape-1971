@@ -48,7 +48,17 @@ function restoreVertrauen(){
 function restorebv4(){
 	bv4puzzle.classList.toggle("display");
 	alert_wrongAnswer.classList.toggle("display");
-	document.getElementById("button_alert").removeEventListener("click", restoreVertrauen);
+	document.getElementById("button_alert").removeEventListener("click", restorebv4);
+}
+
+function closebv4(){
+	bv4puzzle.classList.toggle("display");
+	hintergrund.removeEventListener("click", closebv4);
+	  for(i=0; i<bv4.length; i++){
+     bv4[i].addEventListener("mouseover", glowBV4);
+	 bv4[i].addEventListener("mouseleave", glowBV4);
+	 bv4[i].addEventListener("click", bv4puzzleOpen);
+}
 }
 	
 
@@ -64,6 +74,7 @@ function VertrauenRichtig(){
 	callFlag();
 	helvetia.addEventListener("mouseover", glow);
 	helvetia.addEventListener("mouseleave", glow);
+	showTV.removeEventListener("click", displayTV);
 }
 
 
@@ -88,15 +99,40 @@ function moveFlag(event) {
 
 }
 
+function showhelvetia(){
+	
+	if (helvetia.classList.contains("display")){
+		helvetia.classList.toggle("display");
+	}
+	
+	setTimeout(function() {
+    
+	hintergrund.style.opacity="0.2";
+	flag.style.opacity="0.2";
+	helvetia.removeEventListener("mouseover", glow);
+	helvetia.removeEventListener("mouseleave", glow);
+	
+	helvetiagross.classList.toggle("hide");
+	document.getElementById('AV-applaus').play();
+	document.getElementById('AV-applaus').addEventListener('ended', function(){
+		hintergrund.style.opacity="1";
+		flag.style.opacity="1";
+		helvetiagross.classList.toggle("hide");
+		document.getElementById('Tor').play();
+		document.getElementById("Tor").addEventListener('ended', function(){
+		location.assign("nationalratssaal.html");
+  });
+  });
+  }, 1000);
+}
+
 // Wenn Fahne an den richtigen Koordinaten ist: Helvetia in die Hand drücken
 function putFlag() {
   document.removeEventListener("mousemove", moveFlag);
-  flag.style.left = "570px";
-  flag.style.top = "150px";
-  document.getElementById('Tor').play();
-  document.getElementById("Tor").addEventListener('ended', function(){
-	  location.assign("nationalratssaal.html");
-  });
+  flag.style.left = "585px";
+  flag.style.top = "120px";
+  
+  showhelvetia();
 }
 
 // Funktion, die die Fahne erscheinen lässt: Es wird ein addEventListener
@@ -191,9 +227,9 @@ SRF_Video.prototype = {
     //this.subtitles.classList.toggle("display");
     this.startInterval();
     //showSubtitles();
-     if (TV_black.classList.contains("display")) {
-       TV_black.classList.toggle("display");
-     }
+    // if (TV_black.classList.contains("display")) {
+     //  TV_black.classList.toggle("display");
+     //}
   },
 
   pause: function() {
@@ -205,9 +241,9 @@ SRF_Video.prototype = {
   },
 
   recreatePlayer: function() {
-     if (TV_black.classList.contains("display") == false) {
-			TV_black.classList.toggle("display");
-    }
+     //if (TV_black.classList.contains("display") == false) {
+		//	TV_black.classList.toggle("display");
+   // }
     this.stopInterval();
     player.destroy();
     this.resetLoadState();
@@ -281,6 +317,7 @@ function showArea(area) {
 }
 
 function displayTV() {
+	hintergrund.removeEventListener("click", closebv4);
 	showTV.removeEventListener("click", displayTV);
 	fernseher.classList.toggle("display");
 	hintergrund.style.opacity="0.2";
@@ -302,11 +339,9 @@ function glowBV4(){
 }
 
 function bv4puzzleOpen(){
+	document.addEventListener("keypress", function(event) {preventEnter(event);})
 	bv4text.classList.toggle("hide");
-	bv4text.addEventListener("click", function(){
-		bv4puzzle.classList.toggle("display");
-		bv4text.classList.toggle("hide");
-	});
+	
 	
 	  for(i=0; i<bv4.length; i++){
 			bv4[i].removeEventListener("mouseover", glowBV4);
@@ -322,6 +357,7 @@ function checkPuzzle(trigger){
 	if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
 		showTV.addEventListener("click", displayTV);
 		bv4puzzle.classList.toggle("display");
+		
 	} else{
 		bv4puzzle.classList.toggle("display");
 		alert_wrongAnswer.classList.toggle("display");
@@ -330,6 +366,12 @@ function checkPuzzle(trigger){
 	
 }
 
+function preventEnter(event) {
+  if (event.key == "Enter"){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
 
 function setup() {
   //button_startPuzzle.addEventListener("click", startPuzzle);
@@ -344,6 +386,11 @@ function setup() {
 	 bv4[i].addEventListener("mouseleave", glowBV4);
 	 bv4[i].addEventListener("click", bv4puzzleOpen);
 }
+  bv4text.addEventListener("click", function(){
+		bv4puzzle.classList.toggle("display");
+		bv4text.classList.toggle("hide");
+		hintergrund.addEventListener("click", closebv4);
+	});
 }
 
 window.addEventListener("load", setup);

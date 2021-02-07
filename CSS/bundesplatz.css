@@ -31,6 +31,18 @@
 	left:270px;
 }
 
+#helvetiagross.hide {
+	display:none;
+}
+
+#helvetiagross{
+	position:absolute;
+	width:650px;
+	top:100px;
+	left:270px;
+	z-index:2;
+}
+
 ul { 
   list-style: none 
 }
@@ -49,14 +61,17 @@ ul {
 #bv4text{
 	background-color:white;
 	position:absolute;
-	width:600px;
-	height:400px;
-	top:100px;
+	width:700px;
+	top:200px;
 	left:270px;
 	font-family: 'Architects Daughter', cursive;
 	color: rgb(95, 0, 204);
 	font-size: 30px;
 	text-align:center;
+	border-color: rgb(95, 0, 204); /* dunkellila */
+  border-radius: 7%;
+  border-width: 2px;
+  border-style: solid;
 }
 	
 	
@@ -138,7 +153,7 @@ ul {
   top: 300px;
   left: 600px;
   background-color: black;
-  z-index: 3;
+  z-index: 1;
 }
 
 #fernseher {
@@ -162,6 +177,7 @@ ul {
   top: 0px;
   width: 100px;
   height: 100px;
+  z-index: 4;
 }
 
 #helvetia{
