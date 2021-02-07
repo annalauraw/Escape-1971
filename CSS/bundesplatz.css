@@ -1,33 +1,112 @@
+
+
 .handschrift{
 	font-size: 20pt;
+}
+
+.handschrift.label {
+	  cursor: pointer;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+}
+
+.fieldset{
+	border:none;
+}
+
+#alert_wrongAnswer{
+	left: 370px;
+}
+
+#bv4puzzle{
+	left: 370px;
+}
+
+#puzzleVertrauen {
+	text-align: left;
+	width:600px;
+	top:100px;
+	left:270px;
 }
 
 ul { 
   list-style: none 
 }
 
-#fieldset{
-	border:none;
+#backTV {
+	Position:absolute;
+	left: 200px;
+	
 }
 
 
-#puzzleVertrauen {
-  display: none;
+#bv4text.hide {
+	display:none;
+}
+
+#bv4text{
+	background-color:white;
+	position:absolute;
+	width:600px;
+	height:400px;
+	top:100px;
+	left:270px;
+	font-family: 'Architects Daughter', cursive;
+	color: rgb(95, 0, 204);
+	font-size: 30px;
+	text-align:center;
+}
+	
+	
+
+.bv4{
+	position:absolute;
+	z-index:5;
+}
+
+.bv4.display {
+	/*background-color: rgb(201, 153, 255);*/
+	position:absolute;
+	z-index:5;
+	border-radius: 20px;
+    box-shadow: 0 0 20px #ad66ff;
 }
 
 
-#puzzleVertrauen.display {
-  display: block;
-  position: absolute;
-  left: 500px;
-  top: 170px;
-  padding: 20px;
-  /* background-color: rgb(204, 153, 255); */
-  background-color: rgb(229, 204, 255); /* lila */
-  border-color: rgb(173, 102, 255); /* dunkellila */
-  border-radius: 10%;
-  border-width: 5px;
-  border-style: solid;
+#bv4-1{
+	left:550px;
+	top:555px;
+	height: 30px;
+	width: 30px;
+}
+
+#bv4-2{
+	left:230px;
+	top:715px;
+	height: 25px;
+	width: 25px;
+}
+
+#bv4-3{
+	left:555px;
+	top:710px;
+	height: 25px;
+	width: 25px;
+}
+
+#bv4-4{
+	left:925px;
+	top:705px;
+	height: 25px;
+	width: 25px;
+}
+#bv4-5{
+	left:520px;
+	top:585px;
+	height: 25px;
+	width: 25px;
 }
 
 
@@ -107,28 +186,7 @@ ul {
   box-shadow: 0 0 10px #ad66ff;
 }
 
-/* Button "Rätsel starten" */
-#startPuzzle {
-  position: absolute;
-  left: 1070px;
-}
 
-/* Rätsel zu Emilie lieberherr */
-#puzzle_lieberherrQuestions {
-  display: none;
-}
-
-#puzzle_lieberherrQuestions.display {
-  display: block;
-  position: absolute;
-  left: 800px;
-  top: 170px;
-  padding: 20px;
-  background-color: rgb(204, 153, 255);
-  border-color: rgb(204, 102, 255);
-  border-width: 5px;
-  border-style: solid;
-}
 
 #fahne {
   display: none;
@@ -138,7 +196,7 @@ ul {
   display: block;
   width: 100px;
   position: absolute;
-  z-index: 3:
+  z-index: 999:
   /* border-style: solid;
   border-width: 5px;
   border-color: black; */

@@ -218,6 +218,9 @@ function checkTimer(){
 		//console.log("Done");
 		document.getElementById('AV-ticken').pause();
 		document.getElementById('AV-klingeln').play();
+		setTimeout(function() {
+			document.getElementById('schnarch').pause();
+		}, 500);
 		document.getElementById('AV-klingeln').addEventListener("ended", function () {
 			location.assign("wecker_3.html");
 		});
@@ -355,10 +358,6 @@ function findKey() {
 
 function lichtAn (){
   document.getElementById('AV-schalter').play();
-  //document.getElementById('AV-schalter').addEventListener('ended', function(){
-	  //nacht.classList.toggle("hide");
-	  //schalter.classList.toggle("hide");
-  //});
 	setTimeout(function() {
     nacht.classList.toggle("hide");
 	 schalter.classList.toggle("hide");
@@ -569,15 +568,22 @@ function checkLicht(){
 function checkTicken(){
 
 	var aufziehenCookie=getCookie("aufziehen");
-	console.log(aufziehenCookie);
 	if (aufziehenCookie=="done"){
 		
 		document.getElementById("AV-ticken").play();
 		document.getElementById("AV-ticken").loop = true;
-		document.removeEventListener("click",checkTicken);
 		
 	}
+	document.removeEventListener("click",checkTicken);
 }
+
+
+function schnarchen(){
+	document.getElementById("schnarch").play();
+	document.getElementById("schnarch").loop = true;
+	document.removeEventListener("click",schnarchen);
+}
+
 
 function setup() {
   wecker.addEventListener("click", showClock);
@@ -591,6 +597,7 @@ function setup() {
   checkLicht();
   updateClock();
   document.addEventListener("click", checkTicken);
+  document.addEventListener("click", schnarchen);
   	
    }
 

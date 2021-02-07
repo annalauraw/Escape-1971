@@ -11,7 +11,7 @@ var flag = document.getElementById("fahne");
 var helvetia = document.getElementById("helvetia");
 
 var fernseher =document.getElementById("fernseher");
-var puzzleVertrauen = document.getElementById("puzzleVertrauen");
+var puzzleVertrauen = document.getElementsByClassName("quizbox")[0];
 
 var showTV= document.getElementById("showTV");
 var button_lieberherr = document.getElementById("button_lieberherr");
@@ -24,13 +24,41 @@ var player_isDisplayed = false;
 
 var TV_black=document.getElementById("TV_black");
 
+var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
+
+
+//bv4-Rätsel
+var bv4=document.getElementsByClassName("bv4");
+var bv4puzzle=document.getElementById("bv4puzzle");
+var bv4text=document.getElementById("bv4text");
+
+
+
 function glow(){
 	helvetia.classList.toggle("display");
 	
 }
 
+function restoreVertrauen(){
+	puzzleVertrauen.style.opacity="1";
+	alert_wrongAnswer.classList.toggle("display");
+	document.getElementById("button_alert").removeEventListener("click", restoreVertrauen);
+}
 
-function richtig(){
+function restorebv4(){
+	bv4puzzle.classList.toggle("display");
+	alert_wrongAnswer.classList.toggle("display");
+	document.getElementById("button_alert").removeEventListener("click", restoreVertrauen);
+}
+	
+
+function VertrauenFalsch(){
+	alert_wrongAnswer.classList.toggle("display");
+	puzzleVertrauen.style.opacity="0";
+	document.getElementById("button_alert").addEventListener("click", restoreVertrauen);
+}
+
+function VertrauenRichtig(){
 	puzzleVertrauen.classList.toggle("display");
 	hintergrund.style.opacity="1";
 	callFlag();
@@ -245,7 +273,7 @@ SRF_Video.prototype = {
 // lieberherrV = new SRF_Video('lieberherrV', 'urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5', 0, 5);
 lieberherrV = new SRF_Video('lieberherrV', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 81, 110);
 lieberherrV2 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 9, 66);
-lieberherrV3 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 110, 124);
+lieberherrV3 = new SRF_Video('lieberherrV3', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 110, 124);
 
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 function showArea(area) {
@@ -266,15 +294,56 @@ function displayTV() {
 	}
 }
 
+function glowBV4(){
+	//console.log("hi");
+	for(i=0; i<bv4.length; i++){
+	bv4[i].classList.toggle("display");
+}
+}
+
+function bv4puzzleOpen(){
+	bv4text.classList.toggle("hide");
+	bv4text.addEventListener("click", function(){
+		bv4puzzle.classList.toggle("display");
+		bv4text.classList.toggle("hide");
+	});
+	
+	  for(i=0; i<bv4.length; i++){
+			bv4[i].removeEventListener("mouseover", glowBV4);
+			bv4[i].removeEventListener("mouseleave", glowBV4);
+			bv4[i].removeEventListener("click", bv4puzzleOpen);
+			bv4[i].classList.toggle("display");
+}
+}
+
+function checkPuzzle(trigger){
+	
+	var playerSolution = document.forms[0]["solution"].value;
+	if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
+		showTV.addEventListener("click", displayTV);
+		bv4puzzle.classList.toggle("display");
+	} else{
+		bv4puzzle.classList.toggle("display");
+		alert_wrongAnswer.classList.toggle("display");
+		button_alert.addEventListener("click", restorebv4);
+	}
+	
+}
+
 
 function setup() {
   //button_startPuzzle.addEventListener("click", startPuzzle);
   //puzzleLieberherrButton.addEventListener("click", checkPuzzle);
-  button_lieberherr3.addEventListener("mouseover", function(event) {showArea(event.target)});
+  //button_lieberherr3.addEventListener("mouseover", function(event) {showArea(event.target)});
   backTV.addEventListener("click", displayTV);
   //helvetia.addEventListener("mouseover", function(event) {showArea(event.target)});
   // showTV.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
-	showTV.addEventListener("click", displayTV);
+  button_solution.addEventListener("click", function() {checkPuzzle(this);});
+  for(i=0; i<bv4.length; i++){
+     bv4[i].addEventListener("mouseover", glowBV4);
+	 bv4[i].addEventListener("mouseleave", glowBV4);
+	 bv4[i].addEventListener("click", bv4puzzleOpen);
+}
 }
 
 window.addEventListener("load", setup);

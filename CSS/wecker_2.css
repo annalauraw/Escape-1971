@@ -108,7 +108,7 @@
   position: absolute;
   top: 440px;
   left: 490px;
-  background-image: url(bilder/Zahlenrad-hintergrund.png); /*http://i.stack.imgur.com/0Fc85m.png*/
+  background-image: url(bilder/Zahlenrad-hintergrund-gezeichnet.png); /*http://i.stack.imgur.com/0Fc85m.png*/
 	/* background-image: url("bilder/Zahlenrad-hintergrund.png"); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -117,7 +117,7 @@
   z-index: 6;
 }
 .number9 {
-  background-image: url(bilder/Zahlenrad-zahlen9.png);/*http://i.stack.imgur.com/c0ufam.png*/
+  background-image: url(bilder/Zahlenrad-zahlen9-gezeichnet.png);/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;
@@ -126,7 +126,7 @@
   float: left;
 }
 .number3 {
-  background-image: url(bilder/Zahlenrad-zahlen3.png);/*http://i.stack.imgur.com/c0ufam.png*/
+  background-image: url(bilder/Zahlenrad-zahlen3-gezeichnet.png);/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;
@@ -135,7 +135,7 @@
   float: left;
 }
 .number2 {
-  background-image: url(bilder/Zahlenrad-zahlen2.png);/*http://i.stack.imgur.com/c0ufam.png*/
+  background-image: url(bilder/Zahlenrad-zahlen2-gezeichnet.png);/*http://i.stack.imgur.com/c0ufam.png*/
   background-repeat: no-repeat;
   background-size: 75% 330px;
   height: 75px;

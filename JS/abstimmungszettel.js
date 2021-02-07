@@ -130,10 +130,17 @@ function checkTicken(){
 	}
 }
 
+function schnarchen(){
+	document.getElementById("schnarch").play();
+	document.getElementById("schnarch").loop = true;
+	document.removeEventListener("click",schnarchen);
+}
+
 function setup() {
 	testCookie();
 	hintergrund.addEventListener("click", goBack);
 	document.addEventListener("click",checkTicken);
+	document.addEventListener("click",schnarchen);
 }
 
 
