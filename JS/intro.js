@@ -60,6 +60,11 @@ var articleIndex = 0;
 // Button "Ich bin informiert", startet das Rätsel zum Video
 var button_startPuzzle = document.getElementById("startPuzzle");
 
+// Was wurde bereits angesehen?
+var tv_watched = false;
+var paper_read = false;
+var radio_listened = false;
+
 // Buttons 'Senden', um die eingegebenen Lösungswörter zu überprüfen
 var button_solution_1 = document.getElementById("button_solution_1");
 var button_solution_2 = document.getElementById("button_solution_2");
@@ -96,6 +101,14 @@ function hideTV() {
   }
   if (black.classList.contains("display")) {
     black.classList.toggle("display");
+  }
+  tv_watched = true;
+  // Wenn alle Medien schonmal angeschaut wurden, Button "informiert" anzeigen
+  if (paper_read == true && radio_listened == true) {
+    if (button_startPuzzle.classList.contains("display") == false) {
+      button_startPuzzle.classList.toggle("display");
+      button_startPuzzle.addEventListener("click", startPuzzle);
+    }
   }
 }
 
@@ -255,13 +268,25 @@ function stopRadio() {
 }
 
 // Funktion, die den Radio-Song abspielt
-function playSound(sound) {
+function playSound(sound, button) {
   if (sound.paused == false) {
     sound.pause();
   }
   else {
     stopRadio();
     sound.play();
+    if (button == button_radio_song) {
+      sound.addEventListener("ended", function() {
+        radio_listened = true;
+        // Wenn alle Medien schonmal angeschaut wurden, Button "informiert" anzeigen
+        if (tv_watched == true && paper_read == true) {
+          if (button_startPuzzle.classList.contains("display") == false) {
+            button_startPuzzle.classList.toggle("display");
+            button_startPuzzle.addEventListener("click", startPuzzle);
+          }
+        }
+      });
+    }
   }
 }
 
@@ -281,8 +306,14 @@ function hidePaper() {
   zeitungWeg_2.removeEventListener("click", hidePaper);
   arrowLeft.removeEventListener("click", function() {switchArticle("left");});
   arrowRight.removeEventListener("click", function() {switchArticle("right");});
-  button_startPuzzle.classList.toggle("display");
-  button_startPuzzle.addEventListener("click", startPuzzle);
+  paper_read = true;
+  // Wenn alle Medien schonmal angeschaut wurden, Button "informiert" anzeigen
+  if (tv_watched == true && radio_listened == true) {
+    if (button_startPuzzle.classList.contains("display") == false) {
+      button_startPuzzle.classList.toggle("display");
+      button_startPuzzle.addEventListener("click", startPuzzle);
+    }
+  }
 }
 
 // Funktion, die prüft, mit welchem Index der Liste
@@ -523,8 +554,8 @@ function setup() {
   button_lotti.addEventListener("click", lotti.handle.bind(lotti));
   button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
   button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
-  button_radio_noise.addEventListener("click", function() {playSound(rauschen);});
-  button_radio_song.addEventListener("click", function() {playSound(radiosong);});
+  button_radio_noise.addEventListener("click", function(event) {playSound(rauschen, event.target);});
+  button_radio_song.addEventListener("click", function(event) {playSound(radiosong, event.target);});
   // Quizfragen
   button_solution_1.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
