@@ -1,4 +1,6 @@
-
+ul { 
+  list-style: none 
+}
 
 .handschrift{
 	font-size: 20pt;
@@ -181,7 +183,6 @@ ul {
 }
 
 #helvetia{
-  display: block;
   position: absolute;
   left: 570px;
   top: 150px;
@@ -216,4 +217,43 @@ ul {
   /* border-style: solid;
   border-width: 5px;
   border-color: black; */
+}
+
+
+/* Untertitel */
+.untertitel {
+  display: none;
+}
+
+/* Untertitel werden sichtbar und wieder unsichtbar */
+@keyframes displayHide {
+    0% {
+        opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.untertitel.display {
+  display: flex;
+  position: absolute;
+  left: 620px;
+  top: 480px;
+  width: 310px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: rgb(229, 204, 255);
+  text-align: center;
+  z-index: 4;
+  opacity: 0;
+  animation-name: displayHide;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 3s;
 }

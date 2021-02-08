@@ -24,7 +24,10 @@ var player_isDisplayed = false;
 
 var TV_black=document.getElementById("TV_black");
 
-var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
+//Untertitel
+untertitel_lieberherrV=document.getElementById("untertitel_lieberherrV");
+untertitel_lieberherrV2=document.getElementById("untertitel_lieberherrV2");
+untertitel_lieberherrV3=document.getElementById("untertitel_lieberherrV3");
 
 
 //bv4-Rätsel
@@ -32,6 +35,7 @@ var bv4=document.getElementsByClassName("bv4");
 var bv4puzzle=document.getElementById("bv4puzzle");
 var bv4text=document.getElementById("bv4text");
 
+var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
 
 
 function glow(){
@@ -200,7 +204,7 @@ function returnCheckPlaybackTime(obj) {
 }
 
 // Prototyp SRF_Video
-function SRF_Video(name, urn, startTime, stopTime) {
+function SRF_Video(name, urn, startTime, stopTime, subtitles) {
   // startTime and stopTime in seconds (int or float)
   // var self = this;
   this.name = name;
@@ -208,14 +212,14 @@ function SRF_Video(name, urn, startTime, stopTime) {
   this.startTime = startTime;
   this.stopTime = stopTime;
   this.fullUrn = urn + '&start=' + startTime;
-  //this.subtitles = subtitles;
+  this.subtitles = subtitles;
 }
 
 SRF_Video.prototype = {
 
-  /*showSubtitles: function() {
+  showSubtitles: function() {
     this.subtitles.classList.toggle("display");
-  },*/
+  },
 
   play: function() {
     player.play();
@@ -224,9 +228,9 @@ SRF_Video.prototype = {
     if (player_isDisplayed == false) {
       this.displayPlayer();
     }
-    //this.subtitles.classList.toggle("display");
+    this.subtitles.classList.toggle("display");
     this.startInterval();
-    //showSubtitles();
+    showSubtitles();
     // if (TV_black.classList.contains("display")) {
      //  TV_black.classList.toggle("display");
      //}
@@ -234,7 +238,7 @@ SRF_Video.prototype = {
 
   pause: function() {
     player.pause();
-    //this.showSubtitles();
+    this.showSubtitles();
     playState[this.name] = false;
 	hintergrund.addEventListener("click", puzzleVertrauenFrauen);
     //area_hideTV.addEventListener("click", hideTV);
@@ -307,9 +311,9 @@ SRF_Video.prototype = {
 }
 
 // lieberherrV = new SRF_Video('lieberherrV', 'urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5', 0, 5);
-lieberherrV = new SRF_Video('lieberherrV', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 81, 110);
-lieberherrV2 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 9, 66);
-lieberherrV3 = new SRF_Video('lieberherrV3', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 110, 124);
+lieberherrV = new SRF_Video('lieberherrV', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 81, 110, untertitel_lieberherrV);
+lieberherrV2 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 9, 66, untertitel_lieberherrV2);
+lieberherrV3 = new SRF_Video('lieberherrV3', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 110, 124, untertitel_lieberherrV3);
 
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 function showArea(area) {
