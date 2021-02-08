@@ -13,24 +13,31 @@
 	<div id="abstimmungszettel"></div>
 	
 	<div id="frage" class="quizbox">
-	<div id="frage2">
-	<p class="text">Und was würdest du abstimmen?</p><br>
-	<fieldset id="fieldset">
+	<p class="handschrift">Und was würdest du abstimmen?</p><br>
+	<fieldset class="fieldset">
 	<ul><li>
-	<input type="radio" name="auswahl" id="ja" value="ja" onclick="richtig()">
-    <label class="text" for="ja">Ja</label> 
+	<label class="handschrift label" for="ja"><input type="radio" name="auswahl" id="ja" value="ja" onclick="richtig()">
+		Ja
+    </label> 
 	</li><li>
-    <input type="radio" name="auswahl" id="nein" value="nein">
-    <label class="text" for="nein">Nein</label>
+	<label class="handschrift label" for="nein"><input type="radio" name="auswahl" id="nein" value="nein" onclick="falsch()">
+	    Nein
+	</label>
 	</li></ul>
 	</fieldset>
 	</div>
-	</div>
 	
-	  
-      <!-- Hauptbild -->
+	<div id="alert_wrongAnswer" class="quizbox handschrift">
+        <form>
+         <label class="handschrift">Das ist die falsche Antwort - versuch's nochmal!</label><br/><br/>
+         <input type="button" id="button_alert" class="button inputButton" value="Okay">
+        </form>
+      </div>
 
 	</div>
+  <audio id="3_nein"><source src="Audio/3_nein.m4a" type="audio/mpeg"/>
+      Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
+      Oder möchtest du eine aktuellere Browser-Version installieren?</audio>
   <script  type="text/javascript" src="JS/wecker_3.js"></script>
   </body>
 </html>
