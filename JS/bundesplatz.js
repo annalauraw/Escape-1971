@@ -105,9 +105,7 @@ function moveFlag(event) {
 
 function showhelvetia(){
 	
-	if (helvetia.classList.contains("display")){
-		helvetia.classList.toggle("display");
-	}
+	helvetia.remove();
 	
 	setTimeout(function() {
     
@@ -175,6 +173,8 @@ var playState = {
 // Window gebunden)
 
 function puzzleVertrauenFrauen(){
+	document.getElementById("AV-Laerm").play();
+	document.getElementById("AV-Laerm").loop=true;
 	hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
 	fernseher.classList.toggle("display");
 	puzzleVertrauen.classList.toggle("display");
@@ -321,6 +321,7 @@ function showArea(area) {
 }
 
 function displayTV() {
+	document.getElementById("AV-Laerm").pause();
 	hintergrund.removeEventListener("click", closebv4);
 	showTV.removeEventListener("click", displayTV);
 	fernseher.classList.toggle("display");
@@ -377,6 +378,13 @@ function preventEnter(event) {
   }
 }
 
+function machlaerm(){
+	document.getElementById("AV-Laerm").play();
+	document.getElementById("AV-Laerm").loop=true;
+	window.removeEventListener("click", machlaerm);
+	
+}
+
 function setup() {
   //button_startPuzzle.addEventListener("click", startPuzzle);
   //puzzleLieberherrButton.addEventListener("click", checkPuzzle);
@@ -395,6 +403,7 @@ function setup() {
 		bv4text.classList.toggle("hide");
 		hintergrund.addEventListener("click", closebv4);
 	});
+	window.addEventListener("click", machlaerm);
 }
 
 window.addEventListener("load", setup);
