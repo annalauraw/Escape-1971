@@ -1,0 +1,120 @@
+#SRF_player {
+  display: none;
+}
+
+#SRF_player.display {
+  display: block;
+  width: 480px;
+  height: 270px;
+  position: absolute;
+  left: 400px;
+  top: 215px;
+  /* Hinter dem Fernseher */
+  z-index: 2;
+}
+
+#fernseher.hide {
+  display: none;
+}
+
+#fernseher {
+  display: block;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 1200px;
+  height: 750px;
+  z-index: 3;
+}
+
+#tv_black.hide {
+  display: none;
+}
+
+#tv_black {
+  display: block;
+  width: 1200px;
+  height: 750px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: black;
+  z-index: 1;
+}
+
+#hintergrund{
+	display: block;
+    position: absolute;
+	z-index: 0;
+	width: 1200px;
+    height: 750px;
+}
+
+
+/* Untertitel */
+.untertitel {
+  display: none;
+}
+
+/* Untertitel werden sichtbar und wieder unsichtbar */
+@keyframes displayHide {
+    0% {
+        opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.untertitel.display {
+  display: flex;
+  position: absolute;
+  left: 300px;
+  top: 220px;
+  width: 310px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: rgb(229, 204, 255);
+  text-align: center;
+  z-index: 4;
+  opacity: 0;
+  animation-name: displayHide;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 3s;
+}
+
+/*CSS für Radio-Button-Rätsel*/
+
+
+ul { 
+  list-style: none 
+}
+
+.handschrift{
+	font-size: 20pt;
+}
+
+.handschrift.label {
+	  cursor: pointer;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+}
+
+.fieldset{
+	border:none;
+}
+
+#frage {
+	text-align: left;
+	width:700px;
+	top:100px;
+	left:220px;
+}

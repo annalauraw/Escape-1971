@@ -1,0 +1,92 @@
+<!-- Inhalt der HTML-Seite, der angezeigt wird, wenn Ruth Uelis Haus betritt (Uelis Schlafzimmer) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="CSS/general.css" type="text/css"/>
+    <link rel="stylesheet" href="CSS/resultat.css" type="text/css"/>
+  </head>
+  <body>
+    
+	  <div class="imagecontainer">
+      <img id="hintergrund" src="Bilder/bilder/ruths_stube.png" usemap="#discover_media">
+      <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
+      <map name="discover_media">
+        <!-- Macht den grossen Fernseher sichtbar -->
+        <area id="tv_gross" shape="rect" coords="460, 230, 780, 410">
+        <!-- Radio -->
+        <area id="button_radio_noise" shape="circle" coords="1055, 280, 10">
+        <area id="button_radio_song" shape="circle" coords="1055, 310, 10">
+        <!-- Zeitungen -->
+        <area id="zeitungsstapel" shape="circle" coords="720, 190, 30">
+        <area id="zeitungWeg_1" shape="rect" coords="2, 2, 200, 750">
+        <area id="zeitungWeg_2" shape="rect" coords="1000, 2, 1200, 750">
+      </map>
+      <div id="tv_black"></div>
+      <img id="fernseher" src="Bilder/bilder/fernseher_stube.png" usemap="#knoepfe_tv">
+      <map name="knoepfe_tv">
+        <!-- Fernseher verschwinden lassen -->
+        <area id="area_hideTV_1" shape="rect" coords="2, 2, 200, 750">
+        <area id="area_hideTV_2" shape="rect" coords="850, 2, 1200, 750">
+        <area id="button_lotti" shape="circle" coords="685, 245, 20">
+        <area id="button_unterbaech" shape="circle" coords="685, 335, 20">
+        <area id="button_appenzell" shape="circle" coords="685, 425, 20">
+      </map>
+		<!--Frage zur Zukunft-->
+     <div id="frage" class="quizbox">
+	<p class="handschrift">Sagt, wie ist es denn bei Euch in der Zukunft? Ist die Gleichberechtigung erreicht?»</p><br>
+	<fieldset class="fieldset">
+	<ul><li>
+	<label class="handschrift label" for="ja"><input type="radio" name="auswahl" id="ja" value="ja" onclick="falsch()">
+		Ja, vollkommen. Es gibt keine Unterschiede mehr zwischen Frauen und Männer 
+    </label> 
+	</li><li>
+	<label class="handschrift label" for="nein"><input type="radio" name="auswahl" id="nein" value="nein" onclick="falsch()">
+		Nein, überhaupt nicht. Die Frauen haben nur wenig vom Stimm- und Wahlrecht Gebrauch gemacht und so nur wenig erreicht
+	</label>
+	</li><li>
+	<label class="handschrift label" for="korrekt"><input type="radio" name="auswahl" id="korrekt" value="korrekt" onclick="richtig()">
+		Es wurde viel erreicht, aber es gibt noch immer ganz viel zu tun!
+	</label>
+	</li></ul>
+	</fieldset>
+	</div>
+	
+	<div id="alert_wrongAnswer" class="quizbox handschrift">
+        <form>
+         <label class="handschrift">Das ist die falsche Antwort - versuch's nochmal!</label><br/><br/>
+         <input type="button" id="button_alert" class="button inputButton" value="Okay">
+        </form>
+      </div>
+
+	</div>
+
+	<!--Untertitel TV-->
+	<div id="untertitel_urne" class="untertitel druckschrift">
+        <p>7. Februar 1971<br/>
+        Männer an der Urne</p>
+      </div>
+	  <div id="untertitel_lotti" class="untertitel druckschrift">
+        <p>Dr. Lotti Ruckstuhl, Präsidentin<br/>
+        des Schweizerischen Verbandes für<br/>
+        Frauenstimmrecht, 1967</p>
+      </div>
+      <div id="untertitel_unterbaech" class="untertitel druckschrift">
+        <p><br/>&nbsp; &nbsp; &nbsp; Unterbäch VS, 3. März 1957</p>
+      </div>
+      <div id="untertitel_appenzell" class="untertitel" class="druckschrift">
+        <p>Strassenumfrage in Appenzell zur Konsultativabstimmung zum Frauenstimmrecht 1969</p>
+      </div>
+
+      <div id="SRF_player"></div>
+      <audio id="radiosong">
+        <source src="Audio/escape_song_test.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+	  
+	  
+  <div>
+  <script type="text/javascript" src="https://tp.srgssr.ch/assets/javascripts/player-api.min.js"></script>
+  <script  type="text/javascript" src="JS/resultat.js"></script>
+  </body>
+</html>
