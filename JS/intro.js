@@ -453,6 +453,8 @@ function preventEnter(event) {
 // Wrapper-Funktion, da von Event-Listener aufgerufen
 function startPuzzle() {
   startPuzzlePart("puzzle_videoQuestions_1");
+  button_startPuzzle.classList.toggle("display");
+  button_startPuzzle.removeEventListener("click", startPuzzle);
 }
 
 function startPuzzlePart(puzzlePart) {
@@ -546,7 +548,7 @@ function checkPuzzle(trigger) {
     solvedForm.classList.toggle("display");
     // Zweite Rätselfrage aufrufen
     if (nextPuzzlePart == undefined) {
-      alert("Vreni, Lisi und Ruth kommen ins Wohnzimmer für die nächste Station");
+      location.assign("marsch.html");
     }
     else {
       startPuzzlePart(nextPuzzlePart);

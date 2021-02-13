@@ -21,6 +21,39 @@
   max-width: 100%;
 }
 
+#fahne {
+  display: none;
+}
+
+#fahne.display {
+  display: block;
+  position: absolute;
+  right: 3%;
+  top: 5%;
+}
+
+/* Button zum Quiz starten */
+#startPuzzle {
+  display: none;
+}
+
+#startPuzzle.display {
+  display: block;
+  position: absolute;
+  right: 3%;
+  top: 5%;
+  font-size: 18px;
+  padding: 10px;
+}
+
+#alert_wrongAnswer {
+  display: none;
+}
+
+#alert_wrongAnswer.display {
+  display: block;
+}
+
 /* Pfeile, zum zwischen den Zeitungsartikeln wechseln */
 .arrow {
   display: none;
