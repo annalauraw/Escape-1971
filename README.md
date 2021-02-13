@@ -1,7 +1,6 @@
 # Escape 1971
 Escape 1971 ist ein frei verfügbares Online-Escape-Game zum 50. Jubiläum des Schweizer Frauenstimmrechts. Es wurde von einem 5köpfigen Team aus eigener Initiative entwickelt. 
-Primäre Motivation war die Freude, gemeinsam ein Spiel zu entwickeln und dabei etwas zu lernen. Das Spiel ist für Personen ab 12 Jahren, die Deutsch sowie 
-Schweizerdeutsch verstehen.
+Primäre Motivation war die Freude, gemeinsam ein Spiel zu entwickeln und dabei etwas zu lernen. Das Spiel ist geeignet für Personen ab 12 Jahren, die Deutsch sowie Schweizerdeutsch verstehen. Bitte spielt es im Firefox- oder Chrome-Browser auf einem Desktop-Gerät - auf mobilen Geräten funktioniert es leider nicht.
 
 Hier geht's zum Spiel: https://annalauraw.github.io/Escape-1971/index.html
 
