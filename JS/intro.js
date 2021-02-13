@@ -28,14 +28,14 @@ var untertitel_unterbaech = document.getElementById("untertitel_unterbaech");
 var untertitel_appenzell = document.getElementById("untertitel_appenzell");
 
 // Zustand der Videos - sind sie im Player geladen? Werden sie gerade abgespielt?
-var lotti_isPlaying = false;
-// var lotti_isLoaded = true;
-var unterbaech_isPlaying = false;
-// var unterbaech_isLoaded = false;
-var appenzell_isPlaying = false;
-// var appenzell_isLoaded = false;
-var radiosong_isPlaying = false;
-var rauschen_isPlaying = false;
+// var lotti_isPlaying = false;
+// // var lotti_isLoaded = true;
+// var unterbaech_isPlaying = false;
+// // var unterbaech_isLoaded = false;
+// var appenzell_isPlaying = false;
+// // var appenzell_isLoaded = false;
+// var radiosong_isPlaying = false;
+// var rauschen_isPlaying = false;
 
 // Zeitungsartikel
 var zeitungsstapel = document.getElementById("zeitungsstapel");
@@ -134,6 +134,7 @@ var playState = {
   appenzell: false,
 }
 
+
 // Funktion, die eine Closure enthält und die Callback-Funktion für das
 // Intervall zurückgibt,
 // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
@@ -166,7 +167,16 @@ function SRF_Video(name, urn, startTime, stopTime, subtitles) {
 SRF_Video.prototype = {
 
   showSubtitles: function() {
-    this.subtitles.classList.toggle("display");
+    if (this.subtitles.classList.contains("display") == false) {
+      this.subtitles.classList.toggle("display");
+    }
+    // this.subtitles.classList.toggle("display");
+  },
+
+  hideSubtitles: function() {
+    if (this.subtitles.classList.contains("display")) {
+      this.subtitles.classList.toggle("display");
+    }
   },
 
   play: function() {
@@ -177,9 +187,9 @@ SRF_Video.prototype = {
     if (player_isDisplayed == false) {
       this.displayPlayer();
     }
-    this.subtitles.classList.toggle("display");
+    // this.subtitles.classList.toggle("display");
     this.startInterval();
-    showSubtitles();
+    this.showSubtitles();
     // if (black.classList.contains("display")) {
     //   black.classList.toggle("display");
     // }
@@ -187,7 +197,7 @@ SRF_Video.prototype = {
 
   pause: function() {
     player.pause();
-    this.showSubtitles();
+    this.hideSubtitles();
     playState[this.name] = false;
     area_hideTV_1.addEventListener("click", hideTV);
     area_hideTV_2.addEventListener("click", hideTV);
@@ -197,6 +207,8 @@ SRF_Video.prototype = {
     // if (black.classList.contains("display") == false) {
     //   black.classList.toggle("display");
     // }
+    // Untertitel des vorherigen Videos verstecken
+    this.hideSubtitles();
     this.stopInterval();
     player.destroy();
     this.resetLoadState();
