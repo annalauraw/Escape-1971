@@ -8,14 +8,15 @@
   </head>
   <body>
     <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder/ruths_stube.png" usemap="#discover_media">
+      <img id="hintergrund" src="Bilder/bilder/ruths_stube_def_marsch.png" usemap="#discover_media">
       <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
       <map name="discover_media">
         <!-- Zeitungen -->
-        <area id="zeitungsstapel" shape="circle" coords="720, 190, 30">
+        <area id="zeitungsstapel" shape="circle" coords="950, 360, 30">
         <area id="zeitungWeg_1" shape="rect" coords="2, 2, 200, 750">
         <area id="zeitungWeg_2" shape="rect" coords="1000, 2, 1200, 750">
-        <area id="ruth" shape="rect" coords="700, 200, 900, 600">
+        <area id="ruth" shape="circle" coords="820, 130, 60">
+        <area id="lisi" shape="circle" coords="200, 200, 150"
       </map>
 
       <!-- Zeitungsartikel -->
@@ -27,9 +28,11 @@
       <div id="arrowLeft" class="arrow left"></div>
 
       <!-- Fahne -->
-      <div id="fahne" class="display">
+      <!-- <div id="fahne" class="display">
         <img draggable="true" src="Bilder/bilder/fahne_def.png">
-      </div>
+      </div> -->
+
+      <img id="fahne" draggable="true" src="Bilder/bilder/fahne_def.png">
 
       <!-- Ruths Rede -->
       <audio id="rede">

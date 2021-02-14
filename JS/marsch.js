@@ -1,6 +1,10 @@
-// Ruth
+// Hintergrundbild
+var hintergrund = document.getElementsByClassName("imagecontainer")[0];
+
+// Ruth und Lisi
 var ruth = document.getElementById("ruth");
 var rede = document.getElementById("rede");
+var lisi = document.getElementById("lisi");
 
 // Zeitungsartikel
 var zeitungsstapel = document.getElementById("zeitungsstapel");
@@ -33,19 +37,31 @@ var button_alert = document.getElementById("button_alert");
 var paper_read = false;
 var puzzle_solved = false;
 
-// Fahne in Ruths Hand platzieren
-function placeFlag() {
-  fahne.style.right = "10%";
-  fahne.removeEventListener("dragend", placeFlag);
-  setTimeout(function() {location.assign("Karte.html");}, 5000);
+// Fahne in Lisis Hand platzieren
+function placeFlag(event) {
+  document.removeEventListener("mousemove", moveFlag);
+  fahne.style.left = "395px";
+  fahne.style.top = "20px";
+  setTimeout(function() {location.assign("Karte.html");}, 3000);
+}
+
+// Fahne bewegen
+function moveFlag(event) {
+  fahne.removeEventListener("dragend", function(){document.addEventListener("mousemove", moveFlag);});
+  var windowMarginLeft = (window.innerWidth - 1200) / 2;
+  // Die Fahne ist immer dort, wo der Mauszeiger ist
+  // bzw. 20px rechts davon, damit auf Vrenis Kopf geklickt
+  // werden kann, ohne dass die Fahne im Weg ist
+  fahne.style.left = event.clientX - windowMarginLeft + 20 + 'px';
+  fahne.style.top = event.clientY -50 + 'px';
+  lisi.addEventListener("click", placeFlag);
 }
 
 // Fahne anzeigen
 function showFlag() {
   if (paper_read == true && puzzle_solved == true) {
     fahne.classList.toggle("display");
-    // fahne.addEventListener("drag", function(e) {e.preventDefault();});
-    fahne.addEventListener("dragend", placeFlag);
+    fahne.addEventListener("dragend", function(){document.addEventListener("mousemove", moveFlag);});
   }
 }
 
@@ -167,11 +183,8 @@ function showArea(area) {
 
 function setup() {
   zeitungsstapel.addEventListener("click", showPaper);
-  // Noch ersetzen durch Fläche Ruth - Achtung: image areas dürfen sich
-  // evtl. nicht überlappen?
   ruth.addEventListener("click", startSpeech);
-  ruth.addEventListener("mouseover", function(event) {showArea(event.target)});
-  // zeitungWeg_1.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // lisi.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
 
 window.addEventListener("load", setup);
