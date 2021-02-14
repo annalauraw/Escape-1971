@@ -1,5 +1,5 @@
 // Hintergrundbild
-var hintergrund = document.getElementsByClassName("imagecontainer")[0];
+var hintergrund = document.getElementById("hintergrund");
 
 // Ruth und Lisi
 var ruth = document.getElementById("ruth");
