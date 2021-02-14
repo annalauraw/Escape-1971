@@ -28,8 +28,13 @@
 #fahne.display {
   display: block;
   position: absolute;
-  right: 3%;
-  top: 5%;
+  right: 80px;
+  top: 90px;
+  width: 300px;
+}
+
+img {
+  max-width: 100%;
 }
 
 /* Button zum Quiz starten */

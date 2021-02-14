@@ -15,6 +15,7 @@
         <area id="zeitungsstapel" shape="circle" coords="720, 190, 30">
         <area id="zeitungWeg_1" shape="rect" coords="2, 2, 200, 750">
         <area id="zeitungWeg_2" shape="rect" coords="1000, 2, 1200, 750">
+        <area id="ruth" shape="rect" coords="700, 200, 900, 600">
       </map>
 
       <!-- Zeitungsartikel -->
@@ -26,9 +27,15 @@
       <div id="arrowLeft" class="arrow left"></div>
 
       <!-- Fahne -->
-      <div id="fahne">
-        <img src="Bilder/bilder/fahne_def.png">
-      </div>  
+      <div id="fahne" class="display">
+        <img draggable="true" src="Bilder/bilder/fahne_def.png">
+      </div>
+
+      <!-- Ruths Rede -->
+      <audio id="rede">
+        <source src="Audio/mitstreiterinnen.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
 
       <button id="startPuzzle" class="button" type="button">Quizfrage</button>
       <div id="puzzle" class="quizbox handschrift">

@@ -1,3 +1,7 @@
+// Ruth
+var ruth = document.getElementById("ruth");
+var rede = document.getElementById("rede");
+
 // Zeitungsartikel
 var zeitungsstapel = document.getElementById("zeitungsstapel");
 var zeitungsartikel = document.getElementById("zeitungsartikel");
@@ -23,12 +27,25 @@ var puzzle = document.getElementById("puzzle");
 var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
 var button_alert = document.getElementById("button_alert");
 
-// Funktion, die das Default Behaviour der Enter-Taste
-// (Formular abschicken mit POST) verhindert
-function preventEnter(event) {
-  if (event.key == "Enter"){
-    event.preventDefault();
-    // alert("Enter key was pressed!");
+// Wenn die Quizfrage zu Ruths Rede beantwortet wurde und die Zeitungsschnipsel
+// angeschaut wurden, haben die Variablen den Wert "true"
+// Bedingung dafür, dass die Fahne nach dem Quiz angezeigt wird
+var paper_read = false;
+var puzzle_solved = false;
+
+// Fahne in Ruths Hand platzieren
+function placeFlag() {
+  fahne.style.right = "10%";
+  fahne.removeEventListener("dragend", placeFlag);
+  setTimeout(function() {location.assign("Karte.html");}, 5000);
+}
+
+// Fahne anzeigen
+function showFlag() {
+  if (paper_read == true && puzzle_solved == true) {
+    fahne.classList.toggle("display");
+    // fahne.addEventListener("drag", function(e) {e.preventDefault();});
+    fahne.addEventListener("dragend", placeFlag);
   }
 }
 
@@ -46,8 +63,10 @@ function checkPuzzle() {
   var playerSolution = document.forms["puzzle_marsch"]["attitude"].value;
   // richtige Antwort
   if (playerSolution == "aendern") {
+    puzzle_solved = true;
     puzzle.classList.toggle("display");
-    fahne.classList.toggle("display");
+    button_startPuzzle.classList.toggle("display");
+    showFlag();
   }
   else {
     puzzle.classList.toggle("display");
@@ -65,6 +84,27 @@ function startPuzzle() {
   button_solution.addEventListener("click", checkPuzzle);
   button_startPuzzle.removeEventListener("click", startPuzzle);
 }
+// Quizbutton anzeigen - erst nachdem Ruth gesprochen hat
+function showQuizButton() {
+  button_startPuzzle.classList.toggle("display");
+  button_startPuzzle.addEventListener("click", startPuzzle);
+}
+
+// Ruths Rede starten
+function startSpeech() {
+  rede.play();
+  ruth.removeEventListener("click", startSpeech);
+  rede.addEventListener("ended", showQuizButton);
+}
+
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+function preventEnter(event) {
+  if (event.key == "Enter"){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
 
 // Zeitungsartikel verstecken
 function hidePaper() {
@@ -80,16 +120,9 @@ function hidePaper() {
   zeitungWeg_2.removeEventListener("click", hidePaper);
   arrowLeft.removeEventListener("click", switchArticle);
   arrowRight.removeEventListener("click", switchArticle);
-  // Button anzeigen
-  button_startPuzzle.classList.toggle("display");
-  button_startPuzzle.addEventListener("click", startPuzzle);
+  paper_read = true;
+  showFlag();
 }
-
-// Funktion, die prüft, mit welchem Index der Liste
-// der Dateiname übereinstimmt
-// function compareFileName(file) {
-//   return file == currentArticle.attributes[1].value;
-// }
 
 // Zwischen den Zeitungsartikeln wechseln
 function switchArticle() {
@@ -133,11 +166,11 @@ function showArea(area) {
 }
 
 function setup() {
-  // Quizfragen
-  // button_solution_1.addEventListener("click", function() {checkPuzzle(this);});
-  // button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
-  // button_solution_3.addEventListener("click", function() {checkPuzzle(this);});
   zeitungsstapel.addEventListener("click", showPaper);
+  // Noch ersetzen durch Fläche Ruth - Achtung: image areas dürfen sich
+  // evtl. nicht überlappen?
+  ruth.addEventListener("click", startSpeech);
+  ruth.addEventListener("mouseover", function(event) {showArea(event.target)});
   // zeitungWeg_1.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
 
