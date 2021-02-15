@@ -22,9 +22,9 @@ ul {
 
 #frage {
 	text-align: left;
-	width:600px;
+	width:300px;
 	top:100px;
-	left:270px;
+	left:400px;
 }
 
 #alert_wrongAnswer{
@@ -51,4 +51,10 @@ ul {
 
 #alert_wrongAnswer{
 	left: 370px;
+}
+
+#button_solution {
+	Position:absolute;
+	left: 125px;
+	
 }

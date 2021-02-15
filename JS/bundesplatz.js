@@ -120,10 +120,13 @@ function showhelvetia(){
 		hintergrund.style.opacity="1";
 		flag.style.opacity="1";
 		helvetiagross.classList.toggle("hide");
-		document.getElementById('Tor').play();
-		document.getElementById("Tor").addEventListener('ended', function(){
-		location.assign("nationalratssaal.html");
-  });
+		document.getElementById("AbinsParlament").play();
+		document.getElementById("AbinsParlament").addEventListener('ended', function(){
+			document.getElementById('Tor').play();
+			document.getElementById("Tor").addEventListener('ended', function(){
+				location.assign("nationalratssaal.html");
+		});
+	});
   });
   }, 1000);
 }
@@ -172,10 +175,19 @@ var playState = {
 // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
 // Window gebunden)
 
+
+function backtoBP(){
+	puzzleVertrauen.classList.toggle("display");
+	hintergrund.removeEventListener("click", backtoBP);
+	hintergrund.style.opacity="1";
+	showTV.addEventListener("click", displayTV);
+}
+
 function puzzleVertrauenFrauen(){
 	document.getElementById("AV-Laerm").play();
 	document.getElementById("AV-Laerm").loop=true;
 	hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
+	hintergrund.addEventListener("click", backtoBP);
 	fernseher.classList.toggle("display");
 	puzzleVertrauen.classList.toggle("display");
 	
@@ -360,6 +372,7 @@ function checkPuzzle(trigger){
 	
 	var playerSolution = document.forms[0]["solution"].value;
 	if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
+		document.getElementById('AV-applaus').play();
 		showTV.addEventListener("click", displayTV);
 		bv4puzzle.classList.toggle("display");
 		
@@ -367,6 +380,17 @@ function checkPuzzle(trigger){
 		bv4puzzle.classList.toggle("display");
 		alert_wrongAnswer.classList.toggle("display");
 		button_alert.addEventListener("click", restorebv4);
+	}
+	
+}
+
+function checkPuzzle2(trigger){	
+	
+	if (document.getElementById("richtig").checked == true){
+		VertrauenRichtig();
+		
+	} else{
+		VertrauenFalsch();
 	}
 	
 }
@@ -389,10 +413,11 @@ function setup() {
   //button_startPuzzle.addEventListener("click", startPuzzle);
   //puzzleLieberherrButton.addEventListener("click", checkPuzzle);
   //button_lieberherr3.addEventListener("mouseover", function(event) {showArea(event.target)});
-  backTV.addEventListener("click", displayTV);
+  //backTV.addEventListener("click", displayTV);
   //helvetia.addEventListener("mouseover", function(event) {showArea(event.target)});
   // showTV.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
   button_solution.addEventListener("click", function() {checkPuzzle(this);});
+  button_solution2.addEventListener("click", function() {checkPuzzle2(this);});
   for(i=0; i<bv4.length; i++){
      bv4[i].addEventListener("mouseover", glowBV4);
 	 bv4[i].addEventListener("mouseleave", glowBV4);

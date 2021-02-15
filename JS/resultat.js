@@ -144,52 +144,12 @@ SRF_Video.prototype = {
     player.play();
 	//"M" auf Keyboard drücken, damit Player stumm ist.
 	
-	var evt = document.createEvent("KeyboardEvent");
-//Chrome hack
-	Object.defineProperty(evt, 'keyCode', {
-		get : function(){
-			return this.keyCodeVal;
-		}
-	});
-	Object.defineProperty(evt, 'which', {
-		get : function(){
-			return this.keyCodeVal
-		}
-	});
-	Object.defineProperty(evt, 'charCode', {
-		get : function(){
-			return this.charCodeVal
-		}
-	});
-//initKeyBoardEvent seems to have different parameters in chrome according to MDN KeyboardEvent(sorry, can't post more than 2 links), but that did not work either
-	evt.initKeyboardEvent("keypress",
-		true,//bubbles
-		true,//cancelable
-		window,
-		false,//ctrlKey,
-		false,//altKey,
-		false,//shiftKey,
-		false,//metaKey,
-		"m",//keyCode,
-		"m"//charCode
-	);
-	evt.charCodeVal = "m";
-	evt.keyCodeVal = "m";
-	
-	
-	/*
-	let evt = new KeyboardEvent("keydown", {
-          //shiftKey: true,
-          //key: "M",
-          //keyCode: 65
-		  bubbles : true, 
-		  cancelable : true, 
-		  key : "M", 
-		  char : "M", 
-		  shiftKey : false
-        });
-    document.dispatchEvent(evt);*/
-
+	var event = document.createEvent('Event');
+    event.keyCode = 77; // Deprecated, prefer .key instead.
+    event.key = 77;
+	event.initEvent('keydown');
+		
+    document.dispatchEvent(event);
 	
     area_hideTV_1.removeEventListener("click", hideTV);
     area_hideTV_2.removeEventListener("click", hideTV);

@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder/bundeshausplatz_marschnachbern.png" draggable="false">
+      <img id="hintergrund" src="Bilder/bilder/bundeshausplatz_def_rednerinnenpult_schilder.png" draggable="false">
       <img id="fahne" src="Bilder/bilder/fahne_def.png">
 
 	  <div id="helvetia"></div>
@@ -34,24 +34,24 @@
 	 <p class="handschrift">Wie lautet Emilie Lieberherrs berühmter Satz?</p><br>
 	<fieldset class="fieldset">
 		<ul><li>
-		<label class="handschrift label"><input type="radio" name="vertrauen" onclick="VertrauenFalsch()">
+		<label class="handschrift label"><input type="radio" name="vertrauen" id="falsch">
 			"Lönd d’Fraue nöd ergraue"
 		</label>
 		</li><li>
-		<label class="handschrift label"><input type="radio" name="vertrauen" onclick="VertrauenRichtig()">
+		<label class="handschrift label"><input type="radio" name="vertrauen" id="richtig">
 			"Händ Vertraue mit de Fraue"
 		</label>
 		</li><li>
-		<label class="handschrift label"><input type="radio" name="vertrauen" onclick="VertrauenFalsch()">
+		<label class="handschrift label"><input type="radio" name="vertrauen" id="falsch">
 			"Lönd euch d’Zuekunft nöd verbaue"
 		</label>
 		</li><li>
-		<label class="handschrift label"><input type="radio" name="vertrauen" onclick="VertrauenFalsch()">
+		<label class="handschrift label"><input type="radio" name="vertrauen" id="falsch">
 			"Lönd euch nöd verhaue vo de Fraue"
 		</label>
 		</li></ul>
 	</fieldset>
-		<button id="backTV" class="button" type="button">Filme nochmals sehen</button>
+		 <input type="button" id="button_solution2" class="button inputButton" value="Senden">
 		
 	 </div>
 	 
@@ -72,9 +72,11 @@
       </div>
 	 
 	 <div id="bv4puzzle" class="quizbox">
-	 <p class="handschrift">Warum durften Frauen in der Schweiz (laut Bundesgericht) nicht wählen? Sie sind keine…</p>
+	 <p class="handschrift">Mit den "BV4"-Demoschildern verweisen die Demonstrierenden des Marschs nach Bern am 1. März 1969  auf den Artikel 4 der Bundesverfassung. <br>Gemäss einem Bundesgerichtsentscheid galt dieser Artikel aber nicht für Frauen. Warum durften Frauen in der Schweiz gemäss Bundesgerichtsentscheid nicht wählen? 
+Sie sind keine ...
+</p>
 	 <form name="puzzle_bv4">
-		<input type="text" id="solution" name="solution"><br><br>
+		<input class="inputfield" type="text" id="solution" name="solution"><br><br>
         <input type="button" id="button_solution" class="button inputButton" value="Senden">
 	 </form>
 	 </div>
@@ -96,6 +98,9 @@
       Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
       Oder möchtest du eine aktuellere Browser-Version installieren?</audio>
 	  <audio id="AV-Laerm"><source src="Audio/01_menschenmenge_hoerspielbox_29sek.mp3" type="audio/mpeg"/>
+      Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
+      Oder möchtest du eine aktuellere Browser-Version installieren?</audio>
+	  <audio id="AbinsParlament"><source src="Audio/Ab_ins_Parlament.m4a" type="audio/mpeg"/>
       Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
       Oder möchtest du eine aktuellere Browser-Version installieren?</audio>
 	<script type="text/javascript" src="https://tp.srgssr.ch/assets/javascripts/player-api.min.js"></script>

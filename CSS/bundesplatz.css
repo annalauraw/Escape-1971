@@ -23,7 +23,9 @@ ul {
 }
 
 #bv4puzzle{
-	left: 370px;
+	top:100px;
+	left: 250px;
+	width: 700px;
 }
 
 #puzzleVertrauen {
@@ -49,9 +51,9 @@ ul {
   list-style: none 
 }
 
-#backTV {
+#button_solution2 {
 	Position:absolute;
-	left: 200px;
+	left: 270px;
 	
 }
 
@@ -107,10 +109,10 @@ ul {
 }
 
 #bv4-3{
-	left:555px;
-	top:710px;
-	height: 25px;
-	width: 25px;
+	left:520px;
+	top:685px;
+	height: 50px;
+	width: 50px;
 }
 
 #bv4-4{
@@ -175,10 +177,10 @@ ul {
 #showTV{
   display: block;
   position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100px;
-  height: 100px;
+  left: 618px;
+  top: 555px;
+  width: 83px;
+  height: 115px;
   z-index: 4;
 }
 
@@ -219,6 +221,9 @@ ul {
   border-color: black; */
 }
 
+.inputfield{
+	width: 200px;
+}
 
 /* Untertitel */
 .untertitel {

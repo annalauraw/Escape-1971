@@ -8,21 +8,22 @@
   </head>
   <body>
     <div class="imagecontainer">
-	<img id="hintergrund" src="Bilder/bilder/uelis_schlafzimmer_ueliwach_def.png">
+	<img id="hintergrund" src="Bilder/bilder/uelis_schlafzimmer_ueliwach_def_ohnefoetzeli.png">
 	
 	<div id="abstimmungszettel"></div>
 	
 	<div id="frage" class="quizbox">
-	<p class="handschrift">Und was würdest du abstimmen?</p><br>
+	<p class="handschrift">Und was würdest du abstimmen?</p>
 	<fieldset class="fieldset">
 	<ul><li>
-	<label class="handschrift label" for="ja"><input type="radio" name="auswahl" id="ja" value="ja" onclick="richtig()">
+	<label class="handschrift label" for="ja"><input type="radio" name="auswahl" id="ja" value="ja">
 		Ja
     </label> 
 	</li><li>
-	<label class="handschrift label" for="nein"><input type="radio" name="auswahl" id="nein" value="nein" onclick="falsch()">
+	<label class="handschrift label" for="nein"><input type="radio" name="auswahl" id="nein" value="nein">
     Nein</label>
 	</li></ul>
+	<input type="button" id="button_solution" class="button inputButton" value="Senden">
 	</fieldset>
 	</div>
 	

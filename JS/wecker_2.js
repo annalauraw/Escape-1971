@@ -536,6 +536,13 @@ function dropKalender(ev){
 }
 
 function checkLicht(){
+	
+	var schieberaetselCookie = getCookie("schieberaetsel");
+	if (schieberaetselCookie=="done"){
+		hintergrund.src="Bilder/bilder/uelis_schlafzimmer_def_ohnefoetzeli.png"
+		
+	}
+	
 	var abstimmungszettelBCookie = getCookie("abstimmungszettelB");
 	if (abstimmungszettelBCookie=="done"){
 		nacht.classList.toggle("hide");

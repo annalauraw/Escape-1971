@@ -37,9 +37,18 @@ function zeigFrage(){
 	}
 }
 
+function checkpuzzle(){
+	if (document.getElementById("ja").checked == true){
+		richtig();
+		
+	} else{
+		falsch();
+	}
+}
 
 function setup() {
   abstimmungszettel.addEventListener("click", zeigFrage);
+  document.getElementById("button_solution").addEventListener("click", checkpuzzle);
 
    }
 
