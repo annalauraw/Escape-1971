@@ -1,4 +1,17 @@
 /* To Do: Links hübscher stylen */
+a:link, a:visited {
+  color: rgb(95, 0, 204);
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  color: rgb(173, 102, 255);
+}
+
+a:active {
+  color: rgb(229, 204, 255);
+}
 
 body {
   font-family: 'Architects Daughter', cursive;
@@ -44,31 +57,52 @@ li {
   text-align: center;
 }
 
-/* Bildli als list-style-image? */
-/* li.arrow {
+#ccIcon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-} */
-
+#buttons_top,
 #buttons {
-  /* position: absolute;
-  left: 40%; */
+  display: none;
+}
+
+#buttons, #buttons_top.display {
+  display: block;
   text-align: center;
 }
 
-#feedback, #song {
-  /* float: left; */
+/* #buttons_top.display {
+  width: 30%;
+} */
+
+#song
+#feedback_top,
+#button_song_top {
   margin: 5%;
+}
+
+#feedback_top {
+  float: left;
+  margin-left: 20%;
+  margin-top: 90px;
+}
+
+#button_song_top,
+#button_song {
+  margin-right: 25%;
 }
 
 /* Animation von oben nach unten (langsam) */
 @keyframes scroll {
   from {top: 0;}
-  to {top: -12300px;}
+  to {top: -12900px;}
 }
 
 @-webkit-keyframes scroll {
   from {top: 0;}
-  to {top: -12300px;}
+  to {top: -12900px;}
 }
 
 .imagecontainer.animate {
@@ -81,13 +115,13 @@ li {
 
 /* Animation von unten nach oben (schnell) */
 @keyframes up {
-  from {top: -12300px;}
-  to {top: 0;}
+  from {top: -12900px;}
+  to {top: 50px;}
 }
 
 @-webkit-keyframes up {
-  from {top: -12300px;}
-  to {top: 0;}
+  from {top: -12900px;}
+  to {top: 50px;}
 }
 
 .imagecontainer.animate.end {

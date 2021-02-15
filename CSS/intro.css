@@ -10,7 +10,7 @@
   left: 200px;
   top: 215px;
   /* Hinter dem Fernseher */
-  z-index: 2;
+  z-index: 3;
 }
 
 #fernseher {
@@ -24,7 +24,7 @@
   top: 2px;
   width: 1200px;
   height: 750px;
-  z-index: 3;
+  z-index: 4;
 }
 
 #tv_black {
@@ -39,7 +39,7 @@
   top: 2px;
   left: 2px;
   background-color: black;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Untertitel */
