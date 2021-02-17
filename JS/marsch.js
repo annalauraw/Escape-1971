@@ -81,7 +81,7 @@ function checkPuzzle() {
   if (playerSolution == "aendern") {
     puzzle_solved = true;
     puzzle.classList.toggle("display");
-    button_startPuzzle.classList.toggle("display");
+    // button_startPuzzle.classList.toggle("display");
     showFlag();
   }
   else {
@@ -98,19 +98,20 @@ function startPuzzle() {
   // puzzleDiv.querySelector("form").focus(); //not working yet
   document.addEventListener("keypress", function(event) {preventEnter(event);})
   button_solution.addEventListener("click", checkPuzzle);
-  button_startPuzzle.removeEventListener("click", startPuzzle);
+  // button_startPuzzle.removeEventListener("click", startPuzzle);
 }
 // Quizbutton anzeigen - erst nachdem Ruth gesprochen hat
-function showQuizButton() {
-  button_startPuzzle.classList.toggle("display");
-  button_startPuzzle.addEventListener("click", startPuzzle);
-}
+// function showQuizButton() {
+//   button_startPuzzle.classList.toggle("display");
+//   button_startPuzzle.addEventListener("click", startPuzzle);
+// }
 
 // Ruths Rede starten
 function startSpeech() {
   rede.play();
   ruth.removeEventListener("click", startSpeech);
-  rede.addEventListener("ended", showQuizButton);
+  // rede.addEventListener("ended", showQuizButton);
+  rede.addEventListener("ended", startPuzzle);
 }
 
 // Funktion, die das Default Behaviour der Enter-Taste
