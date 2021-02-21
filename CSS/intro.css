@@ -173,10 +173,6 @@
   left: 450px;
 }
 
-input[type="text"] {
-  width: 100px;
-}
-
 /* Button soll in der Mitte sein */
 .inputButton {
   position: absolute;

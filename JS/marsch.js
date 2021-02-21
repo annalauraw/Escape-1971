@@ -16,10 +16,10 @@ var arrowUp = document.getElementById("arrowUp");
 var zeitungWeg_1 = document.getElementById("zeitungWeg_1");
 var zeitungWeg_2 = document.getElementById("zeitungWeg_2");
 var currentArticle = document.getElementById("artikelbild");
-var fileNameList = [
-  "Bilder/Zeitungsartikel/Werbung_Marsch.png",
-  "Bilder/Zeitungsartikel/Hinweis_Marsch.png"
-];
+// var fileNameList = [
+//   "Bilder/Zeitungsartikel/Werbung_Marsch.png",
+//   "Bilder/Zeitungsartikel/Hinweis_Marsch.png"
+// ];
 
 // Fahne
 var fahne = document.getElementById("fahne");

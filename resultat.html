@@ -1,4 +1,3 @@
-<!-- Inhalt der HTML-Seite, der angezeigt wird, wenn Ruth Uelis Haus betritt (Uelis Schlafzimmer) -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,20 +6,23 @@
     <link rel="stylesheet" href="CSS/resultat.css" type="text/css"/>
   </head>
   <body>
-    
+
 	  <div class="imagecontainer">
       <img id="hintergrund" src="Bilder/bilder/ruths_stube.png" usemap="#discover_media">
       <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
       <map name="discover_media">
+        <!-- Area, das Ruth zum Sprechen bringt -->
+        <area id="ruth" shape="rect" coords="2, 2, 200, 200">
         <!-- Macht den grossen Fernseher sichtbar -->
         <area id="tv_gross" shape="rect" coords="460, 230, 780, 410">
         <!-- Radio -->
-        <area id="button_radio_noise" shape="circle" coords="1055, 280, 10">
-        <area id="button_radio_song" shape="circle" coords="1055, 310, 10">
+        <area id="button_radio_1" shape="circle" coords="1055, 280, 10">
+        <area id="button_radio_2" shape="circle" coords="1055, 310, 10">
+        <area id="button_radio_3" shape="circle" coords="1055, 340, 10">
         <!-- Zeitungen -->
         <area id="zeitungsstapel" shape="circle" coords="720, 190, 30">
-        <area id="zeitungWeg_1" shape="rect" coords="2, 2, 200, 750">
-        <area id="zeitungWeg_2" shape="rect" coords="1000, 2, 1200, 750">
+        <area id="zeitungWeg_1" shape="rect" coords="2, 2, 370, 750">
+        <area id="zeitungWeg_2" shape="rect" coords="710, 2, 1200, 750">
       </map>
       <div id="tv_black"></div>
       <img id="fernseher" src="Bilder/bilder/fernseher_stube.png" usemap="#knoepfe_tv">
@@ -28,18 +30,63 @@
         <!-- Fernseher verschwinden lassen -->
         <area id="area_hideTV_1" shape="rect" coords="2, 2, 200, 750">
         <area id="area_hideTV_2" shape="rect" coords="850, 2, 1200, 750">
-        <area id="button_lotti" shape="circle" coords="685, 245, 20">
-        <area id="button_unterbaech" shape="circle" coords="685, 335, 20">
-        <area id="button_appenzell" shape="circle" coords="685, 425, 20">
+        <area id="button_tv_1" shape="circle" coords="685, 245, 20">
+        <area id="button_tv_2" shape="circle" coords="685, 335, 20">
+        <area id="button_tv_3" shape="circle" coords="685, 425, 20">
       </map>
+
+      <!-- SRF-PLayer, Video und Audio -->
+      <div id="SRF_player"></div>
+
+      <!--Untertitel TV-->
+      <div id="untertitel_urne" class="untertitel druckschrift">
+        <p>7. Februar 1971<br/>
+          Männer an der Urne</p>
+        </div>
+
+        <!-- Untertitel für Audio Ludwig von Moos -->
+        <div id="untertitel_moos" class="untertitel druckschrift audio">
+          <p>Bundesrat<br/>Ludwig von Moos</p>
+        </div>
+
+        <!-- Untertitel für Audio Marthe Gosteli -->
+        <div id="untertitel_gosteli" class="untertitel druckschrift audio">
+          <p>Marthe Gosteli<br/>Vizepräsidentin BSF</p>
+        </div>
+
+        <!-- Pseudo-div für nicht vorhandene Audio-Untertitel -->
+        <div id="untertitel_audio">
+          <p>
+        </div>
+
+        <!-- Zeitungsartikel -->
+        <div id="zeitungsartikel">
+          <img id="artikelbild" src="Bilder/Zeitungsartikel/Durchbruch_gelungen_oben.png">
+        </div>
+
+        <!-- Pfeile, zum zwischen den Zeitungsartikel-Teilen wechseln (oben und unten) -->
+        <div id="arrowDown" class="arrow down"></div>
+        <div id="arrowUp" class="arrow up"></div>
+
+        <!-- Audio Ruth 1: Es wurde abgestimmt, wir warten auf die Resultate -->
+        <audio id="warten">
+          <source src="Audio/warten_auf_resultate.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag.
+        </audio>
+        <!-- Audio Ruth 2: Abschiedsworte -->
+        <audio id="abschied">
+          <source src="Audio/geschafft.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag.
+        </audio>
+
 		<!--Frage zur Zukunft-->
      <div id="frage" class="quizbox">
 	<p class="handschrift">Sagt, wie ist es denn bei Euch in der Zukunft? Ist die Gleichberechtigung erreicht?»</p><br>
 	<fieldset class="fieldset">
 	<ul><li>
 	<label class="handschrift label" for="ja"><input type="radio" name="auswahl" id="ja" value="ja" onclick="falsch()">
-		Ja, vollkommen. Es gibt keine Unterschiede mehr zwischen Frauen und Männer 
-    </label> 
+		Ja, vollkommen. Es gibt keine Unterschiede mehr zwischen Frauen und Männern
+    </label>
 	</li><li>
 	<label class="handschrift label" for="nein"><input type="radio" name="auswahl" id="nein" value="nein" onclick="falsch()">
 		Nein, überhaupt nicht. Die Frauen haben nur wenig vom Stimm- und Wahlrecht Gebrauch gemacht und so nur wenig erreicht
@@ -51,7 +98,7 @@
 	</li></ul>
 	</fieldset>
 	</div>
-	
+
 	<div id="alert_wrongAnswer" class="quizbox handschrift">
         <form>
          <label class="handschrift">Das ist die falsche Antwort - versuch's nochmal!</label><br/><br/>
@@ -61,32 +108,9 @@
 
 	</div>
 
-	<!--Untertitel TV-->
-	<div id="untertitel_urne" class="untertitel druckschrift">
-        <p>7. Februar 1971<br/>
-        Männer an der Urne</p>
-      </div>
-	  <div id="untertitel_lotti" class="untertitel druckschrift">
-        <p>Dr. Lotti Ruckstuhl, Präsidentin<br/>
-        des Schweizerischen Verbandes für<br/>
-        Frauenstimmrecht, 1967</p>
-      </div>
-      <div id="untertitel_unterbaech" class="untertitel druckschrift">
-        <p><br/>&nbsp; &nbsp; &nbsp; Unterbäch VS, 3. März 1957</p>
-      </div>
-      <div id="untertitel_appenzell" class="untertitel" class="druckschrift">
-        <p>Strassenumfrage in Appenzell zur Konsultativabstimmung zum Frauenstimmrecht 1969</p>
-      </div>
 
-      <div id="SRF_player"></div>
-      <audio id="radiosong">
-        <source src="Audio/escape_song_test.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
-      </audio>
-	  
-	  
-  <div>
   <script type="text/javascript" src="https://tp.srgssr.ch/assets/javascripts/player-api.min.js"></script>
+  <script  type="text/javascript" src="JS/srf_video.js"></script>
   <script  type="text/javascript" src="JS/resultat.js"></script>
   </body>
 </html>

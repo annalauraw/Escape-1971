@@ -27,16 +27,6 @@ var untertitel_lotti = document.getElementById("untertitel_lotti");
 var untertitel_unterbaech = document.getElementById("untertitel_unterbaech");
 var untertitel_appenzell = document.getElementById("untertitel_appenzell");
 
-// Zustand der Videos - sind sie im Player geladen? Werden sie gerade abgespielt?
-// var lotti_isPlaying = false;
-// // var lotti_isLoaded = true;
-// var unterbaech_isPlaying = false;
-// // var unterbaech_isLoaded = false;
-// var appenzell_isPlaying = false;
-// // var appenzell_isLoaded = false;
-// var radiosong_isPlaying = false;
-// var rauschen_isPlaying = false;
-
 // Zeitungsartikel
 var zeitungsstapel = document.getElementById("zeitungsstapel");
 var zeitungsartikel = document.getElementById("zeitungsartikel");
@@ -80,12 +70,8 @@ button_alert = document.getElementById("button_alert");
 var form_videoQuestions = document.forms["puzzle_videoQuestions"];
 
 // SRF Player wird mit einem ersten Video geladen (Lotti Ruckstuhl)
-var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a&start=535');
+var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:d43543bb-f5ed-45b6-96e3-a1c065c40335&start=19');
 var player_isDisplayed = false;
-
-// Intervall, das die aktuelle Abspielsekunde kontrolliert
-// Wird von SRF_player-Methoden gestartet und gestoppt
-var playbackInterval = undefined;
 
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 function showArea(area) {
@@ -120,153 +106,138 @@ function showTV() {
   area_hideTV_2.addEventListener("click", hideTV);
 }
 
-// Objekt, das den Zustand der Videos kennt - sind sie im Player geladen?
-var loadState = {
-  lotti: true,
-  unterbaech: false,
-  appenzell: false
-}
-
-// Objekt, das den Zustand der Videos kennt - werden sie gerade abgespielt?
-var playState = {
-  lotti: false,
-  unterbaech: false,
-  appenzell: false,
-}
-
-
-// Funktion, die eine Closure enthält und die Callback-Funktion für das
-// Intervall zurückgibt,
-// die an das Video-Objekt gebunden ist (andernfalls wäre sie an
-// Window gebunden)
-function returnCheckPlaybackTime(obj) {
-  return function() {
-    player.getCurrentTime(function (currentTime) {
-      if (currentTime >= obj.stopTime) {
-        obj.pause();
-        obj.stopInterval();
-        player.seek(obj.startTime);
-        playState[obj.name] = false;
-      }
-    });
-  }
-}
-
-// Prototyp SRF_Video
-function SRF_Video(name, urn, startTime, stopTime, subtitles) {
-  // startTime and stopTime in seconds (int or float)
-  // var self = this;
-  this.name = name;
-  this.urn = urn;
-  this.startTime = startTime;
-  this.stopTime = stopTime;
-  this.fullUrn = urn + '&start=' + startTime;
-  this.subtitles = subtitles;
-}
-
-SRF_Video.prototype = {
-
-  showSubtitles: function() {
-    if (this.subtitles.classList.contains("display") == false) {
-      this.subtitles.classList.toggle("display");
-    }
-    // this.subtitles.classList.toggle("display");
-  },
-
-  hideSubtitles: function() {
-    if (this.subtitles.classList.contains("display")) {
-      this.subtitles.classList.toggle("display");
-    }
-  },
-
-  play: function() {
-    player.play();
-    area_hideTV_1.removeEventListener("click", hideTV);
-    area_hideTV_2.removeEventListener("click", hideTV);
-    playState[this.name] = true;
-    if (player_isDisplayed == false) {
-      this.displayPlayer();
-    }
-    // this.subtitles.classList.toggle("display");
-    this.startInterval();
-    this.showSubtitles();
-    // if (black.classList.contains("display")) {
-    //   black.classList.toggle("display");
-    // }
-  },
-
-  pause: function() {
-    player.pause();
-    this.hideSubtitles();
-    playState[this.name] = false;
-    area_hideTV_1.addEventListener("click", hideTV);
-    area_hideTV_2.addEventListener("click", hideTV);
-  },
-
-  recreatePlayer: function() {
-    // if (black.classList.contains("display") == false) {
-    //   black.classList.toggle("display");
-    // }
-    // Untertitel des vorherigen Videos verstecken
-    this.hideSubtitles();
-    this.stopInterval();
-    player.destroy();
-    this.resetLoadState();
-    this.resetPlayState();
-    player = SRG.PlayerManager.createPlayer('SRF_player','inline', this.fullUrn);
-    loadState[this.name] = true;
-  },
-
-  resetLoadState: function() {
-    loadState.lotti = false;
-    loadState.unterbaech = false;
-    loadState.appenzell = false;
-  },
-
-  resetPlayState: function() {
-    playState.lotti = false;
-    playState.unterbaech = false;
-    playState.appenzell = false;
-  },
-
-  startInterval: function() {
-    clearInterval(playbackInterval);
-    // Der Variable wird eine Funktion ausserhalb des Objekts zugewiesen,
-    // die eine Closure enthält und die Callback-Funktion zurückgibt,
-    // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
-    // Window gebunden)
-    let checkPlaybackTime = returnCheckPlaybackTime(this);
-    playbackInterval = setInterval(checkPlaybackTime, 1000);
-  },
-
-  stopInterval: function() {
-    if (playbackInterval != undefined) {
-      clearInterval(playbackInterval);
-    }
-  },
-
-  displayPlayer: function() {
-    SRF_player.classList.toggle("display");
-    player_isDisplayed = true;
-  },
-
-  handle: function() {
-    // Wenn das Video schon geladen ist, Player starten
-    if (loadState[this.name] == true) {
-      if (playState[this.name] == false) {
-        this.play();
-      }
-      else {
-        this.pause();
-      }
-    }
-    // Sonst Video laden
-    else {
-      this.recreatePlayer();
-      this.play();
-    }
-  },
-}
+// // Funktion, die eine Closure enthält und die Callback-Funktion für das
+// // Intervall zurückgibt,
+// // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
+// // Window gebunden)
+// function returnCheckPlaybackTime(obj) {
+//   return function() {
+//     player.getCurrentTime(function (currentTime) {
+//       if (currentTime >= obj.stopTime) {
+//         obj.pause();
+//         obj.stopInterval();
+//         player.seek(obj.startTime);
+//         playState[obj.name] = false;
+//       }
+//     });
+//   }
+// }
+//
+// // Prototyp SRF_Video
+// function SRF_Video(name, urn, startTime, stopTime, subtitles) {
+//   // startTime and stopTime in seconds (int or float)
+//   // var self = this;
+//   this.name = name;
+//   this.urn = urn;
+//   this.startTime = startTime;
+//   this.stopTime = stopTime;
+//   this.fullUrn = urn + '&start=' + startTime;
+//   this.subtitles = subtitles;
+// }
+//
+// SRF_Video.prototype = {
+//
+//   showSubtitles: function() {
+//     if (this.subtitles.classList.contains("display") == false) {
+//       this.subtitles.classList.toggle("display");
+//     }
+//     // this.subtitles.classList.toggle("display");
+//   },
+//
+//   hideSubtitles: function() {
+//     if (this.subtitles.classList.contains("display")) {
+//       this.subtitles.classList.toggle("display");
+//     }
+//   },
+//
+//   play: function() {
+//     player.play();
+//     area_hideTV_1.removeEventListener("click", hideTV);
+//     area_hideTV_2.removeEventListener("click", hideTV);
+//     playState[this.name] = true;
+//     if (player_isDisplayed == false) {
+//       this.displayPlayer();
+//     }
+//     // this.subtitles.classList.toggle("display");
+//     this.startInterval();
+//     this.showSubtitles();
+//     // if (black.classList.contains("display")) {
+//     //   black.classList.toggle("display");
+//     // }
+//   },
+//
+//   pause: function() {
+//     player.pause();
+//     this.hideSubtitles();
+//     playState[this.name] = false;
+//     area_hideTV_1.addEventListener("click", hideTV);
+//     area_hideTV_2.addEventListener("click", hideTV);
+//   },
+//
+//   recreatePlayer: function() {
+//     // if (black.classList.contains("display") == false) {
+//     //   black.classList.toggle("display");
+//     // }
+//     // Untertitel des vorherigen Videos verstecken
+//     this.hideSubtitles();
+//     this.stopInterval();
+//     player.destroy();
+//     this.resetLoadState();
+//     this.resetPlayState();
+//     player = SRG.PlayerManager.createPlayer('SRF_player','inline', this.fullUrn);
+//     loadState[this.name] = true;
+//   },
+//
+//   resetLoadState: function() {
+//     loadState.lotti = false;
+//     loadState.unterbaech = false;
+//     loadState.appenzell = false;
+//   },
+//
+//   resetPlayState: function() {
+//     playState.lotti = false;
+//     playState.unterbaech = false;
+//     playState.appenzell = false;
+//   },
+//
+//   startInterval: function() {
+//     clearInterval(playbackInterval);
+//     // Der Variable wird eine Funktion ausserhalb des Objekts zugewiesen,
+//     // die eine Closure enthält und die Callback-Funktion zurückgibt,
+//     // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
+//     // Window gebunden)
+//     let checkPlaybackTime = returnCheckPlaybackTime(this);
+//     playbackInterval = setInterval(checkPlaybackTime, 1000);
+//   },
+//
+//   stopInterval: function() {
+//     if (playbackInterval != undefined) {
+//       clearInterval(playbackInterval);
+//     }
+//   },
+//
+//   displayPlayer: function() {
+//     SRF_player.classList.toggle("display");
+//     player_isDisplayed = true;
+//   },
+//
+//   handle: function() {
+//     // Wenn das Video schon geladen ist, Player starten
+//     if (loadState[this.name] == true) {
+//       if (playState[this.name] == false) {
+//         this.play();
+//       }
+//       else {
+//         this.pause();
+//       }
+//     }
+//     // Sonst Video laden
+//     else {
+//       this.recreatePlayer();
+//       this.play();
+//     }
+//   },
+// }
 
 
 lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609, untertitel_lotti);
