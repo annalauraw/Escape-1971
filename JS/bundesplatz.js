@@ -334,7 +334,7 @@ function showArea(area) {
 
 function displayTV() {
 	document.getElementById("AV-Laerm").pause();
-	hintergrund.removeEventListener("click", closebv4);
+	//hintergrund.removeEventListener("click", closebv4);
 	showTV.removeEventListener("click", displayTV);
 	fernseher.classList.toggle("display");
 	hintergrund.style.opacity="0.2";
@@ -375,6 +375,7 @@ function checkPuzzle(trigger){
 		document.getElementById('AV-applaus').play();
 		showTV.addEventListener("click", displayTV);
 		bv4puzzle.classList.toggle("display");
+		hintergrund.removeEventListener("click", closebv4);
 		
 	} else{
 		bv4puzzle.classList.toggle("display");
