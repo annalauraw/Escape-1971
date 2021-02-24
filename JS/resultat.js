@@ -42,19 +42,20 @@ var moos_listened = false;
 var gosteli_listened = false;
 var paper_read = false;
 
-//Anzeige Frage
-var anzeige =1;
-
 var untertitel_urne = document.getElementById("untertitel_urne");
 var untertitel_audio = document.getElementById("untertitel_audio");
 var untertitel_gosteli = document.getElementById("untertitel_gosteli");
 var untertitel_moos = document.getElementById("untertitel_moos");
 
-// div mit Rätsel zum Video
-var puzzle_videoQuestions = document.getElementById("puzzle_videoQuestions");
+// div mit Quizfrage
+var puzzle = document.getElementById("puzzle");
+var button_solution = document.getElementById("button_solution");
+var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
+var button_newStart = document.getElementById("button_newStart");
+var button_diffAnswer = document.getElementById("button_diffAnswer");
 
-// Rätsel zum Video, Formular mit Fragen und Eingabefeldern
-var form_videoQuestions = document.forms["puzzle_videoQuestions"];
+// Rätsel-Formular mit Fragen und Eingabefeldern
+var form_puzzle = document.forms["form_puzzle"];
 
 // SRF Player wird mit einem ersten Medium geladen (Video Urne)
 var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:d43543bb-f5ed-45b6-96e3-a1c065c40335&start=19');
@@ -83,7 +84,7 @@ function afterRuthsAudio(audioEl) {
     tv_gross.removeEventListener("click", showTV);
   }
   else if (audioEl == abschied) {
-    zeigFrage();
+    startPuzzle();
   }
 }
 
@@ -194,38 +195,44 @@ function showTV() {
 
 urne = new SRF_Video('urne', 'urn:srf:video:d43543bb-f5ed-45b6-96e3-a1c065c40335', 19, 26, untertitel_urne);
 angenommen = new SRF_Video('angenommen', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 46.5, 53, untertitel_audio);
-moos = new SRF_Video('moos', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 93.5, 104, untertitel_moos);
+moos = new SRF_Video('moos', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 93.5, 103.5, untertitel_moos);
 gosteli = new SRF_Video('gosteli', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 143, 156, untertitel_gosteli);
 
-//Funktionen für Radio-Button-Rätsel
-function richtig(){
-	location.assign("abspann.html");
+
+// Quiz erneut anzeigen, wenn Antwort falsch war
+function reDisplayPuzzle() {
+  alert_wrongAnswer.classList.toggle("display");
+  puzzle.classList.toggle("display");
+  button_diffAnswer.removeEventListener("click", reDisplayPuzzle);
 }
 
-function restoreFrage(){
-	document.getElementById("button_alert").removeEventListener("click", restoreFrage);
-	alert_wrongAnswer.classList.toggle("display");
-	frage.style.opacity="1";
+// Quizantwort überprüfen
+function checkPuzzle() {
+
+  // Was die Spielerin eingegeben hat bei der aktuellen Rätselfrage
+  var playerSolution = document.forms["form_puzzle"]["gleich"].value;
+  // richtige Antwort
+  if (playerSolution == "jein") {
+    puzzle_solved = true;
+    puzzle.classList.toggle("display");
+    // Abspann starten
+    location.assign("abspann.html");
+  }
+  else {
+    puzzle.classList.toggle("display");
+    alert_wrongAnswer.classList.toggle("display");
+    button_diffAnswer.addEventListener("click", reDisplayPuzzle);
+    button_newStart.addEventListener("click", function(){location.assign("briefing.html")});
+  }
 }
 
-function falsch(){
-	alert_wrongAnswer.classList.toggle("display");
-	frage.style.opacity="0";
-	//document.getElementById('3_nein').play();
-	document.getElementById("button_alert").addEventListener("click", restoreFrage);
+// Quiz starten
+function startPuzzle() {
+  // Div mit Rätselfrage anzeigen
+  puzzle.classList.toggle("display");
+  document.addEventListener("keypress", function(event) {preventEnter(event);})
+  button_solution.addEventListener("click", checkPuzzle);
 }
-
-function zeigFrage(){
-	frage.classList.toggle("display");
-	if (anzeige==0){
-	hintergrund.addEventListener("click", zeigFrage);
-	anzeige=1
-	} else{
-		hintergrund.removeEventListener("click", zeigFrage);
-		anzeige=0;
-	}
-}
-
 
 function setup() {
   // Fernseher und Radio
@@ -236,8 +243,7 @@ function setup() {
   //button_radio.addEventListener("click", playSong);
   area_hideTV_1.addEventListener("click", hideTV);
   area_hideTV_2.addEventListener("click", hideTV);
-  // hintergrund.addEventListener("click", zeigFrage);
-  //area_hideTV.addEventListener("mouseover", function(event) {showArea(event.target)});
+  // zeitungsstapel.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
 
 window.addEventListener("load", setup);

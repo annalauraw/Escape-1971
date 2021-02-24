@@ -1,5 +1,5 @@
-ul { 
-  list-style: none 
+ul {
+  list-style: none
 }
 
 .handschrift{
@@ -35,6 +35,10 @@ ul {
 	left:270px;
 }
 
+#puzzleVertrauen h3 {
+  text-align: center;
+}
+
 #helvetiagross.hide {
 	display:none;
 }
@@ -47,14 +51,14 @@ ul {
 	z-index:2;
 }
 
-ul { 
-  list-style: none 
+ul {
+  list-style: none
 }
 
 #button_solution2 {
 	Position:absolute;
 	left: 270px;
-	
+	bottom: 5%;
 }
 
 
@@ -77,8 +81,8 @@ ul {
   border-width: 2px;
   border-style: solid;
 }
-	
-	
+
+
 
 .bv4{
 	position:absolute;

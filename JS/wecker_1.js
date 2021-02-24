@@ -8,8 +8,17 @@ const BIT_TUNE = document.getElementById("8bit");
 // Soundtrack: Loop ohne Intro
 const BIT_TUNE_LOOP = document.getElementById("8bit_loop");
 // Button, der zuerst der Startbutton ist
-// Danach Button, um Soundtrack zu stoppen/starten
-const START = document.getElementById("start_stop");
+var button_hilfe = document.getElementById("button_hilfe");
+// Button, um vom Tip zurück zum Rätsel zu kommen
+var button_zurueck_1 = document.getElementById("button_zurueck_1");
+// Button, um das Bild vom Nationalratssaal anzuzeigen
+var button_bild = document.getElementById("button_bild");
+// div mit Tip
+var hilfe = document.getElementById("hilfe");
+// Bild vom Nationalratssaal
+var nationalratssaal = document.getElementById("nationalratssaal");
+// Button, um vom Nationalratssaal wieder zurück zu kommen
+var button_zurueck_2 = document.getElementById("button_zurueck_2");
 
 // Variablen für den Timer
 const TIMER = document.getElementById("timer");
@@ -58,31 +67,31 @@ function startTimer() {
 }
 
 function startGame() {
+  document.removeEventListener("keypress", startGame);
   document.addEventListener("keypress", function(event){moveRuth(event)});
   document.addEventListener("keypress", checkRuthPosition);
-  START.removeEventListener("click", startGame);
   startSoundtrack();
   startTimer();
 }
 
 // Soundtrack stoppen / starten, wenn Button gedrückt wird
-function toggleSoundtrack() {
-  if (BIT_TUNE_LOOP.paused) {
-    BIT_TUNE_LOOP.play();
-    START.innerHTML = "Sound stoppen";
-  }
-  else {
-    BIT_TUNE_LOOP.pause();
-    START.innerHTML = "Sound starten";
-  }
-}
+// function toggleSoundtrack() {
+//   if (BIT_TUNE_LOOP.paused) {
+//     BIT_TUNE_LOOP.play();
+//     START.innerHTML = "Sound stoppen";
+//   }
+//   else {
+//     BIT_TUNE_LOOP.pause();
+//     START.innerHTML = "Sound starten";
+//   }
+// }
 
 function startSoundtrackLoop() {
   BIT_TUNE_LOOP.play();
-  if (START.innerHTML == "Start") {
-    START.innerHTML = "Sound stoppen";
-    START.addEventListener("click", toggleSoundtrack);
-  }
+  // if (START.innerHTML == "Start") {
+  //   START.innerHTML = "Sound stoppen";
+  //   START.addEventListener("click", toggleSoundtrack);
+  // }
 }
 
 function moveRuth(event) {
@@ -98,17 +107,18 @@ function moveRuth(event) {
         posLeft += 20;
         // console.log(posLeft);
         posLeftString = posLeft.toString() + "px";
-        //The above statement does not update the left value in the document yet
         RUTH.style.left = posLeft.toString() + "px";
         // console.log("left", posLeftString);
       }
     }
     else if (posLeft <= 1000) {
-      posLeft += 20;
-      // console.log(posLeft);
-      posLeftString = posLeft.toString() + "px";
-      //The above statement does not update the left value in the document yet
-      RUTH.style.left = posLeft.toString() + "px";
+      if (posBottom > 340 && posBottom <= 380) {
+        posLeft += 20;
+        // console.log(posLeft);
+        posLeftString = posLeft.toString() + "px";
+        //The above statement does not update the left value in the document yet
+        RUTH.style.left = posLeft.toString() + "px";
+      }
     }
   }
   // Wenn a-Taste gedrückt wird, läuft Ruth 20px nach links
@@ -141,13 +151,13 @@ function moveRuth(event) {
       // console.log(posBottom);
       posBottomString = posBottom.toString() + "px";
       RUTH.style.bottom = posBottom.toString() + "px";
-      // console.log("bottom", posBottomString);
+      console.log("bottom", posBottomString);
     }
     // wenn Ruth vor einem der Häuser ist
     else if (posBottom >= 360 && posBottom <= 460) {
       if (posLeft == 1020 || posLeft == 580 || posLeft == 200) {
         posBottom += 20;
-        // console.log(posBottom);
+        console.log(posBottom);
         posBottomString = posBottom.toString() + "px";
         RUTH.style.bottom = posBottom.toString() + "px";
       }
@@ -158,14 +168,14 @@ function moveRuth(event) {
     // wenn sie auf dem langen senkrechten Weg ist
     if (posLeft >= 740 && posLeft <= 780 && posBottom >= 60) {
       posBottom -= 20;
-      // console.log(posBottom);
+      console.log(posBottom);
       posBottomString = posBottom.toString() + "px";
       RUTH.style.bottom = posBottom.toString() + "px";
     }
     // wenn sie vor einem der Häuser steht
     else if ((posLeft == 1020 || posLeft == 580 || posLeft == 200) && posBottom >= 400) {
       posBottom -= 20;
-      // console.log(posBottom);
+      console.log(posBottom);
       posBottomString = posBottom.toString() + "px";
       RUTH.style.bottom = posBottom.toString() + "px";
     }
@@ -180,15 +190,46 @@ function checkRuthPosition() {
   }
 }
 
+// Nach dem Tip: zurück zum Rätsel
+function backToPuzzle(e) {
+  if (hilfe.classList.contains("display")) {
+    hilfe.classList.toggle("display");
+  }
+  if (e.target.id == "button_zurueck_1") {
+    button_zurueck_1.removeEventListener("click", backToPuzzle);
+  }
+  else if (e.target.id == "button_zurueck_2") {
+    button_zurueck_2.removeEventListener("click", backToPuzzle);
+    button_zurueck_2.classList.toggle("display");
+    nationalratssaal.classList.toggle("display");
+  }
+}
+
+// Bild vom Nationalratssaal zeigen
+function showPicture() {
+  button_bild.removeEventListener("click", showPicture);
+  nationalratssaal.classList.toggle("display");
+  button_zurueck_2.classList.toggle("display");
+  button_zurueck_2.addEventListener("click", backToPuzzle);
+}
+
+// Wenn der Hilfe-Button geklickt wird
+function getHelp() {
+  hilfe.classList.toggle("display");
+  button_zurueck_1.addEventListener("click", backToPuzzle);
+  button_bild.addEventListener("click", showPicture);
+}
+
 // Diese Funktion registriert einen Event-Listener für das gesamte HTML-Dokument
 // Sobald eine Taste gedrück wird, wird die Funktion moveRuth() aufgerufen
 //Als Parameter wird der keypress-Event mitgeliefert, der die Info enthält,
-//welche Taste gedrück wurde
+//welche Taste gedrückt wurde
 function setup() {
   BIT_TUNE.addEventListener("ended", startSoundtrackLoop);
   // BIT_TUNE.addEventListener("ended", showButton);
   BIT_TUNE_LOOP.addEventListener("ended", startSoundtrackLoop);
-  START.addEventListener("click", startGame);
+  document.addEventListener("keypress", startGame);
+  button_hilfe.addEventListener("click", getHelp);
 }
 
 // Sobald die Seite geladen ist, wird die setup-Funktion aufgerufen

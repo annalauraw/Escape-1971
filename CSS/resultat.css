@@ -178,9 +178,15 @@ ul {
 	border:none;
 }
 
-#frage {
-	text-align: left;
+#puzzle {
+	/* text-align: left; */
 	width:700px;
 	top:100px;
 	left:220px;
+  padding-bottom: 2%;
+}
+
+#button_diffAnswer,
+#button_newStart {
+  margin: 20px;
 }
