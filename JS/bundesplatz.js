@@ -193,9 +193,9 @@ function backtoBP(){
 }
 
 function puzzleVertrauenFrauen(){
-	button_lieberherr.removeEventListener("click", lieberherrV.handle.bind(lieberherrV));
-	button_lieberherr2.removeEventListener("click", lieberherrV2.handle.bind(lieberherrV2));
-	button_lieberherr3.removeEventListener("click", lieberherrV3.handle.bind(lieberherrV3));
+	button_lieberherr.removeEventListener("click", boundFunction1);
+	button_lieberherr2.removeEventListener("click", boundFunction2);
+	button_lieberherr3.removeEventListener("click", boundFunction3);
 	laerm.play();
 	laerm.loop=true;
 	hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
@@ -254,8 +254,12 @@ SRF_Video.prototype = {
     if (player_isDisplayed == false) {
       this.displayPlayer();
     }
-    this.subtitles.classList.toggle("display");
+    // this.subtitles.classList.toggle("display");
     this.startInterval();
+
+
+
+
     this.showSubtitles();
     // if (TV_black.classList.contains("display")) {
      //  TV_black.classList.toggle("display");
@@ -341,21 +345,26 @@ lieberherrV = new SRF_Video('lieberherrV', "urn:srf:video:e11da950-18a1-4244-952
 lieberherrV2 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 9, 66, untertitel_lieberherrV2);
 lieberherrV3 = new SRF_Video('lieberherrV3', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 110, 124, untertitel_lieberherrV3);
 
+// Bound functions for event listeners
+var boundFunction1 = lieberherrV.handle.bind(lieberherrV);
+var boundFunction2 = lieberherrV2.handle.bind(lieberherrV2);
+var boundFunction3 = lieberherrV3.handle.bind(lieberherrV3);
+
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 function showArea(area) {
   area.style.cursor = "pointer";
 }
 
 function displayTV() {
-	document.getElementById("AV-Laerm").pause();
+	laerm.pause();
 	//hintergrund.removeEventListener("click", closebv4);
 	showTV.removeEventListener("click", displayTV);
 	fernseher.classList.toggle("display");
 	hintergrund.style.opacity="0.2";
 	TV_black.classList.toggle("display");
-	button_lieberherr.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
-	button_lieberherr2.addEventListener("click", lieberherrV2.handle.bind(lieberherrV2));
-	button_lieberherr3.addEventListener("click", lieberherrV3.handle.bind(lieberherrV3));
+	button_lieberherr.addEventListener("click", boundFunction1);
+	button_lieberherr2.addEventListener("click", boundFunction2);
+	button_lieberherr3.addEventListener("click", boundFunction3);
 	hintergrund.addEventListener("click", puzzleVertrauenFrauen);
 	if (puzzleVertrauen.classList.contains("display")){
 		puzzleVertrauen.classList.toggle("display");
