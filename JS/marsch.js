@@ -76,9 +76,9 @@ function reDisplayPuzzle() {
 function checkPuzzle() {
 
   // Was die Spielerin eingegeben hat bei der aktuellen Rätselfrage
-  var playerSolution = document.forms["puzzle_marsch"]["attitude"].value;
+  var playerSolution = document.forms["puzzle_marsch"]["recht"].value;
   // richtige Antwort
-  if (playerSolution == "aendern") {
+  if (playerSolution == "diskriminierung") {
     puzzle_solved = true;
     puzzle.classList.toggle("display");
     // button_startPuzzle.classList.toggle("display");

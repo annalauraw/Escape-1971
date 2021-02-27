@@ -49,6 +49,13 @@
   padding: 10px;
 }
 
+#puzzle.display {
+  /* text-align: left; */
+  top: 50px;
+  left: 350px;
+  width: 500px;
+}
+
 #alert_wrongAnswer {
   display: none;
 }

@@ -67,7 +67,7 @@ function startTimer() {
 }
 
 function startGame() {
-  document.removeEventListener("keypress", startGame);
+  IMAGE.removeEventListener("click", startGame);
   document.addEventListener("keypress", function(event){moveRuth(event)});
   document.addEventListener("keypress", checkRuthPosition);
   startSoundtrack();
@@ -228,7 +228,7 @@ function setup() {
   BIT_TUNE.addEventListener("ended", startSoundtrackLoop);
   // BIT_TUNE.addEventListener("ended", showButton);
   BIT_TUNE_LOOP.addEventListener("ended", startSoundtrackLoop);
-  document.addEventListener("keypress", startGame);
+  IMAGE.addEventListener("click", startGame);
   button_hilfe.addEventListener("click", getHelp);
 }
 
