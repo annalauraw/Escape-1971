@@ -20,6 +20,9 @@ var puzzleVertrauen = document.getElementsByClassName("quizbox")[0];
 
 var showTV= document.getElementById("showTV");
 var button_lieberherr = document.getElementById("button_lieberherr");
+var button_lieberherr2 = document.getElementById("button_lieberherr2");
+var button_lieberherr3 = document.getElementById("button_lieberherr3");
+
 var SRF_player=document.getElementById("SRF_player");
 
 // var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5');
@@ -190,6 +193,9 @@ function backtoBP(){
 }
 
 function puzzleVertrauenFrauen(){
+	button_lieberherr.removeEventListener("click", lieberherrV.handle.bind(lieberherrV));
+	button_lieberherr2.removeEventListener("click", lieberherrV2.handle.bind(lieberherrV2));
+	button_lieberherr3.removeEventListener("click", lieberherrV3.handle.bind(lieberherrV3));
 	laerm.play();
 	laerm.loop=true;
 	hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
@@ -200,6 +206,7 @@ function puzzleVertrauenFrauen(){
 
 	if (SRF_player.classList.contains("display")){
 		SRF_player.classList.toggle("display");
+		player_isDisplayed = false;
 	}
 	if (TV_black.classList.contains("display")){
 		TV_black.classList.toggle("display");
@@ -240,6 +247,7 @@ SRF_Video.prototype = {
   },
 
   play: function() {
+		player.volume(1);
     player.play();
     hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
     playState[this.name] = true;
