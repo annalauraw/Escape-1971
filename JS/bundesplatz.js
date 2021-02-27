@@ -1,3 +1,8 @@
+// Audios
+var laerm = document.getElementById("AV-Laerm");
+laerm.volume = 0.5;
+var applaus = document.getElementById('AV-applaus');
+applaus.volume = 0.5;
 
 // div mit Hintergrundbild - wird für das Erscheinen bzw. Bewegen der Fahne
 // gebraucht
@@ -40,7 +45,7 @@ var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
 
 function glow(){
 	helvetia.classList.toggle("display");
-	
+
 }
 
 function restoreVertrauen(){
@@ -64,7 +69,7 @@ function closebv4(){
 	 bv4[i].addEventListener("click", bv4puzzleOpen);
 }
 }
-	
+
 
 function VertrauenFalsch(){
 	alert_wrongAnswer.classList.toggle("display");
@@ -76,6 +81,7 @@ function VertrauenRichtig(){
 	puzzleVertrauen.classList.toggle("display");
 	hintergrund.style.opacity="1";
 	callFlag();
+	hintergrund.removeEventListener("click", backtoBP);
 	helvetia.addEventListener("mouseover", glow);
 	helvetia.addEventListener("mouseleave", glow);
 	showTV.removeEventListener("click", displayTV);
@@ -104,19 +110,19 @@ function moveFlag(event) {
 }
 
 function showhelvetia(){
-	
+
 	helvetia.remove();
-	
+
 	setTimeout(function() {
-    
+
 	hintergrund.style.opacity="0.2";
 	flag.style.opacity="0.2";
 	helvetia.removeEventListener("mouseover", glow);
 	helvetia.removeEventListener("mouseleave", glow);
-	
+
 	helvetiagross.classList.toggle("hide");
-	document.getElementById('AV-applaus').play();
-	document.getElementById('AV-applaus').addEventListener('ended', function(){
+	applaus.play();
+	applaus.addEventListener('ended', function(){
 		hintergrund.style.opacity="1";
 		flag.style.opacity="1";
 		helvetiagross.classList.toggle("hide");
@@ -136,7 +142,7 @@ function putFlag() {
   document.removeEventListener("mousemove", moveFlag);
   flag.style.left = "585px";
   flag.style.top = "120px";
-  
+
   showhelvetia();
 }
 
@@ -184,21 +190,21 @@ function backtoBP(){
 }
 
 function puzzleVertrauenFrauen(){
-	document.getElementById("AV-Laerm").play();
-	document.getElementById("AV-Laerm").loop=true;
+	laerm.play();
+	laerm.loop=true;
 	hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
 	hintergrund.addEventListener("click", backtoBP);
 	fernseher.classList.toggle("display");
 	puzzleVertrauen.classList.toggle("display");
-	
-	
+
+
 	if (SRF_player.classList.contains("display")){
 		SRF_player.classList.toggle("display");
 	}
 	if (TV_black.classList.contains("display")){
 		TV_black.classList.toggle("display");
 	}
-	
+
 }
 
 
@@ -242,7 +248,7 @@ SRF_Video.prototype = {
     }
     this.subtitles.classList.toggle("display");
     this.startInterval();
-    showSubtitles();
+    this.showSubtitles();
     // if (TV_black.classList.contains("display")) {
      //  TV_black.classList.toggle("display");
      //}
@@ -358,8 +364,8 @@ function glowBV4(){
 function bv4puzzleOpen(){
 	document.addEventListener("keypress", function(event) {preventEnter(event);})
 	bv4text.classList.toggle("hide");
-	
-	
+
+
 	  for(i=0; i<bv4.length; i++){
 			bv4[i].removeEventListener("mouseover", glowBV4);
 			bv4[i].removeEventListener("mouseleave", glowBV4);
@@ -369,31 +375,33 @@ function bv4puzzleOpen(){
 }
 
 function checkPuzzle(trigger){
-	
+
 	var playerSolution = document.forms[0]["solution"].value;
-	if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
-		document.getElementById('AV-applaus').play();
+	// if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
+	correctSolution = /(schweizer)/i
+	if (correctSolution.test(playerSolution)) {
+		applaus.play();
 		showTV.addEventListener("click", displayTV);
 		bv4puzzle.classList.toggle("display");
 		hintergrund.removeEventListener("click", closebv4);
-		
+
 	} else{
 		bv4puzzle.classList.toggle("display");
 		alert_wrongAnswer.classList.toggle("display");
 		button_alert.addEventListener("click", restorebv4);
 	}
-	
+
 }
 
-function checkPuzzle2(trigger){	
-	
+function checkPuzzle2(trigger){
+
 	if (document.getElementById("richtig").checked == true){
 		VertrauenRichtig();
-		
+
 	} else{
 		VertrauenFalsch();
 	}
-	
+
 }
 
 function preventEnter(event) {
@@ -404,10 +412,10 @@ function preventEnter(event) {
 }
 
 function machlaerm(){
-	document.getElementById("AV-Laerm").play();
-	document.getElementById("AV-Laerm").loop=true;
+	laerm.play();
+	laerm.loop=true;
 	window.removeEventListener("click", machlaerm);
-	
+
 }
 
 function setup() {
