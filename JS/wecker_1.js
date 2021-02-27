@@ -154,7 +154,7 @@ function moveRuth(event) {
       console.log("bottom", posBottomString);
     }
     // wenn Ruth vor einem der Häuser ist
-    else if (posBottom >= 360 && posBottom <= 460) {
+    else if (posBottom >= 360 && posBottom <= 420) {
       if (posLeft == 1020 || posLeft == 580 || posLeft == 200) {
         posBottom += 20;
         console.log(posBottom);
@@ -184,7 +184,7 @@ function moveRuth(event) {
 
 // Wenn Ruth in Uelis Tür steht, betritt sie sein Schlafzimmer
 function checkRuthPosition() {
-  if (posLeft == 1020 && posBottom == 460) {
+  if (posLeft == 1020 && posBottom == 420) {
     // Call next HTML page
     location.assign("vordertuere.html");
   }
