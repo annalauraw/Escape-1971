@@ -39,10 +39,9 @@ var zeitungWeg_2 = document.getElementById("zeitungWeg_2");
 var currentArticle = document.getElementById("artikelbild");
 var fileNameList = [
   "Bilder/Zeitungsartikel/Stimmrecht_Basel.jpg",
-  "Bilder/Zeitungsartikel/EMRK_unterzeichnen.png",
   "Bilder/Zeitungsartikel/Wut_1.png",
   "Bilder/Zeitungsartikel/Vorbehalte_Lotti_1.png",
-  "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png"
+  // "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png"
 ];
 // Muss global verfügbar sein
 var articleIndex = 0;
@@ -188,7 +187,7 @@ function switchArticle(direction) {
   // articleIndex = fileNameList.findIndex(compareFileName);
   if (direction == "right") {
     // Bildpfad ersetzen
-    if (articleIndex <= 3) {
+    if (articleIndex <= 1) {
       currentArticle.attributes[1].value = fileNameList[articleIndex + 1];
       articleIndex += 1;
     }
@@ -204,11 +203,11 @@ function switchArticle(direction) {
       articleIndex -= 1;
     }
     else {
-      currentArticle.attributes[1].value = fileNameList[4];
-      articleIndex = 4;
+      currentArticle.attributes[1].value = fileNameList[2];
+      articleIndex = 2;
     }
   }
-  if (articleIndex == 2 || articleIndex == 4) {
+  if (articleIndex == 1) {
     arrowDown.classList.toggle("display");
     // arrowUp.classList.toggle("display");
     arrowDown.addEventListener("click", function() {switchArticlePart("down");});
@@ -236,13 +235,6 @@ function switchArticlePart(direction) {
       arrowUp.addEventListener("click", function() {switchArticlePart("up");});
       arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
     }
-    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
-      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png";
-      arrowDown.classList.toggle("display");
-      arrowUp.classList.toggle("display");
-      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
-      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
-    }
   }
   else if (direction == "up") {
     if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png") {
@@ -251,13 +243,6 @@ function switchArticlePart(direction) {
       arrowUp.classList.toggle("display");
       arrowUp.removeEventListener("click", function() {switchArticlePart("up");});
       arrowDown.addEventListener("click", function() {switchArticlePart("down");});
-    }
-    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
-      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png";
-      arrowDown.classList.toggle("display");
-      arrowUp.classList.toggle("display");
-      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
-      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
     }
   }
 }
@@ -268,14 +253,12 @@ function showPaper() {
   zeitungsartikel.classList.toggle("display");
   arrowLeft.classList.toggle("display");
   arrowRight.classList.toggle("display");
-  if (articleIndex == 2 || articleIndex == 4) {
-    if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_1.png"
-    || currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
+  if (articleIndex == 1) {
+    if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_1.png") {
       arrowDown.classList.toggle("display");
       arrowDown.addEventListener("click", function() {switchArticlePart("down");});
     }
-    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png"
-    || currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
+    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png") {
       arrowUp.classList.toggle("display");
       arrowUp.addEventListener("click", function() {switchArticlePart("up");});
     }
