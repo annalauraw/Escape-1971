@@ -33,6 +33,7 @@ ul {
 	width:600px;
 	top:100px;
 	left:270px;
+  padding-bottom: 80px;
 }
 
 #puzzleVertrauen h3 {
@@ -56,9 +57,9 @@ ul {
 }
 
 #button_solution2 {
-	Position:absolute;
+	position: absolute;
 	left: 270px;
-	bottom: 5%;
+	bottom: 8%;
 }
 
 

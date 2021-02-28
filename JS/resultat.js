@@ -1,6 +1,10 @@
 // Hintergrundbild
 var hintergrund = document.getElementById("hintergrund");
 
+// Ruths Mund
+var mund = document.getElementById("mund");
+var mouthInterval = undefined;
+
 // Audios Ruth
 var warten = document.getElementById("warten");
 var abschied = document.getElementById("abschied");
@@ -66,6 +70,19 @@ function showArea(area) {
   area.style.cursor = "pointer";
 }
 
+// Für die Mundbewegungen
+function toggleMouth() {
+  mund.classList.toggle("display");
+}
+
+function startInterval() {
+  mouthInterval = setInterval(toggleMouth, 700);
+}
+
+function pauseInterval() {
+  clearInterval(mouthInterval);
+}
+
 // Funktion, die nach Ende von Ruths Audios
 // die nächsten EventListener registriert bzw.
 // nicht mehr benötigte deaktiviert
@@ -86,11 +103,13 @@ function afterRuthsAudio(audioEl) {
   else if (audioEl == abschied) {
     startPuzzle();
   }
+  pauseInterval();
 }
 
 // Funktion, die erstes Ruth-Audio startet
 function playWarten() {
   warten.play();
+  startInterval();
   warten.addEventListener("ended", function() {afterRuthsAudio(warten);});
   ruth.removeEventListener("click", playWarten);
 }
@@ -98,6 +117,7 @@ function playWarten() {
 // Funktion, die zweites Ruth-Audio startet
 function playAbschied() {
   abschied.play();
+  startInterval();
   abschied.addEventListener("ended", function() {afterRuthsAudio(abschied);});
   ruth.removeEventListener("click", playAbschied);
 }
@@ -120,6 +140,7 @@ function hidePaper() {
     arrowUp.classList.toggle("display");
   }
   hintergrund.style.opacity = "1";
+  mund.style.opacity = "1";
   zeitungWeg_1.removeEventListener("click", hidePaper);
   zeitungWeg_2.removeEventListener("click", hidePaper);
   arrowDown.removeEventListener("click", switchArticle);
@@ -150,6 +171,7 @@ function switchArticle() {
 // Zeitungsartikel anzeigen
 function showPaper() {
   hintergrund.style.opacity = "0.2";
+  mund.style.opacity = "0.2";
   zeitungsartikel.classList.toggle("display");
   if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Durchbruch_gelungen_oben.png") {
     arrowDown.classList.toggle("display");

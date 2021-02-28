@@ -5,6 +5,9 @@ var hintergrund = document.getElementById("hintergrund");
 var ruth = document.getElementById("ruth");
 var rede = document.getElementById("rede");
 var lisi = document.getElementById("lisi");
+// Ruths Mund
+var mund = document.getElementById("mund");
+var mouthInterval = undefined;
 
 // Zeitungsartikel
 var zeitungsstapel = document.getElementById("zeitungsstapel");
@@ -36,6 +39,19 @@ var button_alert = document.getElementById("button_alert");
 // Bedingung dafür, dass die Fahne nach dem Quiz angezeigt wird
 var paper_read = false;
 var puzzle_solved = false;
+
+// Für die Mundbewegungen
+function toggleMouth() {
+  mund.classList.toggle("display");
+}
+
+function startInterval() {
+  mouthInterval = setInterval(toggleMouth, 700);
+}
+
+function pauseInterval() {
+  clearInterval(mouthInterval);
+}
 
 // Fahne in Lisis Hand platzieren
 function placeFlag(event) {
@@ -109,8 +125,10 @@ function startPuzzle() {
 // Ruths Rede starten
 function startSpeech() {
   rede.play();
+  startInterval();
   ruth.removeEventListener("click", startSpeech);
   // rede.addEventListener("ended", showQuizButton);
+  rede.addEventListener("ended", pauseInterval);
   rede.addEventListener("ended", startPuzzle);
 }
 

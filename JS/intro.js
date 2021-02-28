@@ -80,6 +80,9 @@ function showArea(area) {
 
 // Grossen Fernseher verstecken
 function hideTV() {
+  button_lotti.removeEventListener("click", boundFunctionLotti);
+  button_unterbaech.removeEventListener("click", boundFunctionUnterbaech);
+  button_appenzell.removeEventListener("click", boundFunctionAppenzell);
   fernseher.classList.toggle("display");
   if (player_isDisplayed) {
     SRF_player.classList.toggle("display");
@@ -104,11 +107,19 @@ function showTV() {
   fernseher.classList.toggle("display");
   area_hideTV_1.addEventListener("click", hideTV);
   area_hideTV_2.addEventListener("click", hideTV);
+  button_lotti.addEventListener("click", boundFunctionLotti);
+  button_unterbaech.addEventListener("click", boundFunctionUnterbaech);
+  button_appenzell.addEventListener("click", boundFunctionAppenzell);
 }
 
 lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609, untertitel_lotti);
 unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5, untertitel_unterbaech);
 appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53, untertitel_appenzell);
+
+// Bound functions for event listeners
+var boundFunctionLotti = lotti.handle.bind(lotti);
+var boundFunctionUnterbaech = unterbaech.handle.bind(unterbaech);
+var boundFunctionAppenzell = appenzell.handle.bind(appenzell);
 
 // Funktion, die alle evtl. laufende Radiosounds vorsorglich stoppt
 function stopRadio() {
@@ -287,27 +298,55 @@ function preventEnter(event) {
   }
 }
 
+// Variable, die weiss, welche Rätselfrage gerade dran ist
+var puzzlePart = "puzzle_videoQuestions_1";
+
 // Wrapper-Funktion, da von Event-Listener aufgerufen
 function startPuzzle() {
-  startPuzzlePart("puzzle_videoQuestions_1");
+  // startPuzzlePart("puzzle_videoQuestions_1");
+  startPuzzlePart(puzzlePart);
   button_startPuzzle.classList.toggle("display");
   button_startPuzzle.removeEventListener("click", startPuzzle);
 }
 
+// Anonyme Funtion einer Variablen zuweisen, damit der eventListener
+// später wieder entfernt werden kann
+var interruptPuzzleWrapper = function(){interruptPuzzle(puzzlePart);};
+
+// Puzzle unterbrechen
+function interruptPuzzle(puzzlePart) {
+  // puzzlePart: Rätselfrage, die angezeigt wurde vor dem Unterbruch
+  hintergrund.removeEventListener("click", interruptPuzzleWrapper);
+  var puzzleDiv = document.getElementById(puzzlePart);
+  if (puzzleDiv.classList.contains("display")) {
+    puzzleDiv.classList.toggle("display");
+  }
+  button_startPuzzle.classList.toggle("display");
+  button_startPuzzle.addEventListener("click", startPuzzle);
+}
+
+
 function startPuzzlePart(puzzlePart) {
   // Div mit Rätselfrage anzeigen
   var puzzleDiv = document.getElementById(puzzlePart);
-  puzzleDiv.classList.toggle("display");
+  if (puzzleDiv.classList.contains("display") == false) {
+    puzzleDiv.classList.toggle("display");
+  }
   // puzzleDiv.querySelector("form").focus(); //not working yet
   document.addEventListener("keypress", function(event) {preventEnter(event);})
+  hintergrund.addEventListener("click", interruptPuzzleWrapper);
 }
 
 // Rätselfrage nach falscher Antwort erneut anzeigen
 function reDisplayPuzzlePart(puzzleDiv) {
   alert_wrongAnswer.classList.toggle("display");
   puzzleDiv.classList.toggle("display");
-  button_alert.addEventListener("click", function() {reDisplayPuzzlePart(puzzleDiv);});
+  button_alert.removeEventListener("click", reDisplayPuzzleWrapper);
 }
+
+// Anonyme Funktion einer Variablen zuweisen, damit der eventListener
+// wieder entfernt werden kann
+var reDisplayPuzzleWrapper = function() {reDisplayPuzzlePart(document.getElementById(puzzlePart));}
 
 function checkPuzzle(trigger) {
 
@@ -334,7 +373,7 @@ function checkPuzzle(trigger) {
 
   // Um welche Rätselfrage (welches Formular-HTML-Element)
   // geht es aktuell?
-  var puzzlePart;
+  // var puzzlePart;
 
   if (triggeringButton == "button_solution_1") {
     puzzlePart = "puzzle_videoQuestions_1";
@@ -388,23 +427,21 @@ function checkPuzzle(trigger) {
       location.assign("marsch.html");
     }
     else {
-      startPuzzlePart(nextPuzzlePart);
+      puzzlePart = nextPuzzlePart;
+      startPuzzlePart(puzzlePart);
     }
   }
   else {
     alert_wrongAnswer.classList.toggle("display");
     var puzzleDiv = document.getElementById(puzzlePart);
     puzzleDiv.classList.toggle("display");
-    button_alert.addEventListener("click", function() {reDisplayPuzzlePart(puzzleDiv);});
+    button_alert.addEventListener("click", reDisplayPuzzleWrapper);
   }
 }
 
 function setup() {
   // Fernseher und Radio
   tv_gross.addEventListener("click", showTV);
-  button_lotti.addEventListener("click", lotti.handle.bind(lotti));
-  button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
-  button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
   button_radio_noise.addEventListener("click", function(event) {playSound(rauschen, event.target);});
   button_radio_song.addEventListener("click", function(event) {playSound(radiosong, event.target);});
   // Quizfragen
