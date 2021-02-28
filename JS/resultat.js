@@ -135,16 +135,17 @@ function hidePaper() {
   zeitungsartikel.classList.toggle("display");
   if (arrowDown.classList.contains("display")) {
     arrowDown.classList.toggle("display");
+    arrowDown.removeEventListener("click", switchArticle);
   }
   else if (arrowUp.classList.contains("display")) {
     arrowUp.classList.toggle("display");
+    arrowUp.removeEventListener("click", switchArticle);
   }
   hintergrund.style.opacity = "1";
   mund.style.opacity = "1";
   zeitungWeg_1.removeEventListener("click", hidePaper);
   zeitungWeg_2.removeEventListener("click", hidePaper);
-  arrowDown.removeEventListener("click", switchArticle);
-  arrowUp.removeEventListener("click", switchArticle);
+  zeitungsstapel.addEventListener("click", showPaper);
   paper_read = true;
   checkIfMediaConsumed();
 }
@@ -170,6 +171,7 @@ function switchArticle() {
 
 // Zeitungsartikel anzeigen
 function showPaper() {
+  zeitungsstapel.removeEventListener("click", showPaper);
   hintergrund.style.opacity = "0.2";
   mund.style.opacity = "0.2";
   zeitungsartikel.classList.toggle("display");
@@ -177,7 +179,7 @@ function showPaper() {
     arrowDown.classList.toggle("display");
     arrowDown.addEventListener("click", switchArticle);
   }
-  else if (currentArticle.attributes[1].value == "Bilder/Durchbruch_gelungen_unten.png") {
+  else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Durchbruch_gelungen_unten.png") {
     arrowUp.classList.toggle("display");
     arrowUp.addEventListener("click", switchArticle);
   }
