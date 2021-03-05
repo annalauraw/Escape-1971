@@ -277,11 +277,11 @@ display: none;
 .draggable {
     cursor: move;
 }
-
+/*
 .static {
     cursor: not-allowed;
 }
-
+*/
 
 /* Transparent box ensuring arms center properly. */
 .sizing-box {
