@@ -1,3 +1,8 @@
+// Audios
+var laerm = document.getElementById("AV-Laerm");
+laerm.volume = 0.5;
+var applaus = document.getElementById('AV-applaus');
+applaus.volume = 0.5;
 
 // div mit Hintergrundbild - wird für das Erscheinen bzw. Bewegen der Fahne
 // gebraucht
@@ -15,6 +20,9 @@ var puzzleVertrauen = document.getElementsByClassName("quizbox")[0];
 
 var showTV= document.getElementById("showTV");
 var button_lieberherr = document.getElementById("button_lieberherr");
+var button_lieberherr2 = document.getElementById("button_lieberherr2");
+var button_lieberherr3 = document.getElementById("button_lieberherr3");
+
 var SRF_player=document.getElementById("SRF_player");
 
 // var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:280726b6-f954-4859-ab4e-503aab00d3a5');
@@ -40,7 +48,7 @@ var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
 
 function glow(){
 	helvetia.classList.toggle("display");
-	
+
 }
 
 function restoreVertrauen(){
@@ -64,7 +72,7 @@ function closebv4(){
 	 bv4[i].addEventListener("click", bv4puzzleOpen);
 }
 }
-	
+
 
 function VertrauenFalsch(){
 	alert_wrongAnswer.classList.toggle("display");
@@ -76,6 +84,7 @@ function VertrauenRichtig(){
 	puzzleVertrauen.classList.toggle("display");
 	hintergrund.style.opacity="1";
 	callFlag();
+	hintergrund.removeEventListener("click", backtoBP);
 	helvetia.addEventListener("mouseover", glow);
 	helvetia.addEventListener("mouseleave", glow);
 	showTV.removeEventListener("click", displayTV);
@@ -104,19 +113,19 @@ function moveFlag(event) {
 }
 
 function showhelvetia(){
-	
+
 	helvetia.remove();
-	
+
 	setTimeout(function() {
-    
+
 	hintergrund.style.opacity="0.2";
 	flag.style.opacity="0.2";
 	helvetia.removeEventListener("mouseover", glow);
 	helvetia.removeEventListener("mouseleave", glow);
-	
+
 	helvetiagross.classList.toggle("hide");
-	document.getElementById('AV-applaus').play();
-	document.getElementById('AV-applaus').addEventListener('ended', function(){
+	applaus.play();
+	applaus.addEventListener('ended', function(){
 		hintergrund.style.opacity="1";
 		flag.style.opacity="1";
 		helvetiagross.classList.toggle("hide");
@@ -136,7 +145,7 @@ function putFlag() {
   document.removeEventListener("mousemove", moveFlag);
   flag.style.left = "585px";
   flag.style.top = "120px";
-  
+
   showhelvetia();
 }
 
@@ -184,21 +193,25 @@ function backtoBP(){
 }
 
 function puzzleVertrauenFrauen(){
-	document.getElementById("AV-Laerm").play();
-	document.getElementById("AV-Laerm").loop=true;
+	button_lieberherr.removeEventListener("click", boundFunction1);
+	button_lieberherr2.removeEventListener("click", boundFunction2);
+	button_lieberherr3.removeEventListener("click", boundFunction3);
+	laerm.play();
+	laerm.loop=true;
 	hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
 	hintergrund.addEventListener("click", backtoBP);
 	fernseher.classList.toggle("display");
 	puzzleVertrauen.classList.toggle("display");
-	
-	
+
+
 	if (SRF_player.classList.contains("display")){
 		SRF_player.classList.toggle("display");
+		player_isDisplayed = false;
 	}
 	if (TV_black.classList.contains("display")){
 		TV_black.classList.toggle("display");
 	}
-	
+
 }
 
 
@@ -234,15 +247,20 @@ SRF_Video.prototype = {
   },
 
   play: function() {
+		player.volume(1);
     player.play();
     hintergrund.removeEventListener("click", puzzleVertrauenFrauen);
     playState[this.name] = true;
     if (player_isDisplayed == false) {
       this.displayPlayer();
     }
-    this.subtitles.classList.toggle("display");
+    // this.subtitles.classList.toggle("display");
     this.startInterval();
-    showSubtitles();
+
+
+
+
+    this.showSubtitles();
     // if (TV_black.classList.contains("display")) {
      //  TV_black.classList.toggle("display");
      //}
@@ -327,21 +345,26 @@ lieberherrV = new SRF_Video('lieberherrV', "urn:srf:video:e11da950-18a1-4244-952
 lieberherrV2 = new SRF_Video('lieberherrV2', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 9, 66, untertitel_lieberherrV2);
 lieberherrV3 = new SRF_Video('lieberherrV3', "urn:srf:video:e11da950-18a1-4244-9521-95ce7ad5be83", 110, 124, untertitel_lieberherrV3);
 
+// Bound functions for event listeners
+var boundFunction1 = lieberherrV.handle.bind(lieberherrV);
+var boundFunction2 = lieberherrV2.handle.bind(lieberherrV2);
+var boundFunction3 = lieberherrV3.handle.bind(lieberherrV3);
+
 // Testfunktion, um eine Image map zu sehen (wo ist der klickbare Kreis?)
 function showArea(area) {
   area.style.cursor = "pointer";
 }
 
 function displayTV() {
-	document.getElementById("AV-Laerm").pause();
+	laerm.pause();
 	//hintergrund.removeEventListener("click", closebv4);
 	showTV.removeEventListener("click", displayTV);
 	fernseher.classList.toggle("display");
 	hintergrund.style.opacity="0.2";
 	TV_black.classList.toggle("display");
-	button_lieberherr.addEventListener("click", lieberherrV.handle.bind(lieberherrV));
-	button_lieberherr2.addEventListener("click", lieberherrV2.handle.bind(lieberherrV2));
-	button_lieberherr3.addEventListener("click", lieberherrV3.handle.bind(lieberherrV3));
+	button_lieberherr.addEventListener("click", boundFunction1);
+	button_lieberherr2.addEventListener("click", boundFunction2);
+	button_lieberherr3.addEventListener("click", boundFunction3);
 	hintergrund.addEventListener("click", puzzleVertrauenFrauen);
 	if (puzzleVertrauen.classList.contains("display")){
 		puzzleVertrauen.classList.toggle("display");
@@ -358,8 +381,8 @@ function glowBV4(){
 function bv4puzzleOpen(){
 	document.addEventListener("keypress", function(event) {preventEnter(event);})
 	bv4text.classList.toggle("hide");
-	
-	
+
+
 	  for(i=0; i<bv4.length; i++){
 			bv4[i].removeEventListener("mouseover", glowBV4);
 			bv4[i].removeEventListener("mouseleave", glowBV4);
@@ -369,31 +392,33 @@ function bv4puzzleOpen(){
 }
 
 function checkPuzzle(trigger){
-	
+
 	var playerSolution = document.forms[0]["solution"].value;
-	if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
-		document.getElementById('AV-applaus').play();
+	// if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
+	correctSolution = /(schweizer)/i
+	if (correctSolution.test(playerSolution)) {
+		applaus.play();
 		showTV.addEventListener("click", displayTV);
 		bv4puzzle.classList.toggle("display");
 		hintergrund.removeEventListener("click", closebv4);
-		
+
 	} else{
 		bv4puzzle.classList.toggle("display");
 		alert_wrongAnswer.classList.toggle("display");
 		button_alert.addEventListener("click", restorebv4);
 	}
-	
+
 }
 
-function checkPuzzle2(trigger){	
-	
+function checkPuzzle2(trigger){
+
 	if (document.getElementById("richtig").checked == true){
 		VertrauenRichtig();
-		
+
 	} else{
 		VertrauenFalsch();
 	}
-	
+
 }
 
 function preventEnter(event) {
@@ -404,10 +429,10 @@ function preventEnter(event) {
 }
 
 function machlaerm(){
-	document.getElementById("AV-Laerm").play();
-	document.getElementById("AV-Laerm").loop=true;
+	laerm.play();
+	laerm.loop=true;
 	window.removeEventListener("click", machlaerm);
-	
+
 }
 
 function setup() {

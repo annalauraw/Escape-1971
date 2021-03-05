@@ -83,7 +83,8 @@ SRF_Video.prototype = {
     playState[this.name] = true;
     if (player_isDisplayed == false) {
       // Bei Audios: Player nicht anzeigen
-      if (this.name == 'urne') {
+      let videos = ['urne', 'lotti', 'unterbaech', 'appenzell'];
+      if (videos.includes(this.name)) {
         this.displayPlayer();
       }
     }

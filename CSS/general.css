@@ -52,7 +52,7 @@ eventuelle Kind-Elemente absolut positioniert werden können */
   border-width: 2px;
   border-style: solid;
   /* Wegen Button-Position */
-  text-align:center;
+  text-align: center;
 }
 
 .button {
@@ -89,5 +89,5 @@ input[type="text"] {
 
 input[type="text"]:focus {
   outline: none;
-  box-shadow: 0 0 0 4px rgb(201, 153, 255);
+  box-shadow: 0 0 0 2px rgb(201, 153, 255);
 }

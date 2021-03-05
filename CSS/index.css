@@ -33,3 +33,17 @@ p {
   float: right;
   margin-right: 5%;
 }
+
+a:link, a:visited {
+  color: rgb(95, 0, 204);
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  color: rgb(173, 102, 255);
+}
+
+a:active {
+  color: rgb(229, 204, 255);
+}

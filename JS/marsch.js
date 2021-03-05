@@ -5,12 +5,15 @@ var hintergrund = document.getElementById("hintergrund");
 var ruth = document.getElementById("ruth");
 var rede = document.getElementById("rede");
 var lisi = document.getElementById("lisi");
+// Ruths Mund
+var mund = document.getElementById("mund");
+var mouthInterval = undefined;
 
 // Zeitungsartikel
 var zeitungsstapel = document.getElementById("zeitungsstapel");
 var zeitungsartikel = document.getElementById("zeitungsartikel");
-var arrowLeft = document.getElementById("arrowLeft");
-var arrowRight = document.getElementById("arrowRight");
+// var arrowLeft = document.getElementById("arrowLeft");
+// var arrowRight = document.getElementById("arrowRight");
 var arrowDown = document.getElementById("arrowDown");
 var arrowUp = document.getElementById("arrowUp");
 var zeitungWeg_1 = document.getElementById("zeitungWeg_1");
@@ -36,6 +39,19 @@ var button_alert = document.getElementById("button_alert");
 // Bedingung dafür, dass die Fahne nach dem Quiz angezeigt wird
 var paper_read = false;
 var puzzle_solved = false;
+
+// Für die Mundbewegungen
+function toggleMouth() {
+  mund.classList.toggle("display");
+}
+
+function startInterval() {
+  mouthInterval = setInterval(toggleMouth, 700);
+}
+
+function pauseInterval() {
+  clearInterval(mouthInterval);
+}
 
 // Fahne in Lisis Hand platzieren
 function placeFlag(event) {
@@ -76,9 +92,9 @@ function reDisplayPuzzle() {
 function checkPuzzle() {
 
   // Was die Spielerin eingegeben hat bei der aktuellen Rätselfrage
-  var playerSolution = document.forms["puzzle_marsch"]["attitude"].value;
+  var playerSolution = document.forms["puzzle_marsch"]["recht"].value;
   // richtige Antwort
-  if (playerSolution == "aendern") {
+  if (playerSolution == "diskriminierung") {
     puzzle_solved = true;
     puzzle.classList.toggle("display");
     // button_startPuzzle.classList.toggle("display");
@@ -109,8 +125,10 @@ function startPuzzle() {
 // Ruths Rede starten
 function startSpeech() {
   rede.play();
+  startInterval();
   ruth.removeEventListener("click", startSpeech);
   // rede.addEventListener("ended", showQuizButton);
+  rede.addEventListener("ended", pauseInterval);
   rede.addEventListener("ended", startPuzzle);
 }
 
@@ -126,17 +144,17 @@ function preventEnter(event) {
 // Zeitungsartikel verstecken
 function hidePaper() {
   zeitungsartikel.classList.toggle("display");
-  if (arrowRight.classList.contains("display")) {
-    arrowRight.classList.toggle("display");
+  if (arrowDown.classList.contains("display")) {
+    arrowDown.classList.toggle("display");
   }
-  else if (arrowLeft.classList.contains("display")) {
-    arrowLeft.classList.toggle("display");
+  else if (arrowUp.classList.contains("display")) {
+    arrowUp.classList.toggle("display");
   }
   hintergrund.style.opacity = "1";
   zeitungWeg_1.removeEventListener("click", hidePaper);
   zeitungWeg_2.removeEventListener("click", hidePaper);
-  arrowLeft.removeEventListener("click", switchArticle);
-  arrowRight.removeEventListener("click", switchArticle);
+  arrowDown.removeEventListener("click", switchArticle);
+  arrowUp.removeEventListener("click", switchArticle);
   paper_read = true;
   showFlag();
 }
@@ -144,19 +162,19 @@ function hidePaper() {
 // Zwischen den Zeitungsartikeln wechseln
 function switchArticle() {
 
-  if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Werbung_Marsch.png") {
-    currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Hinweis_Marsch.png";
-    arrowRight.classList.toggle("display");
-    arrowLeft.classList.toggle("display");
-    arrowRight.removeEventListener("click", switchArticle);
-    arrowLeft.addEventListener("click", switchArticle);
+  if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
+    currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png";
+    arrowDown.classList.toggle("display");
+    arrowUp.classList.toggle("display");
+    arrowDown.removeEventListener("click", switchArticle);
+    arrowUp.addEventListener("click", switchArticle);
   }
-  else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Hinweis_Marsch.png") {
-    currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Werbung_Marsch.png";
-    arrowLeft.classList.toggle("display");
-    arrowRight.classList.toggle("display");
-    arrowLeft.removeEventListener("click", switchArticle);
-    arrowRight.addEventListener("click", switchArticle);
+  else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
+    currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png";
+    arrowDown.classList.toggle("display");
+    arrowUp.classList.toggle("display");
+    arrowUp.removeEventListener("click", switchArticle);
+    arrowDown.addEventListener("click", switchArticle);
   }
 }
 
@@ -164,13 +182,13 @@ function switchArticle() {
 function showPaper() {
   hintergrund.style.opacity = "0.2";
   zeitungsartikel.classList.toggle("display");
-  if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Werbung_Marsch.png") {
-    arrowRight.classList.toggle("display");
-    arrowRight.addEventListener("click", switchArticle);
+  if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
+    arrowDown.classList.toggle("display");
+    arrowDown.addEventListener("click", switchArticle);
   }
-  else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Hinweis_Marsch.png") {
-    arrowLeft.classList.toggle("display");
-    arrowLeft.addEventListener("click", switchArticle);
+  else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
+    arrowUp.classList.toggle("display");
+    arrowUp.addEventListener("click", switchArticle);
   }
   zeitungWeg_1.addEventListener("click", hidePaper);
   zeitungWeg_2.addEventListener("click", hidePaper);

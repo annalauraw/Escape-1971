@@ -8,19 +8,19 @@
   <body>
 
 	  <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder/ruths_stube.png" usemap="#discover_media">
+      <img id="hintergrund" src="Bilder/bilder/resultat_bier.png" usemap="#discover_media">
       <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
       <map name="discover_media">
         <!-- Area, das Ruth zum Sprechen bringt -->
-        <area id="ruth" shape="rect" coords="2, 2, 200, 200">
+        <area id="ruth" shape="circle" coords="1100, 170, 50">
         <!-- Macht den grossen Fernseher sichtbar -->
         <area id="tv_gross" shape="rect" coords="460, 230, 780, 410">
         <!-- Radio -->
-        <area id="button_radio_1" shape="circle" coords="1055, 280, 10">
-        <area id="button_radio_2" shape="circle" coords="1055, 310, 10">
-        <area id="button_radio_3" shape="circle" coords="1055, 340, 10">
+        <area id="button_radio_1" shape="circle" coords="1055, 280, 15">
+        <area id="button_radio_2" shape="circle" coords="1055, 310, 15">
+        <area id="button_radio_3" shape="circle" coords="1055, 330, 15">
         <!-- Zeitungen -->
-        <area id="zeitungsstapel" shape="circle" coords="720, 190, 30">
+        <area id="zeitungsstapel" shape="circle" coords="950, 360, 30">
         <area id="zeitungWeg_1" shape="rect" coords="2, 2, 370, 750">
         <area id="zeitungWeg_2" shape="rect" coords="710, 2, 1200, 750">
       </map>
@@ -34,6 +34,9 @@
         <area id="button_tv_2" shape="circle" coords="685, 335, 20">
         <area id="button_tv_3" shape="circle" coords="685, 425, 20">
       </map>
+
+      <!-- Ruths Mund -->
+      <img id="mund" src="Bilder/bilder/ruth_resultat_mund_zu.png">
 
       <!-- SRF-PLayer, Video und Audio -->
       <div id="SRF_player"></div>
@@ -79,35 +82,25 @@
           Your browser does not support the audio tag.
         </audio>
 
-		<!--Frage zur Zukunft-->
-     <div id="frage" class="quizbox">
-	<p class="handschrift">Sagt, wie ist es denn bei Euch in der Zukunft? Ist die Gleichberechtigung erreicht?»</p><br>
-	<fieldset class="fieldset">
-	<ul><li>
-	<label class="handschrift label" for="ja"><input type="radio" name="auswahl" id="ja" value="ja" onclick="falsch()">
-		Ja, vollkommen. Es gibt keine Unterschiede mehr zwischen Frauen und Männern
-    </label>
-	</li><li>
-	<label class="handschrift label" for="nein"><input type="radio" name="auswahl" id="nein" value="nein" onclick="falsch()">
-		Nein, überhaupt nicht. Die Frauen haben nur wenig vom Stimm- und Wahlrecht Gebrauch gemacht und so nur wenig erreicht
-	</label>
-	</li><li>
-	<label class="handschrift label" for="korrekt"><input type="radio" name="auswahl" id="korrekt" value="korrekt" onclick="richtig()">
-		Es wurde viel erreicht, aber es gibt noch immer ganz viel zu tun!
-	</label>
-	</li></ul>
-	</fieldset>
-	</div>
+        <!-- Quiz -->
+        <div id="puzzle" class="quizbox handschrift">
+          <form name="form_puzzle">
+            <h3>Sagt, wie ist es denn bei Euch in der Zukunft? Ist die Gleichberechtigung erreicht?</h3>
+            <input type="radio" id="ja" name="gleich" value="ja">
+            <label for="ja">Ja, vollkommen. Es gibt keine Unterschiede mehr zwischen Frauen und Männern</label><br>
+            <input type="radio" id="jein" name="gleich" value="jein">
+            <label for="jein">Es wurde viel erreicht, aber es gibt noch immer ganz viel zu tun!</label><br>
+            <input type="radio" id="nein" name="gleich" value="nein">
+            <label for="nein">Nein, überhaupt nicht. Die Frauen haben nur wenig vom Stimm- und Wahlrecht Gebrauch gemacht und so nur wenig erreicht</label><br><br>
+           <input type="button" id="button_solution" class="button inputButton" value="Senden">
+          </form>
+        </div>
 
-	<div id="alert_wrongAnswer" class="quizbox handschrift">
-        <form>
-         <label class="handschrift">Das ist die falsche Antwort - versuch's nochmal!</label><br/><br/>
-         <input type="button" id="button_alert" class="button inputButton" value="Okay">
-        </form>
-      </div>
-
-	</div>
-
+        <div id="alert_wrongAnswer" class="quizbox handschrift">
+           <h3>Bist du sicher?</h3>
+           <input type="button" id="button_newStart" class="button inputButton" value="Spiel neu starten">
+           <input type="button" id="button_diffAnswer" class="button inputButton" value="Andere Antwort wählen">
+        </div>
 
   <script type="text/javascript" src="https://tp.srgssr.ch/assets/javascripts/player-api.min.js"></script>
   <script  type="text/javascript" src="JS/srf_video.js"></script>

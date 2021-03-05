@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="CSS/general.css" type="text/css"/>
     <link rel="stylesheet" href="CSS/wecker_1.css" type="text/css"/>
+    <link rel="shortcut icon" type="image/jpg" href="Bilder/favicon.ico"/>
   </head>
   <body>
     <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_landschaft.png">
-      <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
-      <!-- <map name="map1">
-        <area shape="rect" coords="170, 130, 210, 153" alt="Puzzle 1" href="puzzle1.html">
-        <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
-        <area shape="circle" coords="521,502,70" onclick="showPuzzle()">
-      </map> -->
-      <img id="ruth" src="Bilder/bilder_trash/escape_frauenstreik_weckerrätsel_ruth.png" style="position:absolute; bottom: 40px; left: 120px;">
+      <img id="hintergrund" src="Bilder/bilder/haeuser.png">
+      <img id="nationalratssaal" src="Bilder/bilder/nationalratssaal_buchstaben_neu.png">
+      <button id="button_hilfe" class="button" type="button">Hilfe</button>
+      <button id="button_zurueck_2" class="button" type="button">Zurück</button>
+      <!-- Style muss für Ruth inline definiert sein -->
+      <img id="ruth" src="Bilder/bilder/ruth_klein.png" style="position:absolute; bottom: 40px; left: 120px;">
+      <div id="hilfe" class="quizbox handschrift">
+         <p>Wie kannst du Ruth bewegen? War da nicht ein Hinweis im Nationalratssaal versteckt?</p>
+         <!-- Zurück zum Rätsel -->
+         <button id="button_zurueck_1" class="button" value="Zurück">Zurück</button>
+         <!-- Bild vom Nationalratssaal mit den Buchstaben zeigen -->
+         <button id="button_bild" class="button">Bild sehen</button>
+      </div>
     </div>
-    <!-- Button um den Sound zu muten -->
-    <button id="start_stop" type="button">Start</button>
+
     <div id="timer"></div>
     <audio id="8bit">
       <source src="Audio/escape_8bit.mp3" type="audio/mpeg"/>
-      Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
+      Dein Browser unterstützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
       Oder möchtest du eine aktuellere Browser-Version installieren?
     </audio>
     <audio id="8bit_loop">

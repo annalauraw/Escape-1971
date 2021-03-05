@@ -78,12 +78,12 @@ li {
 } */
 
 #song
-#feedback_top,
+#button_feedback,
 #button_song_top {
   margin: 5%;
 }
 
-#feedback_top {
+#button_feedback {
   float: left;
   margin-left: 20%;
   margin-top: 90px;

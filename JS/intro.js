@@ -39,10 +39,9 @@ var zeitungWeg_2 = document.getElementById("zeitungWeg_2");
 var currentArticle = document.getElementById("artikelbild");
 var fileNameList = [
   "Bilder/Zeitungsartikel/Stimmrecht_Basel.jpg",
-  "Bilder/Zeitungsartikel/EMRK_unterzeichnen.png",
   "Bilder/Zeitungsartikel/Wut_1.png",
   "Bilder/Zeitungsartikel/Vorbehalte_Lotti_1.png",
-  "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png"
+  // "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png"
 ];
 // Muss global verfügbar sein
 var articleIndex = 0;
@@ -80,6 +79,9 @@ function showArea(area) {
 
 // Grossen Fernseher verstecken
 function hideTV() {
+  button_lotti.removeEventListener("click", boundFunctionLotti);
+  button_unterbaech.removeEventListener("click", boundFunctionUnterbaech);
+  button_appenzell.removeEventListener("click", boundFunctionAppenzell);
   fernseher.classList.toggle("display");
   if (player_isDisplayed) {
     SRF_player.classList.toggle("display");
@@ -104,145 +106,19 @@ function showTV() {
   fernseher.classList.toggle("display");
   area_hideTV_1.addEventListener("click", hideTV);
   area_hideTV_2.addEventListener("click", hideTV);
+  button_lotti.addEventListener("click", boundFunctionLotti);
+  button_unterbaech.addEventListener("click", boundFunctionUnterbaech);
+  button_appenzell.addEventListener("click", boundFunctionAppenzell);
 }
-
-// // Funktion, die eine Closure enthält und die Callback-Funktion für das
-// // Intervall zurückgibt,
-// // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
-// // Window gebunden)
-// function returnCheckPlaybackTime(obj) {
-//   return function() {
-//     player.getCurrentTime(function (currentTime) {
-//       if (currentTime >= obj.stopTime) {
-//         obj.pause();
-//         obj.stopInterval();
-//         player.seek(obj.startTime);
-//         playState[obj.name] = false;
-//       }
-//     });
-//   }
-// }
-//
-// // Prototyp SRF_Video
-// function SRF_Video(name, urn, startTime, stopTime, subtitles) {
-//   // startTime and stopTime in seconds (int or float)
-//   // var self = this;
-//   this.name = name;
-//   this.urn = urn;
-//   this.startTime = startTime;
-//   this.stopTime = stopTime;
-//   this.fullUrn = urn + '&start=' + startTime;
-//   this.subtitles = subtitles;
-// }
-//
-// SRF_Video.prototype = {
-//
-//   showSubtitles: function() {
-//     if (this.subtitles.classList.contains("display") == false) {
-//       this.subtitles.classList.toggle("display");
-//     }
-//     // this.subtitles.classList.toggle("display");
-//   },
-//
-//   hideSubtitles: function() {
-//     if (this.subtitles.classList.contains("display")) {
-//       this.subtitles.classList.toggle("display");
-//     }
-//   },
-//
-//   play: function() {
-//     player.play();
-//     area_hideTV_1.removeEventListener("click", hideTV);
-//     area_hideTV_2.removeEventListener("click", hideTV);
-//     playState[this.name] = true;
-//     if (player_isDisplayed == false) {
-//       this.displayPlayer();
-//     }
-//     // this.subtitles.classList.toggle("display");
-//     this.startInterval();
-//     this.showSubtitles();
-//     // if (black.classList.contains("display")) {
-//     //   black.classList.toggle("display");
-//     // }
-//   },
-//
-//   pause: function() {
-//     player.pause();
-//     this.hideSubtitles();
-//     playState[this.name] = false;
-//     area_hideTV_1.addEventListener("click", hideTV);
-//     area_hideTV_2.addEventListener("click", hideTV);
-//   },
-//
-//   recreatePlayer: function() {
-//     // if (black.classList.contains("display") == false) {
-//     //   black.classList.toggle("display");
-//     // }
-//     // Untertitel des vorherigen Videos verstecken
-//     this.hideSubtitles();
-//     this.stopInterval();
-//     player.destroy();
-//     this.resetLoadState();
-//     this.resetPlayState();
-//     player = SRG.PlayerManager.createPlayer('SRF_player','inline', this.fullUrn);
-//     loadState[this.name] = true;
-//   },
-//
-//   resetLoadState: function() {
-//     loadState.lotti = false;
-//     loadState.unterbaech = false;
-//     loadState.appenzell = false;
-//   },
-//
-//   resetPlayState: function() {
-//     playState.lotti = false;
-//     playState.unterbaech = false;
-//     playState.appenzell = false;
-//   },
-//
-//   startInterval: function() {
-//     clearInterval(playbackInterval);
-//     // Der Variable wird eine Funktion ausserhalb des Objekts zugewiesen,
-//     // die eine Closure enthält und die Callback-Funktion zurückgibt,
-//     // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
-//     // Window gebunden)
-//     let checkPlaybackTime = returnCheckPlaybackTime(this);
-//     playbackInterval = setInterval(checkPlaybackTime, 1000);
-//   },
-//
-//   stopInterval: function() {
-//     if (playbackInterval != undefined) {
-//       clearInterval(playbackInterval);
-//     }
-//   },
-//
-//   displayPlayer: function() {
-//     SRF_player.classList.toggle("display");
-//     player_isDisplayed = true;
-//   },
-//
-//   handle: function() {
-//     // Wenn das Video schon geladen ist, Player starten
-//     if (loadState[this.name] == true) {
-//       if (playState[this.name] == false) {
-//         this.play();
-//       }
-//       else {
-//         this.pause();
-//       }
-//     }
-//     // Sonst Video laden
-//     else {
-//       this.recreatePlayer();
-//       this.play();
-//     }
-//   },
-// }
-
 
 lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609, untertitel_lotti);
 unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5, untertitel_unterbaech);
 appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53, untertitel_appenzell);
+
+// Bound functions for event listeners
+var boundFunctionLotti = lotti.handle.bind(lotti);
+var boundFunctionUnterbaech = unterbaech.handle.bind(unterbaech);
+var boundFunctionAppenzell = appenzell.handle.bind(appenzell);
 
 // Funktion, die alle evtl. laufende Radiosounds vorsorglich stoppt
 function stopRadio() {
@@ -311,7 +187,7 @@ function switchArticle(direction) {
   // articleIndex = fileNameList.findIndex(compareFileName);
   if (direction == "right") {
     // Bildpfad ersetzen
-    if (articleIndex <= 3) {
+    if (articleIndex <= 1) {
       currentArticle.attributes[1].value = fileNameList[articleIndex + 1];
       articleIndex += 1;
     }
@@ -327,11 +203,11 @@ function switchArticle(direction) {
       articleIndex -= 1;
     }
     else {
-      currentArticle.attributes[1].value = fileNameList[4];
-      articleIndex = 4;
+      currentArticle.attributes[1].value = fileNameList[2];
+      articleIndex = 2;
     }
   }
-  if (articleIndex == 2 || articleIndex == 4) {
+  if (articleIndex == 1) {
     arrowDown.classList.toggle("display");
     // arrowUp.classList.toggle("display");
     arrowDown.addEventListener("click", function() {switchArticlePart("down");});
@@ -359,13 +235,6 @@ function switchArticlePart(direction) {
       arrowUp.addEventListener("click", function() {switchArticlePart("up");});
       arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
     }
-    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
-      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png";
-      arrowDown.classList.toggle("display");
-      arrowUp.classList.toggle("display");
-      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
-      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
-    }
   }
   else if (direction == "up") {
     if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png") {
@@ -374,13 +243,6 @@ function switchArticlePart(direction) {
       arrowUp.classList.toggle("display");
       arrowUp.removeEventListener("click", function() {switchArticlePart("up");});
       arrowDown.addEventListener("click", function() {switchArticlePart("down");});
-    }
-    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
-      currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png";
-      arrowDown.classList.toggle("display");
-      arrowUp.classList.toggle("display");
-      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
-      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
     }
   }
 }
@@ -391,14 +253,12 @@ function showPaper() {
   zeitungsartikel.classList.toggle("display");
   arrowLeft.classList.toggle("display");
   arrowRight.classList.toggle("display");
-  if (articleIndex == 2 || articleIndex == 4) {
-    if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_1.png"
-    || currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
+  if (articleIndex == 1) {
+    if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_1.png") {
       arrowDown.classList.toggle("display");
       arrowDown.addEventListener("click", function() {switchArticlePart("down");});
     }
-    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png"
-    || currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_unten.png") {
+    else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png") {
       arrowUp.classList.toggle("display");
       arrowUp.addEventListener("click", function() {switchArticlePart("up");});
     }
@@ -421,27 +281,55 @@ function preventEnter(event) {
   }
 }
 
+// Variable, die weiss, welche Rätselfrage gerade dran ist
+var puzzlePart = "puzzle_videoQuestions_1";
+
 // Wrapper-Funktion, da von Event-Listener aufgerufen
 function startPuzzle() {
-  startPuzzlePart("puzzle_videoQuestions_1");
+  // startPuzzlePart("puzzle_videoQuestions_1");
+  startPuzzlePart(puzzlePart);
   button_startPuzzle.classList.toggle("display");
   button_startPuzzle.removeEventListener("click", startPuzzle);
 }
 
+// Anonyme Funtion einer Variablen zuweisen, damit der eventListener
+// später wieder entfernt werden kann
+var interruptPuzzleWrapper = function(){interruptPuzzle(puzzlePart);};
+
+// Puzzle unterbrechen
+function interruptPuzzle(puzzlePart) {
+  // puzzlePart: Rätselfrage, die angezeigt wurde vor dem Unterbruch
+  hintergrund.removeEventListener("click", interruptPuzzleWrapper);
+  var puzzleDiv = document.getElementById(puzzlePart);
+  if (puzzleDiv.classList.contains("display")) {
+    puzzleDiv.classList.toggle("display");
+  }
+  button_startPuzzle.classList.toggle("display");
+  button_startPuzzle.addEventListener("click", startPuzzle);
+}
+
+
 function startPuzzlePart(puzzlePart) {
   // Div mit Rätselfrage anzeigen
   var puzzleDiv = document.getElementById(puzzlePart);
-  puzzleDiv.classList.toggle("display");
+  if (puzzleDiv.classList.contains("display") == false) {
+    puzzleDiv.classList.toggle("display");
+  }
   // puzzleDiv.querySelector("form").focus(); //not working yet
   document.addEventListener("keypress", function(event) {preventEnter(event);})
+  hintergrund.addEventListener("click", interruptPuzzleWrapper);
 }
 
 // Rätselfrage nach falscher Antwort erneut anzeigen
 function reDisplayPuzzlePart(puzzleDiv) {
   alert_wrongAnswer.classList.toggle("display");
   puzzleDiv.classList.toggle("display");
-  button_alert.addEventListener("click", function() {reDisplayPuzzlePart(puzzleDiv);});
+  button_alert.removeEventListener("click", reDisplayPuzzleWrapper);
 }
+
+// Anonyme Funktion einer Variablen zuweisen, damit der eventListener
+// wieder entfernt werden kann
+var reDisplayPuzzleWrapper = function() {reDisplayPuzzlePart(document.getElementById(puzzlePart));}
 
 function checkPuzzle(trigger) {
 
@@ -468,7 +356,7 @@ function checkPuzzle(trigger) {
 
   // Um welche Rätselfrage (welches Formular-HTML-Element)
   // geht es aktuell?
-  var puzzlePart;
+  // var puzzlePart;
 
   if (triggeringButton == "button_solution_1") {
     puzzlePart = "puzzle_videoQuestions_1";
@@ -522,23 +410,21 @@ function checkPuzzle(trigger) {
       location.assign("marsch.html");
     }
     else {
-      startPuzzlePart(nextPuzzlePart);
+      puzzlePart = nextPuzzlePart;
+      startPuzzlePart(puzzlePart);
     }
   }
   else {
     alert_wrongAnswer.classList.toggle("display");
     var puzzleDiv = document.getElementById(puzzlePart);
     puzzleDiv.classList.toggle("display");
-    button_alert.addEventListener("click", function() {reDisplayPuzzlePart(puzzleDiv);});
+    button_alert.addEventListener("click", reDisplayPuzzleWrapper);
   }
 }
 
 function setup() {
   // Fernseher und Radio
   tv_gross.addEventListener("click", showTV);
-  button_lotti.addEventListener("click", lotti.handle.bind(lotti));
-  button_unterbaech.addEventListener("click", unterbaech.handle.bind(unterbaech));
-  button_appenzell.addEventListener("click", appenzell.handle.bind(appenzell));
   button_radio_noise.addEventListener("click", function(event) {playSound(rauschen, event.target);});
   button_radio_song.addEventListener("click", function(event) {playSound(radiosong, event.target);});
   // Quizfragen
