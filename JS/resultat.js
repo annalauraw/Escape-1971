@@ -1,3 +1,13 @@
+// SRF-Medien
+var untertitel_urne = document.getElementById("untertitel_urne");
+var untertitel_audio = document.getElementById("untertitel_audio");
+var untertitel_gosteli = document.getElementById("untertitel_gosteli");
+var untertitel_moos = document.getElementById("untertitel_moos");
+var urne = new SRF_Video('urne', 'urn:srf:video:d43543bb-f5ed-45b6-96e3-a1c065c40335', 19, 26, untertitel_urne);
+var angenommen = new SRF_Video('angenommen', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 46.5, 53, untertitel_audio);
+var moos = new SRF_Video('moos', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 93.5, 103.5, untertitel_moos);
+var gosteli = new SRF_Video('gosteli', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 143, 156, untertitel_gosteli);
+
 // Hintergrundbild
 var hintergrund = document.getElementById("hintergrund");
 
@@ -9,6 +19,12 @@ var mouthInterval = undefined;
 var warten = document.getElementById("warten");
 var abschied = document.getElementById("abschied");
 var ruth_audio = warten;
+
+// Andere Audios
+var applaus = document.getElementById("applaus");
+applaus.volume = 1;
+var stimmen = document.getElementById("stimmen");
+stimmen.loop = true;
 
 // Ruth-Area, das die Audios auslöst
 var ruth = document.getElementById("ruth");
@@ -46,16 +62,11 @@ var moos_listened = false;
 var gosteli_listened = false;
 var paper_read = false;
 
-var untertitel_urne = document.getElementById("untertitel_urne");
-var untertitel_audio = document.getElementById("untertitel_audio");
-var untertitel_gosteli = document.getElementById("untertitel_gosteli");
-var untertitel_moos = document.getElementById("untertitel_moos");
 
 // div mit Quizfrage
 var puzzle = document.getElementById("puzzle");
 var button_solution = document.getElementById("button_solution");
 var alert_wrongAnswer = document.getElementById("alert_wrongAnswer");
-var button_newStart = document.getElementById("button_newStart");
 var button_diffAnswer = document.getElementById("button_diffAnswer");
 
 // Rätsel-Formular mit Fragen und Eingabefeldern
@@ -83,20 +94,34 @@ function pauseInterval() {
   clearInterval(mouthInterval);
 }
 
+// Bound functions for event listeners
+var boundFunctionAngenommen = angenommen.handle.bind(angenommen);
+var boundFunctionMoos = moos.handle.bind(moos);
+var boundFunctionGosteli = gosteli.handle.bind(gosteli);
+
+// Die Hintergrundstimmen tönen nur, wenn der Radio nicht läuft
+function startStopStimmen() {
+  if (!stimmen.paused) {
+    stimmen.pause();
+  }
+  else if (stimmen.paused) {
+    stimmen.play();
+  }
+}
+
 // Funktion, die nach Ende von Ruths Audios
 // die nächsten EventListener registriert bzw.
 // nicht mehr benötigte deaktiviert
 function afterRuthsAudio(audioEl) {
+  pauseInterval();
   if (audioEl == warten) {
-    button_radio_1.addEventListener("click", angenommen.handle.bind(angenommen));
-    button_radio_1.addEventListener("click", function(){angenommen_listened = true;});
-    button_radio_1.addEventListener("mouseup", checkIfMediaConsumed);
-    button_radio_2.addEventListener("click", moos.handle.bind(moos));
-    button_radio_2.addEventListener("click", function(){moos_listened = true;});
-    button_radio_2.addEventListener("mouseup", checkIfMediaConsumed);
-    button_radio_3.addEventListener("click", gosteli.handle.bind(gosteli));
-    button_radio_3.addEventListener("click", function(){gosteli_listened = true;});
-    button_radio_3.addEventListener("mouseup", checkIfMediaConsumed);
+    stimmen.play();
+    button_radio_1.addEventListener("click", startStopStimmen);
+    button_radio_1.addEventListener("click", boundFunctionAngenommen);
+    button_radio_2.addEventListener("click", startStopStimmen);
+    button_radio_2.addEventListener("click", boundFunctionMoos);
+    button_radio_3.addEventListener("click", startStopStimmen);
+    button_radio_3.addEventListener("click", boundFunctionGosteli);
     zeitungsstapel.addEventListener("click", showPaper);
     tv_gross.removeEventListener("click", showTV);
   }
@@ -108,25 +133,35 @@ function afterRuthsAudio(audioEl) {
 
 // Funktion, die erstes Ruth-Audio startet
 function playWarten() {
+  ruth.removeEventListener("click", playWarten);
+  stimmen.pause();
   warten.play();
   startInterval();
   warten.addEventListener("ended", function() {afterRuthsAudio(warten);});
-  ruth.removeEventListener("click", playWarten);
 }
 
 // Funktion, die zweites Ruth-Audio startet
 function playAbschied() {
-  abschied.play();
-  startInterval();
+  zeitungsstapel.removeEventListener("click", showPaper);
+  button_radio_1.removeEventListener("click", boundFunctionAngenommen);
+  button_radio_2.removeEventListener("click", boundFunctionMoos);
+  button_radio_3.removeEventListener("click", boundFunctionGosteli);
+  button_radio_1.removeEventListener("click", startStopStimmen);
+  button_radio_2.removeEventListener("click", startStopStimmen);
+  button_radio_3.removeEventListener("click", startStopStimmen);
+  setTimeout(function() {
+    stimmen.pause();
+    abschied.play();
+  }, 3000);
+  setTimeout(function() {startInterval();}, 3000);
   abschied.addEventListener("ended", function() {afterRuthsAudio(abschied);});
-  ruth.removeEventListener("click", playAbschied);
 }
 
 // Funktion, die testet, ob die Zeitung angeschaut und die Radio-O-Töne angehört wurden
 // Wenn ja, wird beim Klick auf Ruth das Abschieds-Audio abgespielt
 function checkIfMediaConsumed() {
   if (paper_read && angenommen_listened && moos_listened && gosteli_listened) {
-    ruth.addEventListener("click", playAbschied);
+    playAbschied();
   }
 }
 
@@ -209,6 +244,8 @@ function hideTV() {
   ruth.addEventListener("click", playWarten);
   // Sobald Ruth spricht, soll Fernseher nicht mehr angezeigt werden können
   ruth.addEventListener("click", noMoreTV);
+  stimmen.play();
+
 }
 
 // Grossen Fernseher anzeigen
@@ -217,10 +254,6 @@ function showTV() {
   fernseher.classList.toggle("hide");
 }
 
-urne = new SRF_Video('urne', 'urn:srf:video:d43543bb-f5ed-45b6-96e3-a1c065c40335', 19, 26, untertitel_urne);
-angenommen = new SRF_Video('angenommen', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 46.5, 53, untertitel_audio);
-moos = new SRF_Video('moos', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 93.5, 103.5, untertitel_moos);
-gosteli = new SRF_Video('gosteli', 'urn:srf:audio:996e7ab3-2a3f-4e74-b1d9-0b5c00c3f93a', 143, 156, untertitel_gosteli);
 
 
 // Quiz erneut anzeigen, wenn Antwort falsch war
@@ -246,7 +279,6 @@ function checkPuzzle() {
     puzzle.classList.toggle("display");
     alert_wrongAnswer.classList.toggle("display");
     button_diffAnswer.addEventListener("click", reDisplayPuzzle);
-    button_newStart.addEventListener("click", function(){location.assign("briefing.html")});
   }
 }
 

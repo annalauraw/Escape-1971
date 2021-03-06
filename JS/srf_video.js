@@ -15,6 +15,23 @@ function returnCheckPlaybackTime(obj) {
         obj.stopInterval();
         player.seek(obj.startTime);
         playState[obj.name] = false;
+        if (obj == angenommen) {
+          angenommen_listened = true;
+          var applaus = document.getElementById("applaus");
+          applaus.play();
+          stimmen.play();
+          checkIfMediaConsumed();
+        }
+        else if (obj == moos) {
+          moos_listened = true;
+          stimmen.play();
+          checkIfMediaConsumed();
+        }
+        else if (obj == gosteli) {
+          gosteli_listened = true;
+          stimmen.play();
+          checkIfMediaConsumed();
+        }
       }
     });
   }

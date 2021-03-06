@@ -4,6 +4,7 @@ var buttons_top = document.getElementById("buttons_top");
 var button_song = document.getElementById("button_song");
 var button_feedback = document.getElementById("button_feedback");
 var imagecontainer = document.getElementsByClassName("imagecontainer")[0];
+var arrow = document.getElementById("arrowDown");
 
 function openFeedbackForm() {
   window.open('https://docs.google.com/forms/d/e/1FAIpQLScuSnXfaIAFTQ_m5FXLmjfz_UJCuODYZNtcckv6M_nAot5h5w/viewform?usp=sf_link', '_blank');
@@ -20,6 +21,7 @@ function backToStart() {
 }
 
 function startAnimation() {
+  arrow.classList.toggle("display");
   window.removeEventListener("scroll", startAnimation);
   window.removeEventListener("click", startAnimation);
   imagecontainer.style.top = "0";

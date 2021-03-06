@@ -139,3 +139,27 @@ li, p {
   top: 50px;
   left: -200px;
 }
+
+/* Pfeil, der nach unten zeigt */
+.arrow {
+  display: none;
+}
+
+.arrow.display {
+  display: block;
+  position: absolute;
+  top: 800px;
+  right: -100px;
+  width: 50px;
+  height: 50px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  border: solid rgb(95, 0, 204);
+  border-width: 0 8px 8px 0;
+  z-index: 4;
+}
+
+.arrow:hover {
+  border-color: rgb(201, 153, 255);
+  opacity: 1;
+}
