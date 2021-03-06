@@ -21,6 +21,7 @@ function backToStart() {
 
 function startAnimation() {
   window.removeEventListener("scroll", startAnimation);
+  window.removeEventListener("click", startAnimation);
   imagecontainer.style.top = "0";
   setTimeout(function() {
     song.play();
@@ -32,6 +33,7 @@ function startAnimation() {
 
 function setup() {
   window.addEventListener("scroll", startAnimation);
+  window.addEventListener("click", startAnimation);
 }
 
 window.addEventListener("load", setup);
