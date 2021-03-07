@@ -1,7 +1,7 @@
 
 var argumentgross=document.getElementById("argumentgross");
-var pult=document.getElementById("pult");
-var abfall=document.getElementById("abfall");
+var pult=document.getElementById("pult_light");
+var abfall=document.getElementById("abfall_light");
 var hintergrund=document.getElementById("hintergrund");
 var istargumentoffen=null;
 var crt="";
@@ -14,6 +14,16 @@ for (i=1; i<11; i++){
 function lightup(ev){
 	var feld=ev.target.id
 	document.getElementById(feld).classList.toggle("display");
+	
+}
+
+
+function lightupDrop(ev){
+	var feld=ev.target.id
+	document.getElementById(feld).classList.toggle("display");
+	setTimeout(function(){ document.getElementById(feld).classList.toggle("display"); }, 1500);
+	
+	
 }
 
 
@@ -65,7 +75,7 @@ function dropPult(){
 }
 
 function moveCrt(event){
-	console.log("move");
+	//console.log("move");
 	
 	var windowMarginLeft = (window.innerWidth - 1200) / 2;
   crt.style.left = event.clientX - windowMarginLeft + 20 + 'px';
@@ -100,6 +110,8 @@ function dragstartArgument(event){
 	document.getElementById("crt").appendChild(crtimg);
 	event.dataTransfer.setData('text/html', null);
 	
+	pult.addEventListener("dragenter", lightupDrop);
+	abfall.addEventListener("dragenter", lightupDrop);
 	
 }
 

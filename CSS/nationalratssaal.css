@@ -118,12 +118,26 @@ width: 40px;
 #abfall {
 	display:flex;
 	position: absolute;
-	height: 100px;
+	height: 90px;
     width: 50px;
     top: 290px;
     left: 520px;
-	z-index:2;
+	z-index:3;
 	
+}
+#abfall_light {
+	display:flex;
+	position: absolute;
+	height: 130px;
+    width: 90px;
+    top: 270px;
+    left: 500px;
+	z-index:2;
+}
+
+#abfall_light.display {
+	border-radius: 10px;
+	box-shadow: 0 0 10px #ad66ff;
 }
 
 #pult {
@@ -133,7 +147,25 @@ width: 40px;
     width: 140px;
     top: 150px;
     left: 670px;
+	z-index:3;
+	border-radius: 5px;
+	
+}
+
+#pult_light {
+	display:flex;
+	position: absolute;
+	height: 150px;
+    width: 240px;
+    top: 120px;
+    left: 650px;
 	z-index:2;
+	transform: rotate(26deg);
+	
+}
+#pult_light.display {
+	border-radius: 10px;
+	box-shadow: 0 0 10px #ad66ff;
 	
 }
 
