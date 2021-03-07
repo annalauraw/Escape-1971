@@ -26,6 +26,7 @@ ul {
 	top:100px;
 	left: 250px;
 	width: 700px;
+	z-index:4;
 }
 
 #puzzleVertrauen {
@@ -81,19 +82,40 @@ ul {
   border-radius: 7%;
   border-width: 2px;
   border-style: solid;
+  z-index: 3;
+}
+
+#bv4text_hilfe.hide {
+	display:none;
+}
+
+#bv4text_hilfe{
+	background-color:white;
+	position:absolute;
+	width:700px;
+	top:200px;
+	left:270px;
+	font-family: 'Architects Daughter', cursive;
+	color: rgb(95, 0, 204);
+	font-size: 30px;
+	text-align:center;
+	border-color: rgb(95, 0, 204); /* dunkellila */
+  border-radius: 7%;
+  border-width: 2px;
+  border-style: solid;
+  z-index: 3;
 }
 
 
 
 .bv4{
 	position:absolute;
-	z-index:5;
 }
 
 .bv4.display {
 	/*background-color: rgb(201, 153, 255);*/
 	position:absolute;
-	z-index:5;
+	z-index:2;
 	border-radius: 20px;
     box-shadow: 0 0 20px #ad66ff;
 }
@@ -266,4 +288,29 @@ ul {
   animation-duration: 5s;
   animation-timing-function: ease-in-out;
   animation-delay: 3s;
+}
+
+#button_zurueck_1 {
+	Position:absolute;
+	left: 200px;
+	
+}
+
+#button_hilfe.hide {
+	display:none;
+}
+
+#button_hilfe {
+  position: absolute;
+  right: 2%;
+  top: 4%;
+  font-size: 18px;
+  padding: 10px;
+  z-index: 2;
+}
+
+#hilfe{
+	width:500px;
+	left: 350px;
+	z-index:3;
 }

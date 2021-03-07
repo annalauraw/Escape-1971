@@ -70,6 +70,8 @@ function closebv4(){
      bv4[i].addEventListener("mouseover", glowBV4);
 	 bv4[i].addEventListener("mouseleave", glowBV4);
 	 bv4[i].addEventListener("click", bv4puzzleOpen);
+	 document.getElementById("button_hilfe").removeEventListener("click", hilfeOeffnen);
+	 document.getElementById("button_hilfe").classList.toggle("hide");
 }
 }
 
@@ -379,6 +381,28 @@ function glowBV4(){
 }
 }
 
+function hilfeSchliessen(){
+	hintergrund.addEventListener("click",closebv4);
+	hintergrund.removeEventListener("click", hilfeSchliessen);
+	document.getElementById("bv4text_hilfe").classList.toggle("hide");
+	bv4puzzle.classList.toggle("display");
+	hintergrund.removeEventListener("click", closebv4);
+	document.getElementById("button_hilfe").addEventListener("click", hilfeOeffnen);
+	document.getElementById("button_hilfe").removeEventListener("click", hilfeSchliessen);
+}
+
+function hilfeOeffnen(){
+	document.getElementById("bv4text_hilfe").classList.toggle("hide");
+	hintergrund.removeEventListener("click",closebv4);
+	hintergrund.addEventListener("click", hilfeSchliessen);
+	bv4puzzle.classList.toggle("display");
+	hintergrund.removeEventListener("click", closebv4);
+	document.getElementById("button_hilfe").removeEventListener("click", hilfeOeffnen);
+	document.getElementById("button_hilfe").addEventListener("click", hilfeSchliessen);
+	
+	
+}
+
 function bv4puzzleOpen(){
 	document.addEventListener("keypress", function(event) {preventEnter(event);})
 	bv4text.classList.toggle("hide");
@@ -390,6 +414,7 @@ function bv4puzzleOpen(){
 			bv4[i].removeEventListener("click", bv4puzzleOpen);
 			bv4[i].classList.toggle("display");
 }
+	
 }
 
 function checkPuzzle(trigger){
@@ -403,6 +428,8 @@ function checkPuzzle(trigger){
 		showTV.style.cursor="pointer"; 
 		bv4puzzle.classList.toggle("display");
 		hintergrund.removeEventListener("click", closebv4);
+		document.getElementById("button_hilfe").removeEventListener("click", hilfeOeffnen);
+	    document.getElementById("button_hilfe").classList.toggle("hide");
 
 	} else{
 		bv4puzzle.classList.toggle("display");
@@ -455,6 +482,8 @@ function setup() {
 		bv4puzzle.classList.toggle("display");
 		bv4text.classList.toggle("hide");
 		hintergrund.addEventListener("click", closebv4);
+		document.getElementById("button_hilfe").addEventListener("click", hilfeOeffnen);
+	    document.getElementById("button_hilfe").classList.toggle("hide");
 	});
 	window.addEventListener("click", machlaerm);
 }
