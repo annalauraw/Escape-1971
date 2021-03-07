@@ -3,12 +3,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <title>Escape 1971</title>
     <link rel="stylesheet" href="CSS/general.css" type="text/css"/>
     <link rel="stylesheet" href="CSS/wecker_2.css" type="text/css"/>
+    <link rel="shortcut icon" type="image/jpg" href="Bilder/favicon.ico"/>
   </head>
   <body>
     <div class="imagecontainer">
-	  
+
       <!-- Hauptbild -->
       <img id="hintergrund" src="Bilder/bilder/uelis_schlafzimmer_def.png" ondragover="allowDrop(event)" ondrop="dropKalender(event)" usemap="#wecker_nachttisch">
 	  <img id="kalenderblatt" src="Bilder/bilder/uelis_schlafzimmer_def_kalenderblatt_6feb.png" ondragover="allowDrop(event)" ondrop="dropKalender(event)">
@@ -17,36 +19,36 @@
 	  </div>
 	  <button id="button_hilfe" class="button" type="button">Hilfe</button>
 	  <div id="hilfe" class="quizbox handschrift">
-	  
+
 	  </div>
-	  
+
 	  <div id="weckerdrehen"></div>
 	  <div id="aufziehen"></div>
       <!-- clickable areas inside the image -->
-      <map name="wecker_nachttisch"> 
+      <map name="wecker_nachttisch">
         <!-- <area shape="rect" coords="170, 130, 210, 153" alt="Puzzle 1" href="puzzle1.html"> -->
         <!-- <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm"> -->
         <!-- Wecker -->
-	   
+
        <area id="wecker" shape="rect" coords="340,410,410,460">
 	   <area id="abstimmungszettel" shape="rect" coords="270,485,340,585">
 	   <!-- <area id="aufziehschluessel2" shape="rect" coords="320,590,360,630">-->
-	  </map> 
-	  
+	  </map>
+
 	  <img id="aufziehschluessel3" src="Bilder/bilder/uelis_schlafzimmer_def_weckerschluessel-klein.png">
 
       <!-- Wecker gross von vorne, wird sichtbar bei Klick auf Nachttisch-Wecker -->
       <img id="wecker_vorne" src="Bilder/bilder/wecker_vorderseite_mitrand.png" usemap="#wecker_rand">
-      
+
 	  <map name="wecker_rand">
         <!-- Koordinaten zum Testen links oben -->
         <area id="wecker_rand" shape="rect" coords="150,120,680,450">
 		<!--<area id="aufziehen" shape="rect" coords="380,220,410,250">-->
         <!-- eine kleine kreisförmige Fäche am rechten Weckerrand - wenn sie angeklickt wird, dreht sich der Wecker -->
         <!-- <area id="wecker_rand" shape="circle" coords="300,300,100"> -->
-		
+
       </map>
-	  
+
 
       <!-- Wecker-Ziffernblatt (SVG) -->
       <div id="clockbox">
@@ -73,7 +75,7 @@
                 <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
             </g>
       </div> <!-- clockbox -->
-	  
+
 
       <img id="wecker_hinten" src="Bilder/bilder/wecker_rueckseite_mitrand.png" usemap="#wecker_rand">
 	  <audio id="AV-weckeraufziehen"><source src="Audio/09_wecker_aufziehen_hoerspielbox_kurz.mp3" type="audio/mpeg"/>
@@ -114,7 +116,7 @@
 		</div>
 		<div id="number8" class="number9">
 	</div>
-  
+
 </div>
 	  <img id="aufziehschluessel" src="Bilder/bilder/uelis_schlafzimmer_def_weckerschluessel-gross.png">
       <!-- <div id="puzzle1">
@@ -124,9 +126,9 @@
          <input type="submit" value="Submit">
         </form>
       </div> -->
-	  
-	 
-	
+
+
+
     </div> <!--imagecontainer-->
 
   <script  type="text/javascript" src="JS/wecker_2.js"></script>
