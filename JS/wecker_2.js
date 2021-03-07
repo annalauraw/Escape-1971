@@ -25,6 +25,10 @@ var spinner = document.getElementById("spinner");
 var aufziehschluessel3 = document.getElementById("aufziehschluessel3");
 var aufziehschluessel = document.getElementById("aufziehschluessel");
 var weckerdrehen =document.getElementById("weckerdrehen");
+// Hilfe Button
+var button_hilfe = document.getElementById("button_hilfe");
+// div mit Tip
+var hilfe = document.getElementById("hilfe");
 
 
 var weissesFeld=document.getElementById("weissesFeld");
@@ -587,10 +591,55 @@ function checkTicken(){
 
 function schnarchen(){
 	document.getElementById("schnarch").play();
-	document.getElementById("schnarch").loop = true;
+	setInterval(function() { document.getElementById("schnarch").play(); },30000);
 	document.removeEventListener("click",schnarchen);
 }
 
+function backToPuzzle() {
+    hilfe.classList.toggle("display");
+    
+    
+}
+
+function getHelp() {
+  hilfe.classList.toggle("display");
+  hilfe.innerHTML="";
+  var btn = document.createElement("BUTTON");
+  btn.innerHTML = "Zurück";
+  btn.id="button_zurueck_1";
+  btn.classList.add("button");
+  hilfe.appendChild(btn);
+  
+  text=hilfe.innerHTML
+  hilfe.innerHTML = "Der kleinste Zeiger steht für die Weckzeit.</br>"+text;
+  
+  var aufziehschluesselCookie  = getCookie("aufziehschluessel");
+  if (aufziehschluesselCookie !="done"){
+	  text=hilfe.innerHTML
+	  hilfe.innerHTML = "Zum Aufziehen brauchst du einen Schlüssel.</br>"+text;
+  }
+  var aufziehenCookie = getCookie("aufziehen");
+  if (aufziehenCookie!="done") {
+	  text=hilfe.innerHTML
+	  hilfe.innerHTML = "Der Wecker muss aufgezogen werden.</br>"+text;
+  }
+  var zahlencodeCookie = getCookie("zahlencode");
+  if (schieberaetselCookie!="done") {
+	  text=hilfe.innerHTML
+	  hilfe.innerHTML = "Der Wecker braucht eine Datumsangabe.</br>"+text;
+  }
+  var kalenderCookie= getCookie("kalender");
+  if (kalenderCookie!="done") {
+	  text=hilfe.innerHTML
+	  hilfe.innerHTML = "Welcher Tag ist heute?</br>"+text;
+  }
+  var schieberaetselCookie=getCookie("schieberaetsel");
+  if (schieberaetselCookie!="done") {
+	  text=hilfe.innerHTML
+	  hilfe.innerHTML = "Was liegt da für Abfall auf dem Nachttisch?</br>"+text;
+  }
+ document.getElementById("button_zurueck_1").addEventListener("click", backToPuzzle);
+}
 
 function setup() {
   wecker.addEventListener("click", showClock);
@@ -605,7 +654,7 @@ function setup() {
   updateClock();
   document.addEventListener("click", checkTicken);
   document.addEventListener("click", schnarchen);
-  	
+  button_hilfe.addEventListener("click", getHelp);
    }
 
 window.addEventListener("load", setup);
