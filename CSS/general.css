@@ -5,6 +5,16 @@ eventuelle Kind-Elemente absolut positioniert werden können */
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
+/* Bilder sollen nicht ausgewählt und damit vom
+Browser blau oder orange markiert werden  können*/
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
 /* Schriftarten */
 .handschrift {
   font-family: 'Architects Daughter', cursive;

@@ -21,7 +21,7 @@
     left: 700px;
 	z-index: 10;
 	cursor:pointer;
-	
+
 }
 
 
@@ -175,11 +175,11 @@
   left: 200px;
   z-index:5;
   /*transform: translate(-50%, -50%);*/
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -o-user-select: none;
-  user-select: none;
+  user-select: none; */
 
 }
 

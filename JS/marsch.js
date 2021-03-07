@@ -76,7 +76,9 @@ function moveFlag(event) {
 // Fahne anzeigen
 function showFlag() {
   if (paper_read == true && puzzle_solved == true) {
+    zeitungsstapel.removeEventListener("click", showPaper);
     fahne.classList.toggle("display");
+    fahne.style.cursor = "move";
     fahne.addEventListener("dragend", function(){document.addEventListener("mousemove", moveFlag);});
   }
 }
@@ -109,6 +111,10 @@ function checkPuzzle() {
 
 // Quiz starten
 function startPuzzle() {
+  // Wenn Zeitung noch sichtbar ist, verstecken
+  if (zeitungsartikel.classList.contains("display")) {
+    zeitungsartikel.classList.toggle("display");
+  }
   // Div mit Rätselfrage anzeigen
   puzzle.classList.toggle("display");
   // puzzleDiv.querySelector("form").focus(); //not working yet
@@ -143,6 +149,7 @@ function preventEnter(event) {
 
 // Zeitungsartikel verstecken
 function hidePaper() {
+  zeitungsstapel.addEventListener("click", showPaper);
   zeitungsartikel.classList.toggle("display");
   if (arrowDown.classList.contains("display")) {
     arrowDown.classList.toggle("display");
@@ -180,6 +187,7 @@ function switchArticle() {
 
 // Zeitungsartikel anzeigen
 function showPaper() {
+  zeitungsstapel.removeEventListener("click", showPaper);
   hintergrund.style.opacity = "0.2";
   zeitungsartikel.classList.toggle("display");
   if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Vorbehalte_Lotti_2_oben.png") {
