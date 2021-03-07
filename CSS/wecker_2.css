@@ -183,7 +183,11 @@
 
 }
 
-
+#button_zurueck_1 {
+	Position:absolute;
+	left: 200px;
+	
+}
 
 /* Ziffernblatt */
 
@@ -225,6 +229,21 @@ display: none;
   left: 500px;
   position: absolute;
   z-index:10;
+}
+
+#button_hilfe {
+  position: absolute;
+  right: 2%;
+  top: 4%;
+  font-size: 18px;
+  padding: 10px;
+  z-index: 2;
+}
+
+#hilfe{
+	width:500px;
+	left: 350px;
+	z-index:3;
 }
 
 
