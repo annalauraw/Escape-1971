@@ -4,7 +4,7 @@ var hintergrund = document.getElementById("hintergrund");
 // Knöpfe an Fernseher und Radio, um Videos/Song zu starten
 var button_lotti = document.getElementById("button_lotti");
 var button_unterbaech = document.getElementById("button_unterbaech");
-var button_appenzell = document.getElementById("button_appenzell");
+var button_herzig = document.getElementById("button_herzig");
 var button_radio_noise = document.getElementById("button_radio_noise");
 var button_radio_song = document.getElementById("button_radio_song");
 var radiosong = document.getElementById("radiosong");
@@ -25,7 +25,7 @@ var black = document.getElementById("tv_black");
 // Untertitel
 var untertitel_lotti = document.getElementById("untertitel_lotti");
 var untertitel_unterbaech = document.getElementById("untertitel_unterbaech");
-var untertitel_appenzell = document.getElementById("untertitel_appenzell");
+var untertitel_herzig = document.getElementById("untertitel_herzig");
 
 // Zeitungsartikel
 var zeitungsstapel = document.getElementById("zeitungsstapel");
@@ -81,7 +81,7 @@ function showArea(area) {
 function hideTV() {
   button_lotti.removeEventListener("click", boundFunctionLotti);
   button_unterbaech.removeEventListener("click", boundFunctionUnterbaech);
-  button_appenzell.removeEventListener("click", boundFunctionAppenzell);
+  button_herzig.removeEventListener("click", boundFunctionHerzig);
   fernseher.classList.toggle("display");
   if (player_isDisplayed) {
     SRF_player.classList.toggle("display");
@@ -108,17 +108,18 @@ function showTV() {
   area_hideTV_2.addEventListener("click", hideTV);
   button_lotti.addEventListener("click", boundFunctionLotti);
   button_unterbaech.addEventListener("click", boundFunctionUnterbaech);
-  button_appenzell.addEventListener("click", boundFunctionAppenzell);
+  button_herzig.addEventListener("click", boundFunctionHerzig);
 }
 
 lotti = new SRF_Video('lotti', 'urn:srf:video:9b110c29-9032-4d65-bd8b-e60c39d30e0a', 535, 609, untertitel_lotti);
 unterbaech = new SRF_Video('unterbaech', 'urn:srf:video:5daf0760-6a4d-441a-9bf9-0a1cb9cb511a', 1045.9, 1062.5, untertitel_unterbaech);
-appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53, untertitel_appenzell);
+// appenzell = new SRF_Video('appenzell', 'urn:srf:video:ad22fde5-2351-4d18-9cf2-9954c194d3a3', 0, 53, untertitel_appenzell);
+herzig = new SRF_Video('herzig', 'urn:srf:video:bab98121-00a9-405d-b13e-572e7ecb098d',  356, 393.5, untertitel_herzig);
 
 // Bound functions for event listeners
 var boundFunctionLotti = lotti.handle.bind(lotti);
 var boundFunctionUnterbaech = unterbaech.handle.bind(unterbaech);
-var boundFunctionAppenzell = appenzell.handle.bind(appenzell);
+var boundFunctionHerzig = herzig.handle.bind(herzig);
 
 // Funktion, die alle evtl. laufende Radiosounds vorsorglich stoppt
 function stopRadio() {

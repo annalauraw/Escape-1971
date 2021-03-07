@@ -2,6 +2,12 @@
 // Wird von SRF_player-Methoden gestartet und gestoppt
 var playbackInterval = undefined;
 
+// Audios aus resultat.html - Variablen werden hier als
+// undefined definiert, damit kein Laufzeitfehler entsteht
+var angenommen = undefined;
+var moos = undefined;
+var gosteli = undefined;
+
 // Funktion, die eine Closure enthält und die Callback-Funktion für das
 // Intervall zurückgibt,
 // die an das Video-Objekt gebunden ist (andernfalls wäre sie an
@@ -41,7 +47,7 @@ function returnCheckPlaybackTime(obj) {
 var loadState = {
   lotti: false,
   unterbaech: false,
-  appenzell: false,
+  herzig: false,
   urne: true,
   angenommen: false,
   moos: false,
@@ -53,7 +59,7 @@ var loadState = {
 var playState = {
   lotti: false,
   unterbaech: false,
-  appenzell: false,
+  herzig: false,
   urne: false,
   angenommen: false,
   moos: false,
@@ -100,7 +106,7 @@ SRF_Video.prototype = {
     playState[this.name] = true;
     if (player_isDisplayed == false) {
       // Bei Audios: Player nicht anzeigen
-      let videos = ['urne', 'lotti', 'unterbaech', 'appenzell'];
+      let videos = ['urne', 'lotti', 'unterbaech', 'herzig'];
       if (videos.includes(this.name)) {
         this.displayPlayer();
       }
@@ -134,7 +140,7 @@ SRF_Video.prototype = {
   resetLoadState: function() {
     loadState.lotti = false;
     loadState.unterbaech = false;
-    loadState.appenzell = false;
+    loadState.herzig = false;
     loadState.urne = false;
     loadState.angenommen = false;
     loadState.moos = false;
@@ -144,7 +150,7 @@ SRF_Video.prototype = {
   resetPlayState: function() {
     playState.lotti = false;
     playState.unterbaech = false;
-    playState.appenzell = false;
+    playState.herzig = false;
     playState.urne = false;
     playState.angenommen = false;
     playState.moos = false;

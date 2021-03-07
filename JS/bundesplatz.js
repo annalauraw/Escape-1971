@@ -399,8 +399,8 @@ function hilfeOeffnen(){
 	hintergrund.removeEventListener("click", closebv4);
 	document.getElementById("button_hilfe").removeEventListener("click", hilfeOeffnen);
 	document.getElementById("button_hilfe").addEventListener("click", hilfeSchliessen);
-	
-	
+
+
 }
 
 function bv4puzzleOpen(){
@@ -414,18 +414,18 @@ function bv4puzzleOpen(){
 			bv4[i].removeEventListener("click", bv4puzzleOpen);
 			bv4[i].classList.toggle("display");
 }
-	
+
 }
 
 function checkPuzzle(trigger){
 
 	var playerSolution = document.forms[0]["solution"].value;
 	// if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
-	correctSolution = /(schweizer)/i
+	correctSolution = /(schweizer)$/i
 	if (correctSolution.test(playerSolution)) {
 		applaus.play();
 		showTV.addEventListener("click", displayTV);
-		showTV.style.cursor="pointer"; 
+		showTV.style.cursor="pointer";
 		bv4puzzle.classList.toggle("display");
 		hintergrund.removeEventListener("click", closebv4);
 		document.getElementById("button_hilfe").removeEventListener("click", hilfeOeffnen);
