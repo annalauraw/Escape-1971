@@ -1,5 +1,9 @@
-/* Das sich bewegende Ruth-Bild */
 #ruth {
+  display: none;
+}
+
+/* Das sich bewegende Ruth-Bild */
+#ruth.display {
   display: inline-block;
   width: 100px;
   /* Position needs to be styled
@@ -15,11 +19,15 @@
 #timer.display {
   display: block;
   position: absolute;
-  right: 70px;
-  top: 70px;
-  width: 200px;
-  font-size: 44px;
-  font-family: monospace;
+  right: 10%;
+  top: 2%;
+  width: 60px;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  padding: 5px;
+  border: 2px solid rgb(95, 0, 204);
+  background-color: white;
+  font-size: 50px;
   color: rgb(95, 0, 204);
 }
 

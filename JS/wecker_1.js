@@ -23,7 +23,11 @@ var button_zurueck_2 = document.getElementById("button_zurueck_2");
 // Variablen für den Timer
 const TIMER = document.getElementById("timer");
 var seconds;
+// Timer, der Countdown zählt
 var timerInterval;
+// Timer, der vor dem Countdown blinkt
+var timerStartInterval;
+var blinkTimes = 6;
 
 // Variablen für den addEventListener
 var posLeftString = RUTH.style.left;
@@ -54,24 +58,52 @@ function countTimer() {
     clearInterval(timerInterval);
     resetRuth();
     TIMER.classList.toggle("display");
+    blinkWrapper();
+  }
+}
+
+// Timer blinkt, bevor er startet
+function blink() {
+  RUTH.classList.toggle("display");
+  TIMER.classList.toggle("display");
+  blinkTimes -= 1;
+  if (blinkTimes == 0) {
+    clearInterval(timerStartInterval);
+    document.addEventListener("keypress", moveRuth);
+    document.addEventListener("keypress", checkRuthPosition);
+    blinkTimes = 6;
     startTimer();
   }
 }
 
+function blinkWrapper() {
+  document.removeEventListener("keypress", moveRuth);
+  document.removeEventListener("keypress", checkRuthPosition);
+  // Timer soll sicher angezeigt werden
+  if (!TIMER.classList.contains("display")) {
+    TIMER.classList.toggle("display");    
+  }
+  // Timer soll blinken, bevor er startet
+  seconds = 8;
+  TIMER.innerHTML = seconds.toString();
+  timerStartInterval = setInterval(blink, 500);
+}
+
 // Funktion, die den Timer startet
 function startTimer() {
-  seconds = 7;
-  TIMER.innerHTML = seconds.toString();
-  TIMER.classList.toggle("display");
+  // TIMER.innerHTML = seconds.toString();
+  // TIMER.classList.toggle("display");
   timerInterval = setInterval(countTimer, 1000);
 }
 
 function startGame() {
   IMAGE.removeEventListener("click", startGame);
-  document.addEventListener("keypress", function(event){moveRuth(event)});
+  // document.addEventListener("keypress", function(event){moveRuth(event)});
+  document.addEventListener("keypress", moveRuth);
   document.addEventListener("keypress", checkRuthPosition);
   startSoundtrack();
-  startTimer();
+  blinkWrapper();
+  // startTimer();
 }
 
 // Soundtrack stoppen / starten, wenn Button gedrückt wird
@@ -151,13 +183,13 @@ function moveRuth(event) {
       // console.log(posBottom);
       posBottomString = posBottom.toString() + "px";
       RUTH.style.bottom = posBottom.toString() + "px";
-      console.log("bottom", posBottomString);
+      // console.log("bottom", posBottomString);
     }
     // wenn Ruth vor einem der Häuser ist
     else if (posBottom >= 360 && posBottom <= 420) {
       if (posLeft == 1020 || posLeft == 580 || posLeft == 200) {
         posBottom += 20;
-        console.log(posBottom);
+        // console.log(posBottom);
         posBottomString = posBottom.toString() + "px";
         RUTH.style.bottom = posBottom.toString() + "px";
       }
@@ -168,14 +200,14 @@ function moveRuth(event) {
     // wenn sie auf dem langen senkrechten Weg ist
     if (posLeft >= 740 && posLeft <= 780 && posBottom >= 60) {
       posBottom -= 20;
-      console.log(posBottom);
+      // console.log(posBottom);
       posBottomString = posBottom.toString() + "px";
       RUTH.style.bottom = posBottom.toString() + "px";
     }
     // wenn sie vor einem der Häuser steht
     else if ((posLeft == 1020 || posLeft == 580 || posLeft == 200) && posBottom >= 400) {
       posBottom -= 20;
-      console.log(posBottom);
+      // console.log(posBottom);
       posBottomString = posBottom.toString() + "px";
       RUTH.style.bottom = posBottom.toString() + "px";
     }
