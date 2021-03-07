@@ -88,6 +88,7 @@ function VertrauenRichtig(){
 	helvetia.addEventListener("mouseover", glow);
 	helvetia.addEventListener("mouseleave", glow);
 	showTV.removeEventListener("click", displayTV);
+	showTV.style.removeProperty("cursor");
 }
 
 
@@ -399,6 +400,7 @@ function checkPuzzle(trigger){
 	if (correctSolution.test(playerSolution)) {
 		applaus.play();
 		showTV.addEventListener("click", displayTV);
+		showTV.style.cursor="pointer"; 
 		bv4puzzle.classList.toggle("display");
 		hintergrund.removeEventListener("click", closebv4);
 

@@ -13,7 +13,7 @@ var cookieTest=document.cookie;
 var puzzle =document.getElementById("puzzle");
 var zettel =document.getElementById("zettel");
 var hintergrund=document.getElementById("hintergrund");
-document.getElementById("AV-ticken").autoplay=true;
+//document.getElementById("AV-ticken").autoplay=true;
 
 document.cookie="abstimmungszettelB=done";
 
@@ -132,7 +132,7 @@ function checkTicken(){
 
 function schnarchen(){
 	document.getElementById("schnarch").play();
-	document.getElementById("schnarch").loop = true;
+	setInterval(function() { document.getElementById("schnarch").play(); },30000);
 	document.removeEventListener("click",schnarchen);
 }
 
