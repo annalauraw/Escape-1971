@@ -68,6 +68,9 @@ button_alert = document.getElementById("button_alert");
 // Rätsel zum Video, Formular mit Fragen und Eingabefeldern
 var form_videoQuestions = document.forms["puzzle_videoQuestions"];
 
+// Hilfe_Box
+var hint = document.getElementById("hint");
+
 // SRF Player wird mit einem ersten Video geladen (Lotti Ruckstuhl)
 var player = SRG.PlayerManager.createPlayer('SRF_player','inline','urn:srf:video:d43543bb-f5ed-45b6-96e3-a1c065c40335&start=19');
 var player_isDisplayed = false;
@@ -282,6 +285,25 @@ function preventEnter(event) {
   }
 }
 
+// Hilfe-Box wieder verstecken
+function hideHint() {
+  hint.classList.toggle("display");
+  button_hint.removeEventListener("click", hideHint);
+  button_startPuzzle.innerHTML = "Ich bin informiert";
+  button_startPuzzle.addEventListener("click", startPuzzle);
+}
+
+// Wenn der Hilfe-Button geklickt wird
+function getHint() {
+  button_startPuzzle.removeEventListener("click", getHint);
+  var puzzleDiv = document.getElementById(puzzlePart);
+  if (puzzleDiv.classList.contains("display")) {
+    puzzleDiv.classList.toggle("display");
+  }
+  hint.classList.toggle("display");
+  button_hint.addEventListener("click", hideHint);
+}
+
 // Variable, die weiss, welche Rätselfrage gerade dran ist
 var puzzlePart = "puzzle_videoQuestions_1";
 
@@ -289,8 +311,10 @@ var puzzlePart = "puzzle_videoQuestions_1";
 function startPuzzle() {
   // startPuzzlePart("puzzle_videoQuestions_1");
   startPuzzlePart(puzzlePart);
-  button_startPuzzle.classList.toggle("display");
+  // button_startPuzzle.classList.toggle("display");
+  button_startPuzzle.innerHTML = "Hilfe";
   button_startPuzzle.removeEventListener("click", startPuzzle);
+  button_startPuzzle.addEventListener("click", getHint);
 }
 
 // Anonyme Funtion einer Variablen zuweisen, damit der eventListener
@@ -305,8 +329,11 @@ function interruptPuzzle(puzzlePart) {
   if (puzzleDiv.classList.contains("display")) {
     puzzleDiv.classList.toggle("display");
   }
-  button_startPuzzle.classList.toggle("display");
-  button_startPuzzle.addEventListener("click", startPuzzle);
+  if (!alert_wrongAnswer.classList.contains("display")) {
+    button_startPuzzle.innerHTML = "Ich bin informiert";
+    button_startPuzzle.removeEventListener("click", getHint);
+    button_startPuzzle.addEventListener("click", startPuzzle);
+  }
 }
 
 
@@ -323,6 +350,7 @@ function startPuzzlePart(puzzlePart) {
 
 // Rätselfrage nach falscher Antwort erneut anzeigen
 function reDisplayPuzzlePart(puzzleDiv) {
+  button_startPuzzle.addEventListener("click", getHint);
   alert_wrongAnswer.classList.toggle("display");
   puzzleDiv.classList.toggle("display");
   button_alert.removeEventListener("click", reDisplayPuzzleWrapper);
@@ -416,6 +444,7 @@ function checkPuzzle(trigger) {
     }
   }
   else {
+    button_startPuzzle.removeEventListener("click", getHint);
     alert_wrongAnswer.classList.toggle("display");
     var puzzleDiv = document.getElementById(puzzlePart);
     puzzleDiv.classList.toggle("display");

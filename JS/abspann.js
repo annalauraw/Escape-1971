@@ -1,4 +1,5 @@
 var song = document.getElementById("song");
+// var besensolo = document.getElementById("besensolo");
 var content = document.getElementsByClassName("imagecontainer")[0];
 var buttons_top = document.getElementById("buttons_top");
 var button_song = document.getElementById("button_song");
@@ -27,6 +28,7 @@ function startAnimation() {
   imagecontainer.style.top = "0";
   setTimeout(function() {
     song.play();
+    // song.addEventListener("ended", function() {besensolo.play();});
     content.classList.toggle("animate");
     content.addEventListener("animationend", backToStart);
     content.addEventListener("webkitAnimationEnd", backToStart);
