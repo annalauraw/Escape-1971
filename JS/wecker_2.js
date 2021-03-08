@@ -139,6 +139,7 @@ function weckerAufziehen() {
 	document.getElementById("AV-weckeraufziehen").addEventListener('ended', function(){
 
     document.getElementById("AV-ticken").play();
+	document.getElementById("AV-ticken").volume=0.8;
 	document.getElementById("AV-ticken").loop = true;
   });
 
@@ -222,6 +223,7 @@ function checkTimer(){
 		//console.log("Done");
 		document.getElementById('AV-ticken').pause();
 		document.getElementById('AV-klingeln').play();
+		document.getElementById('AV-klingeln').volume=0.8;
 		setTimeout(function() {
 			document.getElementById('schnarch').pause();
 		}, 500);
@@ -434,6 +436,7 @@ function getClickPosition(e) {
   rad=e.currentTarget.id;
   zahl =rad.replace("number","")
   document.getElementById('AV-zahlenrad').play();
+  document.getElementById('AV-zahlenrad').volume=0.8;
 
 
 
@@ -582,6 +585,7 @@ function checkTicken(){
 	if (aufziehenCookie=="done"){
 		
 		document.getElementById("AV-ticken").play();
+		document.getElementById("AV-ticken").volume=0.8;
 		document.getElementById("AV-ticken").loop = true;
 		
 	}
@@ -590,8 +594,11 @@ function checkTicken(){
 
 
 function schnarchen(){
-	document.getElementById("schnarch").play();
-	setInterval(function() { document.getElementById("schnarch").play(); },30000);
+	schnarch=document.getElementById("schnarch");
+	schnarch.volume = 0.4;
+	schnarch.play();
+	
+	setInterval(function() { schnarch.play(); },30000);
 	document.removeEventListener("click",schnarchen);
 }
 

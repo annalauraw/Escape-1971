@@ -124,6 +124,7 @@ function checkTicken(){
 	if (aufziehenCookie=="done"){
 		
 		document.getElementById("AV-ticken").play();
+		document.getElementById("AV-ticken").volume=0.8;
 		document.getElementById("AV-ticken").loop = true;
 		document.removeEventListener("click",checkTicken);
 		
@@ -131,8 +132,10 @@ function checkTicken(){
 }
 
 function schnarchen(){
-	document.getElementById("schnarch").play();
-	setInterval(function() { document.getElementById("schnarch").play(); },30000);
+	schnarch=document.getElementById("schnarch");
+	schnarch.volume = 0.4;
+	schnarch.play();
+	setInterval(function() { schnarch.play(); },30000);
 	document.removeEventListener("click",schnarchen);
 }
 
