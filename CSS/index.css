@@ -34,6 +34,11 @@ p {
   margin-right: 5%;
 }
 
+#wir {
+  float: right;
+  margin-right: 5%;
+}
+
 a:link, a:visited {
   color: rgb(95, 0, 204);
   text-decoration: none;

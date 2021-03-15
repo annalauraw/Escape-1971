@@ -77,6 +77,16 @@ li, p {
   width: 30%;
 } */
 
+
+#wir,
+#song,
+#button_feedback,
+#button_song_top {
+  margin: 5%;
+}
+
+/*
+
 #song
 #button_feedback,
 #button_song_top {
@@ -93,7 +103,7 @@ li, p {
 #button_song {
   margin-right: 25%;
 }
-
+*/
 /* Animation von oben nach unten (langsam) */
 @keyframes scroll {
   from {top: 0;}

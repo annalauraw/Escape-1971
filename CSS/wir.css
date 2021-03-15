@@ -1,0 +1,49 @@
+
+
+ul { 
+  list-style: none;
+}
+
+
+.handschrift{
+	font-size: 18px;
+}
+
+#wir_bild{
+	position: absolute;
+	left: 20px;
+	top: 100px
+}
+
+#wir_text{
+	position: absolute;
+	left: 550px;
+	top: 200px;
+	text-align: left;
+}
+
+#block3{
+	position: absolute;
+	left: 10px;
+	top: 450px;
+	text-align: center;
+}
+
+#hintergrund{
+	height: 830px;
+	width: 1200px;
+}
+#button_back{
+	position: absolute;
+	left: 450px;
+	top: 770px;
+}
+
+#button_feedback{
+	position: absolute;
+	left: 650px;
+	top: 770px;
+}
+
+
+
