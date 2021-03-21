@@ -1,37 +1,44 @@
 
 
-ul { 
+ul {
   list-style: none;
 }
 
 
 .handschrift{
-	font-size: 18px;
+	/* font-size: 18px; */
+  font-size: 22px;
 }
 
 #wir_bild{
-	position: absolute;
+	/* position: absolute;
 	left: 20px;
-	top: 100px
+	top: 100px */
+  float: left;
+  margin: 20px;
 }
 
 #wir_text{
 	position: absolute;
 	left: 550px;
-	top: 200px;
+  top: 100px;
+	/* top: 200px; */
 	text-align: left;
+  margin: 20px;
 }
 
 #block3{
 	position: absolute;
-	left: 10px;
-	top: 450px;
+	/* left: 10px; */
+	/* top: 450px; */
+  top: 500px;
 	text-align: center;
 }
 
 #hintergrund{
 	height: 830px;
 	width: 1200px;
+  border: none;
 }
 #button_back{
 	position: absolute;
@@ -44,6 +51,3 @@ ul {
 	left: 650px;
 	top: 770px;
 }
-
-
-

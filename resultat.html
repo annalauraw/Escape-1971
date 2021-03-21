@@ -10,7 +10,7 @@
   <body>
 
 	  <div class="imagecontainer">
-      <img id="hintergrund" src="Bilder/bilder/resultat_bier.png" usemap="#discover_media">
+      <img id="hintergrund" src="Bilder/bilder/resultat_bier.png" draggable="false" usemap="#discover_media">
       <!-- If you want to use map1 (clickable area inside the image), insert attribute usemap="#map1" into img tag -->
       <map name="discover_media">
         <!-- Area, das Ruth zum Sprechen bringt -->
@@ -27,7 +27,7 @@
         <area id="zeitungWeg_2" shape="rect" coords="710, 2, 1200, 750">
       </map>
       <div id="tv_black"></div>
-      <img id="fernseher" src="Bilder/bilder/fernseher_stube.png" usemap="#knoepfe_tv">
+      <img id="fernseher" src="Bilder/bilder/fernseher_stube.png" draggable="false" usemap="#knoepfe_tv">
       <map name="knoepfe_tv">
         <!-- Fernseher verschwinden lassen -->
         <area id="area_hideTV_1" shape="rect" coords="2, 2, 200, 750">
@@ -38,7 +38,7 @@
       </map>
 
       <!-- Ruths Mund -->
-      <img id="mund" src="Bilder/bilder/ruth_resultat_mund_zu.png">
+      <img id="mund" src="Bilder/bilder/ruth_resultat_mund_zu.png" draggable="false">
 
       <!-- SRF-PLayer, Video und Audio -->
       <div id="SRF_player"></div>
@@ -66,7 +66,7 @@
 
         <!-- Zeitungsartikel -->
         <div id="zeitungsartikel">
-          <img id="artikelbild" src="Bilder/Zeitungsartikel/Durchbruch_gelungen_oben.png">
+          <img id="artikelbild" src="Bilder/Zeitungsartikel/Durchbruch_gelungen_oben.png" draggable="false">
         </div>
 
         <!-- Pfeile, zum zwischen den Zeitungsartikel-Teilen wechseln (oben und unten) -->
@@ -86,7 +86,7 @@
 
         <!-- Audio Stimmen Wohnzimmer -->
         <audio id="stimmen">
-          <source src="Audio/gespraech_wohnzimmer_hoerspielbox.mp3" type="audio/mpeg">
+          <source src="Audio/gespraech_wohnzimmer.mp3" type="audio/mpeg">
           Your browser does not support the audio tag.
         </audio>
 

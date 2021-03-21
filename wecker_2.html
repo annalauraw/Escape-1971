@@ -12,7 +12,7 @@
     <div class="imagecontainer">
 
       <!-- Hauptbild -->
-      <img id="hintergrund" src="Bilder/bilder/uelis_schlafzimmer_def.png" ondragover="allowDrop(event)" ondrop="dropKalender(event)" usemap="#wecker_nachttisch">
+      <img id="hintergrund" src="Bilder/bilder/uelis_schlafzimmer_def.png" ondragover="allowDrop(event)" ondrop="dropKalender(event)" draggable="false" usemap="#wecker_nachttisch">
 	  <img id="kalenderblatt" src="Bilder/bilder/uelis_schlafzimmer_def_kalenderblatt_6feb.png" ondragover="allowDrop(event)" ondrop="dropKalender(event)">
 	  <div id="nacht">
 	  <div id="schalter"></div>
@@ -35,10 +35,10 @@
 	   <!-- <area id="aufziehschluessel2" shape="rect" coords="320,590,360,630">-->
 	  </map>
 
-	  <img id="aufziehschluessel3" src="Bilder/bilder/uelis_schlafzimmer_def_weckerschluessel-klein.png">
+	  <img id="aufziehschluessel3" src="Bilder/bilder/uelis_schlafzimmer_def_weckerschluessel-klein.png" draggable="false">
 
       <!-- Wecker gross von vorne, wird sichtbar bei Klick auf Nachttisch-Wecker -->
-      <img id="wecker_vorne" src="Bilder/bilder/wecker_vorderseite_mitrand.png" usemap="#wecker_rand">
+      <img id="wecker_vorne" src="Bilder/bilder/wecker_vorderseite_mitrand.png" draggable="false" usemap="#wecker_rand">
 
 	  <map name="wecker_rand">
         <!-- Koordinaten zum Testen links oben -->
@@ -77,7 +77,7 @@
       </div> <!-- clockbox -->
 
 
-      <img id="wecker_hinten" src="Bilder/bilder/wecker_rueckseite_mitrand.png" usemap="#wecker_rand">
+      <img id="wecker_hinten" src="Bilder/bilder/wecker_rueckseite_mitrand.png" draggable="false" usemap="#wecker_rand">
 	  <audio id="AV-weckeraufziehen"><source src="Audio/09_wecker_aufziehen_hoerspielbox_kurz.mp3" type="audio/mpeg"/>
       Dein Browser untersützt das audio-Tag nicht. Du kannst diese Station aber auch ohne Musik spielen.
       Oder möchtest du eine aktuellere Browser-Version installieren?</audio>
@@ -118,7 +118,7 @@
 	</div>
 
 </div>
-	  <img id="aufziehschluessel" src="Bilder/bilder/uelis_schlafzimmer_def_weckerschluessel-gross.png">
+	  <img id="aufziehschluessel" src="Bilder/bilder/uelis_schlafzimmer_def_weckerschluessel-gross.png" draggable="false">
       <!-- <div id="puzzle1">
         <form name="puzzle1" class="puzzle" onsubmit="checkPuzzle1()">
          <label for="solution1">Lösungswort:</label>

@@ -41,7 +41,7 @@ p {
 
 a:link, a:visited {
   color: rgb(95, 0, 204);
-  text-decoration: none;
+  text-decoration: underline;
   outline: none;
 }
 

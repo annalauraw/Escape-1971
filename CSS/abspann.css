@@ -1,7 +1,7 @@
 /* To Do: Links hübscher stylen */
 a:link, a:visited {
   color: rgb(95, 0, 204);
-  text-decoration: none;
+  text-decoration: underline;
   outline: none;
 }
 
@@ -158,7 +158,7 @@ li, p {
 .arrow.display {
   display: block;
   position: absolute;
-  top: 800px;
+  /* top: 800px; */
   right: -100px;
   width: 50px;
   height: 50px;

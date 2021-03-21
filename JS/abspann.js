@@ -13,7 +13,7 @@ function openFeedbackForm() {
 }
 
 function goWir() {
-	location.assign("wir.html");
+	window.open('wir.html', '_blank');
 }
 
 function backToStart() {
@@ -29,7 +29,6 @@ function backToStart() {
 
 function startAnimation() {
   arrow.classList.toggle("display");
-  window.removeEventListener("scroll", startAnimation);
   window.removeEventListener("click", startAnimation);
   imagecontainer.style.top = "0";
   setTimeout(function() {
@@ -42,8 +41,9 @@ function startAnimation() {
 }
 
 function setup() {
-  window.addEventListener("scroll", startAnimation);
   window.addEventListener("click", startAnimation);
+  arrowTopPosition = window.innerHeight - 150;
+  arrowDown.style.top = arrowTopPosition.toString() + "px";
 }
 
 

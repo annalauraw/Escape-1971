@@ -95,7 +95,7 @@ input {
 
 
 input[type="text"] {
-  width: 100px;
+  width: 120px;
 }
 
 input[type="text"]:focus {
