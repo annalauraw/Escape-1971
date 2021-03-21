@@ -278,8 +278,10 @@ function showPaper() {
 
 // Funktion, die das Default Behaviour der Enter-Taste
 // (Formular abschicken mit POST) verhindert
+// Ebenso das Default Behaviour der Backspace-Taste
+// (zurück zur letzten Seite)
 function preventEnter(event) {
-  if (event.key == "Enter"){
+  if (event.key == "Enter" || (event.keyCode == 8 && event.target == document.body)){
     event.preventDefault();
     // alert("Enter key was pressed!");
   }
@@ -344,7 +346,6 @@ function startPuzzlePart(puzzlePart) {
     puzzleDiv.classList.toggle("display");
   }
   // puzzleDiv.querySelector("form").focus(); //not working yet
-  document.addEventListener("keypress", function(event) {preventEnter(event);})
   hintergrund.addEventListener("click", interruptPuzzleWrapper);
 }
 
@@ -462,6 +463,7 @@ function setup() {
   button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_3.addEventListener("click", function() {checkPuzzle(this);});
   zeitungsstapel.addEventListener("click", showPaper);
+  document.addEventListener("keypress", function(event) {preventEnter(event);})
   // zeitungWeg_1.addEventListener("mouseover", function(event) {showArea(event.target)});
   // zeitungWeg_2.addEventListener("mouseover", function(event) {showArea(event.target)});
 }
