@@ -17,7 +17,7 @@ var sion=document.getElementById("sion");
 
 
 function falsch() {
-	
+
 	document.getElementById("3_nein").play();
 }
 
@@ -28,9 +28,19 @@ function richtig (){
 	document.getElementById('4_ab_nach_Bern').addEventListener("ended", function () {
 			location.assign("bundesplatz.html");
 		});
-	
+
 }
 
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+// Ebenso das Default Behaviour der Backspace-Taste
+// (zurück zur letzten Seite)
+function preventEnter(event) {
+  if (event.key == "Enter" || (event.keyCode == 8 && event.target == document.body)){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
 
 function setup() {
   zuerich.addEventListener("click", falsch);
@@ -48,6 +58,7 @@ function setup() {
   winterthur.addEventListener("click", falsch);
   bern.addEventListener("click", richtig);
   sion.addEventListener("click", falsch);
+	document.addEventListener("keypress", preventEnter);
   //puzzleLieberherrButton.addEventListener("click", checkPuzzle);
 }
 

@@ -81,7 +81,7 @@ function blinkWrapper() {
   document.removeEventListener("keypress", checkRuthPosition);
   // Timer soll sicher angezeigt werden
   if (!TIMER.classList.contains("display")) {
-    TIMER.classList.toggle("display");    
+    TIMER.classList.toggle("display");
   }
   // Timer soll blinken, bevor er startet
   seconds = 8;
@@ -252,6 +252,17 @@ function getHelp() {
   button_bild.addEventListener("click", showPicture);
 }
 
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+// Ebenso das Default Behaviour der Backspace-Taste
+// (zurück zur letzten Seite)
+function preventEnter(event) {
+  if (event.key == "Enter" || (event.keyCode == 8 && event.target == document.body)){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
+
 // Diese Funktion registriert einen Event-Listener für das gesamte HTML-Dokument
 // Sobald eine Taste gedrück wird, wird die Funktion moveRuth() aufgerufen
 //Als Parameter wird der keypress-Event mitgeliefert, der die Info enthält,
@@ -262,6 +273,7 @@ function setup() {
   BIT_TUNE_LOOP.addEventListener("ended", startSoundtrackLoop);
   IMAGE.addEventListener("click", startGame);
   button_hilfe.addEventListener("click", getHelp);
+  document.addEventListener("keypress", preventEnter);
 }
 
 // Sobald die Seite geladen ist, wird die setup-Funktion aufgerufen

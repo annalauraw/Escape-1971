@@ -153,6 +153,14 @@ function playSound(sound, button) {
   }
 }
 
+// Anonyme Funtion muss einer Variablen zugewiesen werden, damit der
+// Eventlistener wieder entfernt werden kann
+var switchLeft = function() {switchArticle("left");};
+var switchRight = function() {switchArticle("right");};
+var switchDown = function() {switchArticlePart("down");};
+var switchUp = function() {switchArticlePart("up");};
+
+
 // Zeitungsartikel verstecken
 function hidePaper() {
   zeitungsartikel.classList.toggle("display");
@@ -167,8 +175,8 @@ function hidePaper() {
   hintergrund.style.opacity = "1";
   zeitungWeg_1.removeEventListener("click", hidePaper);
   zeitungWeg_2.removeEventListener("click", hidePaper);
-  arrowLeft.removeEventListener("click", function() {switchArticle("left");});
-  arrowRight.removeEventListener("click", function() {switchArticle("right");});
+  arrowLeft.removeEventListener("click", switchLeft);
+  arrowRight.removeEventListener("click", switchRight);
   paper_read = true;
   // Wenn alle Medien schonmal angeschaut wurden, Button "informiert" anzeigen
   if (tv_watched == true && radio_listened == true) {
@@ -214,7 +222,7 @@ function switchArticle(direction) {
   if (articleIndex == 1) {
     arrowDown.classList.toggle("display");
     // arrowUp.classList.toggle("display");
-    arrowDown.addEventListener("click", function() {switchArticlePart("down");});
+    arrowDown.addEventListener("click", switchDown);
     // arrowUp.addEventListener("click", function() {switchArticlePart("up");});
   }
   else {
@@ -236,8 +244,8 @@ function switchArticlePart(direction) {
       currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_2.png";
       arrowDown.classList.toggle("display");
       arrowUp.classList.toggle("display");
-      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
-      arrowDown.removeEventListener("click", function() {switchArticlePart("down");});
+      arrowUp.addEventListener("click", switchUp);
+      arrowDown.removeEventListener("click", switchDown);
     }
   }
   else if (direction == "up") {
@@ -245,8 +253,8 @@ function switchArticlePart(direction) {
       currentArticle.attributes[1].value = "Bilder/Zeitungsartikel/Wut_1.png";
       arrowDown.classList.toggle("display");
       arrowUp.classList.toggle("display");
-      arrowUp.removeEventListener("click", function() {switchArticlePart("up");});
-      arrowDown.addEventListener("click", function() {switchArticlePart("down");});
+      arrowUp.removeEventListener("click", switchUp);
+      arrowDown.addEventListener("click", switchDown);
     }
   }
 }
@@ -260,17 +268,17 @@ function showPaper() {
   if (articleIndex == 1) {
     if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_1.png") {
       arrowDown.classList.toggle("display");
-      arrowDown.addEventListener("click", function() {switchArticlePart("down");});
+      arrowDown.addEventListener("click", switchDown);
     }
     else if (currentArticle.attributes[1].value == "Bilder/Zeitungsartikel/Wut_2.png") {
       arrowUp.classList.toggle("display");
-      arrowUp.addEventListener("click", function() {switchArticlePart("up");});
+      arrowUp.addEventListener("click", switchUp);
     }
   }
   zeitungWeg_1.addEventListener("click", hidePaper);
   zeitungWeg_2.addEventListener("click", hidePaper);
-  arrowLeft.addEventListener("click", function() {switchArticle("left");});
-  arrowRight.addEventListener("click", function() {switchArticle("right");});
+  arrowLeft.addEventListener("click", switchLeft);
+  arrowRight.addEventListener("click", switchRight);
   if (button_startPuzzle.classList.contains("display")) {
     button_startPuzzle.classList.toggle("display");
   }
@@ -355,6 +363,7 @@ function reDisplayPuzzlePart(puzzleDiv) {
   alert_wrongAnswer.classList.toggle("display");
   puzzleDiv.classList.toggle("display");
   button_alert.removeEventListener("click", reDisplayPuzzleWrapper);
+  hintergrund.addEventListener("click", interruptPuzzleWrapper);
 }
 
 // Anonyme Funktion einer Variablen zuweisen, damit der eventListener
@@ -463,7 +472,7 @@ function setup() {
   button_solution_2.addEventListener("click", function() {checkPuzzle(this);});
   button_solution_3.addEventListener("click", function() {checkPuzzle(this);});
   zeitungsstapel.addEventListener("click", showPaper);
-  document.addEventListener("keypress", function(event) {preventEnter(event);})
+  document.addEventListener("keypress", preventEnter);
   // zeitungWeg_1.addEventListener("mouseover", function(event) {showArea(event.target)});
   // zeitungWeg_2.addEventListener("mouseover", function(event) {showArea(event.target)});
 }

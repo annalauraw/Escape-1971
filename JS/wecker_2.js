@@ -255,11 +255,11 @@ function drop(ev) {
 	} else {
 		gegenkathete=centerX-punktX;
 	}
-	
 
-	
+
+
 	var rect = clockbox.getBoundingClientRect();
-    
+
 	centerY=rect.top+150;
 	centerX=rect.left+150;
 
@@ -357,7 +357,7 @@ function findKey() {
 		hintergrund.style.opacity="1";
 		kalenderblatt.style.opacity="1";
 	}, 1000);
-	
+
 	//document.cookie="aufziehschluessel=";
 
 }
@@ -543,24 +543,24 @@ function dropKalender(ev){
 }
 
 function checkLicht(){
-	
+
 	var schieberaetselCookie = getCookie("schieberaetsel");
 	if (schieberaetselCookie=="done"){
 		hintergrund.src="Bilder/bilder/uelis_schlafzimmer_def_ohnefoetzeli.png"
-		
+
 	}
-	
+
 	var abstimmungszettelBCookie = getCookie("abstimmungszettelB");
 	if (abstimmungszettelBCookie=="done"){
 		nacht.classList.toggle("hide");
 		schalter.classList.toggle("hide");
-		
+
 	}
-	
+
 	var aufziehschluesselCookie = getCookie("aufziehschluessel");
 	if (aufziehschluesselCookie=="done"){
 		aufziehschluessel3.classList.toggle("hide");
-		
+
 	}
 	var kalenderCookie = getCookie("kalender");
 	if (kalenderCookie=="done"){
@@ -569,8 +569,8 @@ function checkLicht(){
 			rad="number"+i
 			document.getElementById(rad).addEventListener("mousedown", getClickPosition, false);
 			move();
-		
-	}	
+
+	}
 	}
 	var aufziehenCookie=getCookie("aufziehen");
 	if (aufziehenCookie=="done"){
@@ -583,11 +583,11 @@ function checkTicken(){
 
 	var aufziehenCookie=getCookie("aufziehen");
 	if (aufziehenCookie=="done"){
-		
+
 		document.getElementById("AV-ticken").play();
 		document.getElementById("AV-ticken").volume=0.8;
 		document.getElementById("AV-ticken").loop = true;
-		
+
 	}
 	document.removeEventListener("click",checkTicken);
 }
@@ -597,15 +597,15 @@ function schnarchen(){
 	schnarch=document.getElementById("schnarch");
 	schnarch.volume = 0.4;
 	schnarch.play();
-	
+
 	setInterval(function() { schnarch.play(); },30000);
 	document.removeEventListener("click",schnarchen);
 }
 
 function backToPuzzle() {
     hilfe.classList.toggle("display");
-    
-    
+
+
 }
 
 function getHelp() {
@@ -616,10 +616,10 @@ function getHelp() {
   btn.id="button_zurueck_1";
   btn.classList.add("button");
   hilfe.appendChild(btn);
-  
+
   text=hilfe.innerHTML
   hilfe.innerHTML = "Der kleinste Zeiger steht für die Weckzeit.</br>"+text;
-  
+
   var aufziehschluesselCookie  = getCookie("aufziehschluessel");
   if (aufziehschluesselCookie !="done"){
 	  text=hilfe.innerHTML
@@ -648,6 +648,17 @@ function getHelp() {
  document.getElementById("button_zurueck_1").addEventListener("click", backToPuzzle);
 }
 
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+// Ebenso das Default Behaviour der Backspace-Taste
+// (zurück zur letzten Seite)
+function preventEnter(event) {
+  if (event.key == "Enter" || (event.keyCode == 8 && event.target == document.body)){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
+
 function setup() {
   wecker.addEventListener("click", showClock);
   weckerdrehen.addEventListener("click", turnClock);
@@ -662,6 +673,7 @@ function setup() {
   document.addEventListener("click", checkTicken);
   document.addEventListener("click", schnarchen);
   button_hilfe.addEventListener("click", getHelp);
+  document.addEventListener("keypress", preventEnter);
    }
 
 window.addEventListener("load", setup);

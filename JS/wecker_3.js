@@ -40,19 +40,27 @@ function zeigFrage(){
 function checkpuzzle(){
 	if (document.getElementById("ja").checked == true){
 		richtig();
-		
+
 	} else{
 		falsch();
 	}
 }
 
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+// Ebenso das Default Behaviour der Backspace-Taste
+// (zurück zur letzten Seite)
+function preventEnter(event) {
+  if (event.key == "Enter" || (event.keyCode == 8 && event.target == document.body)){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
+
 function setup() {
   abstimmungszettel.addEventListener("click", zeigFrage);
   document.getElementById("button_solution").addEventListener("click", checkpuzzle);
-
+	document.addEventListener("keypress", preventEnter);
    }
 
 window.addEventListener("load", setup);
-
-
-

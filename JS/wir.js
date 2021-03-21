@@ -9,9 +9,21 @@ function goBack(){
 	location.assign("index.html");
 }
 
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+// Ebenso das Default Behaviour der Backspace-Taste
+// (zurück zur letzten Seite)
+function preventEnter(event) {
+  if (event.key == "Enter" || (event.keyCode == 8 && event.target == document.body)){
+    event.preventDefault();
+    // alert("Enter key was pressed!");
+  }
+}
+
 function setup() {
   button_feedback.addEventListener("click", openFeedbackForm);
   button_back.addEventListener("click", goBack);
+  document.addEventListener("keypress", preventEnter);
 }
 
 

@@ -44,7 +44,7 @@ function pieceUp(nr) {
    h/=10;
    mouseDownX = h;
 
-	
+
    var check = 1;
    console.log(check);
    console.log(place00Y);
@@ -71,7 +71,7 @@ function pieceUp(nr) {
 	  zettel.classList.toggle("display");
 	  document.cookie="schieberaetsel=done";
    }
-} 
+}
 
 function getCookie(cname) {
   var test = cname + "=";
@@ -96,8 +96,8 @@ function testCookie(){
 	if (schieberaetsel != "") {
 	puzzle.classList.toggle("hide");
 	zettel.classList.toggle("display");
-	
-  } 
+
+  }
 }
 
 function getCookie(cname) {
@@ -122,12 +122,12 @@ function checkTicken(){
 	var aufziehenCookie=getCookie("aufziehen");
 	console.log(aufziehenCookie);
 	if (aufziehenCookie=="done"){
-		
+
 		document.getElementById("AV-ticken").play();
 		document.getElementById("AV-ticken").volume=0.8;
 		document.getElementById("AV-ticken").loop = true;
 		document.removeEventListener("click",checkTicken);
-		
+
 	}
 }
 
@@ -139,11 +139,23 @@ function schnarchen(){
 	document.removeEventListener("click",schnarchen);
 }
 
+// Funktion, die das Default Behaviour der Enter-Taste
+// (Formular abschicken mit POST) verhindert
+// Ebenso das Default Behaviour der Backspace-Taste
+// (zurück zur letzten Seite)
+function preventEnter(event) {
+	if (event.key == "Enter" || (event.keyCode == 8 && event.target == document.body)){
+		event.preventDefault();
+		// alert("Enter key was pressed!");
+	}
+}
+
 function setup() {
 	testCookie();
 	hintergrund.addEventListener("click", goBack);
 	document.addEventListener("click",checkTicken);
 	document.addEventListener("click",schnarchen);
+	document.addEventListener("keypress", preventEnter);
 }
 
 

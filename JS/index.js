@@ -6,7 +6,7 @@ function startGame() {
 }
 
 function goWir(){
-	location.assign("wir.html");
+	window.open('wir.html', '_blank');
 }
 
 function setup() {
