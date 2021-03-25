@@ -3,6 +3,8 @@ var laerm = document.getElementById("AV-Laerm");
 laerm.volume = 0.5;
 var applaus = document.getElementById('AV-applaus');
 applaus.volume = 0.5;
+var buh = document.getElementById('buh');
+buh.volume = 0.5;
 
 // div mit Hintergrundbild - wird für das Erscheinen bzw. Bewegen der Fahne
 // gebraucht
@@ -423,7 +425,7 @@ function checkPuzzle(trigger){
 	// if (playerSolution=="Schweizer"||playerSolution=="schweizer"){
 	correctSolution = /(schweizer)$/i
 	if (correctSolution.test(playerSolution)) {
-		applaus.play();
+		buh.play();
 		showTV.addEventListener("click", displayTV);
 		showTV.style.cursor="pointer";
 		bv4puzzle.classList.toggle("display");

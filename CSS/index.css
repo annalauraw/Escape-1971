@@ -37,6 +37,7 @@ p {
 #wir {
   float: right;
   margin-right: 5%;
+  outline: none;
 }
 
 a:link, a:visited {
