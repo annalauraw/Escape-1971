@@ -107,12 +107,12 @@ li, p {
 /* Animation von oben nach unten (langsam) */
 @keyframes scroll {
   from {top: 0;}
-  to {top: -12900px;}
+  to {top: -13600px;}
 }
 
 @-webkit-keyframes scroll {
   from {top: 0;}
-  to {top: -12900px;}
+  to {top: -13600px;}
 }
 
 .imagecontainer.animate {
@@ -126,12 +126,12 @@ li, p {
 
 /* Animation von unten nach oben (schnell) */
 @keyframes up {
-  from {top: -12900px;}
+  from {top: -13600px;}
   to {top: 50px;}
 }
 
 @-webkit-keyframes up {
-  from {top: -12900px;}
+  from {top: -13600px;}
   to {top: 50px;}
 }
 

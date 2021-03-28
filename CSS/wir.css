@@ -38,11 +38,12 @@ ul {
 #button_back,
 #button_feedback {
   margin: 20px;
-  /* float: right; */
+  float: right;
 }
 
 #buttons {
   position: absolute;
   top: 10px;
-  left: 1200px;
+  /* left: 1000px; */
+  left: 400px;
 }
