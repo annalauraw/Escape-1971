@@ -19,7 +19,9 @@ function preventEnter(event) {
 }
 
 function setup() {
+    setTimeout(function() {
     hintergrund.addEventListener("click",klopfen);
+     }, 4000); 
 	document.addEventListener("keypress", preventEnter);
 }
 
