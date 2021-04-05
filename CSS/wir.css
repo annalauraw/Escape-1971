@@ -1,3 +1,8 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&display=swap');
+
 h1 {
   margin-top: 100px;
 }
@@ -11,28 +16,34 @@ ul {
 }
 
 #wir_bild{
-  float: left;
-  margin-right: 50px;
+  /* float: left;
+  margin-right: 50px; */
+  width: 100%;
+  height: auto;
 }
 
-#wir_text{
+/* #wir_text{
 	text-align: left;
-  margin: 20px;
-}
+  margin: 50px;
+  width: 1000px;
+} */
 
-#text {
-  margin-top: 50px;
+/* #block3{
+	text-align: left;
+  margin: 50px;
+} */
+
+#wir_text,
+#text,
+#block3 {
+  margin: 50px;
+  margin-left: 110px;
   text-align: left;
-}
-
-#block3{
-	text-align: left;
+  width: 900px;
 }
 
 #hintergrund{
-	height: 830px;
-	width: 1200px;
-  border: none;
+
 }
 
 #button_back,
@@ -43,7 +54,87 @@ ul {
 
 #buttons {
   position: absolute;
-  top: 10px;
+  top: -100px;
   /* left: 1000px; */
-  left: 400px;
+  left: 80px;
+}
+
+/* Der imagecontainer muss position:relative haben, damit
+eventuelle Kind-Elemente absolut positioniert werden können */
+
+
+/* Bilder sollen nicht ausgewählt und damit vom
+Browser blau oder orange markiert werden  können*/
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+/* Schriftarten */
+.handschrift {
+  font-family: 'Architects Daughter', cursive;
+  color: rgb(95, 0, 204);
+  /* font-size: 18px; */
+}
+
+.druckschrift {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.imagecontainer {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 1200px;
+  margin: auto;
+}
+
+#hintergrund {
+  /* position: inherit; */
+  width: inherit;
+  z-index: 1;
+  height: 830px;
+	width: 1200px;
+  border: none;
+}
+
+.button,
+.button:visited {
+  border: 2px solid rgb(95, 0, 204); /* dunkellila */
+  font-family: 'Architects Daughter', cursive;
+  color: rgb(95, 0, 204); /* dunkellila */
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  /* background-color: rgb(201, 153, 255); /* lila*/
+  background-color: rgb(95, 0, 204);
+  color: rgb(255, 255, 255); /* white */
+}
+
+/* Eingabefelder */
+input {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  padding: 5px;
+  color: rgb(95, 0, 204);
+  border-color: rgb(95, 0, 204);
+  border-width: 1px;
+  border-radius: 10%;
+}
+
+
+input[type="text"] {
+  width: 120px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(201, 153, 255);
 }
