@@ -26,7 +26,16 @@ function stopBriefing() {
   repeat.addEventListener("click", repeatBriefing);
 }
 
+function afterRepeatedBriefing() {
+  repeat.removeEventListener("click", stopBriefing);
+  repeat.innerHTML = "Nochmal hören";
+  repeat.addEventListener("click", repeatBriefing);
+}
+
 function repeatBriefing() {
+  briefing.removeEventListener("ended", showButtons);
+  // briefing.removeEventListener("ended", pauseInterval);
+  briefing.addEventListener("ended", afterRepeatedBriefing);
   briefing.play();
   startInterval();
   repeat.removeEventListener("click", repeatBriefing);
@@ -40,10 +49,12 @@ function nextStation() {
 }
 
 function showButtons() {
-  repeat.classList.toggle("display");
-  next.classList.toggle("display");
-  repeat.addEventListener("click", repeatBriefing);
-  next.addEventListener("click", nextStation)
+  if (!repeat.classList.contains("display")) {
+    repeat.classList.toggle("display");
+    next.classList.toggle("display");
+    repeat.addEventListener("click", repeatBriefing);
+    next.addEventListener("click", nextStation)
+  }
 }
 
 // Nur das erste Abspielen - Buttons sind noch versteckt
